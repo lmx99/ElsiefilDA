@@ -10,7 +10,7 @@ import com.lifeisle.jekton.order.updater.UndeliveredOrderUpdater;
 
 /**
  * @author Jekton
- * @version 0.01 7/27/2015
+ * @version 0.2 8/5/2015
  */
 public class OrderController {
 
@@ -72,7 +72,7 @@ public class OrderController {
                 break;
         }
     }
-    
+
 
 
     public void postQRCode(String qrCode) {

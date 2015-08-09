@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/routine"
+        android:id="@+id/schedule"
         android:layout_width="match_parent"
         android:layout_height="@dimen/fragment_logistics_btn_height"
         android:background="@drawable/bg_goto_btn"
@@ -36,7 +36,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/fragment_logistics_btn_drawablePadding"
         android:paddingRight="@dimen/fragment_logistics_btn_drawablePadding"
-        android:text="@string/fragment_logistics_my_occupation"
+        android:text="@string/fragment_logistics_my_position"
         android:textColor="@color/goto_btn_textColor"
         android:textSize="@dimen/fragment_logistics_btn_textSize" />
 
@@ -54,7 +54,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/fragment_logistics_btn_drawablePadding"
         android:paddingRight="@dimen/fragment_logistics_btn_drawablePadding"
-        android:text="@string/fragment_logistics_occupation_auth"
+        android:text="@string/fragment_logistics_job_auth"
         android:textColor="@color/goto_btn_textColor"
         android:textSize="@dimen/fragment_logistics_btn_textSize" />
 
@@ -78,4 +78,22 @@
         android:textColor="@color/goto_btn_textColor"
         android:textSize="@dimen/fragment_logistics_btn_textSize" />
 
+    <TextView
+        android:id="@+id/deliver_stat"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragment_logistics_btn_height"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_goto_btn"
+        android:clickable="true"
+        android:drawableEnd="@drawable/tab_logistics_selected"
+        android:drawableLeft="@drawable/tab_logistics_selected"
+        android:drawablePadding="@dimen/fragment_logistics_btn_drawablePadding"
+        android:drawableRight="@drawable/tab_logistics_selected"
+        android:drawableStart="@drawable/tab_logistics_selected"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/fragment_logistics_btn_drawablePadding"
+        android:paddingRight="@dimen/fragment_logistics_btn_drawablePadding"
+        android:text="@string/fragment_logistics_deliver_stat"
+        android:textColor="@color/goto_btn_textColor"
+        android:textSize="@dimen/fragment_logistics_btn_textSize" />
 </LinearLayout>

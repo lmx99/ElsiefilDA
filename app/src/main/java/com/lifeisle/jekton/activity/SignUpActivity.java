@@ -1,9 +1,10 @@
 package com.lifeisle.jekton.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.easemob.chatuidemo.activity.LoginActivity;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.StringUtils;
@@ -36,7 +38,7 @@ import java.util.Map;
  * @author Jekton
  * @version 0.01 7/20/2015
  */
-public class SignUpActivity extends Activity implements TextWatcher, View.OnClickListener {
+public class SignUpActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener {
 
     private String TAG = "SignUpActivity";
 
@@ -64,7 +66,7 @@ public class SignUpActivity extends Activity implements TextWatcher, View.OnClic
         etVerificationCode = (EditText) findViewById(R.id.verificationCode);
         btnGetVerifyCode = (Button) findViewById(R.id.verify);
         btnSignUp = (Button) findViewById(R.id.sign_up);
-        btnSignUp.setOnClickListener(this);
+
 
         etUserName.addTextChangedListener(this);
         etPassword.addTextChangedListener(this);
@@ -73,8 +75,8 @@ public class SignUpActivity extends Activity implements TextWatcher, View.OnClic
         etVerificationCode.addTextChangedListener(this);
 
         btnGetVerifyCode.setOnClickListener(this);
-        //btnSignUp.setOnClickListener(this);
-       System.out.println("hfdddddfdfdfdfdf");
+        btnSignUp.setOnClickListener(this);
+
         requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
     }
@@ -153,6 +155,7 @@ public class SignUpActivity extends Activity implements TextWatcher, View.OnClic
                 break;
 
             case R.id.sign_up:
+
                 UserNameValidator userNameValidator = new UserNameValidator(etUserName.getText().toString());
                 PasswordValidator passwordValidator = new PasswordValidator(
                         etPassword.getText().toString(), etReenterPassword.getText().toString());
@@ -174,10 +177,9 @@ public class SignUpActivity extends Activity implements TextWatcher, View.OnClic
                                     int status = response.getInt("status");
                                     switch (status) {
                                         case 0:     // sign up successfully
-                                            /*Intent intent = new Intent(SignUpActivity.this,
-                                                    SignInActivity.class);*/
-                                           // startActivity(intent);
-                                            SignUpActivity.this.finish();
+                                            Intent intent = new Intent(SignUpActivity.this,
+                                                    LoginActivity.class);
+                                            startActivity(intent);
                                             break;
                                         case 1:
                                             Toaster.showShort(SignUpActivity.this,
@@ -322,7 +324,7 @@ public class SignUpActivity extends Activity implements TextWatcher, View.OnClic
         }
 
 
- 
+
         @Override
         protected void setParams(Map<String, String> params) {
             params.put("user_name", etUserName.getText().toString());

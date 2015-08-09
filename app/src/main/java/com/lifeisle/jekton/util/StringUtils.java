@@ -1,12 +1,12 @@
 package com.lifeisle.jekton.util;
 
 
+import com.easemob.chatuidemo.DemoApplication;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import com.easemob.chatuidemo.DemoApplication;
 
 /**
  * @author Jekton Luo
@@ -17,6 +17,8 @@ public class StringUtils {
     private static final String SERVER_HOST = "http://192.168.0.103/";
     private static final String SERVER_PATH = SERVER_HOST + "work/main.php";
 
+    private static final String SERVER_BASE = SERVER_HOST + "work/";
+
     private StringUtils() {
         throw new AssertionError("Can not instantiate this class.");
     }
@@ -26,7 +28,9 @@ public class StringUtils {
         return SERVER_PATH;
     }
 
-
+    public static String getServerBase() {
+        return SERVER_BASE;
+    }
 
     public static String readFromInputStream(InputStream inputStream) throws IOException {
         return readFromInputStream(inputStream, "UTF-8");

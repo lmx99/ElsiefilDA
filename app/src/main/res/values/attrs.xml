@@ -16,14 +16,6 @@
      <!-- Jekton -->
      <attr name="text" format="string|reference" />
 
-    <declare-styleable name="TabButton">
-        <attr name="text" />
-        <attr name="icon_normal" format="reference"/>
-        <attr name="icon_selected" format="reference"/>
-        <attr name="color_normal" format="color|reference" />
-        <attr name="color_selected" format="color|reference" />
-    </declare-styleable>
-
 
     <declare-styleable name="FlowLayout">
         <attr name="hspace" format="dimension"/>

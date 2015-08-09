@@ -30,4 +30,3 @@ public class UserNameValidator implements Validator {
         return StringUtils.getStringFromResource(R.string.error_user_name_rule);
     }
 }
-

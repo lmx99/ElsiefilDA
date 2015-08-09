@@ -7,14 +7,21 @@ import com.android.volley.VolleyError;
 
 /**
  * @author Jekton
- * @version 0.01 7/16/2015
+ * @version 0.2 8/5/2015
  */
 public class Logger {
+
+    private static boolean error = true;
     private static boolean debug = true;
 
     public static void e(String tag, String msg) {
-        if (debug)
+        if (error)
             Log.e(tag, msg);
+    }
+
+    public static void e(String tag, String msg, Throwable e) {
+        if (error)
+            Log.e(tag, msg, e);
     }
 
     public static void e(String tag, VolleyError volleyError) {
@@ -33,6 +40,7 @@ public class Logger {
         if (debug)
             Log.w(tag, msg);
     }
+
 
     public static void d(String tag, String msg) {
         if (debug)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <string name="app_name">HuanXin UI Demo</string>
+    <string name="app_name">Lifeisle</string>
     <string name="text_ack_msg">Read</string>
     <string name="text_delivered_msg">Delivered</string>
     <string name="back">Back</string>
@@ -316,10 +316,24 @@
     <string name="error_network_fail">Fail to post your request, please check your network connection</string>
     <string name="error_auto_login_fail">Fail to auto login</string>
     <string name="error_fail_post">Fail to post the data</string>
-    <string name="btn_ok">OK</string>
-    <string name="btn_cancel">Cancel</string>
 
     <string name="success_post">Post successfully</string>
+
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
 
 
 
@@ -333,10 +347,12 @@
     <string name="tab_me">Me</string>
 
 
-    <string name="fragment_logistics_routine">Routine</string>
-    <string name="fragment_logistics_my_occupation">MyOccupation</string>
-    <string name="fragment_logistics_occupation_auth">Occupation Authentication</string>
+
+    <string name="fragment_logistics_routine">Schedules</string>
+    <string name="fragment_logistics_my_position">MyPosition</string>
+    <string name="fragment_logistics_job_auth">Job Opportunity</string>
     <string name="fragment_logistics_scan_QR_code">Scan QR Code</string>
+    <string name="fragment_logistics_deliver_stat">Deliver Stat</string>
 
 
 
@@ -346,7 +362,8 @@
 
 
     <!-- Strings used by QRCodeScanActivity -->
-    <string name="label_qr_scan">Scan QR Code</string>
+    <string name="title_scan_qr_code">Scan QR Code</string>
+    <string name="activity_scan_manual_add">ManualAdd</string>
 
     <string name="error_order_code_existed">The order code already existed!</string>
     <string name="error_order_code_invalid">Invalid order code!</string>
@@ -377,6 +394,8 @@
 
 
     <!-- OrderOperateActivity -->
+    <string name="title_order_operate">Order Operation</string>
+
     <string name="btn_deliver">Deliver</string>
     <string name="btn_received_by_agent">ReceivedByAgent</string>
     <string name="btn_more">More</string>
@@ -420,19 +439,74 @@
 
 
 
-    <!-- Strings used by SignInActivity-->
-    <string name="btn_sign_in">Sign In</string>
-    <string name="error_fail_to_login">Fail to login</string>
-    <string name="error_password_invalid">Invalid Password</string>
-    <string name="error_user_name_invalid">Invalid UserName</string>
 
 
 
+    <!-- JobsActivity -->
+    <string name="title_activity_jobs">Jobs</string>
 
-
-    <!-- OccupationsActivity -->
     <string name="btn_apply">Apply</string>
     <string name="btn_details">Details</string>
+
+    <string name="success_apply">Apply successfully</string>
+    <string name="error_apply_fail">Apply failed</string>
+
+
+
+
+    <!-- MyPositionActivity -->
+    <string name="title_activity_my_position">My Position</string>
+
+
+
+    <!-- ScheduleCategoryActivity -->
+    <string name="title_activity_schedule_category">Schedules</string>
+
+    <string name="cat_schedule_table">Schedule Table</string>
+    <string name="cat_sync_courses">Sync Course</string>
+    <string name="cat_add_schedule">Add Schedule</string>
+
+
+
+    <!-- DeliverStatActivity-->
+    <string name="title_activity_deliver_stat">DeliverStat</string>
+
+    <string name="title_deliver_stat_fee" translatable="false">配送费</string>
+    <string name="title_deliver_stat_num" translatable="false">配送数</string>
+    <string name="title_deliver_stat_allowance" translatable="false">餐补费</string>
+    <string name="title_deliver_stat_cash" translatable="false">收现金</string>
+
+    <string name="action_option">Option</string>
+
+
+
+    <!-- DeliverStatOptionActivity-->
+    <string name="title_activity_deliver_stat_option">DeliverStatOption</string>
+
+
+
+
+    <!-- DeliverStatOptionFragment -->
+    <string name="action_ok">OK</string>
+
+    <string name="error_start_greater_end">The end time must greater than or equal to the start</string>
+    <string name="title_activity_add_schedule">AddScheduleActivity</string>
+
+    <!-- share with AddScheduleActivity-->
+    <string name="title_start_time">From: </string>
+    <string name="title_end_time">To: </string>
+
+
+
+    <!-- AddScheduleActivity -->
+    <string name="title_event_title">Title</string>
+    <string name="title_repeat">Repeat</string>
+    <string name="title_notify">Notify</string>
+
+    <string name="repeat_opt_never">Never</string>
+    <string name="repeat_opt_everyday">Everyday</string>
+    <string name="repeat_opt_weekdays">Weekdays</string>
+
     
     
     

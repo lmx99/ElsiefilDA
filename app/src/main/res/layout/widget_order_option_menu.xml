@@ -15,36 +15,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ratio_btn_all"
-            android:textColor="@android:color/black"
             android:checked="true"/>
 
         <RadioButton
             android:id="@+id/undelivered"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_undelivered" 
-            android:textColor="@android:color/black"/>
+            android:text="@string/ratio_btn_undelivered" />
 
         <RadioButton
             android:id="@+id/delivered"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_delivered"
-            android:textColor="@android:color/black" />
+            android:text="@string/ratio_btn_delivered" />
 
         <RadioButton
             android:id="@+id/abnormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_abnormal" 
-            android:textColor="@android:color/black"/>
+            android:text="@string/ratio_btn_abnormal" />
 
         <RadioButton
             android:id="@+id/postFail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_post_fail" 
-            android:textColor="@android:color/black"/>
+            android:text="@string/ratio_btn_post_fail" />
 
     </RadioGroup>
 
@@ -60,7 +55,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ratio_btn_sort_by_create_time"
-            android:textColor="@android:color/black"
             android:checked="true"/>
 
     </RadioGroup>
@@ -77,15 +71,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ratio_btn_ascending"
-            android:textColor="@android:color/black"
             android:checked="true"/>
 
         <RadioButton
             android:id="@+id/descending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_descending"
-            android:textColor="@android:color/black" />
+            android:text="@string/ratio_btn_descending" />
 
     </RadioGroup>
 

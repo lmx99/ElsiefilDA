@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:layout_margin="@dimen/activity_horizontal_margin">
+
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAlignBottom="true"
+        android:src="@android:drawable/ic_menu_gallery"
+        android:scaleType="centerCrop"/>
+
+
+    <TextView
+        android:id="@+id/brief"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image"
+        android:text="Brief intro"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:padding="6dp"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/brief"
+        android:padding="6dp"
+        android:text="title"
+        android:textSize="22sp"
+        android:textColor="@android:color/white"
+        android:background="#83aca7a5"/>
+
+
+
+    <TextView
+        android:id="@+id/apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/brief"
+        android:padding="6dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/btn_apply"
+        android:textColor="@android:color/tertiary_text_dark"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/apply"
+        android:layout_toStartOf="@id/apply"
+        android:layout_below="@id/brief"
+        android:padding="6dp"
+        android:text="@string/btn_details"
+        android:textColor="@android:color/tertiary_text_dark"
+        android:textSize="20sp"/>
+
+</RelativeLayout>

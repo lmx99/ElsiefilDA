@@ -1,7 +1,6 @@
 package com.lifeisle.jekton.bean;
 
 import com.lifeisle.jekton.order.EventIDMapper;
-import com.lifeisle.jekton.util.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -117,7 +116,7 @@ public class OrderItem {
     public boolean isDelivered() {
         if (isPostFail()) return false;
 
-        for (OrderItem.GoodsItem goodsItem : goodsItems) {
+        for (GoodsItem goodsItem : goodsItems) {
             int length = goodsItem.logistics.length;
             if (length == 0) return false;
             Logistics lastLogistics = goodsItem.logistics[length - 1];
@@ -134,7 +133,7 @@ public class OrderItem {
     public boolean isAbnormal() {
         if (isPostFail()) return false;
 
-        for (OrderItem.GoodsItem goodsItem : goodsItems) {
+        for (GoodsItem goodsItem : goodsItems) {
             int length = goodsItem.logistics.length;
             if (length == 0) return false;
             Logistics lastLogistics = goodsItem.logistics[length - 1];
@@ -173,7 +172,7 @@ public class OrderItem {
         item.restaurantID = order.getInt("user_id");
 
         JSONArray items = order.getJSONArray("order_items");
-        item.goodsItems = new OrderItem.GoodsItem[items.length()];
+        item.goodsItems = new GoodsItem[items.length()];
         for (int i = 0, len = items.length(); i < len; ++i) {
             item.goodsItems[i] = newGoodsItem(items.getJSONObject(i));
         }
@@ -185,7 +184,7 @@ public class OrderItem {
 
 
     public static GoodsItem newGoodsItem(JSONObject goodsJSON) throws JSONException {
-        OrderItem.GoodsItem goodsItem = new OrderItem.GoodsItem();
+        GoodsItem goodsItem = new GoodsItem();
 
         goodsItem.itemID = goodsJSON.getInt("item_id");
         goodsItem.restaurant = goodsJSON.getString("hotel_name");
@@ -196,7 +195,7 @@ public class OrderItem {
 
         JSONArray logisticsArray = goodsJSON.getJSONArray("logistics");
         int logisticsLen = logisticsArray.length();
-        goodsItem.logistics = new OrderItem.Logistics[logisticsLen];
+        goodsItem.logistics = new Logistics[logisticsLen];
         for (int j = 0; j < logisticsLen; ++j) {
             goodsItem.logistics[j] = newLogistics(logisticsArray.getJSONObject(j));
         }
@@ -213,7 +212,7 @@ public class OrderItem {
 
 
     public static Logistics newLogistics(JSONObject logisticsJSON) throws JSONException {
-        OrderItem.Logistics logistics = new OrderItem.Logistics();
+        Logistics logistics = new Logistics();
 
         logistics.stageID = logisticsJSON.getInt("stage_id");
         logistics.eventID = logisticsJSON.getInt("event_id");
