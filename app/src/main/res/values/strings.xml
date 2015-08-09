@@ -507,7 +507,16 @@
     <string name="repeat_opt_everyday">Everyday</string>
     <string name="repeat_opt_weekdays">Weekdays</string>
 
-    
-    
+
+
+    <!-- OrderSearchActivity -->
+    <string name="title_activity_order_search">Order Searching</string>
+
+    <string name="hint_order_number">Order Number</string>
+    <string name="hint_order_code">Order Code (barcode)</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_source">Source</string>
+    <string name="hint_class">Classification</string>
+
     
 </resources>
