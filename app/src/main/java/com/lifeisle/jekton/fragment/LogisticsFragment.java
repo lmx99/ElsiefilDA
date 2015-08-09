@@ -1,5 +1,6 @@
 package com.lifeisle.jekton.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lifeisle.android.R;
+import com.lifeisle.jekton.activity.DeliverStatActivity;
+import com.lifeisle.jekton.activity.JobsActivity;
+import com.lifeisle.jekton.activity.MyPositionActivity;
 import com.lifeisle.jekton.activity.QRCodeScanActivity;
+import com.lifeisle.jekton.activity.ScheduleCategoryActivity;
 
 /**
  * @author Jekton
@@ -27,10 +32,11 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_logistics, container, false);
 
-        view.findViewById(R.id.routine).setOnClickListener(this);
+        view.findViewById(R.id.schedule).setOnClickListener(this);
         view.findViewById(R.id.myOccupation).setOnClickListener(this);
         view.findViewById(R.id.occupationAuth).setOnClickListener(this);
         view.findViewById(R.id.scanQRCode).setOnClickListener(this);
+        view.findViewById(R.id.deliver_stat).setOnClickListener(this);
 
         return view;
     }
@@ -38,11 +44,32 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.scanQRCode:
-                Intent intent = new Intent(getActivity(), QRCodeScanActivity.class);
-                startActivity(intent);
+            case R.id.schedule: {
+                startActivity(ScheduleCategoryActivity.class);
                 break;
-
+            }
+            case R.id.myOccupation: {
+                startActivity(MyPositionActivity.class);
+                break;
+            }
+            case R.id.occupationAuth: {
+                startActivity(JobsActivity.class);
+                break;
+            }
+            case R.id.scanQRCode: {
+                startActivity(QRCodeScanActivity.class);
+                break;
+            }
+            case R.id.deliver_stat: {
+                startActivity(DeliverStatActivity.class);
+                break;
+            }
         }
+    }
+
+
+    private <T extends Activity> void startActivity(Class<T> activityClass) {
+        Intent intent = new Intent(getActivity(), activityClass);
+        startActivity(intent);
     }
 }

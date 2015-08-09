@@ -10,12 +10,12 @@
         android:id="@+id/goodsList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="2" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_weight="5">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +38,6 @@
                     android:button="@color/white"
                     android:text="@string/btn_deliver"
                     android:textSize="@dimen/text_activity_order_operate_action_btn"
-            		android:textColor="@android:color/black"
                     android:background="@drawable/bg_ratio_btn_order_operate"/>
 
                 <RadioButton
@@ -49,7 +48,6 @@
                     android:button="@color/white"
                     android:padding="@dimen/padding_activity_order_operate_action_btn"
                     android:text="@string/btn_received_by_agent"
-          		    android:textColor="@android:color/black"
                     android:textSize="@dimen/text_activity_order_operate_action_btn"
                     android:background="@drawable/bg_ratio_btn_order_operate" />
 
@@ -61,7 +59,6 @@
                     android:button="@color/white"
                     android:padding="@dimen/padding_activity_order_operate_action_btn"
                     android:text="@string/btn_supplement"
-            		android:textColor="@android:color/black"
                     android:textSize="@dimen/text_activity_order_operate_action_btn"
                     android:background="@drawable/bg_ratio_btn_order_operate" />
 
@@ -71,7 +68,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/interval_activity_order_operate_action_btn"
                     android:button="@color/white"
-                    android:textColor="@android:color/black"
                     android:padding="@dimen/padding_activity_order_operate_action_btn"
                     android:text="@string/btn_return_goods"
                     android:textSize="@dimen/text_activity_order_operate_action_btn"
@@ -85,7 +81,6 @@
                     android:button="@color/white"
                     android:padding="@dimen/padding_activity_order_operate_action_btn"
                     android:text="@string/btn_exchange_goods"
-            		android:textColor="@android:color/black"
                     android:textSize="@dimen/text_activity_order_operate_action_btn"
                     android:background="@drawable/bg_ratio_btn_order_operate"/>
 
@@ -97,7 +92,6 @@
                     android:button="@color/white"
                     android:padding="@dimen/padding_activity_order_operate_action_btn"
                     android:text="@string/btn_other"
-            		android:textColor="@android:color/black"
                     android:textSize="@dimen/text_activity_order_operate_action_btn"
                     android:background="@drawable/bg_ratio_btn_order_operate"
                     android:checked="true"/>
@@ -110,7 +104,6 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_activity_order_operate_action_btn"
                 android:background="#eeeeee"
-            	android:textColor="@android:color/black"
                 android:hint="@string/hint_reason"/>
 
             <TextView
@@ -122,7 +115,7 @@
                 android:padding="6dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:text="@string/btn_ok"
+                android:text="@android:string/ok"
                 android:textSize="20sp"
                 android:textColor="@color/white"
                 android:background="@drawable/bg_btn_order_operate_ok" />

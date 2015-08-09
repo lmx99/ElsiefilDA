@@ -7,7 +7,7 @@ import android.content.Intent;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
-import com.lifeisle.jekton.activity.SignInActivity;
+import com.easemob.chatuidemo.activity.LoginActivity;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.Poster;
 import com.lifeisle.jekton.util.Preferences;
@@ -32,7 +32,7 @@ public class AutoLoginRequest extends SessionRequest {
 
     private static final String TAG = "AutoLoginRequest";
 
-    private Context context;             // used to goto SignInActivity
+    private Context context;             // used to goto LoginActivity
 
     private Executor executor;
 
@@ -100,7 +100,7 @@ public class AutoLoginRequest extends SessionRequest {
             Logger.d(TAG, "loginFail() is instanceof Activity");
             Activity activity = (Activity) context;
 //            Toaster.showShort(activity, R.string.error_auto_login_fail);
-            Intent intent = new Intent(activity, SignInActivity.class);
+            Intent intent = new Intent(activity, LoginActivity.class);
             activity.startActivity(intent);
         }
         waitUpOriginRequest();
@@ -210,51 +210,3 @@ public class AutoLoginRequest extends SessionRequest {
 
 
 
-
-
-//                Logger.d(TAG, "requestQueue.add(loginRequest)");
-//                requestQueue.add(new LoginRequest(StringUtils.getServerPath(),
-//                        Preferences.getUserName(), Preferences.getPassword(),
-//                        new Response.Listener<JSONObject>() {
-//                            @Override
-//                            public void onResponse(JSONObject response) {
-//                                try {
-//                                    int loginStatus = response.getInt("status");
-//                                    Logger.d(TAG, "loginStatus = " + loginStatus);
-//                                    if (loginStatus == 0) {
-//                                        // re-login successfully, re-request
-//                                        requestQueue.add(new SessionRequest(getMethod(), getUrl(),
-//                                                new Response.Listener<JSONObject>() {
-//                                                    @Override
-//                                                    public void onResponse(JSONObject response) {
-//                                                        // update the response that will be returned
-//                                                        // as the response of original request
-//                                                        Logger.d(TAG, "response = " + response);
-//                                                        originalResponse = Response.success(response,
-//                                                                getCacheEntry());
-//                                                        waitUpOriginRequest();
-//                                                    }
-//                                                },
-//                                                new Response.ErrorListener() {
-//                                                    @Override
-//                                                    public void onErrorResponse(VolleyError error) {
-//                                                        Logger.e(TAG, error);
-//                                                        waitUpOriginRequest();
-//                                                    }
-//                                                }));
-//
-//                                    }
-//                                    loginFail();
-//                                } catch (JSONException e) {
-//                                    Logger.e(TAG, e.toString());
-//                                    loginFail();
-//                                }
-//                            }
-//                        },
-//                        new Response.ErrorListener() {
-//                            @Override
-//                            public void onErrorResponse(VolleyError error) {
-//                                Logger.e(TAG, error);
-//                                loginFail();
-//                            }
-//                        }));

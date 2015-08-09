@@ -101,6 +101,11 @@
 
 
 
+    <!-- dialog_set_repeat.xml -->
+    <color name="divider_dialog_set_repeat">#c4c4c4</color>
+    <color name="bg_dialog_set_repeat_text">#ddd</color>
+
+
 
     <color name="bg_color">#EDEDED</color>
     <color name="contents_text">#ff000000</color>
@@ -128,5 +133,4 @@
     <color name="viewfinder_mask">#60000000</color>
     <color name="header">#58567D</color>
     <color name="grgray">#686868</color>
-
 </resources>

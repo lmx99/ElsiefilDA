@@ -31,7 +31,6 @@ public class PasswordValidator implements Validator {
         if (password0.length() == password1.length()
                 && password0.length() <= 6 && 16 <= password0.length()) {
             return StringUtils.getStringFromResource(R.string.error_pwd_length);
-           
         }
         return StringUtils.getStringFromResource(R.string.error_pwd_unmatched);
     }

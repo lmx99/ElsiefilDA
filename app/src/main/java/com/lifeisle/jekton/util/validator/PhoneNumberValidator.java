@@ -22,7 +22,6 @@ public class PhoneNumberValidator implements Validator {
     public boolean validate() {
         return phone.length() == PHONE_NUMBER_LENGTH;
     }
-    
 
     @Override
     public String getErrorMessage() {

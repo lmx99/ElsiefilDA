@@ -34,7 +34,7 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Jekton
- * @version 0.2 8/5/2015
+ * @version 1.0 8/5/2015
  */
 public class OrderModel {
 
@@ -51,6 +51,9 @@ public class OrderModel {
     private int orderRequestCount;
 
     volatile private List<OrderItem> orderItems;
+    /**
+     * 用于跟踪是否需要更新内存中的数据
+     */
     private int initCount;
 
     // strategies
@@ -365,8 +368,8 @@ public class OrderModel {
                                     Logger.d(TAG, "postOrderCode success, initCount = " + currentInitCount);
                                     executorService.execute(
                                             new OrderInfoFilledTask(order,
-                                                                    index,
-                                                                    currentInitCount));
+                                                    index,
+                                                    currentInitCount));
                                 }
                             } else {
                                 Logger.d(TAG, "postOrderCode response: \n" + response);

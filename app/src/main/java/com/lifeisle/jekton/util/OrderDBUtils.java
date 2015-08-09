@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteException;
 import com.easemob.chatuidemo.DemoApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.bean.OrderItem;
-import com.lifeisle.jekton.db.OrdersDBHelper;
+import com.lifeisle.jekton.data.db.OrdersDBHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -176,8 +176,8 @@ public class OrderDBUtils {
         String orderSelection = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "=" + orderCode;
         Cursor orderCursor = ordersDB.query(OrdersDBHelper.TABLE_ORDERS, orderColumns, orderSelection,
                 null, null, null, null);
-        orderItem.orderCode = orderCode;
         fillOrderItem(orderItem, orderCursor);
+        orderItem.orderCode = orderCode;
         orderCursor.close();
 
         String[] goodsColumns = {
@@ -247,7 +247,6 @@ public class OrderDBUtils {
             orderItem.source = source;
             orderItem.restaurantID = restaurantID;
             orderItem.requestType = requestType;
-            Logger.d(TAG, "orderCode = " + orderItem.orderCode + ", requestType = " + requestType);
         }
     }
 
@@ -373,7 +372,6 @@ public class OrderDBUtils {
     public static boolean isOrderCodeExists(String orderCode) {
         String[] columns = { OrdersDBHelper.COLUMN_ORDERS_ORDER_ID };
         String selection = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "=" + orderCode;
-        Logger.d(TAG, "isOrderCodeExists orderCode = " + orderCode + ", selection = " + selection);
         Cursor cursor = ordersDB.query(OrdersDBHelper.TABLE_ORDERS, columns, selection,
                 null, null, null, null);
 

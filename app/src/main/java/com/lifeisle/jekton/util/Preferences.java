@@ -1,10 +1,10 @@
 package com.lifeisle.jekton.util;
 
-import com.easemob.chatuidemo.DemoApplication;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+
+import com.easemob.chatuidemo.DemoApplication;
 
 
 /**
@@ -71,7 +71,6 @@ public class Preferences {
 
     public static @NonNull String getUserName() {
         return getInstance(PREF_USER_INFO).getString("userName", "");
-//        return "jekton";
     }
 
     public static void setUserName(String userName) {
@@ -84,7 +83,6 @@ public class Preferences {
 
     public static String getPassword() {
         return getInstance(PREF_USER_INFO).getString("password", "");
-//        return "helloworld";
     }
 
     public static void setPassword(String password) {

@@ -105,7 +105,7 @@ public class OrderListAdapter extends BaseAdapter {
      */
     public class OrderListItem extends RelativeLayout implements View.OnClickListener {
 
-        public static final String EXTRA_ORDER_CODE = "OrderListItem.EXTRA_ORDER_CODE";
+        public static final String EXTRA_ORDER_CODE = "OrderListItem.EXTRA_ORDER_UPDATE";
         public static final String EXTRA_EVENT_ID = "OrderListItem.EXTRA_EVENT_ID";
 
         private static final long MILLI_30_MIN = 30 * 60 * 1000;
