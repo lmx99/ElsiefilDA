@@ -2,7 +2,7 @@ package com.lifeisle.jekton.model;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.bean.DeliverStatItem;
 import com.lifeisle.jekton.fragment.DeliverStatFragment;
@@ -67,7 +67,7 @@ public class DeliverStatModel {
     }
 
     private void requestStat() {
-        DemoApplication.addToRequestQueue(new DeliverStatRequest(interval[0], interval[1],
+        MyApplication.addToRequestQueue(new DeliverStatRequest(interval[0], interval[1],
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {

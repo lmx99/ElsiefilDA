@@ -5,7 +5,7 @@ import android.net.Uri;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.activity.JobsActivity;
 import com.lifeisle.jekton.activity.MyBrowserActivity;
@@ -41,7 +41,7 @@ public class JobsModel {
     }
 
     private void loadData() {
-        DemoApplication.addToRequestQueue(new OccupationInfoRequest(
+        MyApplication.addToRequestQueue(new OccupationInfoRequest(
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -88,7 +88,7 @@ public class JobsModel {
 
 
     public void apply(int reId) {
-        DemoApplication.addToRequestQueue(new ApplyJobRequest(reId,
+        MyApplication.addToRequestQueue(new ApplyJobRequest(reId,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

@@ -26,7 +26,7 @@ import com.boshu.image.ImageDowloader;
 import com.boshu.image.ImageDowloader.OnImageDownloadListener;
 import com.boshu.utils.Model;
 import com.easemob.EMCallBack;
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.util.Preferences;
 
@@ -120,7 +120,7 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
         pd.setMessage(st);
         pd.setCanceledOnTouchOutside(false);
         pd.show();
-        DemoApplication.getInstance().logout(new EMCallBack() {
+        MyApplication.getInstance().logout(new EMCallBack() {
             
             @Override
             public void onSuccess() {

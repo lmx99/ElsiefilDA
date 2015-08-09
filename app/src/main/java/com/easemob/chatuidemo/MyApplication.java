@@ -24,10 +24,10 @@ import com.android.volley.toolbox.Volley;
 import com.easemob.EMCallBack;
 import com.easemob.chatuidemo.domain.User;
 
-public class DemoApplication extends Application {
+public class MyApplication extends Application {
 
 	public static Context applicationContext;
-	private static DemoApplication instance;
+	private static MyApplication instance;
 	// login user name
 	public final String PREF_USERNAME = "username";
 	
@@ -70,7 +70,7 @@ public class DemoApplication extends Application {
         hxSDKHelper.onInit(applicationContext);
 	}
 
-	public static DemoApplication getInstance() {
+	public static MyApplication getInstance() {
 		return instance;
 	}
  

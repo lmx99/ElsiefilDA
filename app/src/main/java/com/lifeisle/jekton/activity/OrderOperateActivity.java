@@ -12,7 +12,7 @@ import android.widget.RadioGroup;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.bean.OrderItem;
 import com.lifeisle.jekton.order.EventIDMapper;
@@ -117,7 +117,7 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
         final int eventID = getEventID();
         Logger.d(TAG, "eventID = " + eventID);
 
-        DemoApplication.addToRequestQueue(new AutoLoginRequest(this, Request.Method.POST, StringUtils.getServerPath(),
+        MyApplication.addToRequestQueue(new AutoLoginRequest(this, Request.Method.POST, StringUtils.getServerPath(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(final JSONObject response) {

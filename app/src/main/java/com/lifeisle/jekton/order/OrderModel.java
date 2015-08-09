@@ -7,7 +7,7 @@ import android.os.Message;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.activity.OrderOperateActivity;
 import com.lifeisle.jekton.bean.OrderItem;
@@ -315,7 +315,7 @@ public class OrderModel {
 
 
     public void signInAJob(String qrCode) {
-        DemoApplication.addToRequestQueue(new SignInJobsRequest(qrCode,
+        MyApplication.addToRequestQueue(new SignInJobsRequest(qrCode,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -348,7 +348,7 @@ public class OrderModel {
     private void postOrderCode(final String orderCode,final int index, final int requestType,
                                final int currentInitCount) {
         orderRequestCount++;
-        DemoApplication.addToRequestQueue(new OrderItemInfoRequest(orderCode, requestType,
+        MyApplication.addToRequestQueue(new OrderItemInfoRequest(orderCode, requestType,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -405,7 +405,7 @@ public class OrderModel {
 
     public void postDeliveredOrder(final int orderID, final int eventID) {
 
-        DemoApplication.addToRequestQueue(new PostDeliveredOrderRequest(orderID, eventID,
+        MyApplication.addToRequestQueue(new PostDeliveredOrderRequest(orderID, eventID,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(final JSONObject response) {
