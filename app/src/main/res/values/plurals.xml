@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- ################################################# -->
+    <!-- Jekton -->
+    <!-- Strings used by QRCodeScanActivity -->
+    <plurals name="error_fail_count">
+        <item quantity="one">%d order request failed</item>
+        <item quantity="other">%d orders request failed</item>
+    </plurals>
+
+</resources>

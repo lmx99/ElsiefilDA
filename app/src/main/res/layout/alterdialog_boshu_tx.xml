@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:background="@color/white"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    <TextView 
+        android:gravity="center"
+        android:text="请选择"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/tv"/>
+    <View 
+        android:background="#0093EA"
+        android:layout_height="0.1dp"
+        android:layout_width="fill_parent"/>
+
+    <ListView
+         android:divider="#F0F0F0"
+         android:dividerHeight="0.5dp"
+        android:scrollbars="none"
+        android:id="@+id/lv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>

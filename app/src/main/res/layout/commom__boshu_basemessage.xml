@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_layout_message"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/boshu_backgroud_color2"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/boshu_item_color" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="昵称"
+            android:textColor="@color/boshu_textcolorkey"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_boshu_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_boshu_editname"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:gravity="center_vertical"
+                android:text="未填写"
+                android:textSize="16sp" >
+            </TextView>
+
+            <EditText
+                android:textSize="16sp"
+                android:id="@+id/et_boshu_editnickName"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:background="#00000000"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/view1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/boshu_item_color" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="学校"
+            android:textColor="@color/boshu_textcolorkey"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_boshu_school"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_boshu_editschool"
+                android:layout_width="215dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:gravity="center_vertical"
+                android:text="未填写"
+                android:textSize="16sp" />
+
+            <EditText
+                android:textSize="16sp"
+                android:id="@+id/et_boshu_school"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:background="#00000000"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/view1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/boshu_item_color" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="专业"
+            android:textColor="@color/boshu_textcolorkey"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_boshu_job"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_boshu_editjob"
+                android:layout_width="215dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:gravity="center_vertical"
+                android:text="未填写"
+                android:textSize="16sp" />
+
+            <EditText
+                android:textSize="16sp"
+                android:id="@+id/et_boshu_job"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:background="#00000000"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/view1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/boshu_item_color" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="性别"
+            android:textColor="@color/boshu_textcolorkey"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_boshu_sex"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_boshu_editsex"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:gravity="center_vertical"
+                android:text="未填写"
+                android:textSize="16sp" />
+
+            
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/view1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/boshu_item_color" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="年龄"
+            android:textColor="@color/boshu_textcolorkey"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_boshu_age"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_boshu_editage"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:gravity="center_vertical"
+                android:text="未填写"
+                android:textSize="16sp" />
+
+           
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/boshu_item_color" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="身高"
+            android:textColor="@color/boshu_textcolorkey"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_boshu_hight"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_boshu_edithight"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:gravity="center_vertical"
+                android:text="未填写"
+                android:textSize="16sp" />
+
+           
+        </LinearLayout>
+
+        <include layout="@layout/view1" />
+    </RelativeLayout>
+
+    <include layout="@layout/view1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/boshu_item_color" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="体型"
+            android:textColor="@color/boshu_textcolorkey"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_boshu_body"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_boshu_editbody"
+                android:layout_width="215dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:gravity="center_vertical"
+                android:text="未填写"
+                android:textSize="16sp" />
+
+           
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/view1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/boshu_item_color" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="入学"
+            android:textColor="@color/boshu_textcolorkey"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_boshu_enrollmentNew"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_boshu_enrollment"
+                android:layout_width="215dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:gravity="center_vertical"
+                android:text="未填写"
+                android:textSize="16sp" />
+
+            
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/view" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="应聘信息"
+            android:textColor="@color/boshu_textcolorkey" />
+
+        <Button
+            android:id="@+id/bt_boshu_ident"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="250dp"
+            android:background="#00000000"
+            android:gravity="center"
+            android:text="认证"
+            android:textColor="#0348FF"
+            android:textSize="15sp" >
+        </Button>
+    </RelativeLayout>
+
+    <include layout="@layout/view" />
+
+    <include layout="@layout/commom_boshu_nextmessage" />
+
+</LinearLayout>

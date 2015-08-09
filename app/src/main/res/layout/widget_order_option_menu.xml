@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <RadioGroup
+        android:id="@+id/orderOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_all"
+            android:textColor="@android:color/black"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/undelivered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_undelivered" 
+            android:textColor="@android:color/black"/>
+
+        <RadioButton
+            android:id="@+id/delivered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_delivered"
+            android:textColor="@android:color/black" />
+
+        <RadioButton
+            android:id="@+id/abnormal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_abnormal" 
+            android:textColor="@android:color/black"/>
+
+        <RadioButton
+            android:id="@+id/postFail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_post_fail" 
+            android:textColor="@android:color/black"/>
+
+    </RadioGroup>
+
+
+    <RadioGroup
+        android:id="@+id/sortOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/sortByCreateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_sort_by_create_time"
+            android:textColor="@android:color/black"
+            android:checked="true"/>
+
+    </RadioGroup>
+
+
+    <RadioGroup
+        android:id="@+id/sortOptionExtra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/ascending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_ascending"
+            android:textColor="@android:color/black"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/descending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_descending"
+            android:textColor="@android:color/black" />
+
+    </RadioGroup>
+
+</LinearLayout>

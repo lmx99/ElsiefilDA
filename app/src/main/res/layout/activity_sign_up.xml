@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_sign_up_item"
+        android:paddingLeft="@dimen/padding_sign_up_text"
+        android:paddingRight="@dimen/padding_sign_up_text"
+        android:layout_marginBottom="@dimen/margin_sign_up_text"
+        android:hint="@string/hint_user_name"
+        android:maxLength="16"
+        android:background="@color/bg_sign_up_text"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_sign_up_item"
+        android:paddingLeft="@dimen/padding_sign_up_text"
+        android:paddingRight="@dimen/padding_sign_up_text"
+        android:layout_marginBottom="@dimen/margin_sign_up_text"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:hint="@string/hint_password"
+        android:background="@color/bg_sign_up_text"/>
+
+    <EditText
+        android:id="@+id/reenterPassword"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_sign_up_item"
+        android:paddingLeft="@dimen/padding_sign_up_text"
+        android:paddingRight="@dimen/padding_sign_up_text"
+        android:layout_marginBottom="@dimen/margin_sign_up_text"
+        android:inputType="textPassword"
+        android:hint="@string/hint_password_reenter"
+        android:background="@color/bg_sign_up_text"/>
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_sign_up_item"
+        android:paddingLeft="@dimen/padding_sign_up_text"
+        android:paddingRight="@dimen/padding_sign_up_text"
+        android:layout_marginBottom="@dimen/margin_sign_up_text"
+        android:inputType="phone"
+        android:hint="@string/hint_phone"
+        android:background="@color/bg_sign_up_text"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/verificationCode"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_sign_up_item"
+            android:layout_weight="3"
+            android:paddingLeft="@dimen/padding_sign_up_text"
+            android:paddingRight="@dimen/padding_sign_up_text"
+            android:hint="@string/hint_verification_code"
+            android:background="@color/bg_sign_up_text"/>
+
+        <Button
+            android:id="@+id/verify"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_sign_up_item"
+            android:layout_weight="2"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="6dp"
+            android:text="@string/btn_sign_up_verify"
+            android:background="@drawable/bg_sign_up_verify"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_sign_up_item"
+        android:layout_marginTop="24dp"
+        android:text="@string/btn_sign_up"
+        android:background="@drawable/bg_btn_sign_up"
+        android:enabled="false"/>
+
+</LinearLayout>
