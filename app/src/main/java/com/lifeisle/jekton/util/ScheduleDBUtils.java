@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 
 
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.jekton.bean.ScheduleEvent;
 import com.lifeisle.jekton.data.ScheduleContract.EventEntry;
 import com.lifeisle.jekton.data.db.ScheduleDBHelper;
@@ -50,7 +50,7 @@ public class ScheduleDBUtils {
 
     private static SQLiteOpenHelper sqLiteOpenHelper =
             new ScheduleDBHelper(
-                    DemoApplication.getInstance(),
+                    MyApplication.getInstance(),
                     ScheduleDBHelper.DATABASE_NAME,
                     null,
                     ScheduleDBHelper.DATABASE_VERSION);

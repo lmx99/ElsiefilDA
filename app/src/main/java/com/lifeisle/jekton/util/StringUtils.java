@@ -1,7 +1,7 @@
 package com.lifeisle.jekton.util;
 
 
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,11 +54,11 @@ public class StringUtils {
 
 
     public static String getStringFromResource(int id) {
-        return DemoApplication.getInstance().getResources().getString(id);
+        return MyApplication.getInstance().getResources().getString(id);
     }
 
 
     public static String[] getStringsFromResource(int id) {
-        return DemoApplication.getInstance().getResources().getStringArray(id);
+        return MyApplication.getInstance().getResources().getStringArray(id);
     }
 }

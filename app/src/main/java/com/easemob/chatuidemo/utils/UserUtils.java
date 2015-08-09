@@ -3,7 +3,7 @@ package com.easemob.chatuidemo.utils;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.domain.User;
 import com.lifeisle.android.R;
 import com.squareup.picasso.Picasso;
@@ -15,7 +15,7 @@ public class UserUtils {
      * @return
      */
     public static User getUserInfo(String username){
-        User user = DemoApplication.getInstance().getContactList().get(username);
+        User user = MyApplication.getInstance().getContactList().get(username);
         if(user == null){
             user = new User(username);
         }

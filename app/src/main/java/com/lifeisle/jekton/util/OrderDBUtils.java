@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.bean.OrderItem;
 import com.lifeisle.jekton.data.db.OrdersDBHelper;
@@ -32,7 +32,7 @@ public class OrderDBUtils {
     }
 
     static {
-        OrdersDBHelper dbHelper = new OrdersDBHelper(DemoApplication.getInstance(),
+        OrdersDBHelper dbHelper = new OrdersDBHelper(MyApplication.getInstance(),
                 OrdersDBHelper.DB_NAME, null, OrdersDBHelper.DB_VERSION);
         try {
             ordersDB = dbHelper.getWritableDatabase();

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 
 
 /**
@@ -27,7 +27,7 @@ public class Preferences {
 
 
     public static SharedPreferences getInstance(String name) {
-        return DemoApplication.getInstance().getSharedPreferences(name, Context.MODE_PRIVATE);
+        return MyApplication.getInstance().getSharedPreferences(name, Context.MODE_PRIVATE);
     }
 
 

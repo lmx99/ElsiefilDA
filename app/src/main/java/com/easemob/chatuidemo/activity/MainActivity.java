@@ -60,7 +60,7 @@ import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.EMMessage.Type;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.DemoApplication;
+import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.UserDao;
@@ -152,7 +152,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                         false)) {
             // 防止被移除后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
             // 三个fragment里加的判断同理
-            DemoApplication.getInstance().logout(null);
+            MyApplication.getInstance().logout(null);
             finish();
             startActivity(new Intent(this, LoginActivity.class));
             return;
@@ -307,7 +307,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                         userlist.put(Constant.CHAT_ROBOT, robotUser);
 
                         // 存入内存
-                        DemoApplication.getInstance().setContactList(userlist);
+                        MyApplication.getInstance().setContactList(userlist);
                         // 存入db
                         UserDao dao = new UserDao(context);
                         List<User> users = new ArrayList<User>(userlist
@@ -552,9 +552,9 @@ public class MainActivity extends BaseActivity implements EMEventListener {
      */
     public int getUnreadAddressCountTotal() {
         int unreadAddressCountTotal = 0;
-        if (DemoApplication.getInstance().getContactList()
+        if (MyApplication.getInstance().getContactList()
                 .get(Constant.NEW_FRIENDS_USERNAME) != null)
-            unreadAddressCountTotal = DemoApplication.getInstance()
+            unreadAddressCountTotal = MyApplication.getInstance()
                     .getContactList().get(Constant.NEW_FRIENDS_USERNAME)
                     .getUnreadMsgCount();
         return unreadAddressCountTotal;
@@ -590,7 +590,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         @Override
         public void onContactAdded(List<String> usernameList) {
             // 保存增加的联系人
-            Map<String, User> localUsers = DemoApplication.getInstance()
+            Map<String, User> localUsers = MyApplication.getInstance()
                     .getContactList();
             Map<String, User> toAddUsers = new HashMap<String, User>();
             for (String username : usernameList) {
@@ -611,7 +611,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         @Override
         public void onContactDeleted(final List<String> usernameList) {
             // 被删除
-            Map<String, User> localUsers = DemoApplication.getInstance()
+            Map<String, User> localUsers = MyApplication.getInstance()
                     .getContactList();
             for (String username : usernameList) {
                 localUsers.remove(username);
@@ -953,7 +953,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         // 保存msg
         inviteMessgeDao.saveMessage(msg);
         // 未读数加1
-        User user = DemoApplication.getInstance().getContactList()
+        User user = MyApplication.getInstance().getContactList()
                 .get(Constant.NEW_FRIENDS_USERNAME);
         if (user.getUnreadMsgCount() == 0)
             user.setUnreadMsgCount(user.getUnreadMsgCount() + 1);
@@ -1051,7 +1051,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
      */
     private void showConflictDialog() {
         isConflictDialogShow = true;
-        DemoApplication.getInstance().logout(null);
+        MyApplication.getInstance().logout(null);
         String st = getResources().getString(R.string.Logoff_notification);
         if (!MainActivity.this.isFinishing()) {
             // clear up global variables
@@ -1091,7 +1091,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
      */
     private void showAccountRemovedDialog() {
         isAccountRemovedDialogShow = true;
-        DemoApplication.getInstance().logout(null);
+        MyApplication.getInstance().logout(null);
         String st5 = getResources().getString(R.string.Remove_the_notification);
         if (!MainActivity.this.isFinishing()) {
             // clear up global variables
@@ -1147,7 +1147,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 
             @Override
             public void onReceive(Context context, Intent intent) {
-                DemoApplication.getInstance().logout(new EMCallBack() {
+                MyApplication.getInstance().logout(new EMCallBack() {
 
                     @Override
                     public void onSuccess() {
