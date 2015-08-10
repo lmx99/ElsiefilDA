@@ -55,12 +55,17 @@ public class testDateUtils extends AndroidTestCase {
 
     public void testFormatDaysAbbr() {
         int days = 0b0111_1111;
-        assertEquals("Mon,Tue,Wed,Thu,Fri,Sat,Sun", DateUtils.formatDaysAbbr(days));
+        assertEquals("Everyday", DateUtils.formatRepeatOfWeekString(days));
 
         days = 0b0000_0000;
-        assertEquals("", DateUtils.formatDaysAbbr(days));
+        assertEquals("Never", DateUtils.formatRepeatOfWeekString(days));
+
+        days = 0b0001_1111;
+        assertEquals("Weekday", DateUtils.formatRepeatOfWeekString(days));
 
         days = 0b0101_1001;
-        assertEquals("Mon,Thu,Fri,Sun", DateUtils.formatDaysAbbr(days));
+        assertEquals("Mon,Thu,Fri,Sun", DateUtils.formatRepeatOfWeekString(days));
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.lifeisle.jekton.util;
 
 import com.lifeisle.android.R;
+import com.lifeisle.jekton.bean.ScheduleEvent;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -121,7 +122,16 @@ public class DateUtils {
     }
 
 
-    public static String formatDaysAbbr(int daysOfWeek) {
+    public static String formatRepeatOfWeekString(int daysOfWeek) {
+        switch (daysOfWeek) {
+            case ScheduleEvent.MASK_EVERYDAY:
+                return StringUtils.getStringFromResource(R.string.repeat_opt_everyday);
+            case ScheduleEvent.MASK_WEEKDAY:
+                return StringUtils.getStringFromResource(R.string.repeat_opt_weekdays);
+            case ScheduleEvent.MASK_NEVER:
+                return StringUtils.getStringFromResource(R.string.repeat_opt_never);
+        }
+
         final int NUM_DAYS_OF_WEEK = 7;
         String[] days = StringUtils.getStringsFromResource(R.array.day_of_week_abbrs);
         int day = 1;
@@ -133,7 +143,7 @@ public class DateUtils {
             }
             day <<= 1;
         }
-        return builder.length() == 0 ? "" : builder.substring(0, builder.length() - 1);
+        return builder.substring(0, builder.length() - 1);
     }
 
 

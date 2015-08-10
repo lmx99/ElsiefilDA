@@ -181,7 +181,7 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
 
     @Override
     public void setRepeat(int repeat) {
-        this.repeat.setText(DateUtils.formatDaysAbbr(repeat));
+        this.repeat.setText(DateUtils.formatRepeatOfWeekString(repeat));
         // store the int repeat to the tag of repeatTextView
         this.repeat.setTag(repeat);
     }

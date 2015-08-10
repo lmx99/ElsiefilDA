@@ -497,7 +497,7 @@
 
     <string name="repeat_opt_never">Never</string>
     <string name="repeat_opt_everyday">Everyday</string>
-    <string name="repeat_opt_weekdays">Weekdays</string>
+    <string name="repeat_opt_weekdays">Weekday</string>
 
     <string name="error_event_title_empty">The title couldn\'t be empty</string>
     <string name="error_fail_to_add_event">Some error occurred and adding failed</string>
