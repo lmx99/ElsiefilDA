@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -20,14 +21,16 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
 
     private ScheduleAdder scheduleAdder;
 
+    private EditText mTitle;
+
     private TextView startTimeDay;
     private TextView startTimeClock;
     private TextView endTimeDay;
     private TextView endTimeClock;
-    
+
     private TextView repeat;
     private TextView notify;
-    
+
     private TextView ok;
     private TextView cancel;
     private TextView delete;
@@ -38,7 +41,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
      * as a bookkeeping
      */
     private TextView currentSettingTextView;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,8 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void init() {
+        mTitle = (EditText) findViewById(R.id.title);
+
         startTimeDay = (TextView) findViewById(R.id.start_time_day);
         startTimeClock = (TextView) findViewById(R.id.start_time_clock);
         endTimeDay = (TextView) findViewById(R.id.end_time_day);
@@ -99,6 +104,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                 break;
             }
             case R.id.ok: {
+
                 break;
             }
             case R.id.cancel: {
@@ -113,17 +119,14 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-
-
-
     public void pickTime(TextView textView) {
         currentSettingTextView = textView;
         String time = textView.getText().toString();
         TimePickerDialog dialog = new TimePickerDialog(this,
-                                                       this,
-                                                       DateUtils.extractHour(time),
-                                                       DateUtils.extractMin(time),
-                                                       true);
+                this,
+                DateUtils.extractHour(time),
+                DateUtils.extractMin(time),
+                true);
         dialog.show();
     }
 
@@ -136,10 +139,10 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     public void pickDate(TextView textView) {
         String date = textView.getText().toString();
         DatePickerDialog dialog = new DatePickerDialog(this,
-                                                       this,
-                                                       DateUtils.extractYear(date),
-                                                       DateUtils.extractMonth(date),
-                                                       DateUtils.extractDay(date));
+                this,
+                DateUtils.extractYear(date),
+                DateUtils.extractMonth(date),
+                DateUtils.extractDay(date));
         dialog.getDatePicker().setTag(textView);
         dialog.show();
     }
@@ -162,5 +165,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onRepeatChanged(int repeat) {
         currentSettingTextView.setText(Integer.toBinaryString(repeat));
+        // store the int repeat to the tag of repeatTextView
+        currentSettingTextView.setTag(repeat);
     }
 }

@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 
-
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.jekton.bean.ScheduleEvent;
 import com.lifeisle.jekton.data.ScheduleContract.EventEntry;
@@ -31,6 +30,7 @@ public class ScheduleDBUtils {
             EventEntry.COL_EVENT_REPEAT,
             EventEntry.COL_EVENT_NOTIFY,
             EventEntry.COL_EVENT_TYPE,
+            EventEntry.COL_EVENT_NEED_POST,
     };
 
     /**
@@ -44,6 +44,7 @@ public class ScheduleDBUtils {
     public static final int COL_EVENT_REPEAT = 4;
     public static final int COL_EVENT_NOTIFY = 5;
     public static final int COL_EVENT_TYPE = 6;
+    public static final int COL_EVENT_NEED_POST = 7;
 
 
     private static final String LOG_TAG = "ScheduleDBUtils";
@@ -99,6 +100,7 @@ public class ScheduleDBUtils {
         values.put(EventEntry.COL_EVENT_REPEAT, event.repeat);
         values.put(EventEntry.COL_EVENT_NOTIFY, event.notify);
         values.put(EventEntry.COL_EVENT_TYPE, event.type);
+        values.put(EventEntry.COL_EVENT_NEED_POST, event.needPost);
 
         SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
         long id = db.insert(EventEntry.TABLE_NAME, null, values);

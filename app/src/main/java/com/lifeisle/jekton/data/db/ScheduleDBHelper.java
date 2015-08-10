@@ -27,7 +27,8 @@ public class ScheduleDBHelper extends SQLiteOpenHelper {
             EventEntry.COL_EVENT_END_TIME + " integer not null," +
             EventEntry.COL_EVENT_REPEAT + " integer not null," +
             EventEntry.COL_EVENT_NOTIFY + " integer not null," +
-            EventEntry.COL_EVENT_TYPE + " integer not null" +
+            EventEntry.COL_EVENT_TYPE + " integer not null," +
+            EventEntry.COL_EVENT_NEED_POST + " integer not null" +
             ");";
 
 

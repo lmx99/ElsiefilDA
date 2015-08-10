@@ -18,6 +18,10 @@ public class ScheduleAdder{
     }
 
 
+    public void addEvent(String title, String startTime, String endTime, int repeat, int notify) {
+
+    }
+
     public void addEvent(ScheduleEvent event) {
 
     }

@@ -33,6 +33,7 @@ public class ScheduleEvent {
     public int repeat;
     public int notify;
     public int type;
+    public boolean needPost;
 
 
     @Override
@@ -45,6 +46,7 @@ public class ScheduleEvent {
                 ", repeat=" + repeat +
                 ", notify=" + notify +
                 ", type=" + type +
+                ", needPost=" + needPost +
                 '}';
     }
 
@@ -70,6 +72,7 @@ public class ScheduleEvent {
         event.repeat = cursor.getInt(ScheduleDBUtils.COL_EVENT_REPEAT);
         event.notify = cursor.getInt(ScheduleDBUtils.COL_EVENT_NOTIFY);
         event.type = cursor.getInt(ScheduleDBUtils.COL_EVENT_TYPE);
+        event.needPost = cursor.getInt(ScheduleDBUtils.COL_EVENT_NEED_POST) != 0;
 
         return event;
     }

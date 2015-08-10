@@ -20,12 +20,15 @@ public class ScheduleContract {
 
         public static final String TABLE_NAME = "events";
 
+        public static final int NOTIFY_NONE = 0;
+        public static final int NOTIFY_ONCE = 1;
+
         public static final String COL_EVENT_TITLE = "title";
         public static final String COL_EVENT_START_TIME = "start_time";
         public static final String COL_EVENT_END_TIME = "end_time";
         public static final String COL_EVENT_REPEAT = "repeat";
         public static final String COL_EVENT_NOTIFY = "notify";
         public static final String COL_EVENT_TYPE = "type";
-
+        public static final String COL_EVENT_NEED_POST = "need_post";
     }
 }
