@@ -92,7 +92,7 @@ public class ScheduleDBUtils {
     }
 
 
-    public static void insertScheduleEvent(ScheduleEvent event) {
+    public static long insertScheduleEvent(ScheduleEvent event) {
         ContentValues values = new ContentValues();
         values.put(EventEntry.COL_EVENT_TITLE, event.title);
         values.put(EventEntry.COL_EVENT_START_TIME, event.startMillis);
@@ -106,5 +106,7 @@ public class ScheduleDBUtils {
         long id = db.insert(EventEntry.TABLE_NAME, null, values);
         if (id < 0)
             Logger.e(LOG_TAG, "Fail to insert event to database, event = " + event);
+
+        return id;
     }
 }

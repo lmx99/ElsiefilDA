@@ -49,7 +49,6 @@ public class ScheduleInsertController extends ScheduleController
         ScheduleEvent event = getEvent();
         if (event != null) {
             mScheduleModel.insertEvent(event);
-        } else {
             getScheduleDetailView().close();
         }
     }

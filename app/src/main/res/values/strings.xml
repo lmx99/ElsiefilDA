@@ -479,7 +479,6 @@
     <!-- DeliverStatOptionFragment -->
     <string name="action_ok">OK</string>
 
-    <string name="title_activity_add_schedule">AddScheduleActivity</string>
 
     <!-- share with ScheduleDetailActivity-->
     <string name="title_start_time">From: </string>
@@ -489,6 +488,9 @@
 
 
     <!-- ScheduleDetailActivity -->
+    <string name="title_activity_add_schedule">Add Schedule</string>
+    <string name="title_activity_alter_schedule">Alter Schedule</string>
+
     <string name="title_event_title">Title</string>
     <string name="title_repeat">Repeat</string>
     <string name="title_notify">Notify</string>
@@ -498,6 +500,9 @@
     <string name="repeat_opt_weekdays">Weekdays</string>
 
     <string name="error_event_title_empty">The title couldn\'t be empty</string>
+    <string name="error_fail_to_add_event">Some error occurred and adding failed</string>
+
+    <string name="success_add_event">Schedule added</string>
 
 
 

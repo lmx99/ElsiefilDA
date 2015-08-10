@@ -27,6 +27,7 @@ public abstract class ScheduleController {
     protected ScheduleEvent getEvent() {
         String title = mScheduleDetailView.getEventTitle();
         if (title.equals("")) {
+            mScheduleDetailView.showErrMsg(R.string.error_event_title_empty);
             return null;
         }
 
@@ -34,7 +35,7 @@ public abstract class ScheduleController {
         long startMillis = DateUtils.translateTimeMillis(startTime[0], startTime[1]);
         String[] endTime = mScheduleDetailView.getEndTime();
         long endMillis = DateUtils.translateTimeMillis(endTime[0], endTime[1]);
-        if (startMillis < endMillis) {
+        if (endMillis < startMillis) {
             mScheduleDetailView.showErrMsg(R.string.error_start_greater_end);
             return null;
         }
