@@ -52,6 +52,7 @@ public class ScheduleEvent {
 
     public static ScheduleEvent newInstance(JSONObject jsonObject) throws JSONException {
         ScheduleEvent event = new ScheduleEvent();
+        event.id = jsonObject.getInt(ScheduleContract.OWN_EVENT_LOCAL_ID);
         event.title = jsonObject.getString(ScheduleContract.OWN_EVENT_TITLE);
         event.startMillis = jsonObject.getLong(ScheduleContract.OWN_EVENT_START_TIME);
         event.endMillis = jsonObject.getLong(ScheduleContract.OWN_EVENT_END_TIME);

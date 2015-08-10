@@ -479,16 +479,16 @@
     <!-- DeliverStatOptionFragment -->
     <string name="action_ok">OK</string>
 
-    <string name="error_start_greater_end">The end time must greater than or equal to the start</string>
     <string name="title_activity_add_schedule">AddScheduleActivity</string>
 
-    <!-- share with AddScheduleActivity-->
+    <!-- share with ScheduleDetailActivity-->
     <string name="title_start_time">From: </string>
     <string name="title_end_time">To: </string>
+    <string name="error_start_greater_end">The end time must greater than or equal to the start</string>
 
 
 
-    <!-- AddScheduleActivity -->
+    <!-- ScheduleDetailActivity -->
     <string name="title_event_title">Title</string>
     <string name="title_repeat">Repeat</string>
     <string name="title_notify">Notify</string>
@@ -496,6 +496,8 @@
     <string name="repeat_opt_never">Never</string>
     <string name="repeat_opt_everyday">Everyday</string>
     <string name="repeat_opt_weekdays">Weekdays</string>
+
+    <string name="error_event_title_empty">The title couldn\'t be empty</string>
 
 
 

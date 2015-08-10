@@ -524,7 +524,7 @@
                 android:value="com.lifeisle.jekton.activity.DeliverStatActivity" />
         </activity>
         <activity
-            android:name="com.lifeisle.jekton.activity.AddScheduleActivity"
+            android:name="com.lifeisle.jekton.activity.ScheduleDetailActivity"
             android:label="@string/title_activity_add_schedule"
             android:parentActivityName="com.lifeisle.jekton.activity.ScheduleCategoryActivity"
             android:theme="@style/MyTheme" >

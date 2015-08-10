@@ -82,7 +82,7 @@
 
 
 
-    <!-- AddScheduleActivity -->
+    <!-- ScheduleDetailActivity -->
     <dimen name="padding_selectable_text">8dp</dimen>
     <dimen name="width_dialog_divider">1dp</dimen>
     <dimen name="width_dialog_divider_half">0.5dp</dimen>

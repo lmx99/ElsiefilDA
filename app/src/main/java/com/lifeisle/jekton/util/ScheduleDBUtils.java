@@ -100,7 +100,7 @@ public class ScheduleDBUtils {
         values.put(EventEntry.COL_EVENT_REPEAT, event.repeat);
         values.put(EventEntry.COL_EVENT_NOTIFY, event.notify);
         values.put(EventEntry.COL_EVENT_TYPE, event.type);
-        values.put(EventEntry.COL_EVENT_NEED_POST, event.needPost);
+        values.put(EventEntry.COL_EVENT_NEED_POST, event.needPost ? 1 : 0);
 
         SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
         long id = db.insert(EventEntry.TABLE_NAME, null, values);

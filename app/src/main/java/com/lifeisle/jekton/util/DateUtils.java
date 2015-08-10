@@ -47,6 +47,17 @@ public class DateUtils {
     /**
      * @return date format of "yyyy-MM-dd"
      */
+    public static String formatDate(Calendar calendar) {
+        int year = calendar.get(Calendar.YEAR);
+        int monthOfYear = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        return formatDate(year, monthOfYear, dayOfMonth);
+    }
+
+    /**
+     * @return date format of "yyyy-MM-dd"
+     */
     public static String formatDate(int year, int monthOfYear, int dayOfMonth) {
         return String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
     }
@@ -92,6 +103,15 @@ public class DateUtils {
     }
 
     /**
+     * @return time in "hh:mm" format
+     */
+    public static String formatTime(Calendar calendar) {
+        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        return formatTime(hourOfDay, minute);
+    }
+
+    /**
      * @param hourOfDay hour of day
      * @param minute minute of hour
      * @return time in "hh:mm" format
@@ -114,5 +134,16 @@ public class DateUtils {
             day <<= 1;
         }
         return builder.length() == 0 ? "" : builder.substring(0, builder.length() - 1);
+    }
+
+
+    public static long translateTimeMillis(String date, String time) {
+        int year = extractYear(date);
+        int month = extractMonth(date);
+        int day = extractDay(date);
+        int hour = extractHour(time);
+        int min = extractMin(time);
+
+        return new GregorianCalendar(year, month, day, hour, min).getTimeInMillis();
     }
 }

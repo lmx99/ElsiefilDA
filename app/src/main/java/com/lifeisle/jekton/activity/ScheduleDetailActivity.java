@@ -5,21 +5,27 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.lifeisle.android.R;
+import com.lifeisle.jekton.data.ScheduleContract;
 import com.lifeisle.jekton.fragment.SettingRepeatDialogFragment;
-import com.lifeisle.jekton.model.ScheduleAdder;
+import com.lifeisle.jekton.schedule.ScheduleController;
+import com.lifeisle.jekton.schedule.ScheduleDetailView;
+import com.lifeisle.jekton.schedule.ScheduleInsertController;
+import com.lifeisle.jekton.schedule.ScheduleModel;
 import com.lifeisle.jekton.util.DateUtils;
+import com.lifeisle.jekton.util.Toaster;
 
-public class AddScheduleActivity extends AppCompatActivity implements View.OnClickListener,
+public class ScheduleDetailActivity extends AppCompatActivity implements View.OnClickListener,
         TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener,
-        SettingRepeatDialogFragment.OnRepeatChangeListener {
+        SettingRepeatDialogFragment.OnRepeatChangeListener, ScheduleDetailView {
 
-    private ScheduleAdder scheduleAdder;
+    private ScheduleController controller;
 
     private EditText mTitle;
 
@@ -29,16 +35,11 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     private TextView endTimeClock;
 
     private TextView repeat;
-    private TextView notify;
-
-    private TextView ok;
-    private TextView cancel;
-    private TextView delete;
+    private CheckBox notify;
 
     /**
      * Current textView that has been clicked to show the {@link TimePickerDialog}.<br />
-     * Used in {@link #onTimeSet(TimePicker, int, int)} and {@link #setRepeat(TextView)}
-     * as a bookkeeping
+     * Used in {@link #onTimeSet(TimePicker, int, int)} as a bookkeeping
      */
     private TextView currentSettingTextView;
 
@@ -47,38 +48,39 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_schedule);
 
-        scheduleAdder = new ScheduleAdder(this);
         init();
+
+        ScheduleModel scheduleModel = new ScheduleModel(this);
+        controller = new ScheduleInsertController(this, scheduleModel);
     }
 
     private void init() {
-        mTitle = (EditText) findViewById(R.id.title);
+        mTitle = (EditText) findViewById(R.id.event_title);
 
+        initTime();
+
+        repeat = (TextView) findViewById(R.id.repeat);
+        repeat.setTag(0);
+        notify = (CheckBox) findViewById(R.id.notify);
+
+        repeat.setOnClickListener(this);
+        notify.setOnClickListener(this);
+
+        findViewById(R.id.cancel).setOnClickListener(this);
+    }
+
+    private void initTime() {
         startTimeDay = (TextView) findViewById(R.id.start_time_day);
         startTimeClock = (TextView) findViewById(R.id.start_time_clock);
         endTimeDay = (TextView) findViewById(R.id.end_time_day);
         endTimeClock = (TextView) findViewById(R.id.end_time_clock);
 
-        repeat = (TextView) findViewById(R.id.repeat);
-        notify = (TextView) findViewById(R.id.notify);
-
-        ok = (TextView) findViewById(R.id.ok);
-        cancel = (TextView) findViewById(R.id.cancel);
-        delete = (TextView) findViewById(R.id.delete);
-
-
         startTimeDay.setOnClickListener(this);
         startTimeClock.setOnClickListener(this);
         endTimeDay.setOnClickListener(this);
         endTimeClock.setOnClickListener(this);
-
-        repeat.setOnClickListener(this);
-        notify.setOnClickListener(this);
-
-        ok.setOnClickListener(this);
-        cancel.setOnClickListener(this);
-        delete.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -100,17 +102,11 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                 break;
             }
             case R.id.repeat: {
-                setRepeat(repeat);
-                break;
-            }
-            case R.id.ok: {
-
+                setupRepeat();
                 break;
             }
             case R.id.cancel: {
-                break;
-            }
-            case R.id.delete: {
+                finish();
                 break;
             }
             default:
@@ -119,7 +115,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    public void pickTime(TextView textView) {
+    private void pickTime(TextView textView) {
         currentSettingTextView = textView;
         String time = textView.getText().toString();
         TimePickerDialog dialog = new TimePickerDialog(this,
@@ -136,7 +132,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    public void pickDate(TextView textView) {
+    private void pickDate(TextView textView) {
         String date = textView.getText().toString();
         DatePickerDialog dialog = new DatePickerDialog(this,
                 this,
@@ -154,9 +150,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    public void setRepeat(TextView textView) {
-        currentSettingTextView = textView;
-
+    private void setupRepeat() {
         SettingRepeatDialogFragment dialogFragment = new SettingRepeatDialogFragment();
         dialogFragment.setRepeatChangeListener(this);
         dialogFragment.show(getSupportFragmentManager(), "setRepeat");
@@ -164,8 +158,80 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onRepeatChanged(int repeat) {
-        currentSettingTextView.setText(Integer.toBinaryString(repeat));
+        setRepeat(repeat);
+    }
+
+
+    @Override
+    public void setEventTitle(String title) {
+        mTitle.setText(title);
+    }
+
+    @Override
+    public void setStartTime(String day, String clockTime) {
+        startTimeDay.setText(day);
+        startTimeClock.setText(clockTime);
+    }
+
+    @Override
+    public void setEndTime(String day, String clockTime) {
+        endTimeDay.setText(day);
+        endTimeClock.setText(clockTime);
+    }
+
+    @Override
+    public void setRepeat(int repeat) {
+        this.repeat.setText(DateUtils.formatDaysAbbr(repeat));
         // store the int repeat to the tag of repeatTextView
-        currentSettingTextView.setTag(repeat);
+        this.repeat.setTag(repeat);
+    }
+
+    @Override
+    public void setNotify(int notify) {
+        if (notify == ScheduleContract.EventEntry.NOTIFY_ONCE) {
+            this.notify.setChecked(true);
+        }
+    }
+
+    @Override
+    public String getEventTitle() {
+        return mTitle.getText().toString();
+    }
+
+    @Override
+    public String[] getStartTime() {
+        return new String[] {
+                startTimeDay.getText().toString(),
+                startTimeClock.getText().toString()
+        };
+    }
+
+    @Override
+    public String[] getEndTime() {
+        return new String[] {
+                endTimeDay.getText().toString(),
+                endTimeClock.getText().toString()
+        };
+    }
+
+    @Override
+    public int getRepeat() {
+        return (int) repeat.getTag();
+    }
+
+    @Override
+    public int getNotify() {
+        return notify.isChecked() ? ScheduleContract.EventEntry.NOTIFY_ONCE
+                                  : ScheduleContract.EventEntry.NOTIFY_NONE;
+    }
+
+    @Override
+    public void showErrMsg(int msgId) {
+        Toaster.showShort(this, msgId);
+    }
+
+    @Override
+    public void close() {
+        finish();
     }
 }
