@@ -152,6 +152,7 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
 
     private void setupRepeat() {
         SettingRepeatDialogFragment dialogFragment = new SettingRepeatDialogFragment();
+        dialogFragment.setRepeat(getRepeat());
         dialogFragment.setRepeatChangeListener(this);
         dialogFragment.show(getSupportFragmentManager(), "setRepeat");
     }
