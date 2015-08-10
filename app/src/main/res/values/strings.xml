@@ -362,9 +362,12 @@
     <string name="error_fail_to_insert_goods">Fail to insert goods item to the database. Please check your storage.</string>
     <string name="error_fail_to_update_order">Fail to update order item of the database. Please check your storage or  permissions.</string>
     <string name="error_fail_sign_in_jobs">Fail to sign in</string>
+    <string name="error_fail_sign_out_jobs">Fail to sign out</string>
     <string name="error_fail_post_delivered">Post delivered data failed</string>
+    <string name="error_qr_code_invalid">Invalid QR Code</string>
 
     <string name="success_sign_in_jobs">Successfully signed in</string>
+    <string name="success_sign_out_jobs">Successfully signed out</string>
 
     <string name="ratio_btn_all">All</string>
     <string name="ratio_btn_undelivered">Undelivered</string>

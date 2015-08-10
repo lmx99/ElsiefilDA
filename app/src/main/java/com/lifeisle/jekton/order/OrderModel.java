@@ -34,7 +34,7 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Jekton
- * @version 1.0 8/5/2015
+ * @version 0.3 8/5/2015
  */
 public class OrderModel {
 
@@ -315,7 +315,7 @@ public class OrderModel {
 
 
     public void signInAJob(String qrCode) {
-        MyApplication.addToRequestQueue(new SignInJobsRequest(qrCode,
+        MyApplication.addToRequestQueue(new SignInJobsRequest(qrCode, true,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -338,6 +338,34 @@ public class OrderModel {
                     public void onErrorResponse(VolleyError error) {
                         Logger.e(TAG, error);
                         Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
+                    }
+                }));
+    }
+
+
+    public void signOutJob(String qrCode) {
+        MyApplication.addToRequestQueue(new SignInJobsRequest(qrCode, true,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Logger.d(TAG, "signOutAJob() response: " + response);
+                        try {
+                            if (response.getInt("status") == 0) {
+                                Preferences.setJCatID(-1);
+                                OrderDBUtils.clearOrders();
+                                Toaster.showShort(context, R.string.success_sign_out_jobs);
+                            }
+                        } catch (JSONException e) {
+                            Logger.e(TAG, e.toString(), e);
+                            Logger.e(TAG, "Sign In Jobs response: " + response);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Logger.e(TAG, error);
+                        Toaster.showShort(context, R.string.error_fail_sign_out_jobs);
                     }
                 }));
     }
@@ -503,19 +531,22 @@ public class OrderModel {
 
 
     /**
-     * post sign info
+     * post sign in or sign out info
      */
     private class SignInJobsRequest extends AutoLoginRequest {
 
         private static final String TAG = "SignInJobsRequest";
 
         private String qrCode;
+        private boolean mSignIn;
 
-        public SignInJobsRequest(String qrCode, Response.Listener<JSONObject> listener,
+        public SignInJobsRequest(String qrCode, boolean signIn,
+                                 Response.Listener<JSONObject> listener,
                                  Response.ErrorListener errorListener) {
             super(context, Method.POST, SERVER_PATH, listener, errorListener);
 
             this.qrCode = qrCode;
+            mSignIn = signIn;
         }
 
         @Override
@@ -526,12 +557,14 @@ public class OrderModel {
                 params.put("region_id", "" + region_id);
                 params.put("sys", "job");
                 params.put("ctrl", "job_epl");
-                params.put("action", "sign_in");
+                params.put("action", mSignIn? "sign_in" : "sign_out");
             } catch (JSONException e) {
-                Logger.e(TAG, e.toString());
+                Logger.e(TAG, e.toString(), e);
             }
         }
     }
+
+
 
 
 

@@ -27,12 +27,13 @@ import com.lifeisle.jekton.order.OrderModel;
 import com.lifeisle.jekton.order.OrderView;
 import com.lifeisle.jekton.ui.adapter.OrderListAdapter;
 import com.lifeisle.jekton.util.Logger;
+import com.lifeisle.jekton.util.Toaster;
 import com.zxing.activity.CaptureActivity;
 
 
 /**
  * @author Jekton
- * @version 0.01 7/16/2015
+ * @version 0.2 8/10/2015
  */
 public class QRCodeScanActivity extends AppCompatActivity
         implements View.OnClickListener, OrderView, RadioGroup.OnCheckedChangeListener,
@@ -118,7 +119,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
         orderModel = new OrderModel(this);
         orderListAdapter = new OrderListAdapter(this, orderModel);
-        orderController = new OrderController(orderModel);
+        orderController = new OrderController(this, orderModel);
 
         listView.setAdapter(orderListAdapter);
 
@@ -253,15 +254,7 @@ public class QRCodeScanActivity extends AppCompatActivity
         if (requestCode == REQUEST_CODE_SCAN_QR_CODE && resultCode == RESULT_OK) {
             String result = data.getStringExtra("result");
             Logger.d(TAG, "scan result: " + result);
-            if (result.startsWith("{")) {
-                orderController.postQRCode(result);
-            } else {
-                if (orderController.addOrderCode(result)) {
-                    Intent startScan = new Intent(this, CaptureActivity.class);
-                    startActivityForResult(startScan, 0);
-                }
-            }
-
+            orderController.postQRCode(result);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
@@ -343,6 +336,16 @@ public class QRCodeScanActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public void startScanActivity() {
+        Intent startScan = new Intent(this, CaptureActivity.class);
+        startActivityForResult(startScan, REQUEST_CODE_SCAN_QR_CODE);
+    }
+
+    @Override
+    public void showErrMsg(int msgId) {
+        Toaster.showShort(this, msgId);
+    }
 
     @Override
     public void onRefresh() {

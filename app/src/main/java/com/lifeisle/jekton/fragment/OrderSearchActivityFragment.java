@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.activity;
+package com.lifeisle.jekton.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -25,6 +25,9 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
         TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener,
         SettingRepeatDialogFragment.OnRepeatChangeListener, ScheduleDetailView {
 
+    /**
+     * Stored as a field to prevent being reclaimed
+     */
     private ScheduleController controller;
 
     private EditText mTitle;

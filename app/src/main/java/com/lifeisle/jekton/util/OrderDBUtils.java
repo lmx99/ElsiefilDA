@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @author Jekton
- * @version 0.01 7/16/2015
+ * @version 0.2 7/16/2015
  */
 public class OrderDBUtils {
 
@@ -379,5 +379,12 @@ public class OrderDBUtils {
         cursor.close();
 
         return result;
+    }
+
+
+    public static void clearOrders() {
+        ordersDB.execSQL("delete from " + OrdersDBHelper.TABLE_ORDERS);
+        ordersDB.execSQL("delete from " + OrdersDBHelper.TABLE_GOODS);
+        ordersDB.execSQL("delete from " + OrdersDBHelper.TABLE_LOGISTICS);
     }
 }
