@@ -277,8 +277,10 @@
     <string name="hanging_up">Hanging up..</string>
     <string name="illegal_user_name">Illegal user name</string>
     <string name="robot_chat">Robot chat</string>
-    
-    
+
+    <string name="error_fail_to_login">Fail to login</string>
+    <string name="error_password_invalid">Invalid Password</string>
+    <string name="error_user_name_invalid">Invalid UserName</string>
     
     
     
@@ -341,18 +343,13 @@
 
 
 
-    <string name="tab_logistics">Logistics</string>
-    <string name="tab_chats">Chats</string>
-    <string name="tab_discover">Discover</string>
-    <string name="tab_me">Me</string>
-
-
 
     <string name="fragment_logistics_routine">Schedules</string>
     <string name="fragment_logistics_my_position">MyPosition</string>
     <string name="fragment_logistics_job_auth">Job Opportunity</string>
     <string name="fragment_logistics_scan_QR_code">Scan QR Code</string>
     <string name="fragment_logistics_deliver_stat">Deliver Stat</string>
+    <string name="fragment_logistics_order_search">Search Orders</string>
 
 
 

@@ -535,6 +535,7 @@
         <activity
             android:name="com.lifeisle.jekton.activity.OrderSearchActivity"
             android:label="@string/title_activity_order_search"
+            android:theme="@style/MyTheme"
             android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
