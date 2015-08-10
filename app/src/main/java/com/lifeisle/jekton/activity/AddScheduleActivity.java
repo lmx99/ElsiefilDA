@@ -98,9 +98,6 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                 setRepeat(repeat);
                 break;
             }
-            case R.id.notify: {
-                break;
-            }
             case R.id.ok: {
                 break;
             }

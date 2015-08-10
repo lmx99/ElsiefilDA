@@ -1,5 +1,7 @@
 package com.lifeisle.jekton.util;
 
+import com.lifeisle.android.R;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -99,8 +101,18 @@ public class DateUtils {
     }
 
 
-    public static String formatDaysAbbr(int bits) {
-
-        return null;
+    public static String formatDaysAbbr(int daysOfWeek) {
+        final int NUM_DAYS_OF_WEEK = 7;
+        String[] days = StringUtils.getStringsFromResource(R.array.day_of_week_abbrs);
+        int day = 1;
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < NUM_DAYS_OF_WEEK; ++i) {
+            if ((daysOfWeek & day) != 0) {
+                builder.append(days[i]);
+                builder.append(",");
+            }
+            day <<= 1;
+        }
+        return builder.length() == 0 ? "" : builder.substring(0, builder.length() - 1);
     }
 }
