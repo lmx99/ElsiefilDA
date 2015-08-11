@@ -70,7 +70,7 @@ public class OrderDBUtils {
         order.put(OrdersDBHelper.COLUMN_ORDERS_CREATE_TIME, createTime);
         long addTime = item.addTime.getTime();
         order.put(OrdersDBHelper.COLUMN_ORDERS_ADD_TIME, addTime);
-        Logger.d(TAG, "createTime = " + createTime + ", addTime = " + addTime);
+//        Logger.d(TAG, "createTime = " + createTime + ", addTime = " + addTime);
         order.put(OrdersDBHelper.COLUMN_ORDERS_PRICE, item.price);
         order.put(OrdersDBHelper.COLUMN_ORDERS_SUBTOTAL, item.subTotal);
         order.put(OrdersDBHelper.COLUMN_ORDERS_MOBILE_PHONE, item.mobilePhone);

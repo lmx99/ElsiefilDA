@@ -385,14 +385,9 @@ public class OrderModel {
                             if (response.getInt("status") == 0) {
                                 orderRequestCount--;
                                 if (!executorService.isTerminated()) {
-                                    JSONObject order;
-                                    if (requestType == OrderItem.REQUEST_LOGISTICS_UPDATE) {
-                                        JSONArray orders = response.getJSONArray("scaned_orders");
-                                        // length == 1
-                                        order = orders.getJSONObject(0);
-                                    } else {
-                                        order = response;
-                                    }
+                                    JSONArray orders = response.getJSONArray("scaned_orders");
+                                    // length == 1
+                                    JSONObject order = orders.getJSONObject(0);
                                     Logger.d(TAG, "postOrderCode success, initCount = " + currentInitCount);
                                     executorService.execute(
                                             new OrderInfoFilledTask(order,
