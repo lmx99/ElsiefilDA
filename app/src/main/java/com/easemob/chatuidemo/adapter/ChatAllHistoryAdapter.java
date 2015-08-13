@@ -14,6 +14,7 @@
 package com.easemob.chatuidemo.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
+import com.boshu.db.NickHeadLoader;
 import com.easemob.applib.controller.HXSDKHelper;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatRoom;
@@ -61,6 +63,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 	private List<EMConversation> copyConversationList;
 	private ConversationFilter conversationFilter;
     private boolean notiyfyByFilter;
+	private  Context context;
 
 	public ChatAllHistoryAdapter(Context context, int textViewResourceId, List<EMConversation> objects) {
 		super(context, textViewResourceId, objects);
@@ -68,6 +71,8 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 		copyConversationList = new ArrayList<EMConversation>();
 		copyConversationList.addAll(objects);
 		inflater = LayoutInflater.from(context);
+		this.context=context;
+
 	}
 
 	@Override
@@ -75,7 +80,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.row_chat_history, parent, false);
 		}
-		ViewHolder holder = (ViewHolder) convertView.getTag();
+		 ViewHolder holder = (ViewHolder) convertView.getTag();
 		if (holder == null) {
 			holder = new ViewHolder();
 			holder.name = (TextView) convertView.findViewById(R.id.name);
@@ -101,7 +106,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 			// 群聊消息，显示群聊头像
 			holder.avatar.setImageResource(R.drawable.group_icon);
 			EMGroup group = EMGroupManager.getInstance().getGroup(username);
-			holder.name.setText(group != null ? group.getGroupName() : username);
+		//	holder.name.setText(group != null ? group.getGroupName() : username);
 		} else if(conversation.getType() == EMConversationType.ChatRoom){
 		    holder.avatar.setImageResource(R.drawable.group_icon);
             EMChatRoom room = EMChatManager.getInstance().getChatRoom(username);
@@ -124,6 +129,17 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 				}
 			}else{
 				holder.name.setText(username);
+				final  ViewHolder holder1=holder;
+				NickHeadLoader loader=new NickHeadLoader(context);
+				loader.setNickImage(username, new NickHeadLoader.OnNickImageLoadListener() {
+					@Override
+					public void OnNickImage(String nickName, Bitmap bitMap) {
+						System.out.println(nickName + "*************************");
+						holder1.name.setText(nickName);
+						holder1.avatar.setImageBitmap(bitMap);
+					}
+				});
+
 			}
 		}
 
@@ -263,7 +279,6 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 				String prefixString = prefix.toString();
 				final int count = mOriginalValues.size();
 				final ArrayList<EMConversation> newValues = new ArrayList<EMConversation>();
-
 				for (int i = 0; i < count; i++) {
 					final EMConversation value = mOriginalValues.get(i);
 					String username = value.getUserName();

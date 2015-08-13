@@ -14,36 +14,23 @@ public class UserDao {
     }
     public void addUser(User user){
         try {
-            
-        
        SQLiteDatabase db= helper.getWritableDatabase();
-      /* create table user(id integer primary 
-       * key autoincrement,userName varchar(100),nickName varchar(100),
-       * sex varchar(100),age varchar(100),hight varchar(100),figure varchar(100),
-       * school varchar(100),major varchar(100),entrance_year varchar(20),realname varchar(20),
-       * myPhone varchar(100),friendPhone varchar100),mail varchar(100),qQ varchar(100),
-       * jobWant varchar(100),resume varchar(300),idCard varchar(100),
-       * BeforeIdCard varchar(100),AferIdCard varchar(100),headImage varchar(100))";*/
-       System.out.println("------------------------------username"+user.getUserName());
        ContentValues values=new ContentValues();
        values.put("userName", user.getUserName());
        values.put("nickName", user.getNickName());
        values.put("sex", user.getSex());
-       System.out.println(".........................dddd");
        values.put("age", user.getAge());
        values.put("hight", user.getHight());
        values.put("figure", user.getFigure());
        values.put("school", user.getSchool());
        values.put("major", user.getMajor());
        values.put("entrance_year", user.getEntrance_year());
-       System.out.println(".............................fffff");
        values.put("realname", user.getRealName());
        values.put("myPhone", user.getMyPhone());
        values.put("friendPhone", user.getFriendPhone());
        values.put("mail", user.getMail());
        values.put("qQ", user.getqQ());
        values.put("jobWant", user.getJobWant());
-       System.out.println(".........................fffffff");
        values.put("resume", user.getResume());
        values.put("idCard", user.getIdCard());
        values.put("BeforeIdCard", user.getBeforeIdCard());

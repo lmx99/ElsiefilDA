@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+
+    >
+
+    <TextView
+        android:text="11:33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:padding="10dp" >
+
+            <ImageView
+                android:id="@+id/News_Pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#B5B9BE"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:textColor="#ffffff"
+                android:id="@+id/News_Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="#40000000"
+                android:padding="5dp"
+                android:text="飒沓洒洒的" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#B5B9BE" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/News_Title1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:textColor="#000000"
+                android:maxLines="2"
+                android:text="as大苏打撒打算打算" />
+
+            <ImageView
+                android:id="@+id/News_Pic1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/delete" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#B5B9BE" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/News_Title2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="#000000"
+                android:text="as大苏打撒打算打算" />
+
+            <ImageView
+                android:id="@+id/News_Pic2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/delete" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/delete" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/News_Title3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:textColor="#000000"
+                android:maxLines="2"
+                android:text="as大苏打撒打算打算" />
+
+            <ImageView
+                android:id="@+id/News_Pic3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/delete" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

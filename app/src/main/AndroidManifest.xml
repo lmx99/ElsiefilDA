@@ -307,6 +307,16 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             ></activity>
+        <activity android:name="com.boshu.activity.Activity_boshu_push"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
+        <activity android:name="com.boshu.activity.Activity_boshu_Wallet"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
           
          
 
@@ -387,7 +397,7 @@
             <intent-filter>
 
                 <!-- 【必须】 请修改为当前APP名包.PUSH_ACTION，如demo的包名为：com.qq.xgdemo -->
-                <action android:name="com.easemob.chatuidemo.PUSH_ACTION" />
+                <action android:name="com.lifeisle.android.PUSH_ACTION" />
             </intent-filter>
         </service>
 
@@ -419,16 +429,16 @@
         <!-- 【必须】 请修改为APP的AccessId，“21”开头的10位数字，中间没空格 -->
         <meta-data
             android:name="XG_V2_ACCESS_ID"
-            android:value="2100133832" />
+            android:value="2100139965" />
         <!-- 【必须】 请修改为APP的AccessKey，“A”开头的12位字符串，中间没空格 -->
         <meta-data
             android:name="XG_V2_ACCESS_KEY"
-            android:value="AAJ3SY11B57N" />
+            android:value="A5AV374M4TTV" />
 
         <!-- 【！！不需要添加！！】 此处的secretkey主要是为了Demo一键诊断用，实际APP不用添加，切记！ -->
         <meta-data
             android:name="XG_V2_SECRET_KEY"
-            android:value="138f925233d6f4e402f284fb51e01d93" />
+            android:value="977cf34428994a033ed325c0e392a02d" />
         
         
         

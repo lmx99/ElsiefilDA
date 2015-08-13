@@ -39,6 +39,10 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
+import com.boshu.db.UserDao;
+import com.boshu.domain.User;
+import com.boshu.image.ImageDowloader;
+import com.boshu.utils.Model;
 import com.easemob.EMCallBack;
 import com.easemob.EMError;
 import com.easemob.applib.controller.HXSDKHelper;
@@ -78,6 +82,7 @@ import com.easemob.util.FileUtils;
 import com.easemob.util.LatLng;
 import com.easemob.util.TextFormater;
 import com.lifeisle.android.R;
+import com.lifeisle.jekton.util.Preferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -458,7 +463,8 @@ public class MessageAdapter extends BaseAdapter{
 		}
 		
 		//设置用户头像
-		setUserAvatar(message, holder.iv_avatar);
+		//setUserAvatar(message, holder.iv_avatar);
+		setAvater(context,message,holder.iv_avatar);
 
 		switch (message.getType()) {
 		// 根据消息type显示item
@@ -564,14 +570,15 @@ public class MessageAdapter extends BaseAdapter{
 	 * @param message
 	 * @param imageView
 	 */
-	private void setUserAvatar(EMMessage message, ImageView imageView){
+	/*private void setUserAvatar(EMMessage message, ImageView imageView){
 	    if(message.direct == Direct.SEND){
 	        //显示自己头像
+			setAvater(context,EMChatManager.getInstance().getCurrentUser(),imageView);
 	        UserUtils.setUserAvatar(context, EMChatManager.getInstance().getCurrentUser(), imageView);
 	    }else{
 	        UserUtils.setUserAvatar(context, message.getFrom(), imageView);
 	    }
-	}
+	}*/
 
 	/**
 	 * 文本消息
@@ -1563,6 +1570,26 @@ public class MessageAdapter extends BaseAdapter{
 			activity.startActivity(intent);
 		}
 
+	}
+	public void setAvater(Context context,EMMessage message,final ImageView imge){
+		String headUrl=null;
+		UserDao userDao=new UserDao(context);
+
+		ImageDowloader dowloader=new ImageDowloader(context);
+		if(message.direct == Direct.SEND){
+			headUrl= Model.PitureLoad+userDao.find(Preferences.getUserName()).getHeadImage();
+			//显示自己头像
+		}else{
+			headUrl= Model.PitureLoad+userDao.find(message.getFrom()).getHeadImage();
+
+		}
+		dowloader.downloadImage(45, 45, headUrl, new ImageDowloader.OnImageDownloadListener() {
+
+			@Override
+			public void onImageDownload(String url, Bitmap bitmap) {
+				imge.setImageBitmap(bitmap);
+			}
+		});
 	}
 
 }

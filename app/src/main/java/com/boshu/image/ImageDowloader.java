@@ -1,17 +1,17 @@
 package com.boshu.image;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Message;
 
 public class ImageDowloader {
 	private ExecutorService mImageThreadPool=null;
@@ -95,7 +95,6 @@ public class ImageDowloader {
 			synchronized (ExecutorService.class) {
 				if(mImageThreadPool==null){
 					mImageThreadPool=Executors.newFixedThreadPool(THREAD_NUM);//
-					
 				}
 			}
 		}

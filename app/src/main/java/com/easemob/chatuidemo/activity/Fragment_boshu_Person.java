@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.boshu.activity.Activity_boshu_Message;
+import com.boshu.activity.Activity_boshu_Wallet;
 import com.boshu.customview.CircleImageView;
 import com.boshu.db.UserDao;
 import com.boshu.domain.User;
@@ -32,6 +33,7 @@ import com.lifeisle.jekton.util.Preferences;
 
 public class Fragment_boshu_Person extends Fragment implements OnClickListener{
     private RelativeLayout rl_Boshu_Message;
+    private RelativeLayout rl_Boshu_Wallet;
     private TextView tv_boshu_experience;
     private CircleImageView circl_boshu_head;
     private ImageDowloader mImageDowloader;
@@ -57,7 +59,9 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
         super.onActivityResult(requestCode, resultCode, data);
     }
     public void init(){
+       rl_Boshu_Wallet= (RelativeLayout) getView().findViewById(R.id.rl_boshu_wallet);
         rl_Boshu_Message= (RelativeLayout) getView().findViewById(R.id.rl_boshu_message);
+        rl_Boshu_Wallet.setOnClickListener(this);
         rl_Boshu_Message.setOnClickListener(this);
         tv_boshu_experience=(TextView) getView().findViewById(R.id.tv_boshu_experience);
         tv_boshu_experience.setOnClickListener(this);
@@ -83,7 +87,6 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
         if(bitmap!=null){
             img.setImageBitmap(bitmap);
         }else{
-            System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkk");
             mImageDowloader.downloadImage(80, 80,url , new OnImageDownloadListener() {
                 @Override
                 public void onImageDownload(String url, Bitmap bitmap) {
@@ -109,6 +112,10 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
             break;
         case R.id.tv_boshu_experience:
             layout();
+            break;
+        case R.id.rl_boshu_wallet:
+            it.setClass(getActivity(), Activity_boshu_Wallet.class);
+            getActivity().startActivity(it);
             break;
         }
         
