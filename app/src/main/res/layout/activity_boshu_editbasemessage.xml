@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_top_bar"
         android:background="@color/top_bar_normal_bg"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical"
+       >
 
         <include layout="@layout/commom_back_btn" />
 
@@ -33,7 +34,7 @@
                 android:textSize="16sp"
                />
         
-    </LinearLayout>>
+    </LinearLayout>
 
     <ScrollView
         android:id="@+id/sl_boshu_editMessageNew"

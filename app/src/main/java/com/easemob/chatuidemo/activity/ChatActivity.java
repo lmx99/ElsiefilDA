@@ -57,6 +57,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.boshu.db.NickHeadLoader;
 import com.easemob.EMChatRoomChangeListener;
 import com.easemob.EMError;
 import com.easemob.EMEventListener;
@@ -79,8 +80,8 @@ import com.easemob.chat.NormalFileMessageBody;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chat.VideoMessageBody;
 import com.easemob.chat.VoiceMessageBody;
-import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.adapter.ExpressionAdapter;
 import com.easemob.chatuidemo.adapter.ExpressionPagerAdapter;
 import com.easemob.chatuidemo.adapter.MessageAdapter;
@@ -157,7 +158,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	private View buttonSetModeVoice;
 	private View buttonSend;
 	private View buttonPressToSpeak;
-	// private ViewPager expressionViewpager;
+
 	private LinearLayout emojiIconContainer;
 	private LinearLayout btnContainer;
 	private ImageView locationImgview;
@@ -380,7 +381,14 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 
 		if (chatType == CHATTYPE_SINGLE) { // 单聊
 			toChatUsername = getIntent().getStringExtra("userId");
-			Map<String,RobotUser> robotMap=((DemoHXSDKHelper)HXSDKHelper.getInstance()).getRobotList();
+			NickHeadLoader loader=new NickHeadLoader(this);
+			loader.setNickImage(toChatUsername, new NickHeadLoader.OnNickImageLoadListener() {
+				@Override
+				public void OnNickImage(String nickName, Bitmap bitMap) {
+					((TextView) findViewById(R.id.name)).setText(nickName);
+				}
+			});
+		/*	Map<String,RobotUser> robotMap=((DemoHXSDKHelper)HXSDKHelper.getInstance()).getRobotList();
 			if(robotMap!=null&&robotMap.containsKey(toChatUsername)){
 				isRobot = true;
 				String nick = robotMap.get(toChatUsername).getNick();
@@ -391,7 +399,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				}
 			}else{
 				((TextView) findViewById(R.id.name)).setText(toChatUsername);
-			}
+			}*/
 		} else {
 			// 群聊
 			findViewById(R.id.container_to_group).setVisibility(View.VISIBLE);
