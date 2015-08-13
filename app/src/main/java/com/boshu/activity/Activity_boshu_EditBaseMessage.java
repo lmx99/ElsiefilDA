@@ -50,7 +50,8 @@ import com.boshu.utils.CompressPicture;
 import com.boshu.utils.Model;
 import com.easemob.chatuidemo.activity.MainActivity;
 import com.easemob.chatuidemo.utils.CommonUtils;
-import com.lifeisle.android.R;import com.lifeisle.jekton.util.Preferences;
+import com.lifeisle.android.R;
+import com.lifeisle.jekton.util.Preferences;
 import com.lifeisle.jekton.util.network.AutoLoginRequest;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -90,8 +91,8 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     private ImageView img_boshu_studentCard;
     private AlertDialog alertDialog;
     private static final String FILE_PATH = "/sdcard/lifeIsland.jpg";
-    private String[] ss = new String[] { "相册", "拍照"  };
-    private String[] sexStrings = new String[] {  "男", "女" };
+    private String[] ss = new String[]{"相册", "拍照"};
+    private String[] sexStrings = new String[]{"男", "女"};
     private String pathImage;
     private int FLAG;
     private int EDITFLAG;
@@ -139,7 +140,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     private EditText intentEditText;
     private EditText resumEditText;
     private EditText idCardEditText;
-  
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -149,11 +150,11 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
         init2();
         initCach();
         getUser();
-        
+
     }
-   
+
     public void setSelect(int viewId, final String[] ss, Double widthFlag,
-            Double heightFlag) {
+                          Double heightFlag) {
         Builder builder = new Builder(this);
         View view1 = this.getLayoutInflater().inflate(viewId, null);
         final WheelView hight = (WheelView) view1
@@ -175,7 +176,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                     str_boshu_figure = string;
                 }
                 if (ss.length == 70) {
-                    str_boshu_hight = string.substring(0,3);
+                    str_boshu_hight = string.substring(0, 3);
                     System.out.println(string);
                 }
                 if (ss.length == 60) {
@@ -217,7 +218,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                     tv_boshu_editbody.setText(str_boshu_figure);
                 }
                 if (ss.length == 70) {
-                    tv_boshu_edithight.setText(str_boshu_hight+"cm");
+                    tv_boshu_edithight.setText(str_boshu_hight + "cm");
                 }
                 if (ss.length == 60) {
                     tv_boshu_editage.setText(str_boshu_age);
@@ -384,7 +385,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                     // sendPicByUri(selectedImage);
                     if (!TextUtils.isEmpty(uri.getAuthority())) {
                         Cursor cursor = getContentResolver().query(uri,
-                                new String[] { MediaStore.Images.Media.DATA },
+                                new String[]{MediaStore.Images.Media.DATA},
                                 null, null, null);
                         if (null == cursor) {
                             return;
@@ -428,7 +429,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
 
                             @Override
                             public void onSuccess(int arg0, Header[] arg1,
-                                    byte[] arg2) {
+                                                  byte[] arg2) {
                                 // TODO Auto-generated method stub
                                 UserDao ud = new UserDao(
                                         Activity_boshu_EditBaseMessage.this);
@@ -538,7 +539,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
 
                             @Override
                             public void onFailure(int arg0, Header[] arg1,
-                                    byte[] arg2, Throwable arg3) {
+                                                  byte[] arg2, Throwable arg3) {
                                 // TODO Auto-generated method stub
                                 String str = new String(arg2);
 
@@ -559,72 +560,72 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     public void onClick(View v) {
         // TODO Auto-generated method stub
         switch (v.getId()) {
-        case R.id.img_boshu_beforehead:
-            FLAG = 1;
-            setMoreDialog();
-            break;
-        case R.id.img_boshu_afterhead:
-            FLAG = 2;
-            setMoreDialog();
-            break;
-        case R.id.img_boshu_studentCard:
-            setMoreDialog();
-            FLAG = 3;
-            break;
+            case R.id.img_boshu_beforehead:
+                FLAG = 1;
+                setMoreDialog();
+                break;
+            case R.id.img_boshu_afterhead:
+                FLAG = 2;
+                setMoreDialog();
+                break;
+            case R.id.img_boshu_studentCard:
+                setMoreDialog();
+                FLAG = 3;
+                break;
 
-        case R.id.bt_boshu_finish:
-            str_boshu_name=nickNamEditText.getText().toString();
-            str_boshu_realName = realNamEditText.getText().toString();
-            str_boshu_school = schoolEditText.getText().toString();
-            str_boshu_myPhone = myphoneEditText.getText().toString();
-            str_boshu_mail = emailEditText.getText().toString();
-            str_boshu_major = jobEditText.getText().toString();
-            str_boshu_qQ = qqEditText.getText().toString();
-            str_boshu_friendPhone = friendPhoneEditText.getText().toString();
-            str_boshu_jobWant = intentEditText.getText().toString();
-            str_boshu_resume = resumEditText.getText().toString();
-            str_boshu_IdCard = idCardEditText.getText().toString();
+            case R.id.bt_boshu_finish:
+                str_boshu_name = nickNamEditText.getText().toString();
+                str_boshu_realName = realNamEditText.getText().toString();
+                str_boshu_school = schoolEditText.getText().toString();
+                str_boshu_myPhone = myphoneEditText.getText().toString();
+                str_boshu_mail = emailEditText.getText().toString();
+                str_boshu_major = jobEditText.getText().toString();
+                str_boshu_qQ = qqEditText.getText().toString();
+                str_boshu_friendPhone = friendPhoneEditText.getText().toString();
+                str_boshu_jobWant = intentEditText.getText().toString();
+                str_boshu_resume = resumEditText.getText().toString();
+                str_boshu_IdCard = idCardEditText.getText().toString();
 
-            postMessage1();
-            break;
-        // �Ա�
-        case R.id.ll_boshu_sex:
-            DisplayMetrics dm = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(dm);
-            int width = (int) (dm.widthPixels / 1.2);
-            int height = (int) (dm.heightPixels / 2.8);
-            setAlertDialog(this, sexStrings, width, height);
-            break;
-        case R.id.ll_boshu_hight:
-            int count = 70;
-            final String[] countries = new String[count];
-            for (int i = 0; i < count; i++) {
-                countries[i] = 135 + i + "cm";
-            }
-            this.setSelect(R.layout.item_boshu_select, countries, 1.2, 1.7);
-            break;
-        case R.id.ll_boshu_age:
-            int age = 60;
-            final String[] ages = new String[age];
-            for (int i = 0; i < age; i++) {
-                ages[i] = 16 + i + "";
-            }
-            this.setSelect(R.layout.item_boshu_select, ages, 1.2, 1.7);
-            break;
-        case R.id.ll_boshu_enrollmentNew:
-            int year = 20;
-            final String[] years = new String[year];
-            for (int i = 0; i < year; i++) {
-                years[i] = 2005 + i + "";
-            }
-            this.setSelect(R.layout.item_boshu_select, years, 1.2, 1.7);
-            break;
-        case R.id.ll_boshu_body:
-            String[] bodyStrings = new String[] {  "微胖", "偏瘦", "强壮", "正常", "丰满",
-                    "苗条", "其他"  };
+                postMessage1();
+                break;
+            // �Ա�
+            case R.id.ll_boshu_sex:
+                DisplayMetrics dm = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(dm);
+                int width = (int) (dm.widthPixels / 1.2);
+                int height = (int) (dm.heightPixels / 2.8);
+                setAlertDialog(this, sexStrings, width, height);
+                break;
+            case R.id.ll_boshu_hight:
+                int count = 70;
+                final String[] countries = new String[count];
+                for (int i = 0; i < count; i++) {
+                    countries[i] = 135 + i + "cm";
+                }
+                this.setSelect(R.layout.item_boshu_select, countries, 1.2, 1.7);
+                break;
+            case R.id.ll_boshu_age:
+                int age = 60;
+                final String[] ages = new String[age];
+                for (int i = 0; i < age; i++) {
+                    ages[i] = 16 + i + "";
+                }
+                this.setSelect(R.layout.item_boshu_select, ages, 1.2, 1.7);
+                break;
+            case R.id.ll_boshu_enrollmentNew:
+                int year = 20;
+                final String[] years = new String[year];
+                for (int i = 0; i < year; i++) {
+                    years[i] = 2005 + i + "";
+                }
+                this.setSelect(R.layout.item_boshu_select, years, 1.2, 1.7);
+                break;
+            case R.id.ll_boshu_body:
+                String[] bodyStrings = new String[]{"微胖", "偏瘦", "强壮", "正常", "丰满",
+                        "苗条", "其他"};
 
-            this.setSelect(R.layout.item_boshu_select, bodyStrings, 1.2, 1.7);
-            break;
+                this.setSelect(R.layout.item_boshu_select, bodyStrings, 1.2, 1.7);
+                break;
         }
 
     }
@@ -654,7 +655,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     }
 
     /**
-     *  从图库获取图片
+     * 从图库获取图片
      */
     public void selectPicFromLocal() {
         Intent intent;
@@ -673,7 +674,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     }
 
     public void setAlertDialog(Context context, String[] ss, int width,
-            int height) {
+                               int height) {
         Builder builder = new Builder(this);
 
         View view = this.getLayoutInflater().inflate(
@@ -701,34 +702,34 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
-            long id) {
+                            long id) {
         // TODO Auto-generated method stub
-        TextView tv=(TextView) view.findViewById(R.id.tv);
-       String flagString= tv.getText().toString();
-       if(flagString.equals("男")||flagString.equals("女")){
-           String sexString = null;
-           if(id==0){
-               str_boshu_sex="1";
-               sexString="男";
-           }
-           if(id==1){
-               str_boshu_sex="0";
-               sexString="女";
-           }
-           alertDialog.dismiss();
-           tv_boshu_editsex.setText(sexString);
-       }else{
-        switch (parent.getId()) {
-        case R.id.lv:
+        TextView tv = (TextView) view.findViewById(R.id.tv);
+        String flagString = tv.getText().toString();
+        if (flagString.equals("男") || flagString.equals("女")) {
+            String sexString = null;
             if (id == 0) {
-                selectPicFromLocal();
+                str_boshu_sex = "1";
+                sexString = "男";
             }
             if (id == 1) {
-                selectPicFromCamera();
+                str_boshu_sex = "0";
+                sexString = "女";
             }
-            break;
+            alertDialog.dismiss();
+            tv_boshu_editsex.setText(sexString);
+        } else {
+            switch (parent.getId()) {
+                case R.id.lv:
+                    if (id == 0) {
+                        selectPicFromLocal();
+                    }
+                    if (id == 1) {
+                        selectPicFromCamera();
+                    }
+                    break;
+            }
         }
-       }
     }
 
     public void setMoreDialog() {
@@ -762,22 +763,22 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
 
         requestQueue.add(new AutoLoginRequest(this, Request.Method.POST,
                 Model.PathLoad, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        setJsonDb(response);
-                        if(Activity_boshu_Message.context!=null){
-                        Activity_boshu_Message.context.finish();
-                        }
-                        System.out.println(response + "----------");
+            @Override
+            public void onResponse(JSONObject response) {
+                setJsonDb(response);
+                if (Activity_boshu_Message.context != null) {
+                    Activity_boshu_Message.context.finish();
+                }
+                System.out.println(response + "----------");
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println("Volley error: " + error);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Volley error: " + error);
 
-                    }
-                }) {
+            }
+        }) {
 
             @Override
             protected void setParams(Map<String, String> params) {
@@ -805,8 +806,9 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
             }
         });
     }
+
     public void setViewString(Map<String, String> params, String key,
-            String value) {
+                              String value) {
         if (value != null) {
             params.put(key, value);
         }
@@ -815,62 +817,62 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     public void setJsonDb(JSONObject obj) {
         try {
             User user = new User();
-           String accountString=obj.getJSONObject("account").getString("status");
-            String recruitString=obj.getJSONObject("recruit").getString("status");
-           String resumeString=obj.getJSONObject("resume").getString("status");
-           String basicString=obj.getJSONObject("recruit").getString("status");
-           if(accountString.equals("0")||recruitString.equals("0")||resumeString.equals("0")||basicString.equals("0")){
-               
-           
-           JSONObject user_obj = obj.getJSONObject("user_info");
+            String accountString = obj.getJSONObject("account").getString("status");
+            String recruitString = obj.getJSONObject("recruit").getString("status");
+            String resumeString = obj.getJSONObject("resume").getString("status");
+            String basicString = obj.getJSONObject("recruit").getString("status");
+            if (accountString.equals("0") || recruitString.equals("0") || resumeString.equals("0") || basicString.equals("0")) {
 
-            String sex = user_obj.getString("sex");
-            if(sex.equals("1")){
-                sex="男";
-            }else{
-                sex="女";
-            }
 
-            String nickanme = user_obj.getString("nick_name");
-            String age = user_obj.getString("age");
-            String hight = user_obj.getString("height");
-            String figure = user_obj.getString("figure");
-            String school = user_obj.getString("school");
-            String major = user_obj.getString("major");
-            String entrance_year = user_obj.getString("entrance_year");
-            String real_name = user_obj.getString("real_name");
-            String myPhone = user_obj.getString("mobile_phone");
-            String friendPhone = user_obj.getString("agent_phone");
-            String email = user_obj.getString("email");
-            String qq = user_obj.getString("qq");
-            String job_want = user_obj.getString("job_want");
-            String resume = user_obj.getString("work_info");
-            String idCard = user_obj.getString("cer_id");
-            String afterIdCard = user_obj.getString("id_back_image");
-            String beforeIdCard = user_obj.getString("id_image");
-            String head_image = user_obj.getString("head_image");
-            String student_image = user_obj.getString("prv_image");
-            user.setUser(Preferences.getUserName(), nickanme, sex, age, hight,
-                    figure, school, major, entrance_year, real_name, myPhone,
-                    friendPhone, email, qq, job_want, resume, idCard,
-                    beforeIdCard, afterIdCard, head_image, student_image);
-            UserDao ud = new UserDao(this);
-            ud.addUser(user);
-            User user1 = ud.find(Preferences.getUserName());
-            if (user1 != null) {
-                ud.update(user);
-            } else {
+                JSONObject user_obj = obj.getJSONObject("user_info");
+
+                String sex = user_obj.getString("sex");
+                if (sex.equals("1")) {
+                    sex = "男";
+                } else {
+                    sex = "女";
+                }
+
+                String nickanme = user_obj.getString("nick_name");
+                String age = user_obj.getString("age");
+                String hight = user_obj.getString("height");
+                String figure = user_obj.getString("figure");
+                String school = user_obj.getString("school");
+                String major = user_obj.getString("major");
+                String entrance_year = user_obj.getString("entrance_year");
+                String real_name = user_obj.getString("real_name");
+                String myPhone = user_obj.getString("mobile_phone");
+                String friendPhone = user_obj.getString("agent_phone");
+                String email = user_obj.getString("email");
+                String qq = user_obj.getString("qq");
+                String job_want = user_obj.getString("job_want");
+                String resume = user_obj.getString("work_info");
+                String idCard = user_obj.getString("cer_id");
+                String afterIdCard = user_obj.getString("id_back_image");
+                String beforeIdCard = user_obj.getString("id_image");
+                String head_image = user_obj.getString("head_image");
+                String student_image = user_obj.getString("prv_image");
+                user.setUser(Preferences.getUserName(), nickanme, sex, age, hight,
+                        figure, school, major, entrance_year, real_name, myPhone,
+                        friendPhone, email, qq, job_want, resume, idCard,
+                        beforeIdCard, afterIdCard, head_image, student_image);
+                UserDao ud = new UserDao(this);
                 ud.addUser(user);
+                User user1 = ud.find(Preferences.getUserName());
+                if (user1 != null) {
+                    ud.update(user);
+                } else {
+                    ud.addUser(user);
+                }
+                System.out.println(user1.getUserName() + "-----------0000000"
+                        + user1.getNickName() + "---" + user1.getAferIdCard()
+                        + user1.getAge() + user1.getBeforeIdCard()
+                        + user1.getEntrance_year() + user1.getFigure()
+                        + user1.getHeadImage() + user1.getHight()
+                        + user1.getJobWant() + user1.getqQ());
+
             }
-            System.out.println(user1.getUserName() + "-----------0000000"
-                    + user1.getNickName() + "---" + user1.getAferIdCard()
-                    + user1.getAge() + user1.getBeforeIdCard()
-                    + user1.getEntrance_year() + user1.getFigure()
-                    + user1.getHeadImage() + user1.getHight()
-                    + user1.getJobWant() + user1.getqQ());
-            
-           }
-           FinishBack();
+            FinishBack();
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             // e.printStackTrace();
@@ -896,8 +898,8 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
             jobEditText.setText(user.getMajor());
             resumEditText.setText(user.getResume());
             idCardEditText.setText(user.getIdCard());
-            
-             tv_boshu_editage.setText(user.getAge());
+
+            tv_boshu_editage.setText(user.getAge());
            /*  * tv_boshu_editbody.setText(user.getFigure());
              * tv_boshu_editmail.setText(user.getMail());
              * tv_boshu_edithight.setText(user.getHight());
@@ -912,13 +914,13 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
              * tv_boshu_editqq.setText(user.getqQ());
              * tv_boshu_editresum.setText(user.getResume());
              * tv_boshu_editidnumber.setText(user.getIdCard());*/
-             tv_boshu_enrollment.setText(user.getEntrance_year());
-             tv_boshu_editbody.setText(user.getFigure());
-             String sexString=user.getSex();
-            
-             tv_boshu_editsex.setText(user.getSex());
-             tv_boshu_edithight.setText(user.getHight()+"cm");
-             
+            tv_boshu_enrollment.setText(user.getEntrance_year());
+            tv_boshu_editbody.setText(user.getFigure());
+            String sexString = user.getSex();
+
+            tv_boshu_editsex.setText(user.getSex());
+            tv_boshu_edithight.setText(user.getHight() + "cm");
+
             String afterUrl = Model.PitureLoad + user.getAferIdCard();
             String beforeUrl = (Model.PitureLoad + user.getBeforeIdCard());
             String studentUrl = (Model.PitureLoad + user.getStudentImage());
@@ -947,12 +949,12 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                         @Override
                         public void onImageDownload(String url, Bitmap bitmap) {
                             // TODO Auto-generated method stub
-                            if(bitmap==null){
+                            if (bitmap == null) {
                                 img.setImageResource(R.drawable.delete3);
-                            }else{
+                            } else {
                                 img.setImageBitmap(bitmap);
                             }
-                           
+
                         }
                     });
         }

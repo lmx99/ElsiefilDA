@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingTop="13dp" >
+    android:paddingTop="13dp">
 
     <TextView
         android:id="@+id/timestamp"
@@ -17,15 +18,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_chat_activity" >
 
-        <ImageView
+        <com.boshu.customview.CircleImageView
             android:id="@+id/iv_userhead"
             android:layout_width="@dimen/size_avatar"
             android:layout_height="@dimen/size_avatar"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/margin_chat_activity"
-            android:background="@drawable/mini_avatar_shadow"
-            android:scaleType="fitXY" />
+           android:src="@drawable/mini_avatar_shadow"
+            app:border_color="#ffffff"
+            app:border_width="0dp"
+           />
 
         <LinearLayout
             android:id="@+id/row_rec_location"

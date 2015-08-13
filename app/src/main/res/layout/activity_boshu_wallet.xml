@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/boshu_backgroud_color"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+  >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/top_bar_normal_bg"
+        android:gravity="center_vertical"
+       >
+
+        <include layout="@layout/commom_back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="钱包"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+             />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:text="支付宝"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+        <EditText
+            android:gravity="center_vertical"
+            android:background="#00000000"
+            android:layout_marginLeft="70dp"
+            android:hint="请输入支付宝账号"
+            android:inputType="number"
+            android:layout_width="290dp"
+            android:layout_height="40dp"
+            />
+
+    </RelativeLayout>
+    <View
+        android:layout_marginLeft="80dp"
+        android:background="@color/boshu_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <EditText
+
+            android:gravity="center_vertical"
+            android:background="#00000000"
+            android:layout_marginLeft="70dp"
+            android:hint="再次输入支付宝账号"
+            android:inputType="number"
+            android:layout_width="290dp"
+            android:layout_height="40dp"
+            />
+
+    </RelativeLayout>
+    <View
+
+        android:background="@color/boshu_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+    <View
+        android:layout_marginTop="30dp"
+        android:background="@color/boshu_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:text="银行卡"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+        <EditText
+            android:gravity="center_vertical"
+            android:background="#00000000"
+            android:layout_marginLeft="70dp"
+            android:hint="请输入银行卡账号"
+            android:inputType="number"
+            android:layout_width="290dp"
+            android:layout_height="40dp"
+            />
+
+    </RelativeLayout>
+    <View
+        android:layout_marginLeft="80dp"
+        android:background="@color/boshu_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <EditText
+            android:gravity="center_vertical"
+            android:background="#00000000"
+            android:layout_marginLeft="70dp"
+            android:hint="再次输入银行卡账号"
+            android:inputType="number"
+            android:layout_width="290dp"
+            android:layout_height="40dp"
+            />
+
+    </RelativeLayout>
+    <View
+        android:layout_marginLeft="80dp"
+        android:background="@color/boshu_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+</LinearLayout>

@@ -440,6 +440,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     /**
      * 监听事件
      */
+
     @Override
     public void onEvent(EMNotifierEvent event) {
         switch (event.getEvent()) {
@@ -1244,7 +1245,6 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 
     public void setPost() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        System.out.println("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
         requestQueue.start();
 
         requestQueue.add(new AutoLoginRequest(this, Request.Method.POST,

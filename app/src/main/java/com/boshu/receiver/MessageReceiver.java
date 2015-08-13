@@ -29,7 +29,7 @@ public class MessageReceiver extends XGPushBaseReceiver{
 	@Override
 	public void onNotifactionShowedResult(Context arg0, XGPushShowedResult arg1) {
 		// TODO Auto-generated method stub
-		System.out.println(arg1.getContent()+"===================");
+		System.out.println("推送的信息："+arg1.getContent()+"===================");
 	
 		arg0.sendBroadcast(it);
 	}
