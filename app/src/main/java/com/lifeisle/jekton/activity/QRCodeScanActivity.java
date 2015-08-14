@@ -10,7 +10,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -32,7 +31,6 @@ import android.widget.TextView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.Result;
-import com.google.zxing.ResultMetadataType;
 import com.google.zxing.client.android.AmbientLightManager;
 import com.google.zxing.client.android.BeepManager;
 import com.google.zxing.client.android.CaptureActivityHandler;
@@ -102,14 +100,15 @@ public class QRCodeScanActivity extends AppCompatActivity
     private OrderController orderController;
     private OrderModel orderModel;
 
+    private boolean scanning;
 
     // qr scanner
-    private static final long DEFAULT_INTENT_RESULT_DURATION_MS = 0L;
+    private static final long DEFAULT_SCAN_DELAY = 500L;
 
     private CameraManager cameraManager;
     private CaptureActivityHandler handler;
-    private Result savedResultToShow;
     private ViewfinderView viewfinderView;
+    private SurfaceHolder previewSurfaceHolder;
     private boolean hasSurface;
     private Collection<BarcodeFormat> decodeFormats;
     private Map<DecodeHintType, ?> decodeHints;
@@ -155,12 +154,6 @@ public class QRCodeScanActivity extends AppCompatActivity
         progressDialog.show();
 
         initMVC();
-
-
-        hasSurface = false;
-        inactivityTimer = new InactivityTimer(this);
-        beepManager = new BeepManager(this);
-        ambientLightManager = new AmbientLightManager(this);
     }
 
     private void initFailCount() {
@@ -214,12 +207,11 @@ public class QRCodeScanActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        inactivityTimer = new InactivityTimer(this);
+        beepManager = new BeepManager(this);
+        ambientLightManager = new AmbientLightManager(this);
 
-        // CameraManager must be initialized here, not in onCreate(). This is necessary because we don't
-        // want to open the camera driver and measure the screen size if we're going to show the help on
-        // first launch. That led to bugs where the scanning rectangle was the wrong size and partially
-        // off screen.
-        cameraManager = new CameraManager(getApplication());
+        cameraManager = new CameraManager(this);
 
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
         viewfinderView.setCameraManager(cameraManager);
@@ -231,8 +223,6 @@ public class QRCodeScanActivity extends AppCompatActivity
 
         beepManager.updatePrefs();
         ambientLightManager.start(cameraManager);
-
-        inactivityTimer.onResume();
 
 
         Intent intent = getIntent();
@@ -255,35 +245,41 @@ public class QRCodeScanActivity extends AppCompatActivity
 
 
         SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
-        SurfaceHolder surfaceHolder = surfaceView.getHolder();
-        if (hasSurface) {
-            // The activity was paused but not stopped, so the surface still exists. Therefore
-            // surfaceCreated() won't be called, so init the camera here.
-            initCamera(surfaceHolder);
-        } else {
+        previewSurfaceHolder = surfaceView.getHolder();
+        if (!hasSurface) {
             // Install the callback and wait for surfaceCreated() to init the camera.
-            surfaceHolder.addCallback(this);
+            previewSurfaceHolder.addCallback(this);
         }
     }
 
-    @Override
-    protected void onPause() {
-        unregisterReceiver(orderOperateReceiver);
+    private void startScan() {
+        initCamera();
+    }
 
+    private void stopScan() {
         if (handler != null) {
             handler.quitSynchronously();
             handler = null;
         }
-        inactivityTimer.onPause();
-        ambientLightManager.stop();
-        beepManager.close();
-        cameraManager.closeDriver();
+        if (scanning) {
+            inactivityTimer.onPause();
+            ambientLightManager.stop();
+            beepManager.close();
+            cameraManager.closeDriver();
+        }
         //historyManager = null; // Keep for onActivityResult
         if (!hasSurface) {
             SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
             SurfaceHolder surfaceHolder = surfaceView.getHolder();
             surfaceHolder.removeCallback(this);
         }
+    }
+
+
+    @Override
+    protected void onPause() {
+        unregisterReceiver(orderOperateReceiver);
+        stopScan();
         super.onPause();
     }
 
@@ -326,7 +322,10 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (options.getVisibility() == View.VISIBLE) {
+        if (scanning) {
+            stopScan();
+            scanning = false;
+        } else if (options.getVisibility() == View.VISIBLE) {
             options.setVisibility(View.INVISIBLE);
         } else {
             super.onBackPressed();
@@ -345,12 +344,13 @@ public class QRCodeScanActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.optionMenu) {
-            if (options.getVisibility() == View.INVISIBLE) {
-                options.setVisibility(View.VISIBLE);
-            } else {
-                options.setVisibility(View.INVISIBLE);
+            if (!scanning) {
+                if (options.getVisibility() == View.INVISIBLE) {
+                    options.setVisibility(View.VISIBLE);
+                } else {
+                    options.setVisibility(View.INVISIBLE);
+                }
             }
-
             return true;
         }
 
@@ -397,7 +397,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        // TODO: 8/14/2015
         if (requestCode == REQUEST_CODE_SCAN_QR_CODE && resultCode == RESULT_OK) {
             String result = data.getStringExtra("result");
             Logger.d(TAG, "scan result: " + result);
@@ -414,6 +414,9 @@ public class QRCodeScanActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_scan:
+                // TODO: 8/14/2015
+                startScan();
+                scanning = true;
                 if (!rbAllOrder.isChecked())
                     rbAllOrder.setChecked(true);
                 break;
@@ -501,30 +504,15 @@ public class QRCodeScanActivity extends AppCompatActivity
 
 
 
-    private void decodeOrStoreSavedBitmap(Bitmap bitmap, Result result) {
-        // Bitmap isn't used yet -- will be used soon
-        if (handler == null) {
-            savedResultToShow = result;
-        } else {
-            if (result != null) {
-                savedResultToShow = result;
-            }
-            if (savedResultToShow != null) {
-                Message message = Message.obtain(handler, R.id.decode_succeeded, savedResultToShow);
-                handler.sendMessage(message);
-            }
-            savedResultToShow = null;
-        }
-    }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        Logger.d(TAG, "surfaceCreated");
         if (holder == null) {
             Log.e(TAG, "*** WARNING *** surfaceCreated() gave us a null surface!");
         }
         if (!hasSurface) {
             hasSurface = true;
-            initCamera(holder);
         }
     }
 
@@ -548,80 +536,18 @@ public class QRCodeScanActivity extends AppCompatActivity
     public void handleDecode(Result rawResult, Bitmap barcode, float scaleFactor) {
         inactivityTimer.onActivity();
 
-        handleDecodeExternally(rawResult, barcode);
-    }
-
-
-
-
-
-    // Briefly show the contents of the barcode, then handle the result outside Barcode Scanner.
-    private void handleDecodeExternally(Result rawResult, Bitmap barcode) {
-
         if (barcode != null) {
             viewfinderView.drawResultBitmap(barcode);
         }
-
-        long resultDurationMS;
-        if (getIntent() == null) {
-            resultDurationMS = DEFAULT_INTENT_RESULT_DURATION_MS;
-        } else {
-            resultDurationMS = getIntent().getLongExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS,
-                    DEFAULT_INTENT_RESULT_DURATION_MS);
-        }
-
-
-        // Hand back whatever action they requested - this can be changed to Intents.Scan.ACTION when
-        // the deprecated intent is retired.
-        Intent intent = new Intent(getIntent().getAction());
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        intent.putExtra(Intents.Scan.RESULT, rawResult.toString());
-        intent.putExtra(Intents.Scan.RESULT_FORMAT, rawResult.getBarcodeFormat().toString());
-        byte[] rawBytes = rawResult.getRawBytes();
-        if (rawBytes != null && rawBytes.length > 0) {
-            intent.putExtra(Intents.Scan.RESULT_BYTES, rawBytes);
-        }
-        Map<ResultMetadataType, ?> metadata = rawResult.getResultMetadata();
-        if (metadata != null) {
-            if (metadata.containsKey(ResultMetadataType.UPC_EAN_EXTENSION)) {
-                intent.putExtra(Intents.Scan.RESULT_UPC_EAN_EXTENSION,
-                        metadata.get(ResultMetadataType.UPC_EAN_EXTENSION).toString());
-            }
-            Number orientation = (Number) metadata.get(ResultMetadataType.ORIENTATION);
-            if (orientation != null) {
-                intent.putExtra(Intents.Scan.RESULT_ORIENTATION, orientation.intValue());
-            }
-            String ecLevel = (String) metadata.get(ResultMetadataType.ERROR_CORRECTION_LEVEL);
-            if (ecLevel != null) {
-                intent.putExtra(Intents.Scan.RESULT_ERROR_CORRECTION_LEVEL, ecLevel);
-            }
-            @SuppressWarnings("unchecked")
-            Iterable<byte[]> byteSegments = (Iterable<byte[]>) metadata.get(ResultMetadataType.BYTE_SEGMENTS);
-            if (byteSegments != null) {
-                int i = 0;
-                for (byte[] byteSegment : byteSegments) {
-                    intent.putExtra(Intents.Scan.RESULT_BYTE_SEGMENTS_PREFIX + i, byteSegment);
-                    i++;
-                }
-            }
-        }
-        sendReplyMessage(R.id.return_scan_result, intent, resultDurationMS);
-
+        Toaster.showShort(this, rawResult.getText());
+        restartPreviewAfterDelay(DEFAULT_SCAN_DELAY);
+//        orderController.postQRCode(rawResult.getText());
     }
 
-    private void sendReplyMessage(int id, Object arg, long delayMS) {
-        if (handler != null) {
-            Message message = Message.obtain(handler, id, arg);
-            if (delayMS > 0L) {
-                handler.sendMessageDelayed(message, delayMS);
-            } else {
-                handler.sendMessage(message);
-            }
-        }
-    }
 
-    private void initCamera(SurfaceHolder surfaceHolder) {
-        if (surfaceHolder == null) {
+
+    private void initCamera() {
+        if (previewSurfaceHolder == null) {
             throw new IllegalStateException("No SurfaceHolder provided");
         }
         if (cameraManager.isOpen()) {
@@ -629,12 +555,12 @@ public class QRCodeScanActivity extends AppCompatActivity
             return;
         }
         try {
-            cameraManager.openDriver(surfaceHolder);
+            cameraManager.openDriver(previewSurfaceHolder);
             // Creating the handler starts the preview, which can also throw a RuntimeException.
             if (handler == null) {
-                handler = new CaptureActivityHandler(this, decodeFormats, decodeHints, characterSet, cameraManager);
+                handler = new CaptureActivityHandler(this, decodeFormats, decodeHints, characterSet,
+                        cameraManager);
             }
-            decodeOrStoreSavedBitmap(null, null);
         } catch (IOException ioe) {
             Log.w(TAG, ioe);
             displayFrameworkBugMessageAndExit();
@@ -655,12 +581,6 @@ public class QRCodeScanActivity extends AppCompatActivity
         builder.show();
     }
 
-    public void restartPreviewAfterDelay(long delayMS) {
-        if (handler != null) {
-            handler.sendEmptyMessageDelayed(R.id.restart_preview, delayMS);
-        }
-        resetStatusView();
-    }
 
     private void resetStatusView() {
         viewfinderView.setVisibility(View.VISIBLE);
@@ -669,6 +589,16 @@ public class QRCodeScanActivity extends AppCompatActivity
     public void drawViewfinder() {
         viewfinderView.drawViewfinder();
     }
+
+
+    public void restartPreviewAfterDelay(long delayMS) {
+        if (handler != null) {
+            handler.sendEmptyMessageDelayed(R.id.restart_preview, delayMS);
+        }
+        resetStatusView();
+    }
+
+
 
     private class OrderOperateReceiver extends BroadcastReceiver {
 
