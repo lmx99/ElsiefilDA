@@ -68,7 +68,6 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     private static final String TAG = "QRCodeScanActivity";
 
-    private static final int REQUEST_CODE_SCAN_QR_CODE = 0;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
