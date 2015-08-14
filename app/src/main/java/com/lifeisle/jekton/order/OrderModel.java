@@ -21,7 +21,6 @@ import com.lifeisle.jekton.util.StringUtils;
 import com.lifeisle.jekton.util.Toaster;
 import com.lifeisle.jekton.util.network.AutoLoginRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -226,6 +225,7 @@ public class OrderModel {
         if (showDialog)
             orderView.showDialog();
         orderRequestCount = 0;
+        orderView.setFailCount(orderRequestCount);
         handler.removeMessages(WHAT_UPDATE_ORDER_ITEM);
 
         final int currentInitCount = initCount;
@@ -251,7 +251,6 @@ public class OrderModel {
                     public void run() {
                         orderItems = orderList;
                         orderView.notifyDataSetChanged();
-                        orderView.setFailCount(orderRequestCount);
                         Logger.d(TAG, "init() orderItems.size() = " + orderItems.size());
                         if (showDialog)
                             orderView.closeDialog();
@@ -384,24 +383,15 @@ public class OrderModel {
                         try {
                             if (response.getInt("status") == 0) {
                                 orderRequestCount--;
-                                if (!executorService.isTerminated()) {
-                                    JSONArray orders = response.getJSONArray("scaned_orders");
-                                    // length == 1
-                                    JSONObject order = orders.getJSONObject(0);
-                                    Logger.d(TAG, "postOrderCode success, initCount = " + currentInitCount);
-                                    executorService.execute(
-                                            new OrderInfoFilledTask(order,
-                                                    index,
-                                                    currentInitCount));
-                                }
+                                updateLogistics(response, index, currentInitCount);
                             } else {
                                 Logger.d(TAG, "postOrderCode response: \n" + response);
                                 Toaster.showShort(context, R.string.error_order_code_invalid);
                             }
                         } catch (JSONException e) {
                             Logger.e(TAG, e.toString());
+                            orderView.setFailCount(orderRequestCount);
                         }
-                        orderView.setFailCount(orderRequestCount);
                     }
                 },
                 new Response.ErrorListener() {
@@ -422,6 +412,20 @@ public class OrderModel {
     }
 
 
+    private void updateLogistics(JSONObject response, int index, int currentInitCount)
+            throws JSONException {
+        if (!executorService.isTerminated()) {
+            // length == 1
+            JSONObject order = OrderItem.getOrderItemAt(response, 0);
+            Logger.d(TAG, "postOrderCode success, initCount = " + currentInitCount);
+            if (!executorService.isShutdown()) {
+                executorService.execute(
+                        new OrderInfoFilledTask(order,
+                                index,
+                                currentInitCount));
+            }
+        }
+    }
 
 
 
@@ -436,12 +440,9 @@ public class OrderModel {
                         try {
                             int status = response.getInt("status");
                             if (status == 0) {
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toaster.showShort(context, R.string.success_post);
-                                    }
-                                });
+                                OrderDBUtils.setNeedRequest(orderID, OrderItem.REQUEST_LOGISTICS_UPDATE);
+                                Toaster.showShort(context, R.string.success_post);
+                                reloadData(false);
                             } else {
                                 Logger.d(TAG, "postDeliveredOrder fail, response = " + response);
                                 Toaster.showShort(context, R.string.error_fail_post_delivered);
@@ -647,11 +648,7 @@ public class OrderModel {
         private void updateOrderItem(int index, OrderItem orderItem) {
             switch (OrderDBUtils.getOrderExistsState(orderItem.orderCode)) {
                 case OrderDBUtils.ORDER_STATE_EXIST:
-                    for (OrderItem.GoodsItem item : orderItem.goodsItems) {
-                        for (OrderItem.Logistics logistics : item.logistics) {
-                            OrderDBUtils.insertLogistics(item.itemID, logistics);
-                        }
-                    }
+                    OrderItem.updateLogistics(orderItem.goodsItems);
                     OrderDBUtils.setNeedRequest(orderItem.orderCode, OrderItem.REQUEST_NO_NEED);
                     break;
                 case OrderDBUtils.ORDER_STATE_EXIST_BUT_NOT_DATA:

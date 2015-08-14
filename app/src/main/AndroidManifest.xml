@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lifeisle.android" >
 
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -48,7 +49,7 @@
     <application
         android:name="com.easemob.chatuidemo.MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/logo_uidemo"
+        android:icon="@drawable/logo_lifeisle"
         android:label="@string/app_name" >
         <activity
             android:name="com.easemob.chatuidemo.activity.MainActivity"
@@ -290,21 +291,34 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        <activity
-            android:name="com.boshu.activity.Activity_boshu_Message"
+
+        <activity android:name="com.boshu.activity.Activity_boshu_Message"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name="com.boshu.activity.Activity_boshu_EditBaseMessage"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
+        <activity android:name="com.boshu.activity.Activity_boshu_EditBaseMessage"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name="com.boshu.activity.ClipPictureActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
+        <activity android:name="com.boshu.activity.ClipPictureActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
+        <activity android:name="com.boshu.activity.Activity_boshu_push"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
+        <activity android:name="com.boshu.activity.Activity_boshu_Wallet"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
+
+
 
         <!-- 设置环信应用的appkey -->
         <meta-data
@@ -383,7 +397,7 @@
             <intent-filter>
 
                 <!-- 【必须】 请修改为当前APP名包.PUSH_ACTION，如demo的包名为：com.qq.xgdemo -->
-                <action android:name="com.easemob.chatuidemo.PUSH_ACTION" />
+                <action android:name="com.lifeisle.android.PUSH_ACTION" />
             </intent-filter>
         </service>
 
@@ -434,7 +448,6 @@
 
 
 
-        
 
         <!-- #################################################### -->
         <!-- Jekton -->

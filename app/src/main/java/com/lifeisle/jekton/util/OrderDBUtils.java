@@ -319,6 +319,14 @@ public class OrderDBUtils {
         return ordersDB.update(OrdersDBHelper.TABLE_ORDERS, values, where, null);
     }
 
+    public static int setNeedRequest(int orderId, int requestType) {
+        ContentValues values = new ContentValues();
+        values.put(OrdersDBHelper.COLUMN_ORDERS_REQUEST_TYPE, requestType);
+
+        String where = OrdersDBHelper.COLUMN_ORDERS_ORDER_ID + "=" + orderId;
+        return ordersDB.update(OrdersDBHelper.TABLE_ORDERS, values, where, null);
+    }
+
 
     public static List<String> getAllOrderCodes() {
 

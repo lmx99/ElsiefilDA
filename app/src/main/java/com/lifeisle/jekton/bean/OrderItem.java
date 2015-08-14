@@ -1,6 +1,7 @@
 package com.lifeisle.jekton.bean;
 
 import com.lifeisle.jekton.order.EventIDMapper;
+import com.lifeisle.jekton.util.OrderDBUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -225,4 +226,19 @@ public class OrderItem {
         return logistics;
     }
 
+
+    public static JSONObject getOrderItemAt(JSONObject response, int index) throws JSONException{
+        JSONArray orders = response.getJSONArray("scaned_orders");
+
+        return orders.getJSONObject(index);
+    }
+
+
+    public static void updateLogistics(GoodsItem[] goodsItems) {
+        for (OrderItem.GoodsItem item : goodsItems) {
+            for (OrderItem.Logistics logistics : item.logistics) {
+                OrderDBUtils.insertLogistics(item.itemID, logistics);
+            }
+        }
+    }
 }
