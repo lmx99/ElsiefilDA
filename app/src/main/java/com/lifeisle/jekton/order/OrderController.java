@@ -113,7 +113,7 @@ public class OrderController {
 
         } else {
             if (orderModel.addOrder(data)) {
-                mOrderView.startScanActivity();
+                // TODO: 8/14/2015
             }
         }
     }
