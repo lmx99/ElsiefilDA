@@ -253,6 +253,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     }
 
     private void startScan() {
+        // TODO: 8/14/2015
         initCamera();
     }
 
@@ -395,26 +396,12 @@ public class QRCodeScanActivity extends AppCompatActivity
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO: 8/14/2015
-        if (requestCode == REQUEST_CODE_SCAN_QR_CODE && resultCode == RESULT_OK) {
-            String result = data.getStringExtra("result");
-            Logger.d(TAG, "scan result: " + result);
-            orderController.postQRCode(result);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_scan:
-                // TODO: 8/14/2015
                 startScan();
                 scanning = true;
                 if (!rbAllOrder.isChecked())
@@ -484,12 +471,6 @@ public class QRCodeScanActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public void startScanActivity() {
-        // TODO: 8/14/2015  delete relative function
-//        Intent startScan = new Intent(this, CaptureActivity.class);
-//        startActivityForResult(startScan, REQUEST_CODE_SCAN_QR_CODE);
-    }
 
     @Override
     public void showErrMsg(int msgId) {
@@ -530,10 +511,9 @@ public class QRCodeScanActivity extends AppCompatActivity
      * A valid barcode has been found, so give an indication of success and show the results.
      *
      * @param rawResult   The contents of the barcode.
-     * @param scaleFactor amount by which thumbnail was scaled
      * @param barcode     A greyscale bitmap of the camera data which was decoded.
      */
-    public void handleDecode(Result rawResult, Bitmap barcode, float scaleFactor) {
+    public void handleDecode(Result rawResult, Bitmap barcode) {
         inactivityTimer.onActivity();
 
         if (barcode != null) {

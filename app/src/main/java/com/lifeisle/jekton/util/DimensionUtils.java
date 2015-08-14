@@ -21,4 +21,12 @@ public class DimensionUtils {
         return (int) (dp * scale + 0.5);
     }
 
+
+    public static float px2dp(Context context, int px) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        float scale = metrics.density;
+
+        return px / scale;
+    }
+
 }

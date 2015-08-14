@@ -14,7 +14,5 @@ public interface OrderView {
 
     void setFailCount(int count);
 
-    void startScanActivity();
-
     void showErrMsg(int msgId);
 }
