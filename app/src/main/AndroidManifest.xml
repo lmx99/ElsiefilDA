@@ -456,16 +456,12 @@
             android:name="com.lifeisle.jekton.activity.QRCodeScanActivity"
             android:label="@string/title_scan_qr_code"
             android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
-            android:theme="@style/MyTheme" >
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
-        <activity
-            android:name="com.zxing.activity.CaptureActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent"
-            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name="com.lifeisle.jekton.activity.OrderOperateActivity"
             android:label="@string/title_order_operate"

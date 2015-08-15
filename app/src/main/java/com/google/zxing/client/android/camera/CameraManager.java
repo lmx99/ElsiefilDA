@@ -26,6 +26,8 @@ import android.view.SurfaceHolder;
 
 import com.google.zxing.PlanarYUVLuminanceSource;
 import com.google.zxing.client.android.camera.open.OpenCameraInterface;
+import com.lifeisle.jekton.util.DimensionUtils;
+import com.lifeisle.jekton.util.Logger;
 
 import java.io.IOException;
 
@@ -166,7 +168,6 @@ public final class CameraManager {
     }
 
     /**
-     * Convenience method for {@link com.google.zxing.client.android.CaptureActivity}
      *
      * @param newSetting if {@code true}, light should be turned on if currently off. And vice versa.
      */
@@ -223,8 +224,10 @@ public final class CameraManager {
 //            int height = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
 
             int leftOffset = (screenResolution.x - width) / 2;
-            int topOffset = (screenResolution.y - height) / 2;
-            framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
+            int screenBottomOffset = DimensionUtils.dp2px(context, 50);
+            Logger.d(TAG, "screenBottomOffset = " + screenBottomOffset);
+            framingRect = new Rect(leftOffset, screenResolution.y - (height + screenBottomOffset),
+                    leftOffset + width, screenResolution.y - screenBottomOffset);
 
             Log.d(TAG, "Calculated framing rect: " + framingRect);
         }

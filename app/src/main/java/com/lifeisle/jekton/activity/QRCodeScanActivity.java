@@ -153,6 +153,10 @@ public class QRCodeScanActivity extends AppCompatActivity
         progressDialog.show();
 
         initMVC();
+
+        inactivityTimer = new InactivityTimer(this);
+        beepManager = new BeepManager(this);
+        ambientLightManager = new AmbientLightManager(this);
     }
 
     private void initFailCount() {
@@ -206,9 +210,6 @@ public class QRCodeScanActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        inactivityTimer = new InactivityTimer(this);
-        beepManager = new BeepManager(this);
-        ambientLightManager = new AmbientLightManager(this);
 
         cameraManager = new CameraManager(this);
 
