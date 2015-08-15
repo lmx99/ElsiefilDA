@@ -112,9 +112,7 @@ public class OrderController {
             }
 
         } else {
-            if (orderModel.addOrder(data)) {
-                mOrderView.startScanActivity();
-            }
+            orderModel.addOrder(data);
         }
     }
 

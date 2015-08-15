@@ -1,34 +1,60 @@
 package com.lifeisle.jekton.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.DecodeHintType;
+import com.google.zxing.Result;
+import com.google.zxing.client.android.AmbientLightManager;
+import com.google.zxing.client.android.BeepManager;
+import com.google.zxing.client.android.CaptureActivityHandler;
+import com.google.zxing.client.android.DecodeFormatManager;
+import com.google.zxing.client.android.DecodeHintManager;
+import com.google.zxing.client.android.FinishListener;
+import com.google.zxing.client.android.InScanningTimer;
+import com.google.zxing.client.android.ViewfinderView;
+import com.google.zxing.client.android.camera.CameraManager;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.OrderController;
 import com.lifeisle.jekton.order.OrderModel;
 import com.lifeisle.jekton.order.OrderView;
 import com.lifeisle.jekton.ui.adapter.OrderListAdapter;
+import com.lifeisle.jekton.util.DimensionUtils;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.Toaster;
-import com.zxing.activity.CaptureActivity;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
 
 
 /**
@@ -37,7 +63,7 @@ import com.zxing.activity.CaptureActivity;
  */
 public class QRCodeScanActivity extends AppCompatActivity
         implements View.OnClickListener, OrderView, RadioGroup.OnCheckedChangeListener,
-        View.OnTouchListener, SwipeRefreshLayout.OnRefreshListener {
+        View.OnTouchListener, SwipeRefreshLayout.OnRefreshListener, SurfaceHolder.Callback {
 
     public static final String ORDER_DELIVERED = "OrderOperateReceiver.ORDER_DELIVERED";
     public static final String ORDER_LOGISTICS_UPDATE = "OrderOperateReceiver.ORDER_LOGISTICS_UPDATE";
@@ -45,7 +71,6 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     private static final String TAG = "QRCodeScanActivity";
 
-    private static final int REQUEST_CODE_SCAN_QR_CODE = 0;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -69,6 +94,10 @@ public class QRCodeScanActivity extends AppCompatActivity
      * used when click the scan button, at {@link #onClick(View)}
      */
     private RadioButton rbAllOrder;
+    private View startScanButton;
+    private View cancelButton;
+    private View background;
+    private EditText barcodeInputText;
 
     private IntentFilter orderOperateFilter;
     private OrderOperateReceiver orderOperateReceiver = new OrderOperateReceiver();
@@ -76,6 +105,35 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     private OrderController orderController;
     private OrderModel orderModel;
+
+    private boolean scanning;
+
+    // qr scanner
+    private static final long DEFAULT_SCAN_DELAY = 500L;
+
+    private CameraManager cameraManager;
+    private CaptureActivityHandler handler;
+    private ViewfinderView viewfinderView;
+    private SurfaceHolder previewSurfaceHolder;
+    private boolean hasSurface;
+    private Collection<BarcodeFormat> decodeFormats;
+    private Map<DecodeHintType, ?> decodeHints;
+    private String characterSet = null;
+    private InScanningTimer inScanningTimer;
+    private BeepManager beepManager;
+    private AmbientLightManager ambientLightManager;
+
+    public ViewfinderView getViewfinderView() {
+        return viewfinderView;
+    }
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public CameraManager getCameraManager() {
+        return cameraManager;
+    }
 
 
 
@@ -94,14 +152,27 @@ public class QRCodeScanActivity extends AppCompatActivity
 
         initFailCount();
 
-        View btnScan = findViewById(R.id.btn_scan);
-        btnScan.setOnClickListener(this);
-        btnScan.setOnTouchListener(this);
+        startScanButton = findViewById(R.id.btn_scan);
+        startScanButton.setOnClickListener(this);
+        startScanButton.setOnTouchListener(this);
+
+        cancelButton = findViewById(R.id.btn_cancel_scan);
+        cancelButton.setOnClickListener(this);
+
+        background = findViewById(R.id.background);
+
+        barcodeInputText = (EditText) findViewById(R.id.barcode);
+
+        findViewById(R.id.ok).setOnClickListener(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
 
         initMVC();
+
+        inScanningTimer = new InScanningTimer(this);
+        beepManager = new BeepManager(this);
+        ambientLightManager = new AmbientLightManager(this);
     }
 
     private void initFailCount() {
@@ -114,14 +185,14 @@ public class QRCodeScanActivity extends AppCompatActivity
     }
 
     private void initMVC() {
-        ListView listView = (ListView) findViewById(R.id.orderList);
-        listView.setOnTouchListener(this);
+        ListView orderListView = (ListView) findViewById(R.id.orderList);
+        orderListView.setOnTouchListener(this);
 
         orderModel = new OrderModel(this);
         orderListAdapter = new OrderListAdapter(this, orderModel);
         orderController = new OrderController(this, orderModel);
 
-        listView.setAdapter(orderListAdapter);
+        orderListView.setAdapter(orderListAdapter);
 
         initOptions();
     }
@@ -152,6 +223,96 @@ public class QRCodeScanActivity extends AppCompatActivity
         registerReceiver(orderOperateReceiver, orderOperateFilter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        cameraManager = new CameraManager(this);
+
+        viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+        viewfinderView.setCameraManager(cameraManager);
+
+        handler = null;
+
+        resetStatusView();
+
+
+        beepManager.updatePrefs();
+        ambientLightManager.start(cameraManager);
+
+
+        Intent intent = getIntent();
+        decodeFormats = DecodeFormatManager.parseDecodeFormats(intent);
+        // TODO: 8/15/2015 set hints
+        decodeHints = DecodeHintManager.parseDecodeHints(intent);
+
+
+        SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+        previewSurfaceHolder = surfaceView.getHolder();
+        if (!hasSurface) {
+            // Install the callback and wait for surfaceCreated() to init the camera.
+            previewSurfaceHolder.addCallback(this);
+        }
+    }
+
+    private void startScan() {
+        initCamera();
+        inScanningTimer.onResume();
+        setListHeight();
+        startScanButton.setVisibility(View.GONE);
+        cancelButton.setVisibility(View.VISIBLE);
+        background.setVisibility(View.GONE);
+        scanning = true;
+        if (!rbAllOrder.isChecked())
+            rbAllOrder.setChecked(true);
+    }
+
+    private void setListHeight() {
+        Rect frameRect = cameraManager.getFramingRect();
+        // called after init the camera, won't be null
+        int top = frameRect.top;
+        swipeRefreshLayout.getLayoutParams().height = top - DimensionUtils.dp2px(this, 60);
+        swipeRefreshLayout.requestLayout();
+    }
+
+    private void restoreListHeight() {
+        swipeRefreshLayout.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+        swipeRefreshLayout.requestLayout();
+    }
+
+    // make public to enable the InScanningTimer call it
+    public void stopScan() {
+        if (handler != null) {
+            handler.quitSynchronously();
+            handler = null;
+        }
+        if (scanning) {
+            inScanningTimer.onPause();
+            ambientLightManager.stop();
+            beepManager.close();
+            cameraManager.closeDriver();
+        }
+        //historyManager = null; // Keep for onActivityResult
+        if (!hasSurface) {
+            SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+            SurfaceHolder surfaceHolder = surfaceView.getHolder();
+            surfaceHolder.removeCallback(this);
+        }
+        scanning = false;
+        restoreListHeight();
+        background.setVisibility(View.VISIBLE);
+        cancelButton.setVisibility(View.GONE);
+        startScanButton.setVisibility(View.VISIBLE);
+    }
+
+
+    @Override
+    protected void onPause() {
+        unregisterReceiver(orderOperateReceiver);
+        stopScan();
+        super.onPause();
+    }
+
 
     @Override
     protected void onRestart() {
@@ -162,24 +323,38 @@ public class QRCodeScanActivity extends AppCompatActivity
     }
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        unregisterReceiver(orderOperateReceiver);
-    }
-
 
     @Override
     protected void onDestroy() {
+        inScanningTimer.shutdown();
         super.onDestroy();
         orderModel.stop();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_FOCUS:
+            case KeyEvent.KEYCODE_CAMERA:
+                // Handle these events so they don't launch the Camera app
+                return true;
+            // Use volume up/down to turn on light
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                cameraManager.setTorch(false);
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                cameraManager.setTorch(true);
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 
     @Override
     public void onBackPressed() {
-        if (options.getVisibility() == View.VISIBLE) {
+        if (scanning) {
+            stopScan();
+        } else if (options.getVisibility() == View.VISIBLE) {
             options.setVisibility(View.INVISIBLE);
         } else {
             super.onBackPressed();
@@ -198,12 +373,13 @@ public class QRCodeScanActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.optionMenu) {
-            if (options.getVisibility() == View.INVISIBLE) {
-                options.setVisibility(View.VISIBLE);
-            } else {
-                options.setVisibility(View.INVISIBLE);
+            if (!scanning) {
+                if (options.getVisibility() == View.INVISIBLE) {
+                    options.setVisibility(View.VISIBLE);
+                } else {
+                    options.setVisibility(View.INVISIBLE);
+                }
             }
-
             return true;
         }
 
@@ -248,36 +424,37 @@ public class QRCodeScanActivity extends AppCompatActivity
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == REQUEST_CODE_SCAN_QR_CODE && resultCode == RESULT_OK) {
-            String result = data.getStringExtra("result");
-            Logger.d(TAG, "scan result: " + result);
-            orderController.postQRCode(result);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_scan:
-                Intent startScan = new Intent(this, CaptureActivity.class);
-                startActivityForResult(startScan, REQUEST_CODE_SCAN_QR_CODE);
-                if (!rbAllOrder.isChecked())
-                    rbAllOrder.setChecked(true);
+                startScan();
                 break;
             case R.id.failCount:
                 rbPostFailed.setChecked(true);
                 break;
+            case R.id.btn_cancel_scan:
+                stopScan();
+                break;
+            case R.id.ok:
+                manuallyAddBarcode();
+                break;
         }
 
     }
+
+    private void manuallyAddBarcode() {
+        String barcode = barcodeInputText.getText().toString();
+        if (barcode.length() != 13) {
+            showErrMsg(R.string.error_order_code_invalid);
+        } else {
+            orderController.postQRCode(barcode);
+            barcodeInputText.setText("");
+        }
+    }
+
 
 
     @Override
@@ -311,7 +488,6 @@ public class QRCodeScanActivity extends AppCompatActivity
     @Override
     public void notifyDataSetChanged() {
         orderListAdapter.notifyDataSetChanged();
-        Logger.d(TAG, "notifyDataSetChanged()");
         if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }
@@ -336,11 +512,6 @@ public class QRCodeScanActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public void startScanActivity() {
-        Intent startScan = new Intent(this, CaptureActivity.class);
-        startActivityForResult(startScan, REQUEST_CODE_SCAN_QR_CODE);
-    }
 
     @Override
     public void showErrMsg(int msgId) {
@@ -352,6 +523,102 @@ public class QRCodeScanActivity extends AppCompatActivity
         swipeRefreshLayout.setRefreshing(true);
         orderController.notifyDataSetChanged(false);
     }
+
+
+
+
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        Logger.d(TAG, "surfaceCreated");
+        if (holder == null) {
+            Log.e(TAG, "*** WARNING *** surfaceCreated() gave us a null surface!");
+        }
+        if (!hasSurface) {
+            hasSurface = true;
+        }
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        hasSurface = false;
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+    }
+
+    /**
+     * A valid barcode has been found, so give an indication of success and show the results.
+     *
+     * @param rawResult   The contents of the barcode.
+     * @param barcode     A greyscale bitmap of the camera data which was decoded.
+     */
+    public void handleDecode(Result rawResult, Bitmap barcode) {
+        inScanningTimer.onActivity();
+
+        if (barcode != null) {
+            viewfinderView.drawResultBitmap(barcode);
+        }
+        orderController.postQRCode(rawResult.getText());
+        restartPreviewAfterDelay(DEFAULT_SCAN_DELAY);
+//        orderController.postQRCode(rawResult.getText());
+    }
+
+
+
+    private void initCamera() {
+        if (previewSurfaceHolder == null) {
+            throw new IllegalStateException("No SurfaceHolder provided");
+        }
+        if (cameraManager.isOpen()) {
+            Log.w(TAG, "initCamera() while already open -- late SurfaceView callback?");
+            return;
+        }
+        try {
+            cameraManager.openDriver(previewSurfaceHolder);
+            // Creating the handler starts the preview, which can also throw a RuntimeException.
+            if (handler == null) {
+                handler = new CaptureActivityHandler(this, decodeFormats, decodeHints, characterSet,
+                        cameraManager);
+            }
+        } catch (IOException ioe) {
+            Log.w(TAG, ioe);
+            displayFrameworkBugMessageAndExit();
+        } catch (RuntimeException e) {
+            // Barcode Scanner has seen crashes in the wild of this variety:
+            // java.?lang.?RuntimeException: Fail to connect to camera service
+            Log.w(TAG, "Unexpected error initializing camera", e);
+            displayFrameworkBugMessageAndExit();
+        }
+    }
+
+    private void displayFrameworkBugMessageAndExit() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.app_name));
+        builder.setMessage(getString(R.string.msg_camera_framework_bug));
+        builder.setPositiveButton(R.string.button_ok, new FinishListener(this));
+        builder.setOnCancelListener(new FinishListener(this));
+        builder.show();
+    }
+
+
+    private void resetStatusView() {
+        viewfinderView.setVisibility(View.VISIBLE);
+    }
+
+    public void drawViewfinder() {
+        viewfinderView.drawViewfinder();
+    }
+
+
+    public void restartPreviewAfterDelay(long delayMS) {
+        if (handler != null) {
+            handler.sendEmptyMessageDelayed(R.id.restart_preview, delayMS);
+        }
+        resetStatusView();
+    }
+
 
 
     private class OrderOperateReceiver extends BroadcastReceiver {

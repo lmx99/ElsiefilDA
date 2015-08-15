@@ -271,24 +271,23 @@ public class OrderModel {
     /**
      *
      * @param orderCode EAN-13 orderCode
-     * @return true to re-open the QRCode Scanner
      */
-    public boolean addOrder(String orderCode) {
+    public void addOrder(String orderCode) {
         if (jcat_id < 0) {
             Toaster.showShort(context, R.string.error_not_sign_in_job);
-            return false;
+            return;
         }
 
         if (!orderCode.matches("\\d{13}")) {
             Toaster.showShort(context, R.string.error_order_code_invalid);
-            return true;
+            return;
         }
 
 
         switch (OrderDBUtils.getOrderExistsState(orderCode)) {
             case OrderDBUtils.ORDER_STATE_NOT_EXIST:
                 addOrderHelper(orderCode);
-                return true;
+                break;
             case OrderDBUtils.ORDER_STATE_EXIST:
                 Intent intent = new Intent(context, OrderOperateActivity.class);
                 intent.putExtra(OrderListAdapter.OrderListItem.EXTRA_ORDER_CODE, orderCode);
@@ -297,10 +296,8 @@ public class OrderModel {
                 break;
             case OrderDBUtils.ORDER_STATE_EXIST_BUT_NOT_DATA:
                 Toaster.showShort(context, R.string.error_order_code_existed);
-                return true;
+                break;
         }
-
-        return false;
     }
 
     private void addOrderHelper(String orderCode) {
