@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @author Jekton
- * @version 0.01 7/16/2015
+ * @version 0.2 7/16/2015
  */
 public class OrderDBUtils {
 
@@ -70,7 +70,7 @@ public class OrderDBUtils {
         order.put(OrdersDBHelper.COLUMN_ORDERS_CREATE_TIME, createTime);
         long addTime = item.addTime.getTime();
         order.put(OrdersDBHelper.COLUMN_ORDERS_ADD_TIME, addTime);
-        Logger.d(TAG, "createTime = " + createTime + ", addTime = " + addTime);
+//        Logger.d(TAG, "createTime = " + createTime + ", addTime = " + addTime);
         order.put(OrdersDBHelper.COLUMN_ORDERS_PRICE, item.price);
         order.put(OrdersDBHelper.COLUMN_ORDERS_SUBTOTAL, item.subTotal);
         order.put(OrdersDBHelper.COLUMN_ORDERS_MOBILE_PHONE, item.mobilePhone);
@@ -319,6 +319,14 @@ public class OrderDBUtils {
         return ordersDB.update(OrdersDBHelper.TABLE_ORDERS, values, where, null);
     }
 
+    public static int setNeedRequest(int orderId, int requestType) {
+        ContentValues values = new ContentValues();
+        values.put(OrdersDBHelper.COLUMN_ORDERS_REQUEST_TYPE, requestType);
+
+        String where = OrdersDBHelper.COLUMN_ORDERS_ORDER_ID + "=" + orderId;
+        return ordersDB.update(OrdersDBHelper.TABLE_ORDERS, values, where, null);
+    }
+
 
     public static List<String> getAllOrderCodes() {
 
@@ -372,6 +380,7 @@ public class OrderDBUtils {
     public static boolean isOrderCodeExists(String orderCode) {
         String[] columns = { OrdersDBHelper.COLUMN_ORDERS_ORDER_ID };
         String selection = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "=" + orderCode;
+        Logger.d(TAG, "isOrderCodeExists() selection = " + selection);
         Cursor cursor = ordersDB.query(OrdersDBHelper.TABLE_ORDERS, columns, selection,
                 null, null, null, null);
 
@@ -379,5 +388,12 @@ public class OrderDBUtils {
         cursor.close();
 
         return result;
+    }
+
+
+    public static void clearOrders() {
+        ordersDB.execSQL("delete from " + OrdersDBHelper.TABLE_ORDERS);
+        ordersDB.execSQL("delete from " + OrdersDBHelper.TABLE_GOODS);
+        ordersDB.execSQL("delete from " + OrdersDBHelper.TABLE_LOGISTICS);
     }
 }

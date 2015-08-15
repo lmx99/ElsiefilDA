@@ -27,17 +27,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.boshu.activity.Activity_boshu_EditBaseMessage;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.utils.CommonUtils;
@@ -59,67 +57,67 @@ import java.util.Map;
 
 /**
  * 登陆页面
- * 
+ *
  */
 public class LoginActivity extends BaseActivity {
-	private static final String TAG = "LoginActivity";
-	public static final int REQUEST_CODE_SETNICK = 1;
-	private EditText usernameEditText;
-	private EditText passwordEditText;
+    private static final String TAG = "LoginActivity";
+    public static final int REQUEST_CODE_SETNICK = 1;
+    private EditText usernameEditText;
+    private EditText passwordEditText;
 
-	private boolean progressShow;
-	private boolean autoLogin = false;
+    private boolean progressShow;
+    private boolean autoLogin = false;
 
-	private String currentUsername;
-	private String currentPassword;
-	private ProgressDialog pd;
+    private String currentUsername;
+    private String currentPassword;
+    private ProgressDialog pd;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		// 如果用户名密码都有，直接进入主页面
-		if (DemoHXSDKHelper.getInstance().isLogined()&&Preferences.getCookie()!=null) {
-			autoLogin = true;
-		//	LoginActivity.this.usernameEditText;
-			startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        // 如果用户名密码都有，直接进入主页面
+        if (DemoHXSDKHelper.getInstance().isLogined()&&Preferences.getCookie()!=null) {
+            autoLogin = true;
+            //	LoginActivity.this.usernameEditText;
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
-			return;
-		}
-		setContentView(R.layout.activity_login);
+            return;
+        }
+        setContentView(R.layout.activity_login);
 
-		usernameEditText = (EditText) findViewById(R.id.username);
-		passwordEditText = (EditText) findViewById(R.id.password);
+        usernameEditText = (EditText) findViewById(R.id.username);
+        passwordEditText = (EditText) findViewById(R.id.password);
 
-		// 如果用户名改变，清空密码
-		usernameEditText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				passwordEditText.setText(null);
-			}
+        // 如果用户名改变，清空密码
+        usernameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                passwordEditText.setText(null);
+            }
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-			}
+            }
 
-			@Override
-			public void afterTextChanged(Editable s) {
+            @Override
+            public void afterTextChanged(Editable s) {
 
-			}
-		});
-		if (MyApplication.getInstance().getUserName() != null) {
-			usernameEditText.setText(MyApplication.getInstance().getUserName());
-		}
-	}
+            }
+        });
+        if (MyApplication.getInstance().getUserName() != null) {
+            usernameEditText.setText(MyApplication.getInstance().getUserName());
+        }
+    }
 
-	/**
-	 * 登录
-	 * 
-	 * @param view
-	 */
-	public void login(View view) {
-	     pd = new ProgressDialog(LoginActivity.this);
+    /**
+     * 登录
+     *
+     * @param view
+     */
+    public void login(View view) {
+        pd = new ProgressDialog(LoginActivity.this);
         pd.setCanceledOnTouchOutside(false);
         pd.setOnCancelListener(new OnCancelListener() {
 
@@ -131,65 +129,65 @@ public class LoginActivity extends BaseActivity {
         pd.setMessage(getString(R.string.Is_landing));
         pd.show();
 
-	    setWeLoginPost();
-		
-	}
+        setWeLoginPost();
 
-	private void initializeContacts() {
-		Map<String, User> userlist = new HashMap<String, User>();
-		// 添加user"申请与通知"
-		User newFriends = new User();
-		newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
-		String strChat = getResources().getString(
-				R.string.Application_and_notify);
-		newFriends.setNick(strChat);
+    }
 
-		userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
-		// 添加"群聊"
-		User groupUser = new User();
-		String strGroup = getResources().getString(R.string.group_chat);
-		groupUser.setUsername(Constant.GROUP_USERNAME);
-		groupUser.setNick(strGroup);
-		groupUser.setHeader("");
-		userlist.put(Constant.GROUP_USERNAME, groupUser);
-		
-		// 添加"Robot"
-		User robotUser = new User();
-		String strRobot = getResources().getString(R.string.robot_chat);
-		robotUser.setUsername(Constant.CHAT_ROBOT);
-		robotUser.setNick(strRobot);
-		robotUser.setHeader("");
-		userlist.put(Constant.CHAT_ROBOT, robotUser);
-		
-		// 存入内存
-		MyApplication.getInstance().setContactList(userlist);
-		// 存入db
-		UserDao dao = new UserDao(LoginActivity.this);
-		List<User> users = new ArrayList<User>(userlist.values());
-		dao.saveContactList(users);
-	}
-	
-	/**
-	 * 注册
-	 * 
-	 * @param view
-	 */
-	public void register(View view) {
-	    
-		startActivityForResult(new Intent(this,SignUpActivity.class), 0);
-	}
-   
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (autoLogin) {
-			return;
-		}
-	}
-	//请求环信后台服务器
-	public void setHuanxinLoginPost(final int flag){
-	    
-	    if (!CommonUtils.isNetWorkConnected(this)) {
+    private void initializeContacts() {
+        Map<String, User> userlist = new HashMap<String, User>();
+        // 添加user"申请与通知"
+        User newFriends = new User();
+        newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
+        String strChat = getResources().getString(
+                R.string.Application_and_notify);
+        newFriends.setNick(strChat);
+
+        userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
+        // 添加"群聊"
+        User groupUser = new User();
+        String strGroup = getResources().getString(R.string.group_chat);
+        groupUser.setUsername(Constant.GROUP_USERNAME);
+        groupUser.setNick(strGroup);
+        groupUser.setHeader("");
+        userlist.put(Constant.GROUP_USERNAME, groupUser);
+
+        // 添加"Robot"
+        User robotUser = new User();
+        String strRobot = getResources().getString(R.string.robot_chat);
+        robotUser.setUsername(Constant.CHAT_ROBOT);
+        robotUser.setNick(strRobot);
+        robotUser.setHeader("");
+        userlist.put(Constant.CHAT_ROBOT, robotUser);
+
+        // 存入内存
+        MyApplication.getInstance().setContactList(userlist);
+        // 存入db
+        UserDao dao = new UserDao(LoginActivity.this);
+        List<User> users = new ArrayList<User>(userlist.values());
+        dao.saveContactList(users);
+    }
+
+    /**
+     * 注册
+     *
+     * @param view
+     */
+    public void register(View view) {
+
+        startActivityForResult(new Intent(this,SignUpActivity.class), 0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (autoLogin) {
+            return;
+        }
+    }
+    //请求环信后台服务器
+    public void setHuanxinLoginPost(final int flag){
+
+        if (!CommonUtils.isNetWorkConnected(this)) {
             Toast.makeText(this, R.string.network_isnot_available, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -206,14 +204,14 @@ public class LoginActivity extends BaseActivity {
         }
 
         progressShow = true;
-       
+
         final long start = System.currentTimeMillis();
         // 调用sdk登陆方法登陆聊天服务器
         EMChatManager.getInstance().login(currentUsername, currentPassword, new EMCallBack() {
 
             @Override
             public void onSuccess() {
-               
+
                 if (!progressShow) {
                     return;
                 }
@@ -253,17 +251,17 @@ public class LoginActivity extends BaseActivity {
                     pd.dismiss();
                 }
                 // 进入主页面
-               if(flag==1){
-                   Intent intent = new Intent(LoginActivity.this,
-                           Activity_boshu_EditBaseMessage.class);
-                   intent.putExtra("FLAG", flag);
-                   startActivity(intent);
-               }else{
-                   Intent intent = new Intent(LoginActivity.this,
-                           MainActivity.class);
-                   startActivity(intent);
-               }
-              
+                if(flag==1){
+                    Intent intent = new Intent(LoginActivity.this,
+                            Activity_boshu_EditBaseMessage.class);
+                    intent.putExtra("FLAG", flag);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(LoginActivity.this,
+                            MainActivity.class);
+                    startActivity(intent);
+                }
+
             }
 
             @Override
@@ -284,30 +282,26 @@ public class LoginActivity extends BaseActivity {
                 });
             }
         });
-	}
-	//请求我们的服务器
-	public void setWeLoginPost(){
-	    RequestQueue requestQueue = null;
-	    if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(this);
-            requestQueue.start();
-        }
-	    requestQueue.add(new SignInRequest(Request.Method.POST, StringUtils.getServerPath(),
+    }
+    //请求我们的服务器
+    public void setWeLoginPost(){
+        MyApplication.addToRequestQueue(new SignInRequest(Request.Method.POST,
+                StringUtils.getServerPath(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                       
-                      
+
+
                         try {
                             int status = response.getInt("status");
                             switch (status) {
                                 case 1:     // login successfully  Preferences.setPassword(LoginActivity.this.passwordEditText.toString());
-                                   
+
                                     LoginActivity.this.setHuanxinLoginPost(1);
                                     break;
                                 case 0:
                                     Preferences.setPassword(LoginActivity.this.passwordEditText.toString());
-                                   
+
                                     LoginActivity.this.setHuanxinLoginPost(2);
                                     break;
                                 case 2:
@@ -339,22 +333,22 @@ public class LoginActivity extends BaseActivity {
                         Toaster.showShort(LoginActivity.this, R.string.error_fail_to_login);
                     }
                 }));
-	   
-	}
-	 private class SignInRequest extends SessionRequest {
 
-	        public SignInRequest(int method, String url, Response.Listener<JSONObject> listener,
-	                             Response.ErrorListener errorListener) {
-	            super(method, url, listener, errorListener);
-	        }
+    }
+    private class SignInRequest extends SessionRequest {
 
-	        @Override
-	        protected void setParams(Map<String, String> params) {
-	            params.put("user_name", usernameEditText.getText().toString());
-	            params.put("password", passwordEditText.getText().toString());
-	            params.put("sys", "user");
-	            params.put("ctrl", "user");
-	            params.put("action", "login");
-	        }
-	    }
+        public SignInRequest(int method, String url, Response.Listener<JSONObject> listener,
+                             Response.ErrorListener errorListener) {
+            super(method, url, listener, errorListener);
+        }
+
+        @Override
+        protected void setParams(Map<String, String> params) {
+            params.put("user_name", usernameEditText.getText().toString());
+            params.put("password", passwordEditText.getText().toString());
+            params.put("sys", "user");
+            params.put("ctrl", "user");
+            params.put("action", "login");
+        }
+    }
 }

@@ -1,5 +1,8 @@
 package com.lifeisle.jekton.util;
 
+import com.lifeisle.android.R;
+import com.lifeisle.jekton.bean.ScheduleEvent;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -40,6 +43,17 @@ public class DateUtils {
         interval[1] = dateFormat.format(now.getTime());
 
         return interval;
+    }
+
+    /**
+     * @return date format of "yyyy-MM-dd"
+     */
+    public static String formatDate(Calendar calendar) {
+        int year = calendar.get(Calendar.YEAR);
+        int monthOfYear = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        return formatDate(year, monthOfYear, dayOfMonth);
     }
 
     /**
@@ -90,6 +104,15 @@ public class DateUtils {
     }
 
     /**
+     * @return time in "hh:mm" format
+     */
+    public static String formatTime(Calendar calendar) {
+        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        return formatTime(hourOfDay, minute);
+    }
+
+    /**
      * @param hourOfDay hour of day
      * @param minute minute of hour
      * @return time in "hh:mm" format
@@ -99,8 +122,38 @@ public class DateUtils {
     }
 
 
-    public static String formatDaysAbbr(int bits) {
+    public static String formatRepeatOfWeekString(int daysOfWeek) {
+        switch (daysOfWeek) {
+            case ScheduleEvent.MASK_EVERYDAY:
+                return StringUtils.getStringFromResource(R.string.repeat_opt_everyday);
+            case ScheduleEvent.MASK_WEEKDAY:
+                return StringUtils.getStringFromResource(R.string.repeat_opt_weekdays);
+            case ScheduleEvent.MASK_NEVER:
+                return StringUtils.getStringFromResource(R.string.repeat_opt_never);
+        }
 
-        return null;
+        final int NUM_DAYS_OF_WEEK = 7;
+        String[] days = StringUtils.getStringsFromResource(R.array.day_of_week_abbrs);
+        int day = 1;
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < NUM_DAYS_OF_WEEK; ++i) {
+            if ((daysOfWeek & day) != 0) {
+                builder.append(days[i]);
+                builder.append(",");
+            }
+            day <<= 1;
+        }
+        return builder.substring(0, builder.length() - 1);
+    }
+
+
+    public static long translateTimeMillis(String date, String time) {
+        int year = extractYear(date);
+        int month = extractMonth(date);
+        int day = extractDay(date);
+        int hour = extractHour(time);
+        int min = extractMin(time);
+
+        return new GregorianCalendar(year, month, day, hour, min).getTimeInMillis();
     }
 }

@@ -79,8 +79,14 @@ public class SettingRepeatDialogFragment extends DialogFragment
         radioButtons[0] = (RadioButton) parent.findViewById(R.id.opt_everyday);
         radioButtons[1] = (RadioButton) parent.findViewById(R.id.opt_weekdays);
         radioButtons[2] = (RadioButton) parent.findViewById(R.id.opt_never);
+
+        refreshOptions();
     }
 
+
+    public void setRepeat(int repeat) {
+        this.repeat = repeat;
+    }
 
     @Override
     public void onClick(View v) {

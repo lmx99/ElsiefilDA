@@ -24,7 +24,6 @@ import com.lifeisle.jekton.util.StringUtils;
 import com.lifeisle.jekton.util.Toaster;
 import com.lifeisle.jekton.util.network.AutoLoginRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,12 +53,12 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_operate);
 
-        initOrderItem();
-
         findViewById(R.id.ok).setOnClickListener(this);
         rbDeliver = (RadioButton) findViewById(R.id.deliver);
         eventRatioGroup = (RadioGroup) findViewById(R.id.eventGroup);
         etReason = (EditText) findViewById(R.id.reason);
+
+        initOrderItem();
     }
 
     private void initOrderItem() {
@@ -68,22 +67,12 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
         selectedAll = intent.getBooleanExtra(SELECT_ALL, false);
         if (orderCode == null) {
             Toaster.showShort(this, R.string.error_order_code_null);
+            finish();
             return;
         }
 
-        new Thread() {
-            @Override
-            public void run() {
-                orderItem = OrderDBUtils.getOrderItem(orderCode);
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        initView();
-                    }
-                });
-            }
-        }.start();
+        orderItem = OrderDBUtils.getOrderItem(orderCode);
+        initView();
     }
 
     private void initView() {
@@ -129,18 +118,9 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
                                     @Override
                                     public void run() {
                                         try {
-                                            JSONArray jsonArray = response.getJSONArray("order_items");
-                                            int len = jsonArray.length();
-                                            for (int i = 0; i < len; ++i) {
-                                                JSONObject item = jsonArray.getJSONObject(i);
-
-                                                int itemID = item.getInt("item_id");
-                                                JSONArray logistics = item.getJSONArray("logistics");
-                                                JSONObject lastLogistics =
-                                                        logistics.getJSONObject(logistics.length() - 1);
-                                                OrderDBUtils.insertLogistics(itemID,
-                                                        OrderItem.newLogistics(lastLogistics));
-                                            }
+                                            JSONObject order = OrderItem.getOrderItemAt(response, 0);
+                                            OrderItem item = OrderItem.newOrderItem(order);
+                                            OrderItem.updateLogistics(item.goodsItems);
                                         } catch (JSONException e) {
                                             Logger.e(TAG, e.toString());
                                         }

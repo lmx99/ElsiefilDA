@@ -277,8 +277,10 @@
     <string name="hanging_up">Hanging up..</string>
     <string name="illegal_user_name">Illegal user name</string>
     <string name="robot_chat">Robot chat</string>
-    
-    
+
+    <string name="error_fail_to_login">Fail to login</string>
+    <string name="error_password_invalid">Invalid Password</string>
+    <string name="error_user_name_invalid">Invalid UserName</string>
     
     
     
@@ -327,24 +329,11 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
 
-    <string name="mon">Mon</string>
-    <string name="tue">Tue</string>
-    <string name="wed">Wed</string>
-    <string name="thu">Thu</string>
-    <string name="fri">Fri</string>
-    <string name="sat">Sat</string>
-    <string name="sun">Sun</string>
 
 
 
 
 
-
-
-    <string name="tab_logistics">Logistics</string>
-    <string name="tab_chats">Chats</string>
-    <string name="tab_discover">Discover</string>
-    <string name="tab_me">Me</string>
 
 
 
@@ -353,6 +342,7 @@
     <string name="fragment_logistics_job_auth">Job Opportunity</string>
     <string name="fragment_logistics_scan_QR_code">Scan QR Code</string>
     <string name="fragment_logistics_deliver_stat">Deliver Stat</string>
+    <string name="fragment_logistics_order_search">Search Orders</string>
 
 
 
@@ -372,9 +362,12 @@
     <string name="error_fail_to_insert_goods">Fail to insert goods item to the database. Please check your storage.</string>
     <string name="error_fail_to_update_order">Fail to update order item of the database. Please check your storage or  permissions.</string>
     <string name="error_fail_sign_in_jobs">Fail to sign in</string>
+    <string name="error_fail_sign_out_jobs">Fail to sign out</string>
     <string name="error_fail_post_delivered">Post delivered data failed</string>
+    <string name="error_qr_code_invalid">Invalid QR Code</string>
 
     <string name="success_sign_in_jobs">Successfully signed in</string>
+    <string name="success_sign_out_jobs">Successfully signed out</string>
 
     <string name="ratio_btn_all">All</string>
     <string name="ratio_btn_undelivered">Undelivered</string>
@@ -390,7 +383,8 @@
     <string name="menu_option">Option</string>
 
 
-
+    <string name="button_ok">OK</string>
+    <string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
 
 
     <!-- OrderOperateActivity -->
@@ -489,23 +483,30 @@
     <!-- DeliverStatOptionFragment -->
     <string name="action_ok">OK</string>
 
-    <string name="error_start_greater_end">The end time must greater than or equal to the start</string>
-    <string name="title_activity_add_schedule">AddScheduleActivity</string>
 
-    <!-- share with AddScheduleActivity-->
+    <!-- share with ScheduleDetailActivity-->
     <string name="title_start_time">From: </string>
     <string name="title_end_time">To: </string>
+    <string name="error_start_greater_end">The end time must greater than or equal to the start</string>
 
 
 
-    <!-- AddScheduleActivity -->
+    <!-- ScheduleDetailActivity -->
+    <string name="title_activity_add_schedule">Add Schedule</string>
+    <string name="title_activity_alter_schedule">Alter Schedule</string>
+
     <string name="title_event_title">Title</string>
     <string name="title_repeat">Repeat</string>
     <string name="title_notify">Notify</string>
 
     <string name="repeat_opt_never">Never</string>
     <string name="repeat_opt_everyday">Everyday</string>
-    <string name="repeat_opt_weekdays">Weekdays</string>
+    <string name="repeat_opt_weekdays">Weekday</string>
+
+    <string name="error_event_title_empty">The title couldn\'t be empty</string>
+    <string name="error_fail_to_add_event">Some error occurred and adding failed</string>
+
+    <string name="success_add_event">Schedule added</string>
 
 
 

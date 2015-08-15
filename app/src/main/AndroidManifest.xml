@@ -292,18 +292,18 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
 
-         <activity android:name="com.boshu.activity.Activity_boshu_Message"
-             android:screenOrientation="portrait"
+        <activity android:name="com.boshu.activity.Activity_boshu_Message"
+            android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             ></activity>
-          <activity android:name="com.boshu.activity.Activity_boshu_EditBaseMessage"
-             android:screenOrientation="portrait"
+        <activity android:name="com.boshu.activity.Activity_boshu_EditBaseMessage"
+            android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             ></activity>
-           <activity android:name="com.boshu.activity.ClipPictureActivity"
-             android:screenOrientation="portrait"
+        <activity android:name="com.boshu.activity.ClipPictureActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             ></activity>
@@ -448,133 +448,127 @@
         <meta-data
             android:name="XG_V2_SECRET_KEY"
             android:value="977cf34428994a033ed325c0e392a02d" />
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
         <!-- #################################################### -->
         <!-- Jekton -->
 
         <activity
             android:name="com.lifeisle.jekton.activity.QRCodeScanActivity"
-            android:theme="@style/MyTheme"
             android:label="@string/title_scan_qr_code"
-            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity" >
+            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
-
-
-        
-        <activity android:name="com.zxing.activity.CaptureActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-
-
-        <activity android:name="com.lifeisle.jekton.activity.OrderOperateActivity"
-            android:theme="@style/MyTheme"
+        <activity
+            android:name="com.lifeisle.jekton.activity.OrderOperateActivity"
             android:label="@string/title_order_operate"
             android:parentActivityName="com.lifeisle.jekton.activity.QRCodeScanActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan" >
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.lifeisle.jekton.activity.QRCodeScanActivity" />
         </activity>
-
         <activity
             android:name="com.lifeisle.jekton.activity.SignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
 
         <receiver
             android:name="com.lifeisle.jekton.receiver.LogisticsUpdateReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.lifeisle.jekton.receiver.LogisticsUpdateReceiver.ACTION_LOGISTICS_UPDATE" />
             </intent-filter>
         </receiver>
 
-
         <activity
             android:name="com.lifeisle.jekton.activity.MyBrowserActivity"
             android:theme="@style/MyTheme" />
-
-
         <activity
             android:name="com.lifeisle.jekton.activity.JobsActivity"
+            android:label="@string/title_activity_jobs"
             android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
-            android:theme="@style/MyTheme"
-            android:label="@string/title_activity_jobs">
+            android:theme="@style/MyTheme" >
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
-
         <activity
             android:name="com.lifeisle.jekton.activity.MyPositionActivity"
+            android:label="@string/title_activity_my_position"
             android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
-            android:theme="@style/MyTheme"
-            android:label="@string/title_activity_my_position">
+            android:theme="@style/MyTheme" >
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
-
-
         <activity
             android:name="com.lifeisle.jekton.activity.ScheduleCategoryActivity"
             android:label="@string/title_activity_schedule_category"
-            android:theme="@style/MyTheme"
-            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity" >
+            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
+            android:theme="@style/MyTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
-
         <activity
             android:name="com.lifeisle.jekton.activity.DeliverStatActivity"
             android:label="@string/title_activity_deliver_stat"
-            android:theme="@style/MyTheme"
-            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity" >
+            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
+            android:theme="@style/MyTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
-
         <activity
             android:name="com.lifeisle.jekton.activity.DeliverStatOptionActivity"
             android:label="@string/title_activity_deliver_stat_option"
-            android:theme="@style/MyTheme"
-            android:parentActivityName="com.lifeisle.jekton.activity.DeliverStatActivity" >
+            android:parentActivityName="com.lifeisle.jekton.activity.DeliverStatActivity"
+            android:theme="@style/MyTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.lifeisle.jekton.activity.DeliverStatActivity" />
         </activity>
-
         <activity
-            android:name="com.lifeisle.jekton.activity.AddScheduleActivity"
+            android:name="com.lifeisle.jekton.activity.ScheduleDetailActivity"
             android:label="@string/title_activity_add_schedule"
-            android:theme="@style/MyTheme"
-            android:parentActivityName="com.lifeisle.jekton.activity.ScheduleCategoryActivity" >
+            android:parentActivityName="com.lifeisle.jekton.activity.ScheduleCategoryActivity"
+            android:theme="@style/MyTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.lifeisle.jekton.activity.ScheduleCategoryActivity" />
         </activity>
-
+        <activity
+            android:name="com.lifeisle.jekton.activity.OrderSearchActivity"
+            android:label="@string/title_activity_order_search"
+            android:theme="@style/MyTheme"
+            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.easemob.chatuidemo.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

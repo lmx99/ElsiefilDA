@@ -58,5 +58,6 @@ create table events (
     end_time integer not null,
     repeat integer not null,
     notify integer not null,
-    type integer not null
+    type integer not null,
+    need_post integer not null
 );

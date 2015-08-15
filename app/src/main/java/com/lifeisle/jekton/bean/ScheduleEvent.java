@@ -33,6 +33,7 @@ public class ScheduleEvent {
     public int repeat;
     public int notify;
     public int type;
+    public boolean needPost;
 
 
     @Override
@@ -45,11 +46,13 @@ public class ScheduleEvent {
                 ", repeat=" + repeat +
                 ", notify=" + notify +
                 ", type=" + type +
+                ", needPost=" + needPost +
                 '}';
     }
 
     public static ScheduleEvent newInstance(JSONObject jsonObject) throws JSONException {
         ScheduleEvent event = new ScheduleEvent();
+        event.id = jsonObject.getInt(ScheduleContract.OWN_EVENT_LOCAL_ID);
         event.title = jsonObject.getString(ScheduleContract.OWN_EVENT_TITLE);
         event.startMillis = jsonObject.getLong(ScheduleContract.OWN_EVENT_START_TIME);
         event.endMillis = jsonObject.getLong(ScheduleContract.OWN_EVENT_END_TIME);
@@ -70,6 +73,7 @@ public class ScheduleEvent {
         event.repeat = cursor.getInt(ScheduleDBUtils.COL_EVENT_REPEAT);
         event.notify = cursor.getInt(ScheduleDBUtils.COL_EVENT_NOTIFY);
         event.type = cursor.getInt(ScheduleDBUtils.COL_EVENT_TYPE);
+        event.needPost = cursor.getInt(ScheduleDBUtils.COL_EVENT_NEED_POST) != 0;
 
         return event;
     }

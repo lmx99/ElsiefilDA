@@ -1,5 +1,6 @@
 package com.lifeisle.jekton.order;
 
+import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.sorter.AscendingCreateTimeSorter;
 import com.lifeisle.jekton.order.sorter.DescendingCreateTimeSorter;
 import com.lifeisle.jekton.order.updater.AbnormalOrderUpdater;
@@ -7,10 +8,14 @@ import com.lifeisle.jekton.order.updater.AllOrderUpdater;
 import com.lifeisle.jekton.order.updater.DeliveredOrderUpdater;
 import com.lifeisle.jekton.order.updater.PostFailUpdater;
 import com.lifeisle.jekton.order.updater.UndeliveredOrderUpdater;
+import com.lifeisle.jekton.util.Logger;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * @author Jekton
- * @version 0.2 8/5/2015
+ * @version 0.3 8/10/2015
  */
 public class OrderController {
 
@@ -22,11 +27,18 @@ public class OrderController {
 
     public static final int OPTION_SORT_BY_CREATE_TIME = 0;
 
+    public static final int TYPE_QR_CODE_SING_IN = 0;
+    public static final int TYPE_QR_CODE_SING_OUT = 1;
 
 
+    private static final String LOG_TAG = "OrderController";
+
+
+    private OrderView mOrderView;
     protected OrderModel orderModel;
 
-    public OrderController(OrderModel orderModel) {
+    public OrderController(OrderView orderView, OrderModel orderModel) {
+        mOrderView = orderView;
         this.orderModel = orderModel;
     }
 
@@ -75,13 +87,38 @@ public class OrderController {
 
 
 
-    public void postQRCode(String qrCode) {
-        orderModel.signInAJob(qrCode);
+    public void postQRCode(String data) {
+        if (data.startsWith("{")) {
+            try {
+                JSONObject jsonObject = new JSONObject(data);
+                switch (jsonObject.getInt("type")) {
+                    case TYPE_QR_CODE_SING_IN: {
+                        orderModel.signInAJob(data);
+                        break;
+                    }
+                    case TYPE_QR_CODE_SING_OUT: {
+                        orderModel.signOutJob(data);
+                        break;
+                    }
+                    default: {
+                        mOrderView.showErrMsg(R.string.error_qr_code_invalid);
+                        Logger.e(LOG_TAG, "unexpected qr code, data = " + data);
+                        break;
+                    }
+                }
+            } catch (JSONException e) {
+                mOrderView.showErrMsg(R.string.error_qr_code_invalid);
+                Logger.e(LOG_TAG, "unexpected qr code, data = " + data, e);
+            }
+
+        } else {
+            orderModel.addOrder(data);
+        }
     }
 
-    public boolean addOrderCode(String orderCode) {
-        return orderModel.addOrder(orderCode);
-    }
+
+
+
 
     public void postDeliveredOrder(int orderID, int eventID) {
         orderModel.postDeliveredOrder(orderID, eventID);

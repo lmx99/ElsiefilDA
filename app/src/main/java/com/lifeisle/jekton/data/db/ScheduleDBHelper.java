@@ -13,7 +13,7 @@ import com.lifeisle.jekton.util.Logger;
  */
 public class ScheduleDBHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 0;
+    public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "schedules.db";
 
     private static final String  LOG_TAG = "ScheduleDBHelper";
@@ -27,7 +27,8 @@ public class ScheduleDBHelper extends SQLiteOpenHelper {
             EventEntry.COL_EVENT_END_TIME + " integer not null," +
             EventEntry.COL_EVENT_REPEAT + " integer not null," +
             EventEntry.COL_EVENT_NOTIFY + " integer not null," +
-            EventEntry.COL_EVENT_TYPE + " integer not null" +
+            EventEntry.COL_EVENT_TYPE + " integer not null," +
+            EventEntry.COL_EVENT_NEED_POST + " integer not null" +
             ");";
 
 

@@ -32,7 +32,7 @@ public class ScheduleCategoryActivity extends AppCompatActivity implements View.
                 break;
             }
             case R.id.add_schedule: {
-                startActivity(AddScheduleActivity.class);
+                startActivity(ScheduleDetailActivity.class);
                 break;
             }
             default:

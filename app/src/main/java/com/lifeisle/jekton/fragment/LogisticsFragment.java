@@ -12,6 +12,7 @@ import com.lifeisle.android.R;
 import com.lifeisle.jekton.activity.DeliverStatActivity;
 import com.lifeisle.jekton.activity.JobsActivity;
 import com.lifeisle.jekton.activity.MyPositionActivity;
+import com.lifeisle.jekton.activity.OrderSearchActivity;
 import com.lifeisle.jekton.activity.QRCodeScanActivity;
 import com.lifeisle.jekton.activity.ScheduleCategoryActivity;
 
@@ -35,8 +36,11 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
         view.findViewById(R.id.schedule).setOnClickListener(this);
         view.findViewById(R.id.myOccupation).setOnClickListener(this);
         view.findViewById(R.id.occupationAuth).setOnClickListener(this);
-        view.findViewById(R.id.scanQRCode).setOnClickListener(this);
+
         view.findViewById(R.id.deliver_stat).setOnClickListener(this);
+        view.findViewById(R.id.order_search).setOnClickListener(this);
+
+        view.findViewById(R.id.scanQRCode).setOnClickListener(this);
 
         return view;
     }
@@ -56,12 +60,16 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
                 startActivity(JobsActivity.class);
                 break;
             }
-            case R.id.scanQRCode: {
-                startActivity(QRCodeScanActivity.class);
-                break;
-            }
             case R.id.deliver_stat: {
                 startActivity(DeliverStatActivity.class);
+                break;
+            }
+            case R.id.order_search: {
+                startActivity(OrderSearchActivity.class);
+                break;
+            }
+            case R.id.scanQRCode: {
+                startActivity(QRCodeScanActivity.class);
                 break;
             }
         }

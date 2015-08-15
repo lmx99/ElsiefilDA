@@ -7,7 +7,12 @@ package com.lifeisle.jekton.order;
 public interface OrderView {
 
     void showDialog();
+
     void closeDialog();
+
     void notifyDataSetChanged();
+
     void setFailCount(int count);
+
+    void showErrMsg(int msgId);
 }

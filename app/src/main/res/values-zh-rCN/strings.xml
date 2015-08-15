@@ -366,5 +366,6 @@
     <string name="ratio_btn_undelivered">未送达</string>
     <string name="success_post">发送成功</string>
     <string name="success_sign_in_jobs">签到成功</string>
-    
+    <string name="button_ok">确定</string>
+    <string name="msg_camera_framework_bug">抱歉，Android相机出现问题。您可能需要重启设备。</string>
 </resources>

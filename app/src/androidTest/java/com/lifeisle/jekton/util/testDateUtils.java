@@ -23,11 +23,11 @@ public class testDateUtils extends AndroidTestCase {
     public void testExtraMonth() {
         String date = "1994-07-27";
         int month = DateUtils.extractMonth(date);
-        assertEquals(7, month);
+        assertEquals(6, month);
 
         date = "2015-08-06";
         month = DateUtils.extractMonth(date);
-        assertEquals(8, month);
+        assertEquals(7, month);
 
     }
 
@@ -45,10 +45,27 @@ public class testDateUtils extends AndroidTestCase {
 
     public void testFormatDateString() {
         int year = 1994;
-        int month = 7;
+        int month = 6;
         int day = 27;
 
         String date = DateUtils.formatDate(year, month, day);
         assertEquals("1994-07-27", date);
     }
+
+
+    public void testFormatDaysAbbr() {
+        int days = 0b0111_1111;
+        assertEquals("Everyday", DateUtils.formatRepeatOfWeekString(days));
+
+        days = 0b0000_0000;
+        assertEquals("Never", DateUtils.formatRepeatOfWeekString(days));
+
+        days = 0b0001_1111;
+        assertEquals("Weekday", DateUtils.formatRepeatOfWeekString(days));
+
+        days = 0b0101_1001;
+        assertEquals("Mon,Thu,Fri,Sun", DateUtils.formatRepeatOfWeekString(days));
+    }
+
+
 }
