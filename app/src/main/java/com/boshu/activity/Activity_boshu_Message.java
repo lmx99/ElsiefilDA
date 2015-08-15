@@ -143,11 +143,10 @@ public class Activity_boshu_Message extends Activity implements
         ImageDowloader mImageDowloader = new ImageDowloader(this);
         fileCacheUtils=new FileCacheUtils(this);
         if (user != null) {
-           
             tv_boshu_editname.setText(user.getNickName());
             tv_boshu_editsex.setText(user.getSex());
-            tv_boshu_editage.setText(user.getAge());
-            tv_boshu_edithight.setText(user.getHight()+"cm");
+            tv_boshu_editage.setText(user.getAge().equals("0")?"":user.getAge());
+            tv_boshu_edithight.setText(user.getHight().equals("") ? "" : user.getHight() + "cm");
             tv_boshu_editbody.setText(user.getFigure());
             tv_boshu_editidnumber.setText(user.getIdCard());
             tv_boshu_editintention.setText(user.getJobWant());
@@ -168,6 +167,7 @@ public class Activity_boshu_Message extends Activity implements
             setNetBitmap(afterImage, afterUrl, mImageDowloader);
             setNetBitmap(beforeImage, beforeUrl, mImageDowloader);
             setNetBitmap(studentImage, studentUrl, mImageDowloader);
+            System.out.println(studentUrl+"---------");
         }
 
     }
@@ -178,7 +178,6 @@ public class Activity_boshu_Message extends Activity implements
         super.onResume();
         if (!TextUtils.isEmpty(pathImage)) {
             System.out.println(pathImage);
-
         }
     }
 

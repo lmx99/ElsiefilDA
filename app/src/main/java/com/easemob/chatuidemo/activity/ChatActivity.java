@@ -595,7 +595,6 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				conversation.removeMessage(deleteMsg.getMsgId());
 				adapter.refreshSeekTo(data.getIntExtra("position", adapter.getCount()) - 1);
 				break;
-
 			case RESULT_CODE_FORWARD: // 转发消息
 				EMMessage forwardMsg = (EMMessage) adapter.getItem(data.getIntExtra("position", 0));
 				Intent intent = new Intent(this, ForwardMessageActivity.class);
