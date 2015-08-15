@@ -24,6 +24,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -96,6 +97,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     private View startScanButton;
     private View cancelButton;
     private View background;
+    private EditText barcodeInputText;
 
     private IntentFilter orderOperateFilter;
     private OrderOperateReceiver orderOperateReceiver = new OrderOperateReceiver();
@@ -158,6 +160,8 @@ public class QRCodeScanActivity extends AppCompatActivity
         cancelButton.setOnClickListener(this);
 
         background = findViewById(R.id.background);
+
+        barcodeInputText = (EditText) findViewById(R.id.barcode);
 
         findViewById(R.id.ok).setOnClickListener(this);
 
@@ -320,6 +324,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
+        // TODO: 8/15/2015
         inactivityTimer.shutdown();
         super.onDestroy();
         orderModel.stop();
@@ -433,10 +438,22 @@ public class QRCodeScanActivity extends AppCompatActivity
                 stopScan();
                 break;
             case R.id.ok:
+                manuallyAddBarcode();
                 break;
         }
 
     }
+
+    private void manuallyAddBarcode() {
+        String barcode = barcodeInputText.getText().toString();
+        if (barcode.length() != 13) {
+            showErrMsg(R.string.error_order_code_invalid);
+        } else {
+            orderController.postQRCode(barcode);
+            barcodeInputText.setText("");
+        }
+    }
+
 
 
     @Override
@@ -470,7 +487,6 @@ public class QRCodeScanActivity extends AppCompatActivity
     @Override
     public void notifyDataSetChanged() {
         orderListAdapter.notifyDataSetChanged();
-        Logger.d(TAG, "notifyDataSetChanged()");
         if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }
@@ -543,7 +559,7 @@ public class QRCodeScanActivity extends AppCompatActivity
         if (barcode != null) {
             viewfinderView.drawResultBitmap(barcode);
         }
-        Toaster.showShort(this, rawResult.getText());
+        orderController.postQRCode(rawResult.getText());
         restartPreviewAfterDelay(DEFAULT_SCAN_DELAY);
 //        orderController.postQRCode(rawResult.getText());
     }

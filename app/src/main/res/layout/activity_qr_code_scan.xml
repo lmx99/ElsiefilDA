@@ -67,7 +67,7 @@
 
     <!-- manually add -->
     <EditText
-        android:id="@+id/barCode"
+        android:id="@+id/barcode"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:paddingRight="68dp"
@@ -81,9 +81,9 @@
         android:id="@+id/ok"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/barCode"
-        android:layout_toRightOf="@id/barCode"
-        android:layout_toEndOf="@id/barCode"
+        android:layout_alignBaseline="@id/barcode"
+        android:layout_toRightOf="@id/barcode"
+        android:layout_toEndOf="@id/barcode"
         android:layout_marginLeft="-64dp"
         android:layout_marginTop="-4dp"
         android:padding="4dp"

@@ -380,6 +380,7 @@ public class OrderDBUtils {
     public static boolean isOrderCodeExists(String orderCode) {
         String[] columns = { OrdersDBHelper.COLUMN_ORDERS_ORDER_ID };
         String selection = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "=" + orderCode;
+        Logger.d(TAG, "isOrderCodeExists() selection = " + selection);
         Cursor cursor = ordersDB.query(OrdersDBHelper.TABLE_ORDERS, columns, selection,
                 null, null, null, null);
 

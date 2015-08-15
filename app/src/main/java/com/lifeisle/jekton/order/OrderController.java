@@ -112,9 +112,7 @@ public class OrderController {
             }
 
         } else {
-            if (orderModel.addOrder(data)) {
-                // TODO: 8/14/2015
-            }
+            orderModel.addOrder(data);
         }
     }
 
