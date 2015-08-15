@@ -223,13 +223,15 @@ public final class CameraManager {
             int height = width;
 //            int height = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
 
+            // actionbar + notification bar
+            int extraHeight = DimensionUtils.dp2px(context, 90);
             int leftOffset = (screenResolution.x - width) / 2;
             int screenBottomOffset = DimensionUtils.dp2px(context, 50);
             Logger.d(TAG, "screenBottomOffset = " + screenBottomOffset);
-            framingRect = new Rect(leftOffset, screenResolution.y - (height + screenBottomOffset),
-                    leftOffset + width, screenResolution.y - screenBottomOffset);
+            framingRect = new Rect(leftOffset, screenResolution.y - (height + screenBottomOffset + extraHeight),
+                    leftOffset + width, screenResolution.y - screenBottomOffset - extraHeight);
 
-            Log.d(TAG, "Calculated framing rect: " + framingRect);
+            Log.d(TAG, "Calculated framing rect: " + framingRect.toString());
         }
         return framingRect;
     }

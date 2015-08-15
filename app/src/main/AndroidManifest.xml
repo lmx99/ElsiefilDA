@@ -457,7 +457,7 @@
             android:label="@string/title_scan_qr_code"
             android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
