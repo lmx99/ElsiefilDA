@@ -502,7 +502,6 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                                 .setImageBitmap(bt);
                                         if (user != null) {
                                             user.setStudentImage(sImage);
-
                                             studentImage = Model.PitureLoad
                                                     + sImage;
                                             final String studentUrl = studentImage
@@ -748,7 +747,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     }
 
     public void back(View view) {
-        finish();
+        FinishBack();
     }
 
     public void postMessage() {
@@ -856,6 +855,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                         figure, school, major, entrance_year, real_name, myPhone,
                         friendPhone, email, qq, job_want, resume, idCard,
                         beforeIdCard, afterIdCard, head_image, student_image);
+                System.out.println(user.getStudentImage()+"++++++++++++++++++");
                 UserDao ud = new UserDao(this);
                 ud.addUser(user);
                 User user1 = ud.find(Preferences.getUserName());
@@ -899,7 +899,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
             resumEditText.setText(user.getResume());
             idCardEditText.setText(user.getIdCard());
 
-            tv_boshu_editage.setText(user.getAge());
+            tv_boshu_editage.setText(user.getAge().equals("0")?"":user.getAge());
            /*  * tv_boshu_editbody.setText(user.getFigure());
              * tv_boshu_editmail.setText(user.getMail());
              * tv_boshu_edithight.setText(user.getHight());
@@ -919,7 +919,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
             String sexString = user.getSex();
 
             tv_boshu_editsex.setText(user.getSex());
-            tv_boshu_edithight.setText(user.getHight() + "cm");
+            tv_boshu_edithight.setText(user.getHight().equals("")?"":user.getHight() + "cm");
 
             String afterUrl = Model.PitureLoad + user.getAferIdCard();
             String beforeUrl = (Model.PitureLoad + user.getBeforeIdCard());
@@ -936,8 +936,6 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
         }
 
     }
-
-    // ��ȡ���֤ͼƬ
     public void setNetBitmap(final ImageView img, Bitmap bitmap, String url) {
 
         if (bitmap != null) {

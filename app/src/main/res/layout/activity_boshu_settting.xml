@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/boshu_backgroud_color2"
+    android:layout_height="match_parent"
+   >
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/top_bar_normal_bg"
+        android:gravity="center_vertical"
+        >
+
+        <include layout="@layout/commom_back_btn"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="设置"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_boshu_changePass"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="修改登录码"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp" />
+        <ImageView
+            android:layout_marginTop="7.5dp"
+            android:layout_marginLeft="300dp"
+            android:src="@drawable/delete2"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_marginLeft="10dp"
+        android:background="@color/boshu_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="通知提醒设置"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp" />
+        <ImageView
+            android:layout_marginTop="7.5dp"
+            android:layout_marginLeft="300dp"
+            android:src="@drawable/delete2"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+
+    <Button
+        android:id="@+id/retreat"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/circl_shape"
+        android:text="退出登录"
+        android:layout_width="280dp"
+        android:layout_height="40dp" />
+    </LinearLayout>
+
+</LinearLayout>

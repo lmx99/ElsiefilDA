@@ -91,7 +91,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class MainActivity extends BaseActivity implements EMEventListener {
-
+    public static MainActivity context;
     protected static final String TAG = "MainActivity";
     // 未读消息textview
     private TextView unreadLabel;
@@ -135,6 +135,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context=this;
         setPost();
         /*
          * if(savedInstanceState!=null){

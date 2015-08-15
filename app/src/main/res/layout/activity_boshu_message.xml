@@ -75,12 +75,13 @@
                     android:textColor="@color/boshu_textcolorkey" />
 
                 <TextView
+                    android:layout_marginRight="25dp"
+                    android:layout_alignParentRight="true"
                     android:textSize="15dp"
                     android:textColor="#FF0000"
                     android:id="@+id/tv_boshu_BaseMssageEit"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="270dp"
                     android:gravity="center_vertical"
                     android:text="编辑"
                     >
