@@ -227,6 +227,7 @@ public class User {
         this.BeforeIdCard=BeforeIdCard;
         this.AferIdCard=afterIdCard;
         this.headImage=headImage;
+        this.studentImage=studentIdCard;
         
 
     }

@@ -5,23 +5,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/boshu_backgroud_color"
     android:orientation="vertical">
-    <LinearLayout 
+    <RelativeLayout
+        android:layout_gravity="center_vertical"
        android:background="@color/top_bar_normal_bg"
         android:layout_height="46dp"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+
         android:gravity="center"
-        >
-        <TextView 
-           android:textColor="@color/bottom_text_color_normal"
-            android:gravity="center"
+      >
+        <TextView
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+             android:textColor="@color/bottom_text_color_normal"
             android:textSize="18sp"
             android:text="个人"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             />
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:id="@+id/iv_boshu_setting"
+            android:layout_marginLeft="280dp"
+            android:src="@drawable/settings_normal"
+            android:layout_width="40dp"
+            android:layout_height="20dp" />
         
-    </LinearLayout>
+    </RelativeLayout>
+
+
     
     <RelativeLayout 
         android:layout_marginTop="5dp"
@@ -49,140 +60,94 @@
     <RelativeLayout
         android:id="@+id/rl_boshu_message"
         android:layout_marginTop="5dp"
-        android:layout_height="60dp"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical" 
         android:background="@color/boshu_item_color"
-        >
-        <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:layout_marginRight="20dp"
             android:layout_marginLeft="30dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/delete1"
-            />
-      <TextView 
-          android:layout_marginLeft="60dp"
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:text="个人信息"
-          android:textColor="@android:color/black"
-          />
-        <ImageView 
-            android:layout_marginLeft="280dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-             android:src="@drawable/delete2"
-            />
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/delete1"
+            android:drawableRight="@drawable/delete2"
+            android:gravity="center_vertical"
+            android:text="个人信息"
+            android:layout_width="match_parent"
+            android:layout_height="46dp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_boshu_wallet"
+        android:layout_marginTop="5dp"
+        android:background="@color/boshu_item_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/delete1"
+            android:drawableRight="@drawable/delete2"
+            android:gravity="center_vertical"
+            android:text="钱包"
+            android:layout_width="match_parent"
+            android:layout_height="46dp" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_marginTop="5dp"
-        android:layout_height="60dp"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical" 
         android:background="@color/boshu_item_color"
-        android:id="@+id/rl_boshu_wallet">
-        <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:layout_marginRight="20dp"
             android:layout_marginLeft="30dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/delete1"
-            />
-      <TextView 
-          android:layout_marginLeft="60dp"
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:text="钱包"
-          android:textColor="@android:color/black"
-          />
-        <ImageView 
-            android:layout_marginLeft="280dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-             android:src="@drawable/delete2"
-            />
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/delete1"
+            android:drawableRight="@drawable/delete2"
+            android:gravity="center_vertical"
+            android:text="我的金额"
+            android:layout_width="match_parent"
+            android:layout_height="46dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:background="@color/boshu_item_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/delete1"
+            android:drawableRight="@drawable/delete2"
+            android:gravity="center_vertical"
+            android:text="我的结算"
+            android:layout_width="match_parent"
+            android:layout_height="46dp" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_marginTop="5dp"
-        android:layout_height="60dp"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical" 
         android:background="@color/boshu_item_color"
-        >
-        <ImageView 
-            android:layout_marginLeft="30dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/delete1"
-            />
-      <TextView 
-          android:layout_marginLeft="60dp"
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:text="我的金额"
-          android:textColor="@android:color/black"
-          />
-        <ImageView 
-            android:layout_marginLeft="280dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-             android:src="@drawable/delete2"
-            />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="5dp"
-        android:layout_height="60dp"
         android:layout_width="match_parent"
-        android:gravity="center_vertical" 
-        android:background="@color/boshu_item_color"
-        >
-        <ImageView 
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_boshu_experience"
+            android:layout_marginRight="20dp"
             android:layout_marginLeft="30dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/delete1"
-            />
-      <TextView 
-          android:layout_marginLeft="60dp"
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:text="我的结算"
-          android:textColor="@android:color/black"
-          />
-        <ImageView 
-            android:layout_marginLeft="280dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-             android:src="@drawable/delete2"
-            />
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/delete1"
+            android:drawableRight="@drawable/delete2"
+            android:gravity="center_vertical"
+            android:text="我的经验"
+            android:layout_width="match_parent"
+            android:layout_height="46dp" />
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="5dp"
-        android:layout_height="60dp"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical" 
-        android:background="@color/boshu_item_color"
-        >
-        <ImageView 
-            android:layout_marginLeft="30dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/delete1"
-            />
-      <TextView 
-          android:id="@+id/tv_boshu_experience"
-          android:layout_marginLeft="60dp"
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:text="我的经验"
-          android:textColor="@android:color/black"
-          />
-        <ImageView 
-            android:layout_marginLeft="280dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-             android:src="@drawable/delete2"
-            />
-    </RelativeLayout>
+
     
     
 

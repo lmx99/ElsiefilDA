@@ -113,6 +113,7 @@ public class UserDao {
           user.setRealName(realName);
           user.setqQ(qQ);
           user.setNickName(nickName);
+           user.setStudentImage(student);
 
        }
        cursor.close();
@@ -143,8 +144,9 @@ public class UserDao {
         values.put("BeforeIdCard", user.getBeforeIdCard());
         values.put(" AferIdCard", user.getAferIdCard());
         values.put("headImage", user.getHeadImage());
+        System.out.println(user.getStudentImage()+"0000000000000000000000");
         values.put("studentImage", user.getStudentImage());
-        db.update("user", values, "userName=?", new String[]{user.getUserName()});
+        int i=db.update("user", values, "userName=?", new String[]{user.getUserName()});
         db.close();
     }
     public void delete(String userName){
