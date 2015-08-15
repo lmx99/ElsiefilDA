@@ -320,15 +320,19 @@ public class OrderModel {
                     public void onResponse(JSONObject response) {
                         Logger.d(TAG, "signInAJob() response: " + response);
                         try {
-                            jcat_id = response.getInt("jcat_id");
-                            Preferences.setJCatID(jcat_id);
-                            for (String orderCode : testOrderCodes) {
-                                addOrder(orderCode);
+                            if (response.getInt("status") == 0) {
+                                jcat_id = response.getInt("jcat_id");
+                                Preferences.setJCatID(jcat_id);
+                                for (String orderCode : testOrderCodes) {
+                                    addOrder(orderCode);
+                                }
+                                Toaster.showShort(context, R.string.success_sign_in_jobs);
+                            } else {
+                                Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
                             }
-                            Toaster.showShort(context, R.string.success_sign_in_jobs);
                         } catch (JSONException e) {
-                            Logger.e(TAG, e.toString());
-                            Logger.e(TAG, "Sign In Jobs response: " + response);
+                            Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
+                            Logger.e(TAG, "Sign In Jobs response: " + response, e);
                         }
                     }
                 },
