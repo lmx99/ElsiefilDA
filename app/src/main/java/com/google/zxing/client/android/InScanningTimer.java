@@ -16,7 +16,6 @@
 
 package com.google.zxing.client.android;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,21 +24,23 @@ import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.util.Log;
 
+import com.lifeisle.jekton.activity.QRCodeScanActivity;
+
 /**
  * Finishes an activity after a period of inactivity if the device is on battery power.
  */
-final public class InactivityTimer {
+final public class InScanningTimer {
 
-    private static final String TAG = InactivityTimer.class.getSimpleName();
+    private static final String TAG = InScanningTimer.class.getSimpleName();
 
     private static final long INACTIVITY_DELAY_MS = 5 * 60 * 1000L;
 
-    private final Activity activity;
+    private final QRCodeScanActivity activity;
     private final BroadcastReceiver powerStatusReceiver;
     private boolean registered;
     private AsyncTask<Object, Object, Object> inactivityTask;
 
-    public InactivityTimer(Activity activity) {
+    public InScanningTimer(QRCodeScanActivity activity) {
         this.activity = activity;
         powerStatusReceiver = new PowerStatusReceiver();
         registered = false;
@@ -91,9 +92,9 @@ final public class InactivityTimer {
                 // 0 indicates that we're on battery
                 boolean onBatteryNow = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) <= 0;
                 if (onBatteryNow) {
-                    InactivityTimer.this.onActivity();
+                    InScanningTimer.this.onActivity();
                 } else {
-                    InactivityTimer.this.cancel();
+                    InScanningTimer.this.cancel();
                 }
             }
         }
@@ -104,8 +105,8 @@ final public class InactivityTimer {
         protected Object doInBackground(Object... objects) {
             try {
                 Thread.sleep(INACTIVITY_DELAY_MS);
-                Log.i(TAG, "Finishing activity due to inactivity");
-                activity.finish();
+                Log.i(TAG, "Finishing activity due to un-scanning");
+                activity.stopScan();
             } catch (InterruptedException e) {
                 // continue without killing
             }

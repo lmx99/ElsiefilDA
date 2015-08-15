@@ -40,7 +40,7 @@ import com.google.zxing.client.android.CaptureActivityHandler;
 import com.google.zxing.client.android.DecodeFormatManager;
 import com.google.zxing.client.android.DecodeHintManager;
 import com.google.zxing.client.android.FinishListener;
-import com.google.zxing.client.android.InactivityTimer;
+import com.google.zxing.client.android.InScanningTimer;
 import com.google.zxing.client.android.ViewfinderView;
 import com.google.zxing.client.android.camera.CameraManager;
 import com.lifeisle.android.R;
@@ -119,7 +119,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     private Collection<BarcodeFormat> decodeFormats;
     private Map<DecodeHintType, ?> decodeHints;
     private String characterSet = null;
-    private InactivityTimer inactivityTimer;
+    private InScanningTimer inScanningTimer;
     private BeepManager beepManager;
     private AmbientLightManager ambientLightManager;
 
@@ -170,7 +170,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
         initMVC();
 
-        inactivityTimer = new InactivityTimer(this);
+        inScanningTimer = new InScanningTimer(this);
         beepManager = new BeepManager(this);
         ambientLightManager = new AmbientLightManager(this);
     }
@@ -243,7 +243,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         decodeFormats = DecodeFormatManager.parseDecodeFormats(intent);
-        // TODO: 8/15/2015
+        // TODO: 8/15/2015 set hints
         decodeHints = DecodeHintManager.parseDecodeHints(intent);
 
 
@@ -257,6 +257,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     private void startScan() {
         initCamera();
+        inScanningTimer.onResume();
         setListHeight();
         startScanButton.setVisibility(View.GONE);
         cancelButton.setVisibility(View.VISIBLE);
@@ -279,13 +280,14 @@ public class QRCodeScanActivity extends AppCompatActivity
         swipeRefreshLayout.requestLayout();
     }
 
-    private void stopScan() {
+    // make public to enable the InScanningTimer call it
+    public void stopScan() {
         if (handler != null) {
             handler.quitSynchronously();
             handler = null;
         }
         if (scanning) {
-            inactivityTimer.onPause();
+            inScanningTimer.onPause();
             ambientLightManager.stop();
             beepManager.close();
             cameraManager.closeDriver();
@@ -324,8 +326,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        // TODO: 8/15/2015
-        inactivityTimer.shutdown();
+        inScanningTimer.shutdown();
         super.onDestroy();
         orderModel.stop();
     }
@@ -554,7 +555,7 @@ public class QRCodeScanActivity extends AppCompatActivity
      * @param barcode     A greyscale bitmap of the camera data which was decoded.
      */
     public void handleDecode(Result rawResult, Bitmap barcode) {
-        inactivityTimer.onActivity();
+        inScanningTimer.onActivity();
 
         if (barcode != null) {
             viewfinderView.drawResultBitmap(barcode);
