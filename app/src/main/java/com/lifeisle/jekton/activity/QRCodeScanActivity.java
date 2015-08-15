@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -38,7 +39,6 @@ import com.google.zxing.client.android.DecodeFormatManager;
 import com.google.zxing.client.android.DecodeHintManager;
 import com.google.zxing.client.android.FinishListener;
 import com.google.zxing.client.android.InactivityTimer;
-import com.google.zxing.client.android.Intents;
 import com.google.zxing.client.android.ViewfinderView;
 import com.google.zxing.client.android.camera.CameraManager;
 import com.lifeisle.android.R;
@@ -46,6 +46,7 @@ import com.lifeisle.jekton.order.OrderController;
 import com.lifeisle.jekton.order.OrderModel;
 import com.lifeisle.jekton.order.OrderView;
 import com.lifeisle.jekton.ui.adapter.OrderListAdapter;
+import com.lifeisle.jekton.util.DimensionUtils;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.Toaster;
 
@@ -91,6 +92,8 @@ public class QRCodeScanActivity extends AppCompatActivity
      * used when click the scan button, at {@link #onClick(View)}
      */
     private RadioButton rbAllOrder;
+    private View startScanButton;
+    private ListView orderListView;
 
     private IntentFilter orderOperateFilter;
     private OrderOperateReceiver orderOperateReceiver = new OrderOperateReceiver();
@@ -145,9 +148,9 @@ public class QRCodeScanActivity extends AppCompatActivity
 
         initFailCount();
 
-        View btnScan = findViewById(R.id.btn_scan);
-        btnScan.setOnClickListener(this);
-        btnScan.setOnTouchListener(this);
+        startScanButton = findViewById(R.id.btn_scan);
+        startScanButton.setOnClickListener(this);
+        startScanButton.setOnTouchListener(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
@@ -169,14 +172,14 @@ public class QRCodeScanActivity extends AppCompatActivity
     }
 
     private void initMVC() {
-        ListView listView = (ListView) findViewById(R.id.orderList);
-        listView.setOnTouchListener(this);
+        orderListView = (ListView) findViewById(R.id.orderList);
+        orderListView.setOnTouchListener(this);
 
         orderModel = new OrderModel(this);
         orderListAdapter = new OrderListAdapter(this, orderModel);
         orderController = new OrderController(this, orderModel);
 
-        listView.setAdapter(orderListAdapter);
+        orderListView.setAdapter(orderListAdapter);
 
         initOptions();
     }
@@ -227,21 +230,8 @@ public class QRCodeScanActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         decodeFormats = DecodeFormatManager.parseDecodeFormats(intent);
+        // TODO: 8/15/2015
         decodeHints = DecodeHintManager.parseDecodeHints(intent);
-
-        if (intent.hasExtra(Intents.Scan.WIDTH) && intent.hasExtra(Intents.Scan.HEIGHT)) {
-            int width = intent.getIntExtra(Intents.Scan.WIDTH, 0);
-            int height = intent.getIntExtra(Intents.Scan.HEIGHT, 0);
-            if (width > 0 && height > 0) {
-                cameraManager.setManualFramingRect(width, height);
-            }
-        }
-        if (intent.hasExtra(Intents.Scan.CAMERA_ID)) {
-            int cameraId = intent.getIntExtra(Intents.Scan.CAMERA_ID, -1);
-            if (cameraId >= 0) {
-                cameraManager.setManualCameraId(cameraId);
-            }
-        }
 
 
         SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
@@ -255,6 +245,18 @@ public class QRCodeScanActivity extends AppCompatActivity
     private void startScan() {
         // TODO: 8/14/2015
         initCamera();
+        setListHeight();
+        startScanButton.setVisibility(View.GONE);
+        scanning = true;
+        if (!rbAllOrder.isChecked())
+            rbAllOrder.setChecked(true);
+    }
+
+    private void setListHeight() {
+        Rect frameRect = cameraManager.getFramingRect();
+        int top = frameRect.top;
+        swipeRefreshLayout.getLayoutParams().height = top - DimensionUtils.dp2px(this, 60);
+        swipeRefreshLayout.requestLayout();
     }
 
     private void stopScan() {
@@ -403,9 +405,6 @@ public class QRCodeScanActivity extends AppCompatActivity
         switch (v.getId()) {
             case R.id.btn_scan:
                 startScan();
-                scanning = true;
-                if (!rbAllOrder.isChecked())
-                    rbAllOrder.setChecked(true);
                 break;
             case R.id.failCount:
                 rbPostFailed.setChecked(true);
