@@ -37,8 +37,6 @@ import com.google.zxing.Result;
 import com.google.zxing.client.android.AmbientLightManager;
 import com.google.zxing.client.android.BeepManager;
 import com.google.zxing.client.android.CaptureActivityHandler;
-import com.google.zxing.client.android.DecodeFormatManager;
-import com.google.zxing.client.android.DecodeHintManager;
 import com.google.zxing.client.android.FinishListener;
 import com.google.zxing.client.android.InScanningTimer;
 import com.google.zxing.client.android.ViewfinderView;
@@ -54,6 +52,7 @@ import com.lifeisle.jekton.util.Toaster;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 
 
@@ -117,7 +116,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     private SurfaceHolder previewSurfaceHolder;
     private boolean hasSurface;
     private Collection<BarcodeFormat> decodeFormats;
-    private Map<DecodeHintType, ?> decodeHints;
+    private Map<DecodeHintType, ?> decodeHints = null;
     private String characterSet = null;
     private InScanningTimer inScanningTimer;
     private BeepManager beepManager;
@@ -243,10 +242,9 @@ public class QRCodeScanActivity extends AppCompatActivity
         ambientLightManager.start(cameraManager);
 
 
-        Intent intent = getIntent();
-        decodeFormats = DecodeFormatManager.parseDecodeFormats(intent);
-        // TODO: 8/15/2015 set hints
-        decodeHints = DecodeHintManager.parseDecodeHints(intent);
+        decodeFormats = new HashSet<>(2);
+        decodeFormats.add(BarcodeFormat.CODE_128);
+        decodeFormats.add(BarcodeFormat.QR_CODE);
 
 
         SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
@@ -567,9 +565,10 @@ public class QRCodeScanActivity extends AppCompatActivity
         if (barcode != null) {
             viewfinderView.drawResultBitmap(barcode);
         }
-        orderController.postQRCode(rawResult.getText());
+        String text = rawResult.getText();
+        Logger.d(TAG, "scanned result = " + text);
+        orderController.postQRCode(text);
         restartPreviewAfterDelay(DEFAULT_SCAN_DELAY);
-//        orderController.postQRCode(rawResult.getText());
     }
 
 

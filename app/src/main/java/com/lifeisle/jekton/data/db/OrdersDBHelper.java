@@ -75,7 +75,7 @@ public class OrdersDBHelper extends SQLiteOpenHelper {
             COLUMN_ORDERS_ADDRESS + " varchar(255) default ''," +
             COLUMN_ORDERS_REMARKS + " text default ''," +
             COLUMN_ORDERS_SOURCE + " varchar(100) default ''," +
-            COLUMN_ORDERS_ORDER_CODE + " char(13) not null unique default ''," +
+            COLUMN_ORDERS_ORDER_CODE + " char(15) not null unique default ''," +
             COLUMN_ORDERS_RESTAURANT_ID + " integer default -1," +
             COLUMN_ORDERS_REQUEST_TYPE + " integer default " + OrderItem.REQUEST_ALL_DATA + ");";
 

@@ -270,7 +270,7 @@ public class OrderModel {
 
     /**
      *
-     * @param orderCode EAN-13 orderCode
+     * @param orderCode code 128 format orderCode
      */
     public void addOrder(String orderCode) {
         if (jcat_id < 0) {
@@ -278,7 +278,7 @@ public class OrderModel {
             return;
         }
 
-        if (!orderCode.matches("\\d{13}")) {
+        if (!orderCode.matches("\\d{15}")) {
             Toaster.showShort(context, R.string.error_order_code_invalid);
             return;
         }
