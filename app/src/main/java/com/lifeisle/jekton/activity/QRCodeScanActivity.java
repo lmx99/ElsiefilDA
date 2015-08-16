@@ -151,19 +151,7 @@ public class QRCodeScanActivity extends AppCompatActivity
         swipeRefreshLayout.setOnRefreshListener(this);
 
         initFailCount();
-
-        startScanButton = findViewById(R.id.btn_scan);
-        startScanButton.setOnClickListener(this);
-        startScanButton.setOnTouchListener(this);
-
-        cancelButton = findViewById(R.id.btn_cancel_scan);
-        cancelButton.setOnClickListener(this);
-
-        background = findViewById(R.id.background);
-
-        barcodeInputText = (EditText) findViewById(R.id.barcode);
-
-        findViewById(R.id.ok).setOnClickListener(this);
+        initScanRelativelyViews();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
@@ -182,6 +170,20 @@ public class QRCodeScanActivity extends AppCompatActivity
         Resources resources = getResources();
         failCountTemplateOne = resources.getQuantityString(R.plurals.error_fail_count, 1);
         failCountTemplateOther = resources.getQuantityString(R.plurals.error_fail_count, 2);
+    }
+
+    private void initScanRelativelyViews() {
+        startScanButton = findViewById(R.id.btn_scan);
+        startScanButton.setOnClickListener(this);
+        startScanButton.setOnTouchListener(this);
+
+        cancelButton = findViewById(R.id.btn_cancel_scan);
+        cancelButton.setOnClickListener(this);
+
+        background = findViewById(R.id.background);
+
+        barcodeInputText = (EditText) findViewById(R.id.barcode);
+        findViewById(R.id.ok).setOnClickListener(this);
     }
 
     private void initMVC() {
@@ -261,7 +263,6 @@ public class QRCodeScanActivity extends AppCompatActivity
         setListHeight();
         startScanButton.setVisibility(View.GONE);
         cancelButton.setVisibility(View.VISIBLE);
-        background.setVisibility(View.GONE);
         scanning = true;
         if (!rbAllOrder.isChecked())
             rbAllOrder.setChecked(true);
@@ -271,11 +272,19 @@ public class QRCodeScanActivity extends AppCompatActivity
         Rect frameRect = cameraManager.getFramingRect();
         // called after init the camera, won't be null
         int top = frameRect.top;
-        swipeRefreshLayout.getLayoutParams().height = top - DimensionUtils.dp2px(this, 60);
+        int height = top - DimensionUtils.dp2px(this, 60);
+
+        swipeRefreshLayout.getLayoutParams().height = height;
         swipeRefreshLayout.requestLayout();
+
+        background.getLayoutParams().height = height;
+        background.requestLayout();
     }
 
     private void restoreListHeight() {
+        background.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+        background.requestLayout();
+
         swipeRefreshLayout.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
         swipeRefreshLayout.requestLayout();
     }
@@ -292,7 +301,6 @@ public class QRCodeScanActivity extends AppCompatActivity
             beepManager.close();
             cameraManager.closeDriver();
         }
-        //historyManager = null; // Keep for onActivityResult
         if (!hasSurface) {
             SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
             SurfaceHolder surfaceHolder = surfaceView.getHolder();
@@ -300,7 +308,6 @@ public class QRCodeScanActivity extends AppCompatActivity
         }
         scanning = false;
         restoreListHeight();
-        background.setVisibility(View.VISIBLE);
         cancelButton.setVisibility(View.GONE);
         startScanButton.setVisibility(View.VISIBLE);
     }
