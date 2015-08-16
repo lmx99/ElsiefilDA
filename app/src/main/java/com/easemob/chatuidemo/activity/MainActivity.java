@@ -1297,7 +1297,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             String afterIdCard = user_obj.getString("id_back_image");
             String beforeIdCard = user_obj.getString("id_image");
             String head_image = user_obj.getString("head_image");
-            String student_image = user_obj.getString("cer_id");
+            String student_image = user_obj.getString("prv_image");
             if (sex.equals("0")) {
                 sex = "女";
             } 
@@ -1317,6 +1317,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                     &&entrance_year.equals("")&&major.equals("")&&school.equals("")&&figure.equals("")&&hight.equals("")){
                 
             }*/
+            System.out.println(Preferences.getUserName()+"*******************************************");
                 if(ud.find(Preferences.getUserName())!=null){
                     ud.update(user);
                 }else{

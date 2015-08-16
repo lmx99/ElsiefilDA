@@ -444,6 +444,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                         String aImage = obj.getJSONObject(
                                                 "user_info").getString(
                                                 "id_back_image");
+                                        setImagUrl(ud,user,afterImage);
                                         img_boshu_afterhead.setImageBitmap(bt);
                                         if (user != null) {
                                             user.setAferIdCard(aImage);
@@ -463,6 +464,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                             it.putExtra("bitmap", bitmap);
                                             Activity_boshu_EditBaseMessage.this
                                                     .sendBroadcast(it);
+                                            Activity_boshu_EditBaseMessage.this.setToast(Activity_boshu_EditBaseMessage.this, "身份证背面照上传成功！");
                                         }
 
                                     }
@@ -470,6 +472,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                         String bImage = obj.getJSONObject(
                                                 "user_info").getString(
                                                 "id_image");
+                                        setImagUrl(ud,user,bImage);
                                         String beforeImage = null;
                                         img_boshu_beforehead.setImageBitmap(bt);
                                         if (user != null) {
@@ -490,8 +493,8 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                             it.putExtra("bitmap", bitmap);
                                             Activity_boshu_EditBaseMessage.this
                                                     .sendBroadcast(it);
+                                            Activity_boshu_EditBaseMessage.this.setToast(Activity_boshu_EditBaseMessage.this,"身份证正面照上传成功！");
                                         }
-
                                     }
                                     if (FLAG == 3) {
                                         String studentImage = null;
@@ -500,8 +503,9 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                                 "prv_image");
                                         img_boshu_studentCard
                                                 .setImageBitmap(bt);
+                                        setImagUrl(ud,user,sImage);
                                         if (user != null) {
-                                            user.setStudentImage(sImage);
+
                                             studentImage = Model.PitureLoad
                                                     + sImage;
                                             final String studentUrl = studentImage
@@ -518,17 +522,12 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                             it.putExtra("bitmap", bitmap);
                                             Activity_boshu_EditBaseMessage.this
                                                     .sendBroadcast(it);
+                                            Activity_boshu_EditBaseMessage.this.setToast(Activity_boshu_EditBaseMessage.this,"学生证照上传成功！");
                                         }
                                     }
-                                    if (user != null) {
-                                        ud.update(user);
-                                    } else {
-                                        ud.addUser(user);
-                                    }
+
                                     dialog.dismiss();
-                                    Toast.makeText(
-                                            Activity_boshu_EditBaseMessage.this,
-                                            "身份证图片上传成功", 0).show();
+
                                     String str = new String(arg2);
                                 } catch (JSONException e) {
                                     // TODO Auto-generated catch block
@@ -554,7 +553,22 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
         }
 
     }
-
+    public void setImagUrl(UserDao ud,User user,String imgUrl){
+        if (user != null) {
+            user.setStudentImage(imgUrl);
+            ud.update(user);
+        } else {
+            user=new User();
+            user.setStudentImage(imgUrl);
+            ud.addUser(user);
+        }
+    }
+    //提示
+    public void setToast(Context context,String text){
+        Toast.makeText(
+                context,
+               text, 0).show();
+    }
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
@@ -855,7 +869,6 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                         figure, school, major, entrance_year, real_name, myPhone,
                         friendPhone, email, qq, job_want, resume, idCard,
                         beforeIdCard, afterIdCard, head_image, student_image);
-                System.out.println(user.getStudentImage()+"++++++++++++++++++");
                 UserDao ud = new UserDao(this);
                 ud.addUser(user);
                 User user1 = ud.find(Preferences.getUserName());

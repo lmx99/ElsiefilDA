@@ -162,12 +162,13 @@ public class Activity_boshu_Message extends Activity implements
             String url = Model.PitureLoad + user.getHeadImage();
             String beforeUrl = Model.PitureLoad + user.getBeforeIdCard();
             String afterUrl = Model.PitureLoad + user.getAferIdCard();
+            System.out.println(afterUrl+"&&&&&&&&&&&&&&&");
             String studentUrl=Model.PitureLoad+user.getStudentImage();
+            System.out.println(studentUrl+"(((((((((((((((((((((((");
             setNetBitmap(imageview, url, mImageDowloader);
             setNetBitmap(afterImage, afterUrl, mImageDowloader);
             setNetBitmap(beforeImage, beforeUrl, mImageDowloader);
             setNetBitmap(studentImage, studentUrl, mImageDowloader);
-            System.out.println(studentUrl+"---------");
         }
 
     }
@@ -404,6 +405,7 @@ public class Activity_boshu_Message extends Activity implements
     // 获取json数据
     public void setJsonDb(String result,Bitmap bitmap) {
         try {
+            System.out.println(result+"------------");
             JSONObject obj = new JSONObject(result);
             User user = new User();
             JSONObject user_obj = obj.getJSONObject("user_info");

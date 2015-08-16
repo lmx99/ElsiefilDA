@@ -76,10 +76,12 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
     public void getHead(){
         UserDao ud=new UserDao(getActivity());
         User user=ud.find(Preferences.getUserName());
-        String headUrl=Model.PitureLoad+user.getHeadImage();
-        Bitmap headBitmap= mImageDowloader.showCacheBitmap(headUrl.replaceAll(
-                "[^\\w]", ""));
-       setNetBitmap(circl_boshu_head,headBitmap, headUrl);
+        if(user!=null) {
+            String headUrl = Model.PitureLoad + user.getHeadImage();
+            Bitmap headBitmap = mImageDowloader.showCacheBitmap(headUrl.replaceAll(
+                    "[^\\w]", ""));
+            setNetBitmap(circl_boshu_head, headBitmap, headUrl);
+        }
           
         
     }
