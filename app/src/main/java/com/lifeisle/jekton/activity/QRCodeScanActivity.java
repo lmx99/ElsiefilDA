@@ -116,7 +116,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     private SurfaceHolder previewSurfaceHolder;
     private boolean hasSurface;
     private Collection<BarcodeFormat> decodeFormats;
-    private Map<DecodeHintType, ?> decodeHints;
+    private Map<DecodeHintType, ?> decodeHints = null;
     private String characterSet = null;
     private InScanningTimer inScanningTimer;
     private BeepManager beepManager;
