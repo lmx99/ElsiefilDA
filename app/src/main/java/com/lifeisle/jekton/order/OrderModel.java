@@ -450,6 +450,7 @@ public class OrderModel {
                             }
 
                         } catch (JSONException e) {
+                            Toaster.showShort(context, R.string.error_fail_post_delivered);
                             Logger.e(TAG, e.toString());
                         }
                     }
