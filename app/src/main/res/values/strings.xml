@@ -518,6 +518,10 @@
     <string name="hint_address">Address</string>
     <string name="hint_source">Source</string>
     <string name="hint_class">Classification</string>
+    <string name="title_activity_schedule_table">ScheduleTableActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
     
 </resources>

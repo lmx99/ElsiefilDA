@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.activity;
+package com.lifeisle.jekton.schedule;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,6 +26,7 @@ public class ScheduleCategoryActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.schedule_table: {
+                startActivity(ScheduleTableActivity.class);
                 break;
             }
             case R.id.sync_courses: {

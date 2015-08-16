@@ -2,11 +2,16 @@ package com.lifeisle.jekton.bean;
 
 import android.database.Cursor;
 
+import com.alamkanak.weekview.WeekViewEvent;
 import com.lifeisle.jekton.data.ScheduleContract;
+import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.ScheduleDBUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * @author Jekton
@@ -26,6 +31,8 @@ public class ScheduleEvent {
     public static final int MASK_WEEKDAY   = 0b0001_1111;
     public static final int MASK_NEVER     = 0b0000_0000;
 
+    private static final String TAG = ScheduleEvent.class.getSimpleName();
+
     public int id;
     public String title;
     public long startMillis;
@@ -35,6 +42,15 @@ public class ScheduleEvent {
     public int type;
     public boolean needPost;
 
+
+    public WeekViewEvent toWeekViewEvent() {
+        Calendar startTime = new GregorianCalendar();
+        startTime.setTimeInMillis(startMillis);
+        Calendar endTime = new GregorianCalendar();
+        endTime.setTimeInMillis(endMillis);
+        Logger.d(TAG, "startTime = " + startTime + ", endTime = " + endTime);
+        return new WeekViewEvent(id, title, startTime, endTime);
+    }
 
     @Override
     public String toString() {

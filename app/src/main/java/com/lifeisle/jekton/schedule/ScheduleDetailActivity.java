@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.activity;
+package com.lifeisle.jekton.schedule;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -14,10 +14,6 @@ import android.widget.TimePicker;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.data.ScheduleContract;
 import com.lifeisle.jekton.fragment.SettingRepeatDialogFragment;
-import com.lifeisle.jekton.schedule.ScheduleController;
-import com.lifeisle.jekton.schedule.ScheduleDetailView;
-import com.lifeisle.jekton.schedule.ScheduleInsertController;
-import com.lifeisle.jekton.schedule.ScheduleModel;
 import com.lifeisle.jekton.util.DateUtils;
 import com.lifeisle.jekton.util.Toaster;
 

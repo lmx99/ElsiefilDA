@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.lifeisle.jekton.activity.ScheduleCategoryActivity">
+    tools:context="com.lifeisle.jekton.schedule.ScheduleCategoryActivity">
 
     <TextView
         android:id="@+id/schedule_table"
