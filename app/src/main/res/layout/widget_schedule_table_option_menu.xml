@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <RadioGroup
+        android:id="@+id/weekViewOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_all"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/undelivered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_undelivered" />
+
+        <RadioButton
+            android:id="@+id/delivered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratio_btn_delivered" />
+    </RadioGroup>
+
+
+</LinearLayout>

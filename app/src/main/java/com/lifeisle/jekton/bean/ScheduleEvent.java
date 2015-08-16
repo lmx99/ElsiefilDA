@@ -4,7 +4,6 @@ import android.database.Cursor;
 
 import com.alamkanak.weekview.WeekViewEvent;
 import com.lifeisle.jekton.data.ScheduleContract;
-import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.ScheduleDBUtils;
 
 import org.json.JSONException;
@@ -48,7 +47,6 @@ public class ScheduleEvent {
         startTime.setTimeInMillis(startMillis);
         Calendar endTime = new GregorianCalendar();
         endTime.setTimeInMillis(endMillis);
-        Logger.d(TAG, "startTime = " + startTime + ", endTime = " + endTime);
         return new WeekViewEvent(id, title, startTime, endTime);
     }
 

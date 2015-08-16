@@ -78,6 +78,7 @@ public class ScheduleDBUtils {
                 EventEntry.COL_EVENT_START_TIME + " asc ");
 
         List<ScheduleEvent> events = createEventsFromCursor(cursor);
+        // TODO: 8/16/2015  cope with repeated event
         cursor.close();
         return events;
     }

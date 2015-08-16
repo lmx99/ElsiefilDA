@@ -3,6 +3,9 @@ package com.lifeisle.jekton.schedule;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
@@ -30,6 +33,25 @@ public class ScheduleTableActivity extends AppCompatActivity
         weekView.setEventLongPressListener(this);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_schedule_table, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_option) {
+
+
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
