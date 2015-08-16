@@ -643,6 +643,16 @@ public class OrderModel {
         }
 
         private void updateOrderItem(int index, OrderItem orderItem) {
+            // update in-memory data
+            Message message = handler.obtainMessage(
+                    WHAT_UPDATE_ORDER_ITEM,
+                    index,
+                    currentInitCount,
+                    orderItem);
+            Logger.d(TAG, "message.arg2 = " + message.arg2);
+            message.sendToTarget();
+
+
             switch (OrderDBUtils.getOrderExistsState(orderItem.orderCode)) {
                 case OrderDBUtils.ORDER_STATE_EXIST:
                     OrderItem.updateLogistics(orderItem.goodsItems);
@@ -652,16 +662,6 @@ public class OrderModel {
                     OrderDBUtils.fillOrderData(orderItem);
                     break;
             }
-
-
-            Message message = handler.obtainMessage(
-                    WHAT_UPDATE_ORDER_ITEM,
-                    index,
-                    currentInitCount,
-                    orderItem);
-            Logger.d(TAG, "message.arg2 = " + message.arg2);
-            message.sendToTarget();
-
         }
     }
 
