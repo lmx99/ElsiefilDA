@@ -15,7 +15,7 @@ public class OrdersDBHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "OrdersDBHelper";
 
-    public static final int DB_VERSION = 2;
+    public static final int DB_VERSION = 3;
     public static final String DB_NAME = "orderItems";
 
     public static final String TABLE_ORDERS = "orders";
