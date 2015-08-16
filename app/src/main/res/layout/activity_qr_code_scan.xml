@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:paddingRight="68dp"
         android:layout_marginTop="8dp"
-        android:layout_below="@id/swipeRefresh"
+        android:layout_below="@id/background"
         android:inputType="number"
         android:singleLine="true"
         android:layout_centerHorizontal="true" />
