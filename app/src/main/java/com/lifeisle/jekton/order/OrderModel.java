@@ -270,7 +270,7 @@ public class OrderModel {
 
     /**
      *
-     * @param orderCode EAN-13 orderCode
+     * @param orderCode code 128 format orderCode
      */
     public void addOrder(String orderCode) {
         if (jcat_id < 0) {
