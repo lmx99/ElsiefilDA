@@ -27,6 +27,8 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
+            return;
     }
 
     @Override

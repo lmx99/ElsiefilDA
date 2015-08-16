@@ -4,10 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.boshu.domain.User;
 
 public class UserDao {
+    private String TAG="UserDao";
    DbOpenBoshuHelper helper;
     public UserDao(Context context){
        helper= new DbOpenBoshuHelper(context);
@@ -144,9 +146,9 @@ public class UserDao {
         values.put("BeforeIdCard", user.getBeforeIdCard());
         values.put(" AferIdCard", user.getAferIdCard());
         values.put("headImage", user.getHeadImage());
-        System.out.println(user.getStudentImage()+"0000000000000000000000");
         values.put("studentImage", user.getStudentImage());
         int i=db.update("user", values, "userName=?", new String[]{user.getUserName()});
+        Log.e(TAG, user.getStudentImage() + "jjjjjjjjj"+i);
         db.close();
     }
     public void delete(String userName){
