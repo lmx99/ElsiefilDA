@@ -37,15 +37,11 @@ public class AutoLoginRequest extends SessionRequest {
     private Executor executor;
 
     private volatile Response<JSONObject> originalResponse;
-
-
     public AutoLoginRequest(Context context, int method, String url,
                             Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
         super(method, url, listener, errorListener);
-
         this.context = context;
     }
-
     @Override
     protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
 
