@@ -35,6 +35,8 @@ public class LogisticsUpdateReceiver extends BroadcastReceiver {
             switch (jsonObject.getString("type")) {
                 case "logistics_update":
                     final String orderCode = jsonObject.getString("order_code");
+                    if (orderCode.equals("")) return;
+
                     new Thread() {
                         @Override
                         public void run() {
