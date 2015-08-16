@@ -75,6 +75,7 @@ public class OrderListAdapter extends BaseAdapter {
             listItem = (OrderListItem) convertView;
         }
 
+        listItem.position = position;
         OrderItem orderItem = getItem(position);
 
         if (!listItem.isDetailHidden()) {
@@ -105,7 +106,6 @@ public class OrderListAdapter extends BaseAdapter {
     public class OrderListItem extends RelativeLayout implements View.OnClickListener {
 
         public static final String EXTRA_ORDER_CODE = "OrderListItem.EXTRA_ORDER_UPDATE";
-        public static final String EXTRA_EVENT_ID = "OrderListItem.EXTRA_EVENT_ID";
 
         private static final long MILLI_30_MIN = 30 * 60 * 1000;
         private static final long MILLI_45_MIN = 45 * 60 * 1000;
@@ -121,6 +121,7 @@ public class OrderListAdapter extends BaseAdapter {
         private TextView tvDetailsInfo;
         private TextView tvOrderInfo;
 
+        private int position;
         private OrderItem orderItem;
 
 
@@ -173,7 +174,7 @@ public class OrderListAdapter extends BaseAdapter {
         }
 
         private void postDeliveredOrder(int orderID, int eventID) {
-            activity.postDeliveredOrder(orderID, eventID);
+            activity.postDeliveredOrder(orderID, eventID, position);
         }
 
 

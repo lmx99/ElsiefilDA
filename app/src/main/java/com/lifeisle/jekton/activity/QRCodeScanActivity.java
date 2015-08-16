@@ -527,9 +527,9 @@ public class QRCodeScanActivity extends AppCompatActivity
     }
 
 
-    public void postDeliveredOrder(int orderID, int eventID) {
+    public void postDeliveredOrder(int orderID, int eventID, int position) {
         closeOptionMenu();
-        orderController.postDeliveredOrder(orderID, eventID);
+        orderController.postDeliveredOrder(orderID, eventID, position);
     }
 
 

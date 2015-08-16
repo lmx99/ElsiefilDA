@@ -427,8 +427,8 @@ public class OrderModel {
 
 
 
-    public void postDeliveredOrder(final int orderID, final int eventID) {
-
+    public void postDeliveredOrder(int orderID, int eventID, final int position) {
+        final int currentInitCount = initCount;
         MyApplication.addToRequestQueue(new PostDeliveredOrderRequest(orderID, eventID,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -437,9 +437,9 @@ public class OrderModel {
                         try {
                             int status = response.getInt("status");
                             if (status == 0) {
-                                OrderDBUtils.setNeedRequest(orderID, OrderItem.REQUEST_LOGISTICS_UPDATE);
                                 Toaster.showShort(context, R.string.success_post);
-                                reloadData(false);
+                                updateLogistics(response, position, currentInitCount);
+                                orderListUpdater.update(orderItems);
                             } else {
                                 Logger.d(TAG, "postDeliveredOrder fail, response = " + response);
                                 Toaster.showShort(context, R.string.error_fail_post_delivered);

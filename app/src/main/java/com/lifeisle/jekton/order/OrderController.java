@@ -120,7 +120,7 @@ public class OrderController {
 
 
 
-    public void postDeliveredOrder(int orderID, int eventID) {
-        orderModel.postDeliveredOrder(orderID, eventID);
+    public void postDeliveredOrder(int orderID, int eventID, int position) {
+        orderModel.postDeliveredOrder(orderID, eventID, position);
     }
 }
