@@ -10,7 +10,7 @@ create table orders (
     address varchar(255) default '',
     remarks text default '',
     source varchar(100) default '',
-    order_code char(13) not null unique default '',
+    order_code char(15) not null unique default '',
     restaurant_id integer default -1,
     request_type integer default 1
 );

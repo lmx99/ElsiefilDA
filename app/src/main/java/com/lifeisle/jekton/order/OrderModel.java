@@ -278,7 +278,7 @@ public class OrderModel {
             return;
         }
 
-        if (!orderCode.matches("\\d{13}")) {
+        if (!orderCode.matches("\\d{15}")) {
             Toaster.showShort(context, R.string.error_order_code_invalid);
             return;
         }
