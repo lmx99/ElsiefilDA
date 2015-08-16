@@ -326,8 +326,8 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             />
-          
-         
+
+
 
         <!-- 设置环信应用的appkey -->
         <meta-data
