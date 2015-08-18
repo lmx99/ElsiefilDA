@@ -143,18 +143,18 @@ public class SettingRepeatDialogFragment extends DialogFragment
      */
     private void refreshOptions() {
         switch (repeat) {
-            case ScheduleEvent.MASK_EVERYDAY:
+            case ScheduleEvent.REPEAT_EVERYDAY:
                 radioButtons[0].setChecked(true);
-                repeat = ScheduleEvent.MASK_EVERYDAY;
+                repeat = ScheduleEvent.REPEAT_EVERYDAY;
                 break;
-            case ScheduleEvent.MASK_WEEKDAY:
+            case ScheduleEvent.REPEAT_WEEKDAY:
                 Logger.d(LOG_TAG, "set weekday");
                 radioButtons[1].setChecked(true);
-                repeat = ScheduleEvent.MASK_WEEKDAY;
+                repeat = ScheduleEvent.REPEAT_WEEKDAY;
                 break;
-            case ScheduleEvent.MASK_NEVER:
+            case ScheduleEvent.REPEAT_NEVER:
                 radioButtons[2].setChecked(true);
-                repeat = ScheduleEvent.MASK_NEVER;
+                repeat = ScheduleEvent.REPEAT_NEVER;
                 break;
             default:
                 Logger.d(LOG_TAG, "set opt empty");
@@ -171,17 +171,17 @@ public class SettingRepeatDialogFragment extends DialogFragment
         switch (checkedId) {
             case R.id.opt_everyday: {
                 if (radioButtons[0].isChecked())
-                    repeat = ScheduleEvent.MASK_EVERYDAY;
+                    repeat = ScheduleEvent.REPEAT_EVERYDAY;
                 break;
             }
             case R.id.opt_weekdays: {
                 if (radioButtons[1].isChecked())
-                    repeat = ScheduleEvent.MASK_WEEKDAY;
+                    repeat = ScheduleEvent.REPEAT_WEEKDAY;
                 break;
             }
             case R.id.opt_never: {
                 if (radioButtons[2].isChecked())
-                    repeat = ScheduleEvent.MASK_NEVER;
+                    repeat = ScheduleEvent.REPEAT_NEVER;
                 break;
             }
             default:

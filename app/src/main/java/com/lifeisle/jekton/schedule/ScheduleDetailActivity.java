@@ -12,8 +12,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.data.ScheduleContract;
+import com.lifeisle.jekton.bean.ScheduleEvent;
 import com.lifeisle.jekton.fragment.SettingRepeatDialogFragment;
+import com.lifeisle.jekton.schedule.data.ScheduleContract;
 import com.lifeisle.jekton.util.DateUtils;
 import com.lifeisle.jekton.util.Toaster;
 
@@ -49,8 +50,8 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
 
         init();
 
-        ScheduleModel scheduleModel = new ScheduleModel(this);
-        controller = new ScheduleInsertController(this, scheduleModel);
+        ScheduleOperateModel scheduleOperateModel = new ScheduleOperateModel(this);
+        controller = new ScheduleInsertController(this, scheduleOperateModel);
     }
 
     private void init() {
@@ -181,9 +182,20 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
 
     @Override
     public void setRepeat(int repeat) {
+        // TODO: 8/18/2015  cope with repeat
+        // TODO using 'today' as the date, the user now can just change the 'time' but not the 'day'
         this.repeat.setText(DateUtils.formatRepeatOfWeekString(repeat));
         // store the int repeat to the tag of repeatTextView
         this.repeat.setTag(repeat);
+
+        if (repeat != ScheduleEvent.REPEAT_NEVER) {
+            if (startTimeDay.getVisibility() != View.GONE) {
+                startTimeDay.setVisibility(View.GONE);
+            }
+            if (endTimeDay.getVisibility() != View.GONE) {
+                endTimeDay.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.data;
+package com.lifeisle.jekton.schedule.data;
 
 import android.provider.BaseColumns;
 

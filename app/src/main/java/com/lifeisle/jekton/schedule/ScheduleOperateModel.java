@@ -11,12 +11,12 @@ import com.lifeisle.jekton.util.Toaster;
  * @author Jekton
  * @version 0.1 8/7/2015
  */
-public class ScheduleModel {
+public class ScheduleOperateModel {
 
     private Context context;
 
 
-    public ScheduleModel(Context context) {
+    public ScheduleOperateModel(Context context) {
         this.context = context;
     }
 

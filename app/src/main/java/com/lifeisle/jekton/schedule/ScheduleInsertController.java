@@ -17,12 +17,12 @@ import java.util.GregorianCalendar;
 public class ScheduleInsertController extends ScheduleController
         implements View.OnClickListener {
 
-    private ScheduleModel mScheduleModel;
+    private ScheduleOperateModel mScheduleOperateModel;
 
-    public ScheduleInsertController(ScheduleDetailView view, ScheduleModel scheduleModel) {
+    public ScheduleInsertController(ScheduleDetailView view, ScheduleOperateModel scheduleOperateModel) {
         super(view);
 
-        mScheduleModel = scheduleModel;
+        mScheduleOperateModel = scheduleOperateModel;
 
         Activity activity = (Activity) view;
         View btn = activity.findViewById(R.id.ok);
@@ -48,7 +48,7 @@ public class ScheduleInsertController extends ScheduleController
     public void onClick(View v) {
         ScheduleEvent event = getEvent();
         if (event != null) {
-            mScheduleModel.insertEvent(event);
+            mScheduleOperateModel.insertEvent(event);
             getScheduleDetailView().close();
         }
     }

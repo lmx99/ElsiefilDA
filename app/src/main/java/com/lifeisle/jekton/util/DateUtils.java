@@ -118,17 +118,17 @@ public class DateUtils {
      * @return time in "hh:mm" format
      */
     public static String formatTime(int hourOfDay, int minute) {
-        return String.format("%2d:%02d", hourOfDay, minute);
+        return String.format("%02d:%02d", hourOfDay, minute);
     }
 
 
     public static String formatRepeatOfWeekString(int daysOfWeek) {
         switch (daysOfWeek) {
-            case ScheduleEvent.MASK_EVERYDAY:
+            case ScheduleEvent.REPEAT_EVERYDAY:
                 return StringUtils.getStringFromResource(R.string.repeat_opt_everyday);
-            case ScheduleEvent.MASK_WEEKDAY:
+            case ScheduleEvent.REPEAT_WEEKDAY:
                 return StringUtils.getStringFromResource(R.string.repeat_opt_weekdays);
-            case ScheduleEvent.MASK_NEVER:
+            case ScheduleEvent.REPEAT_NEVER:
                 return StringUtils.getStringFromResource(R.string.repeat_opt_never);
         }
 

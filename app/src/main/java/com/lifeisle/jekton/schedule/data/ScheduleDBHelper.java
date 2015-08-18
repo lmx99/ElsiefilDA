@@ -1,10 +1,10 @@
-package com.lifeisle.jekton.data.db;
+package com.lifeisle.jekton.schedule.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.lifeisle.jekton.data.ScheduleContract.EventEntry;
+import com.lifeisle.jekton.schedule.data.ScheduleContract.EventEntry;
 import com.lifeisle.jekton.util.Logger;
 
 /**

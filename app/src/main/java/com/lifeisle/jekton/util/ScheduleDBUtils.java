@@ -8,8 +8,8 @@ import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.jekton.bean.ScheduleEvent;
-import com.lifeisle.jekton.data.ScheduleContract.EventEntry;
-import com.lifeisle.jekton.data.db.ScheduleDBHelper;
+import com.lifeisle.jekton.schedule.data.ScheduleContract.EventEntry;
+import com.lifeisle.jekton.schedule.data.ScheduleDBHelper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,13 +72,12 @@ public class ScheduleDBUtils {
 
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         builder.setTables(EventEntry.TABLE_NAME);
-        builder.appendWhere(EventEntry.COL_EVENT_START_TIME + " between " +
-                startTime + " and " + endTime);
+        builder.appendWhere("((" + EventEntry.COL_EVENT_START_TIME + " < " + endTime + ") and (" +
+                startTime + " < " + EventEntry.COL_EVENT_END_TIME + ")) or " +
+                EventEntry.COL_EVENT_REPEAT + " != " + ScheduleEvent.REPEAT_NEVER);
         Cursor cursor = builder.query(db, EVENT_COLUMNS, null, null, null, null,
                 EventEntry.COL_EVENT_START_TIME + " asc ");
-
         List<ScheduleEvent> events = createEventsFromCursor(cursor);
-        // TODO: 8/16/2015  cope with repeated event
         cursor.close();
         return events;
     }

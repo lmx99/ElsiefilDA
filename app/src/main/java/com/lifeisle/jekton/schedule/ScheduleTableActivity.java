@@ -10,14 +10,13 @@ import android.view.MenuItem;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.ScheduleEvent;
-import com.lifeisle.jekton.util.ScheduleDBUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleTableActivity extends AppCompatActivity
         implements WeekView.EventClickListener, WeekView.MonthChangeListener, WeekView.EventLongPressListener {
+
+    private static final String TAG = ScheduleTableActivity.class.getSimpleName();
 
     private WeekView weekView;
 
@@ -45,8 +44,7 @@ public class ScheduleTableActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_option) {
-
-
+            // TODO: 8/18/2015
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -70,11 +68,7 @@ public class ScheduleTableActivity extends AppCompatActivity
     }
 
     private List<WeekViewEvent> getEvents(int year, int month) {
-        List<WeekViewEvent> events = new ArrayList<>();
-        List<ScheduleEvent> scheduleEvents = ScheduleDBUtils.getScheduleEvents(year, month);
-        for (ScheduleEvent scheduleEvent : scheduleEvents) {
-            events.add(scheduleEvent.toWeekViewEvent());
-        }
-        return events;
+        ScheduleReader reader = new ScheduleReader(year, month);
+        return reader.getWeekViewEvent();
     }
 }
