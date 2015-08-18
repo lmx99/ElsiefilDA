@@ -72,9 +72,11 @@ public class ScheduleDBUtils {
 
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         builder.setTables(EventEntry.TABLE_NAME);
-        builder.appendWhere("((" + EventEntry.COL_EVENT_START_TIME + " < " + endTime + ") and (" +
-                startTime + " < " + EventEntry.COL_EVENT_END_TIME + ")) or " +
-                EventEntry.COL_EVENT_REPEAT + " != " + ScheduleEvent.REPEAT_NEVER);
+        builder.appendWhere(
+                EventEntry.COL_EVENT_REPEAT + " != " + ScheduleEvent.REPEAT_NEVER + " or (" +
+                EventEntry.COL_EVENT_START_TIME + " < " + endTime + " and " +
+                startTime + " < " + EventEntry.COL_EVENT_END_TIME + ")"
+                );
         Cursor cursor = builder.query(db, EVENT_COLUMNS, null, null, null, null,
                 EventEntry.COL_EVENT_START_TIME + " asc ");
         List<ScheduleEvent> events = createEventsFromCursor(cursor);

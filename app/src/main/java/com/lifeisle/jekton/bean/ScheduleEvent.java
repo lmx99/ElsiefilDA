@@ -55,14 +55,14 @@ public class ScheduleEvent implements Cloneable {
     @Override
     public String toString() {
         return "ScheduleEvent{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", startMillis=" + startMillis +
-                ", endMillis=" + endMillis +
-                ", repeat=" + repeat +
-                ", notify=" + notify +
-                ", type=" + type +
-                ", needPost=" + needPost +
+                "id=" + id + "\n" +
+                ", title='" + title + '\'' + "\n" +
+                ", startMillis=" + startMillis + "\n" +
+                ", endMillis=" + endMillis + "\n" +
+                ", repeat=" + repeat + "\n" +
+                ", notify=" + notify + "\n" +
+                ", type=" + type + "\n" +
+                ", needPost=" + needPost + "\n" +
                 '}';
     }
 
