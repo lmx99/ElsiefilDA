@@ -522,6 +522,9 @@
 
     <!-- ScheduleTableActivity -->
     <string name="title_activity_schedule_table">ScheduleTable</string>
+    <string name="action_today">Today</string>
+    <string name="action_1_day">1 Day</string>
+    <string name="action_3_days">3 Days</string>
+    <string name="action_7_days">7 Days</string>
 
-    
 </resources>

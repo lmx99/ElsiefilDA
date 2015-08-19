@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RadioGroup
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@android:color/white">
 
-    <RadioGroup
-        android:id="@+id/weekViewOptions"
+    <RadioButton
+        android:id="@+id/days_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="@string/action_1_day" />
 
-        <RadioButton
-            android:id="@+id/all"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_all"
-            android:checked="true"/>
+    <RadioButton
+        android:id="@+id/days_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_3_days"
+        android:checked="true"/>
 
-        <RadioButton
-            android:id="@+id/undelivered"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_undelivered" />
-
-        <RadioButton
-            android:id="@+id/delivered"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_delivered" />
-    </RadioGroup>
-
-
-</LinearLayout>
+    <RadioButton
+        android:id="@+id/days_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_7_days" />
+</RadioGroup>

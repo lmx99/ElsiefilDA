@@ -9,10 +9,8 @@ import com.lifeisle.jekton.util.ScheduleDBUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 /**
  * @author Jekton
@@ -51,6 +49,8 @@ public class ScheduleEvent implements Cloneable {
         endTime.setTimeInMillis(endMillis);
         return new WeekViewEvent(id, title, startTime, endTime);
     }
+
+
 
     @Override
     public String toString() {
@@ -110,45 +110,4 @@ public class ScheduleEvent implements Cloneable {
         return event;
     }
 
-
-
-    public List<ScheduleEvent> expandEvent(Calendar startTime) {
-        final int DAYS_OF_WEEK = 7;
-        ArrayList<ScheduleEvent> events = new ArrayList<>();
-
-        for (int i = 0, days = startTime.getActualMaximum(Calendar.DAY_OF_MONTH); i < days; ++i) {
-            int mask = -1;
-            switch (startTime.get(Calendar.DAY_OF_WEEK)) {
-                case Calendar.MONDAY:
-                    mask = MASK_MONDAY;
-                    break;
-                case Calendar.TUESDAY:
-                    mask = MASK_TUESDAY;
-                    break;
-                case Calendar.WEDNESDAY:
-                    mask = MASK_WEDNESDAY;
-                    break;
-                case Calendar.THURSDAY:
-                    mask = MASK_THURSDAY;
-                    break;
-                case Calendar.FRIDAY:
-                    mask = MASK_FRIDAY;
-                    break;
-                case Calendar.SATURDAY:
-                    mask = MASK_SATURDAY;
-                    break;
-                case Calendar.SUNDAY:
-                    mask = MASK_SUNDAY;
-                    break;
-            }
-            if ((mask & repeat) != 0) {
-                ScheduleEvent newEvent = newInstance(this);
-                // TODO: 8/18/2015 set time
-            }
-        }
-
-
-
-        return events;
-    }
 }

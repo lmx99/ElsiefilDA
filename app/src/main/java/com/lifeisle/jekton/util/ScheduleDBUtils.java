@@ -95,6 +95,17 @@ public class ScheduleDBUtils {
 
 
     public static long insertScheduleEvent(ScheduleEvent event) {
+        ContentValues values = convertToValues(event);
+
+        SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
+        long id = db.insert(EventEntry.TABLE_NAME, null, values);
+        if (id < 0)
+            Logger.e(LOG_TAG, "Fail to insert event to database, event = " + event);
+
+        return id;
+    }
+
+    private static ContentValues convertToValues(ScheduleEvent event) {
         ContentValues values = new ContentValues();
         values.put(EventEntry.COL_EVENT_TITLE, event.title);
         values.put(EventEntry.COL_EVENT_START_TIME, event.startMillis);
@@ -104,11 +115,6 @@ public class ScheduleDBUtils {
         values.put(EventEntry.COL_EVENT_TYPE, event.type);
         values.put(EventEntry.COL_EVENT_NEED_POST, event.needPost ? 1 : 0);
 
-        SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
-        long id = db.insert(EventEntry.TABLE_NAME, null, values);
-        if (id < 0)
-            Logger.e(LOG_TAG, "Fail to insert event to database, event = " + event);
-
-        return id;
+        return values;
     }
 }
