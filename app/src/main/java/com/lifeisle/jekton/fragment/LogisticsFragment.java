@@ -35,12 +35,18 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_logistics, container, false);
 
-        view.findViewById(R.id.schedule).setOnClickListener(this);
-        view.findViewById(R.id.myOccupation).setOnClickListener(this);
+        View schedule = view.findViewById(R.id.schedule);
+        schedule.setOnClickListener(this);
+        schedule.setVisibility(View.GONE);
+        View myPosition = view.findViewById(R.id.myPosition);
+        myPosition.setOnClickListener(this);
+        myPosition.setVisibility(View.GONE);
         view.findViewById(R.id.occupationAuth).setOnClickListener(this);
 
         view.findViewById(R.id.deliver_stat).setOnClickListener(this);
-        view.findViewById(R.id.order_search).setOnClickListener(this);
+        View orderSearch = view.findViewById(R.id.order_search);
+        orderSearch.setOnClickListener(this);
+        orderSearch.setVisibility(View.GONE);
 
         view.findViewById(R.id.scanQRCode).setOnClickListener(this);
 
@@ -54,7 +60,7 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
                 startActivity(ScheduleCategoryActivity.class);
                 break;
             }
-            case R.id.myOccupation: {
+            case R.id.myPosition: {
                 startActivity(MyPositionActivity.class);
                 break;
             }
