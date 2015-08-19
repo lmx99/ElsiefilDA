@@ -240,5 +240,8 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
         view.destroyDrawingCache();
         return finalBitmap;
     }
+    public void back(View view){
+        this.finish();
+    }
 
 }

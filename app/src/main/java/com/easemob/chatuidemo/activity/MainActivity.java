@@ -40,6 +40,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.boshu.utils.Model;
+import com.boshu.utils.upteVersionDialog;
 import com.easemob.EMCallBack;
 import com.easemob.EMConnectionListener;
 import com.easemob.EMError;
@@ -207,6 +208,8 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 .hide(contactListFragment).show(chatHistoryFragment).commit();
 
         init();
+        //检测版本更新
+        upteVersionDialog.getInstance().postVersion(this,this.getWindowManager(),this.getLayoutInflater(),false);
     }
 
     private void init() {

@@ -52,7 +52,6 @@ public class MyApplication extends Application {
 
 		requestQueue = Volley.newRequestQueue(this);
 		requestQueue.start();
-
 		/**
 		 * this function will initialize the HuanXin SDK
 		 *

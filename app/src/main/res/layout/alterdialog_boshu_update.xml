@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="#ffffff"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:textColor="@color/boshu_all_color"
+        android:text="更新"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+       android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/boshu_view"/>
+    <TextView
+        android:textColor="#414141"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:text="当前版本为V1.0.1,检测到有新版本V2.0.0,是否更新"
+        android:id="@+id/tv_boshu_cude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/bt_boshu_updateyes"
+            android:background="#00000000"
+            android:layout_weight="1"
+            android:text="是"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/bt_boshu_updateno"
+            android:background="#00000000"
+            android:layout_weight="1"
+            android:text="否"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

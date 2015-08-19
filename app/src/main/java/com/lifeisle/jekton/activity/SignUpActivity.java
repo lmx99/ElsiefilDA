@@ -175,6 +175,7 @@ public class SignUpActivity extends AppCompatActivity implements TextWatcher, Vi
                                 progressDialog.dismiss();
                                 try {
                                     int status = response.getInt("status");
+                                    System.out.println(response+"******************************");
                                     switch (status) {
                                         case 0:     // sign up successfully
                                             Intent intent = new Intent(SignUpActivity.this,
