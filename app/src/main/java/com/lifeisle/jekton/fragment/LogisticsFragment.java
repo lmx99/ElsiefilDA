@@ -43,13 +43,25 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
         View view = inflater.inflate(R.layout.fragment_logistics, container, false);
         return view;
     }
-    private void init(){
+    private void init() {
         getView().findViewById(R.id.schedule).setOnClickListener(this);
-        getView().findViewById(R.id.myOccupation).setOnClickListener(this);
+        getView().findViewById(R.id.myPosition).setOnClickListener(this);
+        getView().findViewById(R.id.occupationAuth).setOnClickListener(this);
+
+        View schedule = getView().findViewById(R.id.schedule);
+        schedule.setOnClickListener(this);
+        schedule.setVisibility(View.GONE);
+        View myPosition = getView().findViewById(R.id.myPosition);
+        myPosition.setOnClickListener(this);
+        myPosition.setVisibility(View.GONE);
         getView().findViewById(R.id.occupationAuth).setOnClickListener(this);
 
         getView().findViewById(R.id.deliver_stat).setOnClickListener(this);
-        getView().findViewById(R.id.order_search).setOnClickListener(this);
+        View orderSearch = getView().findViewById(R.id.order_search);
+        orderSearch.setOnClickListener(this);
+        orderSearch.setVisibility(View.GONE);
+
+        getView().findViewById(R.id.scanQRCode).setOnClickListener(this);
 
         getView().findViewById(R.id.scanQRCode).setOnClickListener(this);
     }
@@ -61,7 +73,7 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
                 startActivity(ScheduleCategoryActivity.class);
                 break;
             }
-            case R.id.myOccupation: {
+            case R.id.myPosition: {
                 startActivity(MyPositionActivity.class);
                 break;
             }
