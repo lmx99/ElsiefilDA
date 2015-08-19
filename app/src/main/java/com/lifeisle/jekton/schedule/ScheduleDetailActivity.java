@@ -194,8 +194,6 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
 
     @Override
     public void setRepeat(int repeat) {
-        // TODO: 8/18/2015  cope with repeat
-        // TODO using 'today' as the date, the user now can just change the 'time' but not the 'day'
         this.repeat.setText(DateUtils.formatRepeatOfWeekString(repeat));
         // store the int repeat to the tag of repeatTextView
         this.repeat.setTag(repeat);
@@ -206,6 +204,13 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
             }
             if (endTimeDay.getVisibility() != View.GONE) {
                 endTimeDay.setVisibility(View.GONE);
+            }
+        } else {
+            if (startTimeDay.getVisibility() != View.VISIBLE) {
+                startTimeDay.setVisibility(View.VISIBLE);
+            }
+            if (endTimeDay.getVisibility() != View.VISIBLE) {
+                endTimeDay.setVisibility(View.VISIBLE);
             }
         }
     }
