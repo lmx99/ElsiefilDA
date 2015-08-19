@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RadioGroup;
 
@@ -17,15 +16,11 @@ import com.lifeisle.android.R;
 import java.util.List;
 
 public class ScheduleTableActivity extends AppCompatActivity
-        implements WeekView.EventClickListener, WeekView.MonthChangeListener, WeekView.EventLongPressListener, View.OnTouchListener {
+        implements WeekView.EventClickListener, WeekView.MonthChangeListener,
+        WeekView.EventLongPressListener, RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
     private static final String TAG = ScheduleTableActivity.class.getSimpleName();
 
-
-    private static final int TYPE_DAY_VIEW = 1;
-    private static final int TYPE_THREE_DAY_VIEW = 2;
-    private static final int TYPE_WEEK_VIEW = 3;
-    private int weekViewType = TYPE_THREE_DAY_VIEW;
     private WeekView weekView;
     private RadioGroup options;
 
@@ -39,9 +34,14 @@ public class ScheduleTableActivity extends AppCompatActivity
         weekView.setOnEventClickListener(this);
         weekView.setMonthChangeListener(this);
         weekView.setEventLongPressListener(this);
-        weekView.setOnTouchListener(this);
+        weekView.goToHour(8);
 
         options = (RadioGroup) findViewById(R.id.weekViewOptions);
+        options.setOnCheckedChangeListener(this);
+        for (int i = 0, size = options.getChildCount(); i < size; ++i) {
+            View child = options.getChildAt(i);
+            child.setOnClickListener(this);
+        }
     }
 
 
@@ -92,11 +92,30 @@ public class ScheduleTableActivity extends AppCompatActivity
         return reader.getWeekViewEvent();
     }
 
+
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.days_1:
+                weekView.setNumberOfVisibleDays(1);
+                break;
+            case R.id.days_3:
+                weekView.setNumberOfVisibleDays(3);
+                break;
+            case R.id.days_7:
+                weekView.setNumberOfVisibleDays(7);
+                break;
+        }
+    }
+
+    private void closeOptionView() {
         if (options.getVisibility() == View.VISIBLE) {
             options.setVisibility(View.GONE);
         }
-        return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        closeOptionView();
     }
 }
