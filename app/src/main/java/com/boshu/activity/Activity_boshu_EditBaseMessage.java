@@ -607,7 +607,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                 getWindowManager().getDefaultDisplay().getMetrics(dm);
                 int width = (int) (dm.widthPixels / 1.2);
                 int height = (int) (dm.heightPixels / 2.8);
-                setAlertDialog(this, sexStrings, width, height);
+                setAlertDialog(this, sexStrings,width, height);
                 break;
             case R.id.ll_boshu_hight:
                 int count = 70;
@@ -761,7 +761,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     }
 
     public void back(View view) {
-        FinishBack();
+        finish();
     }
 
     public void postMessage() {

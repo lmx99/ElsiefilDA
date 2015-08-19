@@ -13,8 +13,8 @@ import java.io.InputStreamReader;
  * @version 0.01 6/5/2015.
  */
 public class StringUtils {
-   // http://shenghuodao.gotoip2.com/work/api/test.php
     private static final String SERVER_HOST = "http://shenghuodao.gotoip2.com/";
+   // private static final String SERVER_HOST = "http://192.168.0.103/";
     private static final String SERVER_PATH = SERVER_HOST + "work/main.php";
 
     private static final String SERVER_BASE = SERVER_HOST + "work/";
