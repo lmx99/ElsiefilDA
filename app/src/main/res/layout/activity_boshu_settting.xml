@@ -67,6 +67,29 @@
 
 
     </RelativeLayout>
+    <View
+        android:layout_marginLeft="10dp"
+        android:background="@color/boshu_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <RelativeLayout
+        android:id="@+id/rl_updateVersion"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:drawableRight="@drawable/delete2"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:text="版本检测"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
+
+    </RelativeLayout>
     <LinearLayout
         android:gravity="center"
         android:orientation="vertical"
@@ -75,6 +98,8 @@
 
 
     <Button
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:id="@+id/retreat"
         android:textSize="18sp"
         android:textColor="@color/white"
@@ -82,14 +107,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/circl_shape"
         android:text="退出登录"
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp" />
     </LinearLayout>
-
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar2" />
-
 </LinearLayout>

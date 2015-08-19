@@ -104,4 +104,7 @@ public class Activity_boshu_ChangePass extends Activity{
             }
         });
     }
+    public void back(View view){
+        finish();
+    }
 }

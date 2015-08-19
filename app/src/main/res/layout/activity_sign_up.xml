@@ -6,13 +6,14 @@
     android:padding="20dp">
 
     <EditText
+
         android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_sign_up_item"
         android:paddingLeft="@dimen/padding_sign_up_text"
         android:paddingRight="@dimen/padding_sign_up_text"
         android:layout_marginBottom="@dimen/margin_sign_up_text"
-        android:hint="@string/hint_user_name"
+        android:hint="@string/error_user_name_empty"
         android:maxLength="16"
         android:background="@color/bg_sign_up_text"/>
 

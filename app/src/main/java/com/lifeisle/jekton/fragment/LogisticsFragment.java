@@ -27,30 +27,43 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
             return;
+        init();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_logistics, container, false);
+        return view;
+    }
+    private void init() {
+        getView().findViewById(R.id.schedule).setOnClickListener(this);
+        getView().findViewById(R.id.myPosition).setOnClickListener(this);
+        getView().findViewById(R.id.occupationAuth).setOnClickListener(this);
 
-        View schedule = view.findViewById(R.id.schedule);
+        View schedule = getView().findViewById(R.id.schedule);
         schedule.setOnClickListener(this);
         schedule.setVisibility(View.GONE);
-        View myPosition = view.findViewById(R.id.myPosition);
+        View myPosition = getView().findViewById(R.id.myPosition);
         myPosition.setOnClickListener(this);
         myPosition.setVisibility(View.GONE);
-        view.findViewById(R.id.occupationAuth).setOnClickListener(this);
+        getView().findViewById(R.id.occupationAuth).setOnClickListener(this);
 
-        view.findViewById(R.id.deliver_stat).setOnClickListener(this);
-        View orderSearch = view.findViewById(R.id.order_search);
+        getView().findViewById(R.id.deliver_stat).setOnClickListener(this);
+        View orderSearch = getView().findViewById(R.id.order_search);
         orderSearch.setOnClickListener(this);
         orderSearch.setVisibility(View.GONE);
 
-        view.findViewById(R.id.scanQRCode).setOnClickListener(this);
+        getView().findViewById(R.id.scanQRCode).setOnClickListener(this);
 
-        return view;
+        getView().findViewById(R.id.scanQRCode).setOnClickListener(this);
     }
 
     @Override
