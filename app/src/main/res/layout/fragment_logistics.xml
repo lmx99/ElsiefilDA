@@ -23,7 +23,7 @@
         android:textSize="@dimen/fragment_logistics_btn_textSize" />
 
     <TextView
-        android:id="@+id/myOccupation"
+        android:id="@+id/myPosition"
         android:layout_width="match_parent"
         android:layout_height="@dimen/fragment_logistics_btn_height"
         android:background="@drawable/bg_goto_btn"

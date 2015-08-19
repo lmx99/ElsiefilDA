@@ -106,6 +106,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     private OrderModel orderModel;
 
     private boolean scanning;
+    private boolean cameraInit;
 
     // qr scanner
     private static final long DEFAULT_SCAN_DELAY = 500L;
@@ -138,6 +139,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Logger.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_code_scan);
 
@@ -228,31 +230,37 @@ public class QRCodeScanActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-        cameraManager = new CameraManager(this);
+        if (!cameraInit) {
+            Logger.d(TAG, "onResume() init camera");
+            cameraManager = new CameraManager(this);
 
-        viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-        viewfinderView.setCameraManager(cameraManager);
+            viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+            viewfinderView.setCameraManager(cameraManager);
 
-        handler = null;
+            handler = null;
 
-        resetStatusView();
-
-
-        beepManager.updatePrefs();
-        ambientLightManager.start(cameraManager);
+            resetStatusView();
 
 
-        decodeFormats = new HashSet<>(2);
-        decodeFormats.add(BarcodeFormat.CODE_128);
-        decodeFormats.add(BarcodeFormat.QR_CODE);
+            beepManager.updatePrefs();
+            ambientLightManager.start(cameraManager);
 
 
-        SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
-        previewSurfaceHolder = surfaceView.getHolder();
-        if (!hasSurface) {
-            // Install the callback and wait for surfaceCreated() to init the camera.
-            previewSurfaceHolder.addCallback(this);
+            decodeFormats = new HashSet<>(2);
+            decodeFormats.add(BarcodeFormat.CODE_128);
+            decodeFormats.add(BarcodeFormat.QR_CODE);
+
+
+            SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+            previewSurfaceHolder = surfaceView.getHolder();
+            if (!hasSurface) {
+                // Install the callback and wait for surfaceCreated() to init the camera.
+                previewSurfaceHolder.addCallback(this);
+            }
+
+            cameraInit = true;
         }
+
     }
 
     private void startScan() {
@@ -492,6 +500,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     @Override
     public void notifyDataSetChanged() {
+        Logger.d(TAG, "notifyDataSetChanged()");
         orderListAdapter.notifyDataSetChanged();
         if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);

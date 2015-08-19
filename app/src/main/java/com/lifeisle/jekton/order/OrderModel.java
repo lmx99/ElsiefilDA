@@ -62,124 +62,6 @@ public class OrderModel {
     private int jcat_id = Preferences.getJCatID();
 
 
-    String [] testOrderCodes = {
-            "1090024901000",
-            "1090024901017",
-            "1090024901024",
-            "1090024901031",
-            "1090024901048",
-            "1090024901055",
-            "1090024901062",
-            "1090024901079",
-            "1090024901086",
-            "1090024901093",
-            "1090024901109",
-            "1090024901116",
-            "1090024901123",
-            "1090024901130",
-            "1090024901147",
-            "1090024901154",
-            "1090024901161",
-            "1090024901178",
-            "1090024901185",
-            "1090024901192",
-            "1090024901208",
-            "1090024901215",
-            "1090024901222",
-            "1090024901239",
-            "1090024901246",
-            "1090024901253",
-            "1090024901260",
-            "1090024901277",
-            "1090024901284",
-            "1090024901291",
-            "1090024901307",
-            "1090024901314",
-            "1090024901321",
-            "1090024901338",
-            "1090024901345",
-            "1090024901352",
-            "1090024901369",
-            "1090024901376",
-            "1090024901383",
-            "1090024901390",
-            "1090024901406",
-            "1090024901413",
-            "1090024901420",
-            "1090024901437",
-            "1090024901444",
-            "1090024901451",
-            "1090024901468",
-            "1090024901475",
-            "1090024901482",
-            "1090024901499",
-            "1090024901505",
-            "1090024901512",
-            "1090024901529",
-            "1090024901536",
-            "1090024901543",
-            "1090024901550",
-            "1090024901567",
-            "1090024901574",
-            "1090024901581",
-            "1090024901598",
-            "1090024901604",
-            "1090024901611",
-            "1090024901628",
-            "1090024901635",
-            "1090024901642",
-            "1090024901659",
-            "1090024901666",
-            "1090024901673",
-            "1090024901680",
-            "1090024901697",
-            "1090024901703",
-            "1090024901710",
-            "1090024901727",
-            "1090024901734",
-            "1090024901741",
-            "1090024901758",
-            "1090024901765",
-            "1090024901772",
-            "1090024901789",
-            "1090024901796",
-            "1090024901802",
-            "1090024901819",
-            "1090024901826",
-            "1090024901833",
-            "1090024901840",
-            "1090024901857",
-            "1090024901864",
-            "1090024901871",
-            "1090024901888",
-            "1090024901895",
-            "1090024901901",
-            "1090024901918",
-            "1090024901925",
-            "1090024901932",
-            "1090024901949",
-            "1090024901956",
-            "1090024901963",
-            "1090024901970",
-            "1090024901987",
-            "1090024901994",
-            "1090024902007",
-            "1090024902014",
-            "1090024902021",
-            "1090024902038",
-            "1090024902045",
-            "1090024902052",
-            "1090024902069",
-            "1090024902076",
-            "1090024902083",
-            "1090024902090",
-            "1090024902106",
-            "1090024902113",
-            "1090024902120",
-            "1090024902137",
-    };
-
-
 
     public OrderModel(Context context) {
         this.context = context;
@@ -278,7 +160,7 @@ public class OrderModel {
             return;
         }
 
-        if (!orderCode.matches("\\d{15}")) {
+        if (!orderCode.matches("\\d{13,18}")) {
             Toaster.showShort(context, R.string.error_order_code_invalid);
             return;
         }
@@ -320,9 +202,6 @@ public class OrderModel {
                             if (response.getInt("status") == 0) {
                                 jcat_id = response.getInt("jcat_id");
                                 Preferences.setJCatID(jcat_id);
-                                for (String orderCode : testOrderCodes) {
-                                    addOrder(orderCode);
-                                }
                                 Toaster.showShort(context, R.string.success_sign_in_jobs);
                             } else {
                                 Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
@@ -344,7 +223,7 @@ public class OrderModel {
 
 
     public void signOutJob(String qrCode) {
-        MyApplication.addToRequestQueue(new SignInJobsRequest(qrCode, true,
+        MyApplication.addToRequestQueue(new SignInJobsRequest(qrCode, false,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -354,10 +233,13 @@ public class OrderModel {
                                 Preferences.setJCatID(-1);
                                 OrderDBUtils.clearOrders();
                                 Toaster.showShort(context, R.string.success_sign_out_jobs);
+                            } else {
+                                Toaster.showShort(context, R.string.error_fail_sign_out_jobs);
                             }
                         } catch (JSONException e) {
                             Logger.e(TAG, e.toString(), e);
-                            Logger.e(TAG, "Sign In Jobs response: " + response);
+                            Logger.e(TAG, "Sign Out Jobs response: " + response);
+                            Toaster.showShort(context, R.string.error_fail_sign_out_jobs);
                         }
                     }
                 },
@@ -380,11 +262,14 @@ public class OrderModel {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Logger.d(TAG, "postOrderCode response: \n" + response);
+                        Logger.d(TAG, "postOrderCode response(" + orderCode + "): \n" + response);
                         try {
+                            Logger.d(TAG, "enter try block");
                             if (response.getInt("status") == 0) {
                                 orderRequestCount--;
+                                Logger.d(TAG, "start processing");
                                 updateLogistics(response, index, currentInitCount);
+                                Logger.d(TAG, "end processing");
                             } else {
                                 Logger.d(TAG, "postOrderCode response: \n" + response);
                                 Toaster.showShort(context, R.string.error_order_code_invalid);
@@ -407,7 +292,7 @@ public class OrderModel {
                                 }
                             });
                         }
-                        Logger.e(TAG, error);
+                        Logger.e(TAG, "post order code fail: " + error);
                     }
                 }));
     }
@@ -451,6 +336,7 @@ public class OrderModel {
 
                         } catch (JSONException e) {
                             Logger.e(TAG, e.toString());
+                            Toaster.showShort(context, R.string.error_fail_post_delivered);
                         }
                     }
                 },
@@ -489,6 +375,8 @@ public class OrderModel {
 
             this.orderCode = orderCode;
             this.requestType = requestType;
+
+            Logger.d(TAG, "OrderItemInfoRequest");
         }
 
 

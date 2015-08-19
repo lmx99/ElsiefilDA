@@ -62,6 +62,7 @@ public class OrderDBUtils {
      * @param item A orderItem that holds data of a order to be filled
      */
     public static void fillOrderData(OrderItem item) {
+        Logger.d(TAG, "fillOrderData");
         ContentValues order = new ContentValues();
 
         order.put(OrdersDBHelper.COLUMN_ORDERS_ORDER_ID, item.orderID);
