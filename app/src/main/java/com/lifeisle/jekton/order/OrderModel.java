@@ -160,12 +160,6 @@ public class OrderModel {
             return;
         }
 
-        if (!orderCode.matches("\\d{13,18}")) {
-            Toaster.showShort(context, R.string.error_order_code_invalid);
-            return;
-        }
-
-
         switch (OrderDBUtils.getOrderExistsState(orderCode)) {
             case OrderDBUtils.ORDER_STATE_NOT_EXIST:
                 addOrderHelper(orderCode);
@@ -264,14 +258,13 @@ public class OrderModel {
                     public void onResponse(JSONObject response) {
                         Logger.d(TAG, "postOrderCode response(" + orderCode + "): \n" + response);
                         try {
-                            Logger.d(TAG, "enter try block");
-                            if (response.getInt("status") == 0) {
+                            int status = response.getInt("status");
+                            if (status == 0) {
                                 orderRequestCount--;
-                                Logger.d(TAG, "start processing");
                                 updateLogistics(response, index, currentInitCount);
-                                Logger.d(TAG, "end processing");
                             } else {
                                 Logger.d(TAG, "postOrderCode response: \n" + response);
+                                OrderDBUtils.deleteOrderCode(orderCode);
                                 Toaster.showShort(context, R.string.error_order_code_invalid);
                             }
                         } catch (JSONException e) {

@@ -45,7 +45,7 @@ public class OrderDBUtils {
 
 
     /**
-     * @param orderCode EAN-13 barcode of a order
+     * @param orderCode barcode of a order
      * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
     public static long insertOrderCode(String orderCode, int requestType) {
@@ -54,6 +54,11 @@ public class OrderDBUtils {
         values.put(OrdersDBHelper.COLUMN_ORDERS_REQUEST_TYPE, requestType);
 
         return ordersDB.insert(OrdersDBHelper.TABLE_ORDERS, null, values);
+    }
+
+    public static void deleteOrderCode(String orderCode) {
+        String where = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "=" + orderCode;
+        ordersDB.delete(OrdersDBHelper.TABLE_ORDERS, where, null);
     }
 
 
