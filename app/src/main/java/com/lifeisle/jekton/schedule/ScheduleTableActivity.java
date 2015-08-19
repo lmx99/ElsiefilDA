@@ -1,5 +1,6 @@
 package com.lifeisle.jekton.schedule;
 
+import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -73,7 +74,9 @@ public class ScheduleTableActivity extends AppCompatActivity
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
-
+        Intent intent = new Intent(this, ScheduleDetailActivity.class);
+        intent.putExtra(ScheduleDetailActivity.EXTRA_EVENT_ID, event.getId());
+        startActivity(intent);
     }
 
     @Override

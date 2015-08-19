@@ -493,6 +493,7 @@
 
     <!-- ScheduleDetailActivity -->
     <string name="title_activity_add_schedule">Add Schedule</string>
+    <string name="title_activity_schedule_detail">Schedule Detail</string>
     <string name="title_activity_alter_schedule">Alter Schedule</string>
 
     <string name="title_event_title">Title</string>
@@ -504,9 +505,14 @@
     <string name="repeat_opt_weekdays">Weekday</string>
 
     <string name="error_event_title_empty">The title couldn\'t be empty</string>
-    <string name="error_fail_to_add_event">Some error occurred and adding failed</string>
+    <string name="error_fail_to_add_event">Fail to add event</string>
+    <string name="error_fail_to_update_event">Fail to update event</string>
+    <string name="error_fail_to_delete_event">Fail to delete event</string>
+    <string name="error_event_not_found">Event not Found</string>
 
     <string name="success_add_event">Schedule added</string>
+    <string name="success_update_event">Schedule updated</string>
+    <string name="success_delete_event">Schedule deleted</string>
 
 
 

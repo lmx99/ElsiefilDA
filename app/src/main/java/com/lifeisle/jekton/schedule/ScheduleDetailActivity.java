@@ -2,6 +2,7 @@ package com.lifeisle.jekton.schedule;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,6 +22,8 @@ import com.lifeisle.jekton.util.Toaster;
 public class ScheduleDetailActivity extends AppCompatActivity implements View.OnClickListener,
         TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener,
         SettingRepeatDialogFragment.OnRepeatChangeListener, ScheduleDetailView {
+
+    public static final String EXTRA_EVENT_ID = "ScheduleDetailActivity.EXTRA_EVENT_ID";
 
     /**
      * Stored as a field to prevent being reclaimed
@@ -48,13 +51,22 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_schedule);
 
-        init();
+        initView();
 
-        ScheduleOperateModel scheduleOperateModel = new ScheduleOperateModel(this);
-        controller = new ScheduleInsertController(this, scheduleOperateModel);
+        long eventId = -1;
+        Intent intent = getIntent();
+        if (intent != null
+                && (eventId = intent.getLongExtra(EXTRA_EVENT_ID, eventId)) >= 0) {
+            ScheduleOperateModel scheduleOperateModel = new ScheduleOperateModel(this, eventId);
+            controller = new ScheduleUpdateController(this, scheduleOperateModel);
+        } else {
+            ScheduleOperateModel scheduleOperateModel = new ScheduleOperateModel(this);
+            controller = new ScheduleInsertController(this, scheduleOperateModel);
+        }
+
     }
 
-    private void init() {
+    private void initView() {
         mTitle = (EditText) findViewById(R.id.event_title);
 
         initTime();
@@ -245,5 +257,15 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
     @Override
     public void close() {
         finish();
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        // TODO: 8/19/2015
+    }
+
+    @Override
+    public void setActionBarTitle(int titleId) {
+        setTitle(titleId);
     }
 }

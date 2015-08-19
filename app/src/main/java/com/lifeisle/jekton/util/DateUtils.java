@@ -156,4 +156,15 @@ public class DateUtils {
 
         return new GregorianCalendar(year, month, day, hour, min).getTimeInMillis();
     }
+
+    public static String[] timeMillis2String(long millis) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTimeInMillis(millis);
+
+        String[] result = new String[2];
+        result[0] = formatDate(calendar);
+        result[1] = formatTime(calendar);
+
+        return result;
+    }
 }

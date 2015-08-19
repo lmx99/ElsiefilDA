@@ -94,6 +94,21 @@ public class ScheduleDBUtils {
     }
 
 
+    public static ScheduleEvent getScheduleEvent(long id) {
+        SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = db.query(EventEntry.TABLE_NAME,
+                EVENT_COLUMNS,
+                EventEntry._ID + "=" + id,
+                null,
+                null,
+                null,
+                null);
+        if (cursor.moveToFirst()) {
+            return ScheduleEvent.newInstance(cursor);
+        }
+        return null;
+    }
+
     public static long insertScheduleEvent(ScheduleEvent event) {
         ContentValues values = convertToValues(event);
 
@@ -116,5 +131,35 @@ public class ScheduleDBUtils {
         values.put(EventEntry.COL_EVENT_NEED_POST, event.needPost ? 1 : 0);
 
         return values;
+    }
+
+
+    public static int updateScheduleEvent(ScheduleEvent event) {
+        deleteAlarm(event.id);
+
+        ContentValues values = convertToValues(event);
+        SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
+        int count = db.update(EventEntry.TABLE_NAME, values, EventEntry._ID + "=" + event.id, null);
+        if (count <= 0)
+            Logger.e(LOG_TAG, "Fail to update event to database, event = " + event);
+
+        return count;
+    }
+
+
+    public static int deleteScheduleEvent(long id) {
+        deleteAlarm(id);
+
+        SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
+        int count = db.delete(EventEntry.TABLE_NAME, EventEntry._ID + "=" + id, null);
+        if (count <= 0) {
+            Logger.e(LOG_TAG, "Fail to delete event to database, eventId = " + id);
+        }
+
+        return count;
+    }
+
+    private static void deleteAlarm(long id) {
+        // TODO: 8/19/2015  delete old alarm
     }
 }
