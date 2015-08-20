@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * @author Jekton
  * @version 0.1 8/5/2015
  */
-public class DeliverStatItem {
+public class DeliverLogisticsStatItem {
 
     public String fee;
     public String num;
@@ -24,8 +24,8 @@ public class DeliverStatItem {
 
 
 
-    public static DeliverStatItem newInstance(JSONObject jsonObject) throws JSONException {
-        DeliverStatItem item = new DeliverStatItem();
+    public static DeliverLogisticsStatItem newInstance(JSONObject jsonObject) throws JSONException {
+        DeliverLogisticsStatItem item = new DeliverLogisticsStatItem();
 
         item.fee = jsonObject.getString(OWM_DELIVER_FEE);
         item.num = jsonObject.getString(OWM_DELIVER_NUM);

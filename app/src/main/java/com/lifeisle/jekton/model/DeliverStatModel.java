@@ -4,7 +4,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.DeliverStatItem;
+import com.lifeisle.jekton.bean.DeliverLogisticsStatItem;
+import com.lifeisle.jekton.bean.MotorLogisticsStatItem;
 import com.lifeisle.jekton.fragment.DeliverStatFragment;
 import com.lifeisle.jekton.util.DateUtils;
 import com.lifeisle.jekton.util.Logger;
@@ -30,13 +31,15 @@ public class DeliverStatModel {
     private static final String LOG_TAG = "DeliverStatModel";
 
     private DeliverStatFragment fragment;
-    private List<DeliverStatItem> deliverStatItems;
+    private int mType;
+    private List<Object> deliverLogisticsStatItems;
 
     private String[] interval;
 
-    public DeliverStatModel(DeliverStatFragment fragment) {
+    public DeliverStatModel(DeliverStatFragment fragment, int type) {
         this.fragment = fragment;
-        deliverStatItems = new ArrayList<>();
+        mType = type;
+        deliverLogisticsStatItems = new ArrayList<>();
 
         interval = DateUtils.getDefaultDeliverStatInterval();
         requestStat();
@@ -47,12 +50,12 @@ public class DeliverStatModel {
 
 
     public int getCount() {
-        return deliverStatItems.size();
+        return deliverLogisticsStatItems.size();
     }
 
 
-    public DeliverStatItem getItem(int position) {
-        return deliverStatItems.get(position);
+    public Object getItem(int position) {
+        return deliverLogisticsStatItems.get(position);
     }
 
 
@@ -75,11 +78,8 @@ public class DeliverStatModel {
                         try {
                             if (jsonObject.getInt("status") == 0) {
                                 JSONArray itemArray = jsonObject.getJSONArray("st_data");
-                                deliverStatItems.clear();
-                                for (int i = 0; i < itemArray.length(); ++i) {
-                                    JSONObject item = itemArray.getJSONObject(i);
-                                    deliverStatItems.add(DeliverStatItem.newInstance(item));
-                                }
+                                deliverLogisticsStatItems.clear();
+                                readResponse(itemArray);
                                 fragment.notifyDataSetChanged();
                                 return;
                             }
@@ -98,8 +98,23 @@ public class DeliverStatModel {
                 }));
     }
 
+    private void readResponse(JSONArray array) throws JSONException {
+        switch (mType) {
+            case DeliverStatFragment.STAT_TYPE_DELIVER:
+                for (int i = 0; i < array.length(); ++i) {
+                    JSONObject item = array.getJSONObject(i);
+                    deliverLogisticsStatItems.add(DeliverLogisticsStatItem.newInstance(item));
+                }
+                break;
+            case DeliverStatFragment.STAT_TYPE_MOTOR:
+                for (int i = 0; i < array.length(); ++i) {
+                    JSONObject item = array.getJSONObject(i);
+                    deliverLogisticsStatItems.add(MotorLogisticsStatItem.newInstance(item));
+                }
+                break;
+        }
 
-
+    }
 
 
 
@@ -124,7 +139,15 @@ public class DeliverStatModel {
             params.put("end_time", endTime);
             params.put("sys", "fn");
             params.put("ctrl", "fn_data");
-            params.put("action", "edate_data");
+
+            switch (mType) {
+                case DeliverStatFragment.STAT_TYPE_DELIVER:
+                    params.put("action", "edate_data");
+                    break;
+                case DeliverStatFragment.STAT_TYPE_MOTOR:
+                    params.put("action", "motor_date_data");
+                    break;
+            }
         }
     }
 }

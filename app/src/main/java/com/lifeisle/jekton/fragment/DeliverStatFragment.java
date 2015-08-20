@@ -10,12 +10,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.activity.DeliverStatOptionActivity;
 import com.lifeisle.jekton.model.DeliverStatModel;
-import com.lifeisle.jekton.ui.adapter.DeliverStatListAdapter;
+import com.lifeisle.jekton.ui.adapter.DeliverLogisticsStatListAdapter;
+import com.lifeisle.jekton.ui.adapter.MotorLogisticsStatListAdapter;
 import com.lifeisle.jekton.util.Logger;
 
 import java.util.Arrays;
@@ -27,11 +29,15 @@ public class DeliverStatFragment extends Fragment {
 
     public static final int REQUEST_CODE_SET_INTERVAL = 1;
     public static final String EXTRA_STAT_INTERVAL = "DeliverStatFragment.EXTRA_STAT_INTERVAL";
+    public static final String EXTRA_STAT_TYPE = "DeliverStatFragment.EXTRA_STAT_TYPE";
+
+    public static final int STAT_TYPE_DELIVER = 0;
+    public static final int STAT_TYPE_MOTOR = 1;
 
     private static final String LOG_TAG = "DeliverStatFragment";
 
     private DeliverStatModel model;
-    private DeliverStatListAdapter adapter;
+    private BaseAdapter adapter;
 
 
     @Override
@@ -43,11 +49,25 @@ public class DeliverStatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_deliver_stat, container, false);
+        Intent intent = getActivity().getIntent();
+        int type = intent.getIntExtra(EXTRA_STAT_TYPE, -1);
 
+        model = new DeliverStatModel(this, type);
+
+        int resId = 0;
+        switch (type) {
+            case STAT_TYPE_DELIVER:
+                resId = R.layout.fragment_deliver_logistics_stat;
+                adapter = new DeliverLogisticsStatListAdapter(getActivity(), model);
+                break;
+            case STAT_TYPE_MOTOR:
+                resId = R.layout.fragment_motor_logistics_stat;
+                adapter = new MotorLogisticsStatListAdapter(getActivity(), model);
+                break;
+        }
+
+        View view = inflater.inflate(resId, container, false);
         ListView listView = (ListView) view.findViewById(R.id.deliver_stat_list);
-        model = new DeliverStatModel(this);
-        adapter = new DeliverStatListAdapter(getActivity(), model);
         listView.setAdapter(adapter);
 
         return view;

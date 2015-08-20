@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.DeliverStatItem;
+import com.lifeisle.jekton.bean.DeliverLogisticsStatItem;
 import com.lifeisle.jekton.model.DeliverStatModel;
 import com.lifeisle.jekton.util.Logger;
 
@@ -16,14 +16,14 @@ import com.lifeisle.jekton.util.Logger;
  * @author Jekton
  * @version 0.1 8/5/2015
  */
-public class DeliverStatListAdapter extends BaseAdapter {
+public class DeliverLogisticsStatListAdapter extends BaseAdapter {
 
-    private static final String LOG_TAG = "DeliverStatListAdapter";
+    private static final String LOG_TAG = "DeliverLogisticsStatListAdapter";
 
     private Context context;
     private DeliverStatModel statModel;
 
-    public DeliverStatListAdapter(Context context, DeliverStatModel statModel) {
+    public DeliverLogisticsStatListAdapter(Context context, DeliverStatModel statModel) {
         this.context = context;
         this.statModel = statModel;
     }
@@ -36,8 +36,8 @@ public class DeliverStatListAdapter extends BaseAdapter {
     }
 
     @Override
-    public DeliverStatItem getItem(int position) {
-        return statModel.getItem(position);
+    public DeliverLogisticsStatItem getItem(int position) {
+        return (DeliverLogisticsStatItem) statModel.getItem(position);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class DeliverStatListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.widget_deliver_stat_item,
+            convertView = LayoutInflater.from(context).inflate(R.layout.widget_deliver_logistics_stat_item,
                     parent, false);
 
             ViewHolder holder = new ViewHolder();
@@ -61,7 +61,7 @@ public class DeliverStatListAdapter extends BaseAdapter {
             convertView.setTag(holder);
         }
 
-        DeliverStatItem item = getItem(position);
+        DeliverLogisticsStatItem item = getItem(position);
         ViewHolder holder = (ViewHolder) convertView.getTag();
 
         holder.feeTextView.setText(item.fee);

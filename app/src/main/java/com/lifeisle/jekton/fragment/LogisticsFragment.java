@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.activity.DeliverStatActivity;
+import com.lifeisle.jekton.activity.DeliverStatCategoryActivity;
 import com.lifeisle.jekton.activity.JobsActivity;
 import com.lifeisle.jekton.activity.MyPositionActivity;
 import com.lifeisle.jekton.activity.OrderSearchActivity;
@@ -82,7 +82,7 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
                 break;
             }
             case R.id.deliver_stat: {
-                startActivity(DeliverStatActivity.class);
+                startActivity(DeliverStatCategoryActivity.class);
                 break;
             }
             case R.id.order_search: {

@@ -536,13 +536,22 @@
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.lifeisle.jekton.activity.DeliverStatActivity"
-            android:label="@string/title_activity_deliver_stat"
+            android:name="com.lifeisle.jekton.activity.DeliverStatCategoryActivity"
+            android:label="@string/title_activity_deliver_stat_category"
             android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
             android:theme="@style/MyTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.lifeisle.jekton.activity.DeliverStatActivity"
+            android:label="@string/title_activity_deliver_stat"
+            android:parentActivityName="com.lifeisle.jekton.activity.DeliverStatCategoryActivity"
+            android:theme="@style/MyTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lifeisle.jekton.activity.DeliverStatCategoryActivity" />
         </activity>
         <activity
             android:name="com.lifeisle.jekton.activity.DeliverStatOptionActivity"
