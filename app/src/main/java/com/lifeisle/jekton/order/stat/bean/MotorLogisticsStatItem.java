@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.bean;
+package com.lifeisle.jekton.order.stat.bean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
