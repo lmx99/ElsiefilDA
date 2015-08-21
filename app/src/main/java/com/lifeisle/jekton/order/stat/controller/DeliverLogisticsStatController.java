@@ -6,7 +6,7 @@ import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.stat.DeliverStatFragment;
 import com.lifeisle.jekton.order.stat.DeliverStatModel;
 import com.lifeisle.jekton.order.stat.adapter.DeliverLogisticsStatListAdapter;
-import com.lifeisle.jekton.order.stat.bean.DeliverLogisticsStatFactory;
+import com.lifeisle.jekton.order.stat.factory.DeliverLogisticsStatFactory;
 
 /**
  * @author Jekton

@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.stat.controller.DeliverLogisticsStatController;
+import com.lifeisle.jekton.order.stat.controller.GangerLogisticsStatController;
 import com.lifeisle.jekton.order.stat.controller.MotorLogisticsStatController;
 import com.lifeisle.jekton.order.stat.controller.StatController;
 import com.lifeisle.jekton.util.Logger;
@@ -32,6 +33,7 @@ public class DeliverStatFragment extends Fragment {
 
     public static final int STAT_TYPE_DELIVER = 0;
     public static final int STAT_TYPE_MOTOR = 1;
+    public static final int STAT_TYPE_GANGER = 2;
 
     private static final String LOG_TAG = "DeliverStatFragment";
 
@@ -53,11 +55,14 @@ public class DeliverStatFragment extends Fragment {
 
         StatController controller;
         switch (type) {
-            case DeliverStatFragment.STAT_TYPE_DELIVER:
+            case STAT_TYPE_DELIVER:
                 controller = new DeliverLogisticsStatController(this);
                 break;
-            case DeliverStatFragment.STAT_TYPE_MOTOR:
+            case STAT_TYPE_MOTOR:
                 controller = new MotorLogisticsStatController(this);
+                break;
+            case STAT_TYPE_GANGER:
+                controller = new GangerLogisticsStatController(this);
                 break;
             default:
                 throw new IllegalArgumentException("unknown type " + type);

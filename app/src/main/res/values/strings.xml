@@ -474,6 +474,7 @@
     <string name="title_activity_deliver_stat_category">DeliverStat</string>
     <string name="cat_deliver_logistics_stat">Deliver Stat</string>
     <string name="cat_motor_logistics_stat">Motor Stat</string>
+    <string name="cat_ganger_logistics_stat">Ganger Stat</string>
 
     <!-- DeliverStatActivity-->
     <string name="title_activity_deliver_stat">DeliverStat</string>

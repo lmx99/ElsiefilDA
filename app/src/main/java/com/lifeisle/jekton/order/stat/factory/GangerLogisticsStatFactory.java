@@ -1,4 +1,6 @@
-package com.lifeisle.jekton.order.stat.bean;
+package com.lifeisle.jekton.order.stat.factory;
+
+import com.lifeisle.jekton.order.stat.bean.GangerLogisticsStatItem;
 
 import org.json.JSONException;
 import org.json.JSONObject;

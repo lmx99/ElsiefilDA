@@ -20,20 +20,22 @@ public class DeliverStatCategoryActivity extends AppCompatActivity implements Vi
 
         findViewById(R.id.deliver_stat).setOnClickListener(this);
         findViewById(R.id.motor_stat).setOnClickListener(this);
+        findViewById(R.id.ganger_stat).setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.deliver_stat: {
+            case R.id.deliver_stat:
                 startActivity(DeliverStatFragment.STAT_TYPE_DELIVER);
                 break;
-            }
-            case R.id.motor_stat: {
+            case R.id.motor_stat:
                 startActivity(DeliverStatFragment.STAT_TYPE_MOTOR);
                 break;
-            }
+            case R.id.ganger_stat:
+                startActivity(DeliverStatFragment.STAT_TYPE_GANGER);
+                break;
             default:
                 break;
         }
