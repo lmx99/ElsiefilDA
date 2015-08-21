@@ -503,7 +503,7 @@
 
         <activity
             android:name="com.lifeisle.jekton.activity.MyBrowserActivity"
-            android:theme="@style/MyTheme" />
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
         <activity
             android:name="com.lifeisle.jekton.activity.JobsActivity"
             android:label="@string/title_activity_jobs"
