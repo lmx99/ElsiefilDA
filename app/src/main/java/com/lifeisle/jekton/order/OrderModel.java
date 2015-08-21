@@ -196,15 +196,25 @@ public class OrderModel {
                             public void onResponse(JSONObject response) {
                                 Logger.d(TAG, "signInAJob() response: " + response);
                                 try {
-                                    if (response.getInt("status") == 0) {
-                                        jcat_id = response.getInt("jcat_id");
-                                        Preferences.setJCatID(jcat_id);
-                                        Toaster.showShort(context, R.string.success_sign_in_jobs);
-                                    } else {
-                                        Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
+                                    int status = response.getInt("status");
+                                    switch (status) {
+                                        case 0:
+                                            jcat_id = response.getInt("jcat_id");
+                                            Preferences.setJCatID(jcat_id);
+                                            Toaster.showShort(context, R.string.success_sign_in_jobs);
+                                            break;
+                                        case 1:
+                                            Toaster.showShort(context, R.string.error_fail_sign_in_jobs_1);
+                                            break;
+                                        case 2:
+                                            Toaster.showShort(context, R.string.error_fail_sign_in_jobs_2);
+                                            break;
+                                        default:
+                                            Toaster.showShort(context, R.string.error_fail_sign_in_jobs_1);
+                                            break;
                                     }
                                 } catch (JSONException e) {
-                                    Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
+                                    Toaster.showShort(context, R.string.error_fail_sign_in_jobs_1);
                                     Logger.e(TAG, "Sign In Jobs response: " + response, e);
                                 }
                             }
@@ -213,7 +223,7 @@ public class OrderModel {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Logger.e(TAG, error);
-                                Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
+                                Toaster.showShort(context, R.string.error_fail_sign_in_jobs_1);
                             }
                         }
                 );

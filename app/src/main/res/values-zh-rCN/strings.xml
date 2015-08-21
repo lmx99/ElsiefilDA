@@ -348,7 +348,7 @@
     <string name="btn_details">详情</string>
     <string name="btn_ok">确定</string>
     <string name="error_fail_post_delivered">订单送达消息发送失败</string>
-    <string name="error_fail_sign_in_jobs">签到失败</string>
+    <string name="error_fail_sign_in_jobs_1">签到失败</string>
     <string name="error_no_goods_item_selected">没有选中商品</string>
     <string name="error_not_sign_in_job">未签到</string>
     <string name="error_order_code_invalid">条形码无效</string>

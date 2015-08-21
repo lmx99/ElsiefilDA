@@ -361,7 +361,8 @@
     <string name="error_fail_post_order_code">Fail to post data to the server. Please check your network connection </string>
     <string name="error_fail_to_insert_goods">Fail to insert goods item to the database. Please check your storage.</string>
     <string name="error_fail_to_update_order">Fail to update order item of the database. Please check your storage or  permissions.</string>
-    <string name="error_fail_sign_in_jobs">Fail to sign in</string>
+    <string name="error_fail_sign_in_jobs_1">Fail to sign in</string>
+    <string name="error_fail_sign_in_jobs_2">Could not repeatedly sign in or without a job now</string>
     <string name="error_fail_sign_out_jobs">Fail to sign out</string>
     <string name="error_fail_enter_jobs">Fail to enter job</string>
     <string name="error_fail_post_delivered">Post delivered data failed</string>
