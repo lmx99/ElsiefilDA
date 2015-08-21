@@ -5,6 +5,15 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:gravity="center"
+        android:background="@color/main_color"
+        android:text="@string/title_fragment_logistics"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_action_bar"/>
+
+    <TextView
         android:id="@+id/schedule"
         android:layout_width="match_parent"
         android:layout_height="@dimen/fragment_logistics_btn_height"
