@@ -11,6 +11,7 @@ public interface StatController {
 
     String ACTION_STAT_TYPE_DELIVER = "edate_data";
     String ACTION_STAT_TYPE_MOTOR = "motor_date_data";
+    String ACTION_STAT_TYPE_GANGER = "gang_date_data";
 
     int getResId();
 
