@@ -365,6 +365,11 @@
     <string name="error_fail_sign_in_jobs_2">Could not repeatedly sign in or without a job now</string>
     <string name="error_fail_sign_out_jobs">Fail to sign out</string>
     <string name="error_fail_enter_jobs">Fail to enter job</string>
+    <string name="error_fail_enter_jobs_1" translatable="false">没有资格</string>
+    <string name="error_fail_enter_jobs_2" translatable="false">同一时段工作已有工作</string>
+    <string name="error_fail_enter_jobs_3" translatable="false">重复入职</string>
+    <string name="error_fail_enter_jobs_5" translatable="false">从支援换到领班失败</string>
+    <string name="error_fail_enter_jobs_6" translatable="false">从自由人进入班次失败</string>
     <string name="error_fail_post_delivered">Post delivered data failed</string>
     <string name="error_qr_code_invalid">Invalid QR Code</string>
 

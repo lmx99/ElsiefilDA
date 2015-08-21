@@ -270,10 +270,29 @@ public class OrderModel {
                             public void onResponse(JSONObject response) {
 //                                Logger.d(TAG, "enterJob() response: " + response);
                                 try {
-                                    if (response.getInt("status") == 0) {
-                                        Toaster.showShort(context, R.string.success_enter_jobs);
-                                    } else {
-                                        Toaster.showShort(context, R.string.error_fail_enter_jobs);
+                                    int status = response.getInt("status");
+                                    switch (status) {
+                                        case 0:
+                                            Toaster.showShort(context, R.string.success_enter_jobs);
+                                            break;
+                                        case 1:
+                                            Toaster.showShort(context, R.string.error_fail_enter_jobs_1);
+                                            break;
+                                        case 2:
+                                            Toaster.showShort(context, R.string.error_fail_enter_jobs_2);
+                                            break;
+                                        case 3:
+                                            Toaster.showShort(context, R.string.error_fail_enter_jobs_3);
+                                            break;
+                                        case 5:     // without 4
+                                            Toaster.showShort(context, R.string.error_fail_enter_jobs_5);
+                                            break;
+                                        case 6:
+                                            Toaster.showShort(context, R.string.error_fail_enter_jobs_6);
+                                            break;
+                                        default:
+                                            Toaster.showShort(context, R.string.error_fail_enter_jobs);
+                                            break;
                                     }
                                 } catch (JSONException e) {
                                     Logger.e(TAG, e.toString(), e);
