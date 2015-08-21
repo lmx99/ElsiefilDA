@@ -1,13 +1,16 @@
 package com.lifeisle.jekton.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.lifeisle.android.R;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.Preferences;
 
@@ -20,7 +23,7 @@ import java.util.Map;
  * @author Jekton
  * @version 0.01 8/1/2015
  */
-public class MyBrowserActivity extends AppCompatActivity {
+public class MyBrowserActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = "MyBrowserActivity";
 
@@ -31,13 +34,17 @@ public class MyBrowserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        WebView webView = new WebView(this);
-        setContentView(webView);
+        setContentView(R.layout.activity_my_browser);
+        findViewById(R.id.close_button).setOnClickListener(this);
+
+        WebView webView = (WebView) findViewById(R.id.web_view);
 
         setProgressBarVisibility(true);
         setProgressBarIndeterminateVisibility(true);
 
-        webView.getSettings().setJavaScriptEnabled(true);
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setBuiltInZoomControls(false);
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -71,5 +78,10 @@ public class MyBrowserActivity extends AppCompatActivity {
 //        webView.setWebViewClient(new WebViewClient() {
 //
 //        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        finish();
     }
 }

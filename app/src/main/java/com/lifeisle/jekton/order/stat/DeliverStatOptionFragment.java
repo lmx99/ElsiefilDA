@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.fragment;
+package com.lifeisle.jekton.order.stat;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -15,7 +15,6 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.activity.DeliverStatActivity;
 import com.lifeisle.jekton.util.DateUtils;
 import com.lifeisle.jekton.util.Toaster;
 

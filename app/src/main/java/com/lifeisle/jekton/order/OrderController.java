@@ -27,8 +27,9 @@ public class OrderController {
 
     public static final int OPTION_SORT_BY_CREATE_TIME = 0;
 
-    public static final int TYPE_QR_CODE_SING_IN = 0;
-    public static final int TYPE_QR_CODE_SING_OUT = 1;
+    private static final int TYPE_QR_CODE_SING_IN = 0;
+    private static final int TYPE_QR_CODE_SING_OUT = 1;
+    private static final int TYPE_QR_CODE_ENTER_JOB = 2;
 
 
     private static final String LOG_TAG = "OrderController";
@@ -92,25 +93,24 @@ public class OrderController {
             try {
                 JSONObject jsonObject = new JSONObject(data);
                 switch (jsonObject.getInt("type")) {
-                    case TYPE_QR_CODE_SING_IN: {
-                        orderModel.signInAJob(data);
+                    case TYPE_QR_CODE_SING_IN:
+                        orderModel.signInAJob(jsonObject);
                         break;
-                    }
-                    case TYPE_QR_CODE_SING_OUT: {
-                        orderModel.signOutJob(data);
+                    case TYPE_QR_CODE_SING_OUT:
+                        orderModel.signOutJob(jsonObject);
                         break;
-                    }
-                    default: {
+                    case TYPE_QR_CODE_ENTER_JOB:
+                        orderModel.enterJob(jsonObject);
+                        break;
+                    default:
                         mOrderView.showErrMsg(R.string.error_qr_code_invalid);
                         Logger.e(LOG_TAG, "unexpected qr code, data = " + data);
                         break;
-                    }
                 }
             } catch (JSONException e) {
                 mOrderView.showErrMsg(R.string.error_qr_code_invalid);
                 Logger.e(LOG_TAG, "unexpected qr code, data = " + data, e);
             }
-
         } else {
             orderModel.addOrder(data);
         }
