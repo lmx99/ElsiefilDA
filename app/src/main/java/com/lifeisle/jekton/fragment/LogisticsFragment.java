@@ -24,11 +24,6 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
 
     private static final String TAG = "LogisticsFragment";
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -40,8 +35,8 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_logistics, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_logistics, container, false);
+
     }
     private void init() {
         getView().findViewById(R.id.schedule).setOnClickListener(this);

@@ -16,6 +16,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -67,6 +68,7 @@ import java.util.Map;
 @SuppressLint("SdCardPath")
 public class Activity_boshu_EditBaseMessage extends Activity implements
         OnClickListener, OnItemClickListener {
+    private String TAG="Activity_boshu_EditBaseMessage";
     private ScrollView sl;
     private Button bt_boshu_finish;
     private Button bt_boshu_indent;
@@ -101,7 +103,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     private FileCacheUtils filcaCacheUtils = null;
     private ImageDowloader mImageDowloader;
     private AlertDialog alertHDialog;
-
+    private ProgressDialog dialog=null;
     private TextView tv_boshu_editname;
     private TextView tv_boshu_editsex;
     private TextView tv_boshu_editage;
@@ -128,7 +130,6 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     private LinearLayout ll_boshu_schoolLayout;
     private LinearLayout ll_boshu_etranceyearLayout;
     private LinearLayout ll_boshu_jobLayout;
-
     private EditText nickNamEditText;
     private EditText schoolEditText;
     private EditText jobEditText;
@@ -140,6 +141,8 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     private EditText intentEditText;
     private EditText resumEditText;
     private EditText idCardEditText;
+    private ProgressDialog mProngressDialog=null;
+    private  ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -273,6 +276,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     }
 
     public void init() {
+
         myphoneEditText = (EditText) this.findViewById(R.id.et_boshu_phone);
         myphoneEditText.setVisibility(View.VISIBLE);
         friendPhoneEditText = (EditText) this
@@ -402,11 +406,10 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
         }
         if (resultCode == 200 && requestCode == 199) {
             Bitmap bitmap = null;
-            final ProgressDialog dialog = new ProgressDialog(this);
             sl.fullScroll(ScrollView.FOCUS_DOWN);
             try {
                 File file1 = new File(pathImage);
-                byte[] bis = data.getByteArrayExtra("bitmap");
+                final byte[] bis = data.getByteArrayExtra("bitmap");
                 final Bitmap bt = BitmapUtils.decodeSampleBitmapFromByteArray(
                         bis, 40, 40);
                 AsyncHttpClient client = new AsyncHttpClient();
@@ -414,23 +417,57 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                 RequestParams params = new RequestParams();
                 params.put("sys", "user");
                 params.put("ctrl", "user");
+
                 if (FLAG == 2) {
-                    params.put("id_back_image", file1);
+                    params.put("id_back_image",file1);
                 }
                 if (FLAG == 1) {
                     params.put("id_image", file1);
+
                 }
                 if (FLAG == 3) {
                     params.put("prv_image", file1);
+
                 }
+                final int[] progressFlag = {0};
                 params.put("action", "mod_all");
                 client.post(Model.PathLoad, params,
                         new AsyncHttpResponseHandler() {
+                            @Override
+                            public void onProgress(int bytesWritten, int totalSize) {
+                                super.onProgress(bytesWritten, totalSize);
+                                int progress=0;
+                                if(progressFlag[0]!=100) {
+                                    if (bytesWritten != totalSize && bytesWritten != 0) {
+                                        progress = (int) (bytesWritten / (float) totalSize * 100);
+                                        mProngressDialog.setProgress(progress);
+                                        Log.e(TAG, bytesWritten + "/" + totalSize + progress);
+                                    } else {
+                                        progress = 100;
+                                        progressFlag[0] = 100;
+                                        mProngressDialog.setProgress(progress);
+
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onStart() {
+                                super.onStart();
+                                mProngressDialog=new ProgressDialog(Activity_boshu_EditBaseMessage.this);
+                                mProngressDialog.setMessage("正在上传图片...");
+                                mProngressDialog.setIndeterminate(false);
+                                mProngressDialog.setMax(100);
+                                mProngressDialog.setProgress(0);
+                                mProngressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                                mProngressDialog.setCancelable(false);
+                                mProngressDialog.show();
+                            }
 
                             @Override
                             public void onSuccess(int arg0, Header[] arg1,
                                                   byte[] arg2) {
                                 // TODO Auto-generated method stub
+                                mProngressDialog.dismiss();
                                 UserDao ud = new UserDao(
                                         Activity_boshu_EditBaseMessage.this);
                                 User user = ud.find(Preferences.getUserName());
@@ -439,12 +476,25 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                 try {
                                     JSONObject obj = new JSONObject(new String(
                                             arg2));
+                                    // {"account":{"status":"2"},"basic":{"status":"1"},"resume":{"err":"不允许的文件后缀","status":"3"},"recruit":{"status":"1"},"status":"0"}
+                                    String erroString=obj.getJSONObject("resume").getString("status");
+                                    if(erroString.equals("3")){
+                                        Toast.makeText(Activity_boshu_EditBaseMessage.this,obj.getJSONObject("resume").getString("err"),0).show();
+                                    }
                                     if (FLAG == 2) {
                                         String afterImage = null;
                                         String aImage = obj.getJSONObject(
                                                 "user_info").getString(
                                                 "id_back_image");
-                                        setImagUrl(ud,user,afterImage);
+                                        System.out.println("身份证照背照："+aImage);
+                                        if(user!=null){
+                                            user.setAferIdCard(aImage);
+                                            ud.update(user);
+                                        }else{
+                                            user=new User();
+                                            user.setAferIdCard(afterImage);
+                                            ud.addUser(user);
+                                        }
                                         img_boshu_afterhead.setImageBitmap(bt);
                                         if (user != null) {
                                             user.setAferIdCard(aImage);
@@ -472,7 +522,15 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                         String bImage = obj.getJSONObject(
                                                 "user_info").getString(
                                                 "id_image");
-                                        setImagUrl(ud,user,bImage);
+                                        System.out.println("身份证照前照："+bImage);
+                                        if(user!=null){
+                                            user.setBeforeIdCard(bImage);
+                                            ud.update(user);
+                                        }else{
+                                            user=new User();
+                                            user.setBeforeIdCard(bImage);
+                                            ud.addUser(user);
+                                        }
                                         String beforeImage = null;
                                         img_boshu_beforehead.setImageBitmap(bt);
                                         if (user != null) {
@@ -493,7 +551,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                             it.putExtra("bitmap", bitmap);
                                             Activity_boshu_EditBaseMessage.this
                                                     .sendBroadcast(it);
-                                            Activity_boshu_EditBaseMessage.this.setToast(Activity_boshu_EditBaseMessage.this,"身份证正面照上传成功！");
+                                            Activity_boshu_EditBaseMessage.this.setToast(Activity_boshu_EditBaseMessage.this, "身份证正面照上传成功！");
                                         }
                                     }
                                     if (FLAG == 3) {
@@ -503,7 +561,14 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                                 "prv_image");
                                         img_boshu_studentCard
                                                 .setImageBitmap(bt);
-                                        setImagUrl(ud,user,sImage);
+                                        if(user!=null){
+                                            user.setStudentImage(sImage);
+                                            ud.update(user);
+                                        }else{
+                                            user=new User();
+                                            user.setStudentImage(sImage);
+                                            ud.addUser(user);
+                                        }
                                         if (user != null) {
 
                                             studentImage = Model.PitureLoad
@@ -522,16 +587,18 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                             it.putExtra("bitmap", bitmap);
                                             Activity_boshu_EditBaseMessage.this
                                                     .sendBroadcast(it);
-                                            Activity_boshu_EditBaseMessage.this.setToast(Activity_boshu_EditBaseMessage.this,"学生证照上传成功！");
+                                            Activity_boshu_EditBaseMessage.this.setToast(Activity_boshu_EditBaseMessage.this, "学生证照上传成功！");
                                         }
                                     }
 
-                                    dialog.dismiss();
 
                                     String str = new String(arg2);
                                 } catch (JSONException e) {
                                     // TODO Auto-generated catch block
+                                    Log.e(TAG,e.toString());
                                     e.printStackTrace();
+                                    Toast.makeText(Activity_boshu_EditBaseMessage.this, "服务器出错了，图片上传失败！", Toast.LENGTH_SHORT);
+                                    mProngressDialog.dismiss();
                                 }
                             }
 
@@ -539,7 +606,13 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                             public void onFailure(int arg0, Header[] arg1,
                                                   byte[] arg2, Throwable arg3) {
                                 // TODO Auto-generated method stub
-                                String str = new String(arg2);
+                                if(arg2!=null) {
+                                    String str = new String(arg2);
+                                    System.out.println(str);
+                                    Log.e(TAG, "图片上传失败，失败原因：" + str);
+                                }
+                                mProngressDialog.dismiss();
+                                Toast.makeText(Activity_boshu_EditBaseMessage.this,"图片上传失败!",Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -553,7 +626,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
         }
 
     }
-    public void setImagUrl(UserDao ud,User user,String imgUrl){
+    /*public void setImagUrl(UserDao ud,User user,String imgUrl){
         if (user != null) {
             user.setStudentImage(imgUrl);
             ud.update(user);
@@ -562,7 +635,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
             user.setStudentImage(imgUrl);
             ud.addUser(user);
         }
-    }
+    }*/
     //提示
     public void setToast(Context context,String text){
         Toast.makeText(
@@ -585,7 +658,6 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                 setMoreDialog();
                 FLAG = 3;
                 break;
-
             case R.id.bt_boshu_finish:
                 str_boshu_name = nickNamEditText.getText().toString();
                 str_boshu_realName = realNamEditText.getText().toString();
@@ -598,10 +670,8 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                 str_boshu_jobWant = intentEditText.getText().toString();
                 str_boshu_resume = resumEditText.getText().toString();
                 str_boshu_IdCard = idCardEditText.getText().toString();
-
                 postMessage1();
                 break;
-            // �Ա�
             case R.id.ll_boshu_sex:
                 DisplayMetrics dm = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -757,19 +827,34 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     public void onBackPressed() {
         // TODO Auto-generated method stub
         super.onBackPressed();
-        finish();
+        if(EDITFLAG==2){
+            finish();
+        }else {
+            Intent intent = new Intent(Activity_boshu_EditBaseMessage.this,
+                    MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     public void back(View view) {
-        finish();
+        if(EDITFLAG==2){
+            finish();
+        }else {
+            Intent intent = new Intent(Activity_boshu_EditBaseMessage.this,
+                    MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
-
-    public void postMessage() {
-
-    }
-
     //
     public void postMessage1() {
+        pd = new ProgressDialog(this);
+        pd.setMessage("加载中~");
+        pd.setCanceledOnTouchOutside(false);
+        pd.setCancelable(false);
+        pd.show();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         requestQueue.start();
@@ -778,21 +863,22 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                 Model.PathLoad, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+
                 setJsonDb(response);
                 if (Activity_boshu_Message.context != null) {
                     Activity_boshu_Message.context.finish();
                 }
-                System.out.println(response + "----------");
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley error: " + error);
+                Toast.makeText(Activity_boshu_EditBaseMessage.this,"网络出错",0).show();
+                pd.dismiss();
+
 
             }
         }) {
-
             @Override
             protected void setParams(Map<String, String> params) {
                 if (str_boshu_sex != null) {
@@ -835,8 +921,6 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
             String resumeString = obj.getJSONObject("resume").getString("status");
             String basicString = obj.getJSONObject("recruit").getString("status");
             if (accountString.equals("0") || recruitString.equals("0") || resumeString.equals("0") || basicString.equals("0")) {
-
-
                 JSONObject user_obj = obj.getJSONObject("user_info");
 
                 String sex = user_obj.getString("sex");
@@ -885,10 +969,12 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                         + user1.getJobWant() + user1.getqQ());
 
             }
+            pd.dismiss();
             FinishBack();
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             // e.printStackTrace();
+            Toast.makeText(this,"网络出错",0).show();
         }
     }
 
@@ -954,14 +1040,14 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
         if (bitmap != null) {
             img.setImageBitmap(bitmap);
         } else {
-            img.setImageResource(R.drawable.delete3);
+            img.setImageResource(R.drawable.default_add);
             mImageDowloader.downloadImage(40, 40, url,
                     new OnImageDownloadListener() {
                         @Override
                         public void onImageDownload(String url, Bitmap bitmap) {
                             // TODO Auto-generated method stub
                             if (bitmap == null) {
-                                img.setImageResource(R.drawable.delete3);
+                                img.setImageResource(R.drawable.default_add);
                             } else {
                                 img.setImageBitmap(bitmap);
                             }
@@ -984,5 +1070,6 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
         }
         this.finish();
     }
+
 
 }

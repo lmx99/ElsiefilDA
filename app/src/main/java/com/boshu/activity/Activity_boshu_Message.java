@@ -89,10 +89,11 @@ public class Activity_boshu_Message extends Activity implements
         this.RegisterBroadCast(broadCast);
         context=this;
 
+
+
     }
 
     private void init() {
-      
         tv_boshu_BaseMessage = (TextView) this
                 .findViewById(R.id.tv_boshu_BaseMssageEit);
         rl_boshu_head = (RelativeLayout) this.findViewById(R.id.rl_boshu_head);
@@ -162,6 +163,7 @@ public class Activity_boshu_Message extends Activity implements
             String url = Model.PitureLoad + user.getHeadImage();
             String beforeUrl = Model.PitureLoad + user.getBeforeIdCard();
             String afterUrl = Model.PitureLoad + user.getAferIdCard();
+            System.out.println(beforeUrl+"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
             System.out.println(afterUrl+"&&&&&&&&&&&&&&&");
             String studentUrl=Model.PitureLoad+user.getStudentImage();
             System.out.println(studentUrl+"(((((((((((((((((((((((");
@@ -178,7 +180,6 @@ public class Activity_boshu_Message extends Activity implements
         // TODO Auto-generated method stub
         super.onResume();
         if (!TextUtils.isEmpty(pathImage)) {
-            System.out.println(pathImage);
         }
     }
 
@@ -249,10 +250,10 @@ public class Activity_boshu_Message extends Activity implements
                                     byte[] arg2) {
                                 // TODO Auto-generated method stub
                                 //通知头像更新
-                                Intent it=new Intent("lifeisland.boshu.headimage");
+                               /* Intent it=new Intent("lifeisland.boshu.headimage");
                                 byte[] bit=com.boshu.utils.BitmapUtils.getBitmapByte(bitmap);
                                 it.putExtra("bitmap",bit);
-                                Activity_boshu_Message.this.sendBroadcast(it);
+                                Activity_boshu_Message.this.sendBroadcast(it);*/
                                 imageview.setImageBitmap(bitmap);
                                 dialog.dismiss();
                                 Toast.makeText(Activity_boshu_Message.this,
@@ -457,12 +458,13 @@ public class Activity_boshu_Message extends Activity implements
 
     public void setNetBitmap(final ImageView img, String url,
             ImageDowloader mImageDowloader) {
+
         Bitmap bitmap = mImageDowloader.showCacheBitmap(url.replaceAll(
                 "[^\\w]", ""));
         if (bitmap != null) {
             img.setImageBitmap(bitmap);
         } else {
-            img.setImageResource(R.drawable.delete3);
+            img.setImageResource(R.drawable.default_add);
             mImageDowloader.downloadImage(80, 80, url,
                     new OnImageDownloadListener() {
                         @Override
@@ -470,7 +472,7 @@ public class Activity_boshu_Message extends Activity implements
                             // TODO Auto-generated method stub
                             img.setImageBitmap(bitmap);
                             if (bitmap == null) {
-                                img.setImageResource(R.drawable.delete3);
+                                img.setImageResource(R.drawable.default_add);
                             }
                         }
                     });

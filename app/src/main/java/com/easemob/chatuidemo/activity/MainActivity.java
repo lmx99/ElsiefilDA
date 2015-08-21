@@ -204,7 +204,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 .add(R.id.fragment_container, contactListFragment, "contaclist")
                 .add(R.id.fragment_container, logisticsFragment, "logistics")
                 .add(R.id.fragment_container, findFragment, "find")
-                .hide(logisticsFragment).hide(findFragment)
+                .hide(logisticsFragment).hide(findFragment).hide(personFragment)
                 .hide(contactListFragment).show(chatHistoryFragment).commit();
 
         init();

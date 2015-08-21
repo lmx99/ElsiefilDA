@@ -77,6 +77,7 @@ public class Activity_boshu_Setting extends Activity implements View.OnClickList
                 Activity_boshu_Setting.this.runOnUiThread(new Runnable() {
                     public void run() {
                         pd.dismiss();
+                        Activity_boshu_Setting.this.finish();
                         // 重新显示登陆页面
                         MainActivity.context.finish();
                         startActivity(new Intent(Activity_boshu_Setting.this, LoginActivity.class));

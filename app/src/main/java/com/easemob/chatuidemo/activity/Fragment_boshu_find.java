@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.lifeisle.android.R;
 
-public class Fragment_boshu_find extends Fragment{
+public class Fragment_boshu_find extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
