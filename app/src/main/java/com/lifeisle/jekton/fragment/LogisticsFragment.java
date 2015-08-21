@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.activity.DeliverStatActivity;
 import com.lifeisle.jekton.activity.JobsActivity;
 import com.lifeisle.jekton.activity.MyPositionActivity;
 import com.lifeisle.jekton.activity.OrderSearchActivity;
 import com.lifeisle.jekton.activity.QRCodeScanActivity;
 import com.lifeisle.jekton.activity.ScheduleCategoryActivity;
+import com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity;
 
 /**
  * @author Jekton
@@ -82,7 +82,7 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
                 break;
             }
             case R.id.deliver_stat: {
-                startActivity(DeliverStatActivity.class);
+                startActivity(DeliverStatCategoryActivity.class);
                 break;
             }
             case R.id.order_search: {

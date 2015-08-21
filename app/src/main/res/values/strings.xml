@@ -336,10 +336,10 @@
 
 
 
-
+    <string name="title_fragment_logistics">Logistics</string>
     <string name="fragment_logistics_routine">Schedules</string>
     <string name="fragment_logistics_my_position">MyPosition</string>
-    <string name="fragment_logistics_job_auth">Job Opportunity</string>
+    <string name="fragment_logistics_job_auth">Job Opportunities</string>
     <string name="fragment_logistics_scan_QR_code">Scan QR Code</string>
     <string name="fragment_logistics_deliver_stat">Deliver Stat</string>
     <string name="fragment_logistics_order_search">Search Orders</string>
@@ -361,13 +361,21 @@
     <string name="error_fail_post_order_code">Fail to post data to the server. Please check your network connection </string>
     <string name="error_fail_to_insert_goods">Fail to insert goods item to the database. Please check your storage.</string>
     <string name="error_fail_to_update_order">Fail to update order item of the database. Please check your storage or  permissions.</string>
-    <string name="error_fail_sign_in_jobs">Fail to sign in</string>
+    <string name="error_fail_sign_in_jobs_1">Fail to sign in</string>
+    <string name="error_fail_sign_in_jobs_2">Could not repeatedly sign in or without a job now</string>
     <string name="error_fail_sign_out_jobs">Fail to sign out</string>
+    <string name="error_fail_enter_jobs">Fail to enter job</string>
+    <string name="error_fail_enter_jobs_1" translatable="false">没有资格</string>
+    <string name="error_fail_enter_jobs_2" translatable="false">同一时段工作已有工作</string>
+    <string name="error_fail_enter_jobs_3" translatable="false">重复入职</string>
+    <string name="error_fail_enter_jobs_5" translatable="false">从支援换到领班失败</string>
+    <string name="error_fail_enter_jobs_6" translatable="false">从自由人进入班次失败</string>
     <string name="error_fail_post_delivered">Post delivered data failed</string>
     <string name="error_qr_code_invalid">Invalid QR Code</string>
 
     <string name="success_sign_in_jobs">Successfully signed in</string>
     <string name="success_sign_out_jobs">Successfully signed out</string>
+    <string name="success_enter_jobs">Successfully enter job, please sign in and begin your job</string>
 
     <string name="ratio_btn_all">All</string>
     <string name="ratio_btn_undelivered">Undelivered</string>
@@ -461,6 +469,12 @@
     <string name="cat_add_schedule">Add Schedule</string>
 
 
+
+    <!-- DeliverStatCategoryActivity -->
+    <string name="title_activity_deliver_stat_category">DeliverStat</string>
+    <string name="cat_deliver_logistics_stat">Deliver Stat</string>
+    <string name="cat_motor_logistics_stat">Motor Stat</string>
+    <string name="cat_ganger_logistics_stat">Ganger Stat</string>
 
     <!-- DeliverStatActivity-->
     <string name="title_activity_deliver_stat">DeliverStat</string>

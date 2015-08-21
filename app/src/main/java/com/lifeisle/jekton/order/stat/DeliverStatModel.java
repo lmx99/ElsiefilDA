@@ -1,11 +1,10 @@
-package com.lifeisle.jekton.model;
+package com.lifeisle.jekton.order.stat;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.DeliverStatItem;
-import com.lifeisle.jekton.fragment.DeliverStatFragment;
+import com.lifeisle.jekton.order.stat.factory.StatItemFactory;
 import com.lifeisle.jekton.util.DateUtils;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.StringUtils;
@@ -29,13 +28,18 @@ public class DeliverStatModel {
 
     private static final String LOG_TAG = "DeliverStatModel";
 
-    private DeliverStatFragment fragment;
-    private List<DeliverStatItem> deliverStatItems;
+    private DeliverStatFragment mFragment;
+    private StatItemFactory mFactory;
+    private String mPostAction;
+    private List<Object> deliverStatItems;
 
     private String[] interval;
 
-    public DeliverStatModel(DeliverStatFragment fragment) {
-        this.fragment = fragment;
+    public DeliverStatModel(DeliverStatFragment fragment, StatItemFactory factory,
+                            String postAction) {
+        mFragment = fragment;
+        mFactory = factory;
+        mPostAction = postAction;
         deliverStatItems = new ArrayList<>();
 
         interval = DateUtils.getDefaultDeliverStatInterval();
@@ -51,7 +55,7 @@ public class DeliverStatModel {
     }
 
 
-    public DeliverStatItem getItem(int position) {
+    public Object getItem(int position) {
         return deliverStatItems.get(position);
     }
 
@@ -76,30 +80,31 @@ public class DeliverStatModel {
                             if (jsonObject.getInt("status") == 0) {
                                 JSONArray itemArray = jsonObject.getJSONArray("st_data");
                                 deliverStatItems.clear();
-                                for (int i = 0; i < itemArray.length(); ++i) {
-                                    JSONObject item = itemArray.getJSONObject(i);
-                                    deliverStatItems.add(DeliverStatItem.newInstance(item));
-                                }
-                                fragment.notifyDataSetChanged();
+                                readResponse(itemArray);
+                                mFragment.notifyDataSetChanged();
                                 return;
                             }
                         } catch (JSONException e) {
                             Logger.e(LOG_TAG, e.toString(), e);
                         }
-                        Toaster.showShort(fragment.getActivity(), R.string.error_network_fail);
+                        Toaster.showShort(mFragment.getActivity(), R.string.error_network_fail);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         Logger.e(LOG_TAG, volleyError);
-                        Toaster.showShort(fragment.getActivity(), R.string.error_network_fail);
+                        Toaster.showShort(mFragment.getActivity(), R.string.error_network_fail);
                     }
                 }));
     }
 
-
-
+    private void readResponse(JSONArray array) throws JSONException {
+        for (int i = 0; i < array.length(); ++i) {
+            JSONObject item = array.getJSONObject(i);
+            deliverStatItems.add(mFactory.createFromJSON(item));
+        }
+    }
 
 
 
@@ -112,7 +117,7 @@ public class DeliverStatModel {
         public DeliverStatRequest(String startTime, String endTime,
                                   Response.Listener<JSONObject> listener,
                                   Response.ErrorListener errorListener) {
-            super(fragment.getActivity(), Method.POST, StringUtils.getServerPath(), listener, errorListener);
+            super(mFragment.getActivity(), Method.POST, StringUtils.getServerPath(), listener, errorListener);
 
             this.startTime = startTime;
             this.endTime = endTime;
@@ -124,7 +129,7 @@ public class DeliverStatModel {
             params.put("end_time", endTime);
             params.put("sys", "fn");
             params.put("ctrl", "fn_data");
-            params.put("action", "edate_data");
+            params.put("action", mPostAction);
         }
     }
 }

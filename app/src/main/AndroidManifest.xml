@@ -503,7 +503,7 @@
 
         <activity
             android:name="com.lifeisle.jekton.activity.MyBrowserActivity"
-            android:theme="@style/MyTheme" />
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
         <activity
             android:name="com.lifeisle.jekton.activity.JobsActivity"
             android:label="@string/title_activity_jobs"
@@ -536,8 +536,8 @@
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.lifeisle.jekton.activity.DeliverStatActivity"
-            android:label="@string/title_activity_deliver_stat"
+            android:name="com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity"
+            android:label="@string/title_activity_deliver_stat_category"
             android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
             android:theme="@style/MyTheme" >
             <meta-data
@@ -545,13 +545,22 @@
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.lifeisle.jekton.activity.DeliverStatOptionActivity"
-            android:label="@string/title_activity_deliver_stat_option"
-            android:parentActivityName="com.lifeisle.jekton.activity.DeliverStatActivity"
+            android:name="com.lifeisle.jekton.order.stat.DeliverStatActivity"
+            android:label="@string/title_activity_deliver_stat"
+            android:parentActivityName="com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity"
             android:theme="@style/MyTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.lifeisle.jekton.activity.DeliverStatActivity" />
+                android:value="com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity" />
+        </activity>
+        <activity
+            android:name="com.lifeisle.jekton.order.stat.DeliverStatOptionActivity"
+            android:label="@string/title_activity_deliver_stat_option"
+            android:parentActivityName="com.lifeisle.jekton.order.stat.DeliverStatActivity"
+            android:theme="@style/MyTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lifeisle.jekton.order.stat.DeliverStatActivity" />
         </activity>
         <activity
             android:name="com.lifeisle.jekton.activity.ScheduleDetailActivity"

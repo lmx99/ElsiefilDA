@@ -45,7 +45,7 @@ public class OrderDBUtils {
 
 
     /**
-     * @param orderCode EAN-13 barcode of a order
+     * @param orderCode barcode of a order
      * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
     public static long insertOrderCode(String orderCode, int requestType) {
@@ -54,6 +54,11 @@ public class OrderDBUtils {
         values.put(OrdersDBHelper.COLUMN_ORDERS_REQUEST_TYPE, requestType);
 
         return ordersDB.insert(OrdersDBHelper.TABLE_ORDERS, null, values);
+    }
+
+    public static void deleteOrderCode(String orderCode) {
+        String where = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "='" + orderCode + "'";
+        ordersDB.delete(OrdersDBHelper.TABLE_ORDERS, where, null);
     }
 
 
@@ -82,7 +87,7 @@ public class OrderDBUtils {
         order.put(OrdersDBHelper.COLUMN_ORDERS_REQUEST_TYPE, item.requestType);
 
         int update = ordersDB.update(OrdersDBHelper.TABLE_ORDERS, order,
-                OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "=" + item.orderCode, null);
+                OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "='" + item.orderCode + "'", null);
         if (update <= 0) {
             Logger.e(TAG, StringUtils.getStringFromResource(R.string.error_fail_to_update_order) + item.orderCode);
 
@@ -174,7 +179,7 @@ public class OrderDBUtils {
                 OrdersDBHelper.COLUMN_ORDERS_RESTAURANT_ID,
                 OrdersDBHelper.COLUMN_ORDERS_REQUEST_TYPE,
         };
-        String orderSelection = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "=" + orderCode;
+        String orderSelection = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "='" + orderCode + "'";
         Cursor orderCursor = ordersDB.query(OrdersDBHelper.TABLE_ORDERS, orderColumns, orderSelection,
                 null, null, null, null);
         fillOrderItem(orderItem, orderCursor);
@@ -316,7 +321,7 @@ public class OrderDBUtils {
         ContentValues values = new ContentValues();
         values.put(OrdersDBHelper.COLUMN_ORDERS_REQUEST_TYPE, requestType);
 
-        String where = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "=" + orderCode;
+        String where = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "='" + orderCode + "'";
         return ordersDB.update(OrdersDBHelper.TABLE_ORDERS, values, where, null);
     }
 
@@ -365,7 +370,7 @@ public class OrderDBUtils {
 
     public static int getOrderExistsState(String orderCode) {
         String[] columns = { OrdersDBHelper.COLUMN_GOODS_ITEM_ID };
-        String selection = OrdersDBHelper.COLUMN_GOODS_ORDER_CODE + "=" + orderCode;
+        String selection = OrdersDBHelper.COLUMN_GOODS_ORDER_CODE + "='" + orderCode + "'";
         Cursor cursor = ordersDB.query(OrdersDBHelper.TABLE_GOODS, columns, selection,
                 null, null, null, null);
 
@@ -380,7 +385,7 @@ public class OrderDBUtils {
 
     public static boolean isOrderCodeExists(String orderCode) {
         String[] columns = { OrdersDBHelper.COLUMN_ORDERS_ORDER_ID };
-        String selection = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "=" + orderCode;
+        String selection = OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "='" + orderCode + "'";
         Logger.d(TAG, "isOrderCodeExists() selection = " + selection);
         Cursor cursor = ordersDB.query(OrdersDBHelper.TABLE_ORDERS, columns, selection,
                 null, null, null, null);
