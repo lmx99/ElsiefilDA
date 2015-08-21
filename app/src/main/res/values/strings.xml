@@ -363,11 +363,13 @@
     <string name="error_fail_to_update_order">Fail to update order item of the database. Please check your storage or  permissions.</string>
     <string name="error_fail_sign_in_jobs">Fail to sign in</string>
     <string name="error_fail_sign_out_jobs">Fail to sign out</string>
+    <string name="error_fail_enter_jobs">Fail to enter job</string>
     <string name="error_fail_post_delivered">Post delivered data failed</string>
     <string name="error_qr_code_invalid">Invalid QR Code</string>
 
     <string name="success_sign_in_jobs">Successfully signed in</string>
     <string name="success_sign_out_jobs">Successfully signed out</string>
+    <string name="success_enter_jobs">Successfully enter job, please sign in and begin your job</string>
 
     <string name="ratio_btn_all">All</string>
     <string name="ratio_btn_undelivered">Undelivered</string>

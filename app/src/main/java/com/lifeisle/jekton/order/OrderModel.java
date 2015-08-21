@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -186,38 +187,42 @@ public class OrderModel {
 
 
 
-    public void signInAJob(String qrCode) {
-        MyApplication.addToRequestQueue(new SignInJobsRequest(qrCode, true,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Logger.d(TAG, "signInAJob() response: " + response);
-                        try {
-                            if (response.getInt("status") == 0) {
-                                jcat_id = response.getInt("jcat_id");
-                                Preferences.setJCatID(jcat_id);
-                                Toaster.showShort(context, R.string.success_sign_in_jobs);
-                            } else {
+    public void signInAJob(JSONObject jsonObject) {
+        QRInfoRequest request =
+                new QRInfoRequest(
+                        jsonObject,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Logger.d(TAG, "signInAJob() response: " + response);
+                                try {
+                                    if (response.getInt("status") == 0) {
+                                        jcat_id = response.getInt("jcat_id");
+                                        Preferences.setJCatID(jcat_id);
+                                        Toaster.showShort(context, R.string.success_sign_in_jobs);
+                                    } else {
+                                        Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
+                                    }
+                                } catch (JSONException e) {
+                                    Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
+                                    Logger.e(TAG, "Sign In Jobs response: " + response, e);
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Logger.e(TAG, error);
                                 Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
                             }
-                        } catch (JSONException e) {
-                            Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
-                            Logger.e(TAG, "Sign In Jobs response: " + response, e);
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Logger.e(TAG, error);
-                        Toaster.showShort(context, R.string.error_fail_sign_in_jobs);
-                    }
-                }));
+                );
+        MyApplication.addToRequestQueue(request);
     }
 
 
-    public void signOutJob(String qrCode) {
-        MyApplication.addToRequestQueue(new SignInJobsRequest(qrCode, false,
+    public void signOutJob(JSONObject jsonObject) {
+        MyApplication.addToRequestQueue(new QRInfoRequest(jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -246,6 +251,39 @@ public class OrderModel {
                 }));
     }
 
+    public void enterJob(JSONObject jsonObject) {
+        QRInfoRequest request =
+                new QRInfoRequest(
+                        jsonObject,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+//                                Logger.d(TAG, "enterJob() response: " + response);
+                                try {
+                                    if (response.getInt("status") == 0) {
+                                        Toaster.showShort(context, R.string.success_enter_jobs);
+                                    } else {
+                                        Toaster.showShort(context, R.string.error_fail_enter_jobs);
+                                    }
+                                } catch (JSONException e) {
+                                    Logger.e(TAG, e.toString(), e);
+                                    Logger.e(TAG, "enter job response: " + response);
+                                    Toaster.showShort(context, R.string.error_fail_enter_jobs);
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Logger.e(TAG, error);
+                                Toaster.showShort(context, R.string.error_fail_enter_jobs);
+                            }
+                        }
+                );
+
+        MyApplication.addToRequestQueue(request);
+    }
+
 
 
 
@@ -268,7 +306,7 @@ public class OrderModel {
                                 Toaster.showShort(context, R.string.error_order_code_invalid);
                             }
                         } catch (JSONException e) {
-                            Logger.e(TAG, e.toString());
+                            Logger.e(TAG, e.toString(), e);
                             orderView.setFailCount(orderRequestCount);
                         }
                     }
@@ -328,7 +366,7 @@ public class OrderModel {
                             }
 
                         } catch (JSONException e) {
-                            Logger.e(TAG, e.toString());
+                            Logger.e(TAG, e.toString(), e);
                             Toaster.showShort(context, R.string.error_fail_post_delivered);
                         }
                     }
@@ -409,33 +447,32 @@ public class OrderModel {
 
 
     /**
-     * post sign in or sign out info
+     * used such as post sign in or sign out info
      */
-    private class SignInJobsRequest extends AutoLoginRequest {
+    private class QRInfoRequest extends AutoLoginRequest {
 
-        private static final String TAG = "SignInJobsRequest";
+        private static final String TAG = "QRInfoRequest";
 
-        private String qrCode;
-        private boolean mSignIn;
+        private JSONObject mJSONObject;
 
-        public SignInJobsRequest(String qrCode, boolean signIn,
-                                 Response.Listener<JSONObject> listener,
-                                 Response.ErrorListener errorListener) {
+        public QRInfoRequest(JSONObject jsonObject,
+                             Response.Listener<JSONObject> listener,
+                             Response.ErrorListener errorListener) {
             super(context, Method.POST, SERVER_PATH, listener, errorListener);
 
-            this.qrCode = qrCode;
-            mSignIn = signIn;
+            mJSONObject = jsonObject;
         }
 
         @Override
         protected void setParams(Map<String, String> params) {
             try {
-                JSONObject json = new JSONObject(qrCode);
-                int region_id = json.getInt("region_id");
-                params.put("region_id", "" + region_id);
-                params.put("sys", "job");
-                params.put("ctrl", "job_epl");
-                params.put("action", mSignIn? "sign_in" : "sign_out");
+                Iterator<String> iterator = mJSONObject.keys();
+                while (iterator.hasNext()) {
+                    String key = iterator.next();
+                    params.put(key, mJSONObject.getString(key));
+                }
+
+                Logger.d(TAG, params.toString());
             } catch (JSONException e) {
                 Logger.e(TAG, e.toString(), e);
             }
@@ -522,7 +559,7 @@ public class OrderModel {
                     updateOrderItem(index, orderItem);
                 }
             } catch (JSONException e) {
-                Logger.e(TAG, e.toString());
+                Logger.e(TAG, e.toString(), e);
                 Logger.e(TAG, orderJson.toString());
             }
         }
