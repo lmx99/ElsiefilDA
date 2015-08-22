@@ -63,7 +63,7 @@ public class QRCodeScanActivity extends AppCompatActivity
         implements View.OnClickListener, OrderView, RadioGroup.OnCheckedChangeListener,
         View.OnTouchListener, SwipeRefreshLayout.OnRefreshListener, SurfaceHolder.Callback {
 
-    public static final String ORDER_LOGISTICS_UPDATE = "OrderOperateReceiver.ORDER_LOGISTICS_UPDATE";
+    public static final String ORDER_LOGISTICS_UPDATE = "OrderLogisticsUpdateReceiver.ORDER_LOGISTICS_UPDATE";
 
 
     private static final String TAG = "QRCodeScanActivity";
@@ -97,7 +97,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     private EditText barcodeInputText;
 
     private IntentFilter logisticsIntentFilter;
-    private OrderOperateReceiver orderOperateReceiver = new OrderOperateReceiver();
+    private OrderLogisticsUpdateReceiver orderLogisticsUpdateReceiver = new OrderLogisticsUpdateReceiver();
 
 
     private OrderController orderController;
@@ -219,7 +219,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(orderOperateReceiver, logisticsIntentFilter);
+        registerReceiver(orderLogisticsUpdateReceiver, logisticsIntentFilter);
 
         if (!cameraInit) {
             Logger.d(TAG, "onResume() init camera");
@@ -312,7 +312,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     @Override
     protected void onPause() {
-        unregisterReceiver(orderOperateReceiver);
+        unregisterReceiver(orderLogisticsUpdateReceiver);
         stopScan();
         super.onPause();
     }
@@ -451,7 +451,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     private void manuallyAddBarcode() {
         String barcode = barcodeInputText.getText().toString();
-        if (barcode.length() != 13) {
+        if (barcode.equals("")) {
             showErrMsg(R.string.error_order_code_invalid);
         } else {
             orderController.postQRCode(barcode);
@@ -631,7 +631,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
 
 
-    private class OrderOperateReceiver extends BroadcastReceiver {
+    private class OrderLogisticsUpdateReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {

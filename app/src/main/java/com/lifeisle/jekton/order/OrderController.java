@@ -45,7 +45,11 @@ public class OrderController {
 
 
     public void notifyDataSetChanged(boolean showDialog) {
-        orderModel.reloadData(showDialog);
+        if (showDialog) {
+            orderModel.reloadData(showDialog);
+        } else {  // pull down
+            orderModel.retrieveAllScannedData();
+        }
     }
 
 
