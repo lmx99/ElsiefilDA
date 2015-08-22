@@ -39,7 +39,7 @@
 
 
     <color name="boshu_all_color">#00A6E9</color>
-    <color name="boshu_menu_color">#E5E4E3</color>
+    <color name="boshu_menu_color">#e8e8e8</color>
     <color name="boshu_item_color">#F9F9FA</color>
     <color name="boshu_backgroud_color">#EFEFEE</color>
     <color name="boshu_backgroud_color2">#F2F2F2</color>

@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -92,6 +93,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     private ImageView img_boshu_afterhead;
     private ImageView img_boshu_studentCard;
     private AlertDialog alertDialog;
+    private AlertDialog alertDialogCude;
     private static final String FILE_PATH = "/sdcard/lifeIsland.jpg";
     private String[] ss = new String[]{"相册", "拍照"};
     private String[] sexStrings = new String[]{"男", "女"};
@@ -659,18 +661,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                 FLAG = 3;
                 break;
             case R.id.bt_boshu_finish:
-                str_boshu_name = nickNamEditText.getText().toString();
-                str_boshu_realName = realNamEditText.getText().toString();
-                str_boshu_school = schoolEditText.getText().toString();
-                str_boshu_myPhone = myphoneEditText.getText().toString();
-                str_boshu_mail = emailEditText.getText().toString();
-                str_boshu_major = jobEditText.getText().toString();
-                str_boshu_qQ = qqEditText.getText().toString();
-                str_boshu_friendPhone = friendPhoneEditText.getText().toString();
-                str_boshu_jobWant = intentEditText.getText().toString();
-                str_boshu_resume = resumEditText.getText().toString();
-                str_boshu_IdCard = idCardEditText.getText().toString();
-                postMessage1();
+               finishPost();
                 break;
             case R.id.ll_boshu_sex:
                 DisplayMetrics dm = new DisplayMetrics();
@@ -826,27 +817,13 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
-        super.onBackPressed();
-        if(EDITFLAG==2){
-            finish();
-        }else {
-            Intent intent = new Intent(Activity_boshu_EditBaseMessage.this,
-                    MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        setCute(this,getWindowManager(),getLayoutInflater(),"是否要保存个人信息？");
 
     }
 
     public void back(View view) {
-        if(EDITFLAG==2){
-            finish();
-        }else {
-            Intent intent = new Intent(Activity_boshu_EditBaseMessage.this,
-                    MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        setCute(this,getWindowManager(),getLayoutInflater(),"是否要保存个人信息？");
+
     }
     //
     public void postMessage1() {
@@ -1069,6 +1046,68 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
             startActivity(intent);
         }
         this.finish();
+    }
+    public void setCute( Context context,WindowManager window,LayoutInflater inflater,String cudeString){
+        DisplayMetrics dm = new DisplayMetrics();
+        window.getDefaultDisplay().getMetrics(dm);
+        int width = (int) (dm.widthPixels / 1.2);
+        int height = (int) (dm.heightPixels / 2.8);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = inflater.inflate(
+                R.layout.alterdialog_boshu_update, null);
+        Button no = (Button) view.findViewById(R.id.bt_boshu_updateno);
+        Button yes = (Button) view.findViewById(R.id.bt_boshu_updateyes);
+        TextView tv= (TextView) view.findViewById(R.id.tv_boshu_cude);
+        tv.setText(cudeString);
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              finishPost();
+                alertDialogCude.dismiss();
+
+            }
+        });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(EDITFLAG==2){
+                    finish();
+                }else {
+                    Intent intent = new Intent(Activity_boshu_EditBaseMessage.this,
+                            MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                alertDialogCude.dismiss();
+
+            }
+        });
+        builder.setView(view);
+        alertDialogCude= builder.create();
+        alertDialogCude.setCancelable(false);
+        alertDialogCude.show();
+        WindowManager.LayoutParams params = alertDialogCude.getWindow()
+                .getAttributes();
+        params.x = 0;
+        params.y = 0;
+        params.width = width;//
+        params.height = height;//
+        alertDialogCude.getWindow().setAttributes(params);
+
+    }
+    public void finishPost(){
+        str_boshu_name = nickNamEditText.getText().toString();
+        str_boshu_realName = realNamEditText.getText().toString();
+        str_boshu_school = schoolEditText.getText().toString();
+        str_boshu_myPhone = myphoneEditText.getText().toString();
+        str_boshu_mail = emailEditText.getText().toString();
+        str_boshu_major = jobEditText.getText().toString();
+        str_boshu_qQ = qqEditText.getText().toString();
+        str_boshu_friendPhone = friendPhoneEditText.getText().toString();
+        str_boshu_jobWant = intentEditText.getText().toString();
+        str_boshu_resume = resumEditText.getText().toString();
+        str_boshu_IdCard = idCardEditText.getText().toString();
+        postMessage1();
     }
 
 

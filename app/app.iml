@@ -97,15 +97,15 @@
     <orderEntry type="library" exported="" name="picasso-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="zxing" level="project" />
-    <orderEntry type="library" exported="" name="afinal_0.5.1_bin" level="project" />
     <orderEntry type="library" exported="" name="baidumapapi_v3_2_0" level="project" />
+    <orderEntry type="library" exported="" name="afinal_0.5.1_bin" level="project" />
     <orderEntry type="library" exported="" name="jg_filter_sdk_1.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="umeng-analytics-v5.2.4" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.5" level="project" />
     <orderEntry type="library" exported="" name="volley_20150721" level="project" />
     <orderEntry type="library" exported="" name="wup-1.0.0.E-SNAPSHOT" level="project" />
-    <orderEntry type="library" exported="" name="zxing-core-3.2.0" level="project" />
     <orderEntry type="library" exported="" name="Xg_sdk_v2.40_20150616_1030" level="project" />
+    <orderEntry type="library" exported="" name="zxing-core-3.2.0" level="project" />
   </component>
 </module>

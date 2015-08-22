@@ -19,6 +19,7 @@ import com.boshu.db.UserDao;
 import com.boshu.domain.User;
 import com.boshu.image.ImageDowloader;
 import com.boshu.utils.Model;
+import com.easemob.chatuidemo.Constant;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.util.Preferences;
 
@@ -138,9 +139,14 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
             Bitmap bitmap=BitmapFactory.decodeByteArray(b, 0, b.length);
             circl_boshu_head.setImageBitmap(bitmap);
         }*/
-       
-        
 
-
-
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(((MainActivity)getActivity()).isConflict){
+            outState.putBoolean("isConflict", true);
+        }else if(((MainActivity)getActivity()).getCurrentAccountRemoved()){
+            outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
+        }
+    }
 }

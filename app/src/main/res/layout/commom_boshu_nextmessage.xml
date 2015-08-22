@@ -22,12 +22,10 @@
 
         <TextView
             android:id="@+id/tv_boshu_real_name"
-
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textColor="@color/boshu_textcolorallqh"
             android:textSize="16sp" />
 
@@ -67,7 +65,6 @@
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textColor="@color/boshu_textcolorallqh"
             android:textSize="16sp" />
 
@@ -107,7 +104,6 @@
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textColor="@color/boshu_textcolorallqh"
             android:textSize="16sp" />
 
@@ -145,7 +141,6 @@
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textSize="16sp" />
 
         <EditText
@@ -185,7 +180,6 @@
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textSize="16sp" />
 
         <EditText
@@ -225,7 +219,6 @@
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textSize="16sp" />
 
         <EditText
@@ -264,7 +257,6 @@
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textSize="16sp" />
 
         <EditText
@@ -304,7 +296,6 @@
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textSize="16sp" />
 
         <EditText

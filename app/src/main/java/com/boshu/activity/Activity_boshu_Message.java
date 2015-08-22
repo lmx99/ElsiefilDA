@@ -77,6 +77,7 @@ public class Activity_boshu_Message extends Activity implements
     private  FileCacheUtils fileCacheUtils;
     private Button bt_boshu_indentButton;
     public static Activity_boshu_Message context;
+    private ProgressDialog mProngressDialog=null;
 
     private String[] ss = new String[] { "相册", "拍照" };
    private headImageBroadCast broadCast=new headImageBroadCast();
@@ -163,10 +164,7 @@ public class Activity_boshu_Message extends Activity implements
             String url = Model.PitureLoad + user.getHeadImage();
             String beforeUrl = Model.PitureLoad + user.getBeforeIdCard();
             String afterUrl = Model.PitureLoad + user.getAferIdCard();
-            System.out.println(beforeUrl+"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-            System.out.println(afterUrl+"&&&&&&&&&&&&&&&");
             String studentUrl=Model.PitureLoad+user.getStudentImage();
-            System.out.println(studentUrl+"(((((((((((((((((((((((");
             setNetBitmap(imageview, url, mImageDowloader);
             setNetBitmap(afterImage, afterUrl, mImageDowloader);
             setNetBitmap(beforeImage, beforeUrl, mImageDowloader);
@@ -226,10 +224,8 @@ public class Activity_boshu_Message extends Activity implements
         if (resultCode == 200 && requestCode == 199) {
             
             try {
-                final ProgressDialog dialog = new ProgressDialog(this);
-                dialog.setTitle("提示");
-                dialog.setMessage("正在更换头像...");
-                dialog.show();
+
+                final int[] progressFlag = {0};
                 File file1 = new File(pathImage);
                 byte[] bis = data.getByteArrayExtra("bitmap");
                final Bitmap bitmap = BitmapUtils.decodeSampleBitmapFromByteArray(bis, 80,
@@ -244,6 +240,35 @@ public class Activity_boshu_Message extends Activity implements
                 params.put("action", "mod_all");
                 client.post(Model.PathLoad, params,
                         new AsyncHttpResponseHandler() {
+                            @Override
+                            public void onProgress(int bytesWritten, int totalSize) {
+                                super.onProgress(bytesWritten, totalSize);
+                                int progress=0;
+                                if(progressFlag[0]!=100) {
+                                    if (bytesWritten != totalSize && bytesWritten != 0) {
+                                        progress = (int) (bytesWritten / (float) totalSize * 100);
+                                        mProngressDialog.setProgress(progress);
+                                    } else {
+                                        progress = 100;
+                                        progressFlag[0] = 100;
+                                        mProngressDialog.setProgress(progress);
+
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onStart() {
+                                super.onStart();
+                                mProngressDialog=new ProgressDialog(Activity_boshu_Message.this);
+                                mProngressDialog.setMessage("正在上传图片...");
+                                mProngressDialog.setIndeterminate(false);
+                                mProngressDialog.setMax(100);
+                                mProngressDialog.setProgress(0);
+                                mProngressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                                mProngressDialog.setCancelable(false);
+                                mProngressDialog.show();
+                            }
 
                             @Override
                             public void onSuccess(int arg0, Header[] arg1,
@@ -255,13 +280,13 @@ public class Activity_boshu_Message extends Activity implements
                                 it.putExtra("bitmap",bit);
                                 Activity_boshu_Message.this.sendBroadcast(it);*/
                                 imageview.setImageBitmap(bitmap);
-                                dialog.dismiss();
                                 Toast.makeText(Activity_boshu_Message.this,
-                                        "头像上传成功", Toast.LENGTH_SHORT).show();
+                                        "头像上传成功~", Toast.LENGTH_SHORT).show();
                                 String result = new String(arg2);
                                 
                                 Activity_boshu_Message.this.setJsonDb(result,bitmap);
                                /* CompressPicture.setSoftBitmap(bitmap);*///释放内存
+                                mProngressDialog.dismiss();
                             }
 
                             @Override
@@ -269,15 +294,16 @@ public class Activity_boshu_Message extends Activity implements
                                     byte[] arg2, Throwable arg3) {
                                 // TODO Auto-generated method stub
                                 // String str = new String(arg2);
-                                
-                                dialog.dismiss();
-                                Toast.makeText(Activity_boshu_Message.this,"图片上传失败", Toast.LENGTH_SHORT).show();
+                                mProngressDialog.dismiss();
+                                Toast.makeText(Activity_boshu_Message.this,"头像上传失败,呵呵~", Toast.LENGTH_SHORT).show();
                             }
                         });
 
             } catch (Exception e) {
                 // TODO: handle exception
                 e.printStackTrace();
+                mProngressDialog.dismiss();
+                Toast.makeText(Activity_boshu_Message.this,"未知错误，呵呵~",0).show();
             } finally {
                
             }
@@ -331,7 +357,6 @@ public class Activity_boshu_Message extends Activity implements
         // BaseData2Adapter adapter = new BaseData2Adapter(context, ss);//
         // this,salaryarr,R.id.salary
         lv.setAdapter(adapter);
-
         builder.setView(view);
         alertDialog = builder.create();
         lv.setOnItemClickListener(this);
