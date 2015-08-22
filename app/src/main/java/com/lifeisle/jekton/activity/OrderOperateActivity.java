@@ -122,7 +122,7 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
                                             OrderItem item = OrderItem.newOrderItem(order);
                                             OrderItem.updateLogistics(item.goodsItems);
                                         } catch (JSONException e) {
-                                            Logger.e(TAG, e.toString());
+                                            Logger.e(TAG, e.toString(), e);
                                         }
                                     }
                                 }.start();

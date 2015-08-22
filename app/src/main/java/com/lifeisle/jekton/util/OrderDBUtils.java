@@ -32,8 +32,7 @@ public class OrderDBUtils {
     }
 
     static {
-        OrdersDBHelper dbHelper = new OrdersDBHelper(MyApplication.getInstance(),
-                OrdersDBHelper.DB_NAME, null, OrdersDBHelper.DB_VERSION);
+        OrdersDBHelper dbHelper = new OrdersDBHelper(MyApplication.getInstance());
         try {
             ordersDB = dbHelper.getWritableDatabase();
         } catch (SQLiteException e) {

@@ -43,11 +43,11 @@ public class OrderListAdapter extends BaseAdapter {
      */
     private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
-    public OrderListAdapter(QRCodeScanActivity context, OrderModel orderModel) {
+    public OrderListAdapter(QRCodeScanActivity activity, OrderModel orderModel) {
         this.activity = activity;
         this.orderModel = orderModel;
 
-        normalColor = context.getResources().getColor(R.color.bg_order_list_item);
+        normalColor = activity.getResources().getColor(R.color.bg_order_list_item);
     }
 
 

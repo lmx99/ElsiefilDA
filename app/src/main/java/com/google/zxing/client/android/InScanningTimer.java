@@ -106,7 +106,12 @@ final public class InScanningTimer {
             try {
                 Thread.sleep(INACTIVITY_DELAY_MS);
                 Log.i(TAG, "Finishing activity due to un-scanning");
-                activity.stopScan();
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        activity.stopScan();
+                    }
+                });
             } catch (InterruptedException e) {
                 // continue without killing
             }
