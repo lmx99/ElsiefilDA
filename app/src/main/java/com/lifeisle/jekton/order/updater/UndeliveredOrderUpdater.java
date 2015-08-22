@@ -28,9 +28,7 @@ public class UndeliveredOrderUpdater extends OrderListUpdater {
 
     @Override
     public List<OrderItem> update(List<OrderItem> oldList) {
-        List<OrderItem> newList = new ArrayList<>(oldList);
-
-        ListIterator<OrderItem> iterator = newList.listIterator();
+        ListIterator<OrderItem> iterator = oldList.listIterator();
         while (iterator.hasNext()) {
             OrderItem item = iterator.next();
             if (item.isDelivered()) {
@@ -39,6 +37,6 @@ public class UndeliveredOrderUpdater extends OrderListUpdater {
             }
         }
 
-        return newList;
+        return oldList;
     }
 }
