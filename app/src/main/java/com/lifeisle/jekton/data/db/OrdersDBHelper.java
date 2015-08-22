@@ -83,7 +83,7 @@ public class OrdersDBHelper extends SQLiteOpenHelper {
             COLUMN_GOODS_ID + " integer primary key autoincrement," +
             COLUMN_GOODS_ORDER_ID + " int default -1," +
             COLUMN_GOODS_ITEM_ID + " integer default -1," +
-            COLUMN_GOODS_ORDER_CODE + " varchar(18) not null unique default ''," +
+            COLUMN_GOODS_ORDER_CODE + " varchar(18) default ''," +
             COLUMN_GOODS_RESTAURANT + " varchar(60) default ''," +
             COLUMN_GOODS_COURSE_NAME + " varchar(60) default ''," +
             COLUMN_GOODS_PRICE + " decimal(6, 2) default 0.00," +

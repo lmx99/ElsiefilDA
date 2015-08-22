@@ -360,16 +360,14 @@ public class OrderModel {
 
     private void updateLogistics(JSONObject response, int index, int currentInitCount)
             throws JSONException {
-        if (!executorService.isTerminated()) {
-            // length == 1
-            JSONObject order = OrderItem.getOrderItemAt(response, 0);
-            Logger.d(TAG, "postOrderCode success, initCount = " + currentInitCount);
-            if (!executorService.isShutdown()) {
-                executorService.execute(
-                        new OrderInfoFilledTask(order,
-                                index,
-                                currentInitCount));
-            }
+        // length == 1
+        JSONObject order = OrderItem.getOrderItemAt(response, 0);
+        Logger.d(TAG, "postOrderCode success, initCount = " + currentInitCount);
+        if (!executorService.isShutdown()) {
+            executorService.execute(
+                    new OrderInfoFilledTask(order,
+                                            index,
+                                            currentInitCount));
         }
     }
 

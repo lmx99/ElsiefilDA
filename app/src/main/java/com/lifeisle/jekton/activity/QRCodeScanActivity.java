@@ -218,17 +218,10 @@ public class QRCodeScanActivity extends AppCompatActivity
     }
 
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        registerReceiver(orderOperateReceiver, orderOperateFilter);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
+        registerReceiver(orderOperateReceiver, orderOperateFilter);
 
         if (!cameraInit) {
             Logger.d(TAG, "onResume() init camera");
