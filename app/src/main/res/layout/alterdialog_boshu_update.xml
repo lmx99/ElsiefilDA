@@ -11,7 +11,7 @@
         android:gravity="center_vertical"
         android:textSize="20sp"
         android:textColor="@color/boshu_all_color"
-        android:text="更新"
+        android:text="提示"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <View
@@ -19,12 +19,13 @@
         android:layout_marginRight="10dp"
        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/boshu_view"/>
     <TextView
-        android:textColor="#414141"
+
+        android:textColor="@color/boshu_textcolorallqh"
         android:padding="10dp"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:gravity="center"
         android:text="当前版本为V1.0.1,检测到有新版本V2.0.0,是否更新"
         android:id="@+id/tv_boshu_cude"
@@ -36,6 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:textSize="16sp"
+            android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/bt_boshu_updateyes"
             android:background="#00000000"
             android:layout_weight="1"
@@ -43,6 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <Button
+            android:textSize="16sp"
+            android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/bt_boshu_updateno"
             android:background="#00000000"
             android:layout_weight="1"

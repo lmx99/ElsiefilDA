@@ -18,7 +18,7 @@
 
     <ListView
          android:divider="#F0F0F0"
-         android:dividerHeight="0.5dp"
+        android:dividerHeight="0.5dp"
         android:scrollbars="none"
         android:id="@+id/lv"
         android:layout_width="fill_parent"

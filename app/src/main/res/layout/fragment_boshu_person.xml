@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/boshu_backgroud_color"
-    android:orientation="vertical">
+    android:background="@color/boshu_backgroud"
+    android:orientation="vertical"
+    >
     <RelativeLayout
         android:layout_gravity="center_vertical"
         android:background="@color/top_bar_normal_bg"
@@ -22,6 +23,7 @@
             android:layout_width="wrap_content"
             />
         <ImageView
+            android:visibility="gone"
             android:layout_marginRight="25dp"
             android:layout_alignParentRight="true"
             android:id="@+id/iv_boshu_setting"
@@ -33,7 +35,8 @@
 
 
     
-    <RelativeLayout 
+    <RelativeLayout
+        android:visibility="gone"
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -58,94 +61,126 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl_boshu_message"
-        android:layout_marginTop="5dp"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-
+            android:textSize="15sp"
+           android:textColor="@color/boshu_textcolorallqh"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="30dp"
             android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/delete1"
-            android:drawableRight="@drawable/delete2"
+            android:drawableLeft="@drawable/message_myself"
+            android:drawableRight="@drawable/entry_page"
             android:gravity="center_vertical"
             android:text="个人信息"
             android:layout_width="match_parent"
-            android:layout_height="46dp" />
+            android:layout_height="54dp" />
     </RelativeLayout>
-
+     <include layout="@layout/view"></include>
 
     <RelativeLayout
         android:id="@+id/rl_boshu_wallet"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="13dp"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <include layout="@layout/view"></include>
         <TextView
-
+            android:textSize="15sp"
+            android:textColor="@color/boshu_textcolorallqh"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="30dp"
             android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/delete1"
-            android:drawableRight="@drawable/delete2"
+            android:drawableLeft="@drawable/message_wallet"
+            android:drawableRight="@drawable/entry_page"
             android:gravity="center_vertical"
             android:text="钱包"
             android:layout_width="match_parent"
-            android:layout_height="46dp" />
+            android:layout_height="54dp" />
     </RelativeLayout>
+    <include layout="@layout/view"></include>
     <RelativeLayout
-        android:layout_marginTop="5dp"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-
+            android:textSize="15sp"
+            android:textColor="@color/boshu_textcolorallqh"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="30dp"
             android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/delete1"
-            android:drawableRight="@drawable/delete2"
+            android:drawableLeft="@drawable/message_amounts"
+            android:drawableRight="@drawable/entry_page"
             android:gravity="center_vertical"
             android:text="我的金额"
             android:layout_width="match_parent"
-            android:layout_height="46dp" />
+            android:layout_height="54dp"
+            />
     </RelativeLayout>
+    <include layout="@layout/view"></include>
 
     <RelativeLayout
-        android:layout_marginTop="5dp"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-
+            android:textSize="15sp"
+            android:textColor="@color/boshu_textcolorallqh"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="30dp"
             android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/delete1"
-            android:drawableRight="@drawable/delete2"
+            android:drawableLeft="@drawable/message_settlement"
+            android:drawableRight="@drawable/entry_page"
             android:gravity="center_vertical"
             android:text="我的结算"
             android:layout_width="match_parent"
-            android:layout_height="46dp" />
+            android:layout_height="54dp" />
     </RelativeLayout>
+    <include layout="@layout/view"></include>
     <RelativeLayout
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="13dp"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <include layout="@layout/view"></include>
         <TextView
+            android:textSize="15sp"
+            android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_experience"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="30dp"
             android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/delete1"
-            android:drawableRight="@drawable/delete2"
+            android:drawableLeft="@drawable/message_experience"
+            android:drawableRight="@drawable/entry_page"
             android:gravity="center_vertical"
             android:text="我的经验"
             android:layout_width="match_parent"
-            android:layout_height="46dp" />
+            android:layout_height="54dp" />
     </RelativeLayout>
+    <include layout="@layout/view"></include>
+    <RelativeLayout
+        android:id="@+id/rl_boshu_set"
+        android:layout_marginTop="13dp"
+        android:background="@color/boshu_item_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/view"></include>
+        <TextView
+            android:textSize="15sp"
+            android:textColor="@color/boshu_textcolorallqh"
+            android:id="@+id/tv_boshu_set"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/message_set"
+            android:drawableRight="@drawable/entry_page"
+            android:gravity="center_vertical"
+            android:text="设置"
+            android:layout_width="match_parent"
+            android:layout_height="54dp" />
+    </RelativeLayout>
+    <include layout="@layout/view"/>
 
     
     

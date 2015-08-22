@@ -47,6 +47,7 @@ public class upteVersionDialog {
         upteVersionDialog instance=new upteVersionDialog();
         return instance;
     }
+
     public AlertDialog setAlertDialog(final Context context,WindowManager window,LayoutInflater inflater) {
         DisplayMetrics dm = new DisplayMetrics();
         window.getDefaultDisplay().getMetrics(dm);

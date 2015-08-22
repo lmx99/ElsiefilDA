@@ -80,8 +80,8 @@ public class LoginActivity extends BaseActivity {
         if (DemoHXSDKHelper.getInstance().isLogined()&&Preferences.getCookie()!=null) {
             autoLogin = true;
             //	LoginActivity.this.usernameEditText;
+            LoginActivity.this.finish();
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
             return;
         }
         setContentView(R.layout.activity_login);
@@ -260,6 +260,7 @@ public class LoginActivity extends BaseActivity {
                     Intent intent = new Intent(LoginActivity.this,
                             MainActivity.class);
                     startActivity(intent);
+                    LoginActivity.this.finish();
                 }
 
             }

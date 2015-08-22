@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/boshu_backgroud_color"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/boshu_item_color" >
+        android:background="@color/boshu_item_color">
 
         <TextView
             android:layout_width="wrap_content"
@@ -19,9 +19,6 @@
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tv_boshu_real_name"
@@ -29,19 +26,21 @@
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
+            android:textColor="@color/boshu_textcolorallqh"
             android:textSize="16sp" />
-        <EditText 
-            android:textSize="16sp"
-            android:background="#00000000"
-            android:layout_marginLeft="100dp"
-            android:id="@+id/et_boshu_realName"
-            android:layout_height="40dp"
-            android:layout_width="fill_parent"
-            android:visibility="gone"
-            />
 
-       
+        <EditText
+            android:id="@+id/et_boshu_realName"
+
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="100dp"
+            android:background="#00000000"
+            android:textColor="@color/boshu_textcolorallqh"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+
     </RelativeLayout>
 
     <include layout="@layout/view2" />
@@ -49,7 +48,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/boshu_item_color" >
+        android:background="@color/boshu_item_color">
 
         <TextView
             android:layout_width="wrap_content"
@@ -60,29 +59,26 @@
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <TextView
             android:id="@+id/tv_boshu_editphone"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
+            android:textColor="@color/boshu_textcolorallqh"
             android:textSize="16sp" />
-         <EditText 
-             android:textSize="16sp"
-            android:background="#00000000"
-            android:layout_marginLeft="100dp"
-            android:id="@+id/et_boshu_phone"
-            android:layout_height="40dp"
-            android:layout_width="fill_parent"
-            android:visibility="gone"
-            />
 
-      
+        <EditText
+            android:id="@+id/et_boshu_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="100dp"
+            android:background="#00000000"
+            android:textColor="@color/boshu_textcolorallqh"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+
     </RelativeLayout>
 
     <include layout="@layout/view2" />
@@ -90,7 +86,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/boshu_item_color" >
+        android:background="@color/boshu_item_color">
 
         <TextView
             android:id="@+id/tv_boshu_"
@@ -102,28 +98,24 @@
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <TextView
             android:id="@+id/tv_boshu_editphone1"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
+            android:textColor="@color/boshu_textcolorallqh"
             android:textSize="16sp" />
 
-      <EditText 
-          android:textSize="16sp"
-            android:background="#00000000"
-            android:layout_marginLeft="100dp"
+        <EditText
             android:id="@+id/et_boshu_friendPhone"
-            android:layout_height="40dp"
             android:layout_width="fill_parent"
-            android:visibility="gone"
-            />
+            android:layout_height="40dp"
+            android:layout_marginLeft="100dp"
+            android:background="#00000000"
+            android:textColor="@color/boshu_textcolorallqh"
+            android:textSize="16sp"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <include layout="@layout/view2" />
@@ -131,7 +123,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/boshu_item_color" >
+        android:background="@color/boshu_item_color">
 
         <TextView
             android:layout_width="wrap_content"
@@ -142,29 +134,26 @@
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <TextView
+            android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_editmail"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textSize="16sp" />
-         <EditText 
-             android:textSize="16sp"
-            android:background="#00000000"
-            android:layout_marginLeft="100dp"
-            android:id="@+id/et_boshu_email"
-            android:layout_height="40dp"
-            android:layout_width="fill_parent"
-            android:visibility="gone"
-            />
 
-    
+        <EditText
+            android:textColor="@color/boshu_textcolorallqh"
+            android:id="@+id/et_boshu_email"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="100dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+
     </RelativeLayout>
 
     <include layout="@layout/view2" />
@@ -172,7 +161,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/boshu_item_color" >
+        android:background="@color/boshu_item_color">
 
         <TextView
             android:layout_width="wrap_content"
@@ -183,29 +172,27 @@
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <TextView
+            android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_qq"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textSize="16sp" />
-         <EditText 
-             android:textSize="16sp"
-            android:background="#00000000"
-            android:layout_marginLeft="100dp"
-            android:id="@+id/et_boshu_qq"
-            android:layout_height="40dp"
-            android:layout_width="fill_parent"
-            android:visibility="gone"
-            />
 
-       
+        <EditText
+            android:textColor="@color/boshu_textcolorallqh"
+            android:id="@+id/et_boshu_qq"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="100dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+
     </RelativeLayout>
 
     <include layout="@layout/view2" />
@@ -213,7 +200,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/boshu_item_color" >
+        android:background="@color/boshu_item_color">
 
         <TextView
             android:layout_width="wrap_content"
@@ -224,65 +211,66 @@
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
 
-        
 
         <TextView
+            android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_editintention"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textSize="16sp" />
-         <EditText 
-             android:textSize="16sp"
-            android:background="#00000000"
-            android:layout_marginLeft="100dp"
-            android:id="@+id/et_boshu_intention"
-            android:layout_height="40dp"
-            android:layout_width="fill_parent"
-            android:visibility="gone"
-            />
 
-     
+        <EditText
+            android:textColor="@color/boshu_textcolorallqh"
+            android:id="@+id/et_boshu_intention"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="100dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+
     </RelativeLayout>
 
     <include layout="@layout/view2" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/boshu_item_color" >
+        android:layout_height="wrap_content"
+        android:background="@color/boshu_item_color">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
+            android:gravity="fill_vertical"
             android:text="个人简历"
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
 
-       
-        <TextView
+
+        <TextView android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_editresum"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textSize="16sp" />
-         <EditText 
-             android:textSize="16sp"
-            android:background="#00000000"
-            android:layout_marginLeft="100dp"
-            android:id="@+id/et_boshu_resum"
-            android:layout_height="40dp"
-            android:layout_width="fill_parent"
-            android:visibility="gone"
-            />
 
-       
+        <EditText
+            android:textColor="@color/boshu_textcolorallqh"
+            android:lines="5"
+            android:id="@+id/et_boshu_resum"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="100dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+
     </RelativeLayout>
 
     <include layout="@layout/view2" />
@@ -290,7 +278,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/boshu_item_color" >
+        android:background="@color/boshu_item_color">
 
         <TextView
             android:layout_width="wrap_content"
@@ -300,26 +288,25 @@
             android:text="身份证号"
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
-         
-        
 
-        <TextView
+
+        <TextView android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_editidnumber"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:gravity="center_vertical"
-            android:text="未填写"
             android:textSize="16sp" />
-         <EditText 
-             android:textSize="16sp"
-            android:background="#00000000"
-            android:layout_marginLeft="100dp"
+
+        <EditText
+            android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/et_boshu_idCard"
-            android:layout_height="40dp"
             android:layout_width="fill_parent"
-            android:visibility="gone"
-            />
+            android:layout_height="40dp"
+            android:layout_marginLeft="100dp"
+            android:background="#00000000"
+            android:textSize="16sp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -337,7 +324,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@color/boshu_item_color"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -355,7 +342,7 @@
             android:layout_marginLeft="100dp"
             android:layout_marginTop="5dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/delete3" />
+            android:src="@drawable/default_add" />
 
         <ImageView
             android:id="@+id/img_boshu_beforehead"
@@ -364,7 +351,7 @@
             android:layout_marginLeft="170dp"
             android:layout_marginTop="5dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/delete3" />
+            android:src="@drawable/default_add" />
 
         <ImageView
             android:id="@+id/img_boshu_afterhead"
@@ -373,7 +360,7 @@
             android:layout_marginLeft="240dp"
             android:layout_marginTop="5dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/delete3" />
+            android:src="@drawable/default_add" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -406,61 +393,6 @@
             android:textSize="11sp" />
     </RelativeLayout>
 
-    <!--
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/boshu_item_color" >
 
-        <TextView
-            android:gravity="center_vertical"
-            android:textSize="16sp"
-            android:textColor="@color/boshu_textcolorkey"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:text="身份证图"
-          />
-
-        <ImageView
-            android:layout_marginTop="5dp"
-            android:id="@+id/img_boshu_beforehead"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="110dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/delete3" />
-
-        <ImageView
-            android:layout_marginTop="5dp"
-            android:id="@+id/img_boshu_afterhead"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="190dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/delete3" />
-
-        <Button
-            android:visibility="gone"
-            android:id="@+id/bt_boshu_ident"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="220dp"
-            android:gravity="center"
-            android:text="认证" />
-    </RelativeLayout>
-    -->
-    <!--
-
-    -->
-
-    <!-- <Button
-        android:id="@+id/bt_boshu_ident"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="220dp"
-        android:gravity="center"
-        android:text="认证"
-        android:visibility="gone" /> -->
 
 </LinearLayout>

@@ -61,8 +61,8 @@ import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.EMMessage.Type;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.InviteMessage;
@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     private Fragment_boshu_Person personFragment;
 
     // 物流的fragment
-  //  private Fragment_boshu_logistics logisticsFragment;
+  //  private LogisticsFragment logisticsFragment;
     private LogisticsFragment logisticsFragment;
     // 发现的fragment
     private Fragment_boshu_find findFragment;
@@ -144,7 +144,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
          * manager.findFragmentByTag("contaclist");
          * chatHistoryFragment=(ChatAllHistoryFragment)
          * manager.findFragmentByTag("chathistory");
-         * logisticsFragment=(Fragment_boshu_logistics)
+         * logisticsFragment=(LogisticsFragment)
          * manager.findFragmentByTag("logistics");
          * findFragment=(Fragment_boshu_find) manager.findFragmentByTag("find");
          * }
@@ -199,12 +199,12 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         // 添加显示第一个fragment
 
         manager.beginTransaction()
-                .add(R.id.fragment_container, chatHistoryFragment,
-                        "chathistory")
-                .add(R.id.fragment_container, contactListFragment, "contaclist")
-                .add(R.id.fragment_container, logisticsFragment, "logistics")
-                .add(R.id.fragment_container, findFragment, "find")
-                .hide(logisticsFragment).hide(findFragment)
+                .add(R.id.fragment_container,personFragment)
+                .add(R.id.fragment_container, chatHistoryFragment)
+                .add(R.id.fragment_container, contactListFragment)
+                .add(R.id.fragment_container, logisticsFragment)
+                .add(R.id.fragment_container, findFragment)
+                .hide(logisticsFragment).hide(findFragment).hide(personFragment)
                 .hide(contactListFragment).show(chatHistoryFragment).commit();
 
         init();
