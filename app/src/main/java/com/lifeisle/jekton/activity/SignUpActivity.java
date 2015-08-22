@@ -40,7 +40,10 @@ import java.util.Map;
  */
 public class SignUpActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener {
 
-    private String TAG = "SignUpActivity";
+    private static final String TAG = "SignUpActivity";
+
+    private static final int MILLI_COUNT_DOWN = 2 * 60 * 1000;
+    private static final int MILLI_COUNT_DOWN_STEP = 1000;
 
     private RequestQueue requestQueue;
 
@@ -133,14 +136,16 @@ public class SignUpActivity extends AppCompatActivity implements TextWatcher, Vi
             case R.id.verify:
                 PhoneNumberValidator validator = new PhoneNumberValidator(etPhone.getText().toString());
                 if (!validate(validator)) break;
+                new VerifyCountDownTime(SignUpActivity.this, MILLI_COUNT_DOWN, MILLI_COUNT_DOWN_STEP)
+                        .start();
+                v.setEnabled(false);
                 requestQueue.add(new VerifyCodeRequestSimple(Request.Method.POST, StringUtils.getServerPath(),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject jsonObject) {
-                                v.setEnabled(false);
+
                                 // TODO parse the responded json
                                 Logger.d(TAG, "get verify code, onResponse()");
-                                new VerifyCountDownTime(SignUpActivity.this, 10 * 1000, 1000).start();
                             }
                         },
                         new Response.ErrorListener() {

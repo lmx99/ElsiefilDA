@@ -21,6 +21,7 @@ import com.lifeisle.jekton.util.StringUtils;
 import com.lifeisle.jekton.util.Toaster;
 import com.lifeisle.jekton.util.network.AutoLoginRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -81,6 +82,35 @@ public class OrderModel {
     }
 
 
+    public void retrieveAllScannedData() {
+        RetrieveAllScannedOrderRequest request = new RetrieveAllScannedOrderRequest(
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        try {
+                            if (jsonObject.getInt("status") == 0) {
+                                if (!executorService.isShutdown()) {
+                                    executorService.execute(new FillAllScannedOrderTask(jsonObject));
+                                }
+                            } else {
+                                Logger.e(TAG, "error occurred when retrieve all scanned orders");
+
+                            }
+                        } catch (JSONException e) {
+                            Logger.e(TAG, "error occurred when retrieve all scanned orders", e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Logger.e(TAG,
+                                 "error occurred when retrieve all scanned orders" + volleyError);
+                    }
+                }
+        );
+        MyApplication.addToRequestQueue(request);
+    }
 
 
     public OrderItem getItem(int index) {
@@ -151,10 +181,6 @@ public class OrderModel {
     }
 
 
-    /**
-     *
-     * @param orderCode code 128 format orderCode
-     */
     public void addOrder(String orderCode) {
         if (jcat_id < 0) {
             Toaster.showShort(context, R.string.error_not_sign_in_job);
@@ -509,6 +535,23 @@ public class OrderModel {
 
 
 
+    private class RetrieveAllScannedOrderRequest extends AutoLoginRequest {
+        public RetrieveAllScannedOrderRequest(Response.Listener<JSONObject> listener,
+                                              Response.ErrorListener errorListener) {
+            super(context, Method.POST, SERVER_PATH, listener, errorListener);
+        }
+
+        @Override
+        protected void setParams(Map<String, String> params) {
+            params.put("limit", "100000");
+            params.put("offset", "0");
+            params.put("sys", "lgst");
+            params.put("ctrl", "lgst_nor");
+            params.put("action", "scaned_orders");
+        }
+    }
+
+
 
 
     /**
@@ -601,21 +644,54 @@ public class OrderModel {
             Logger.d(TAG, "message.arg2 = " + message.arg2);
             message.sendToTarget();
 
-
-            switch (OrderDBUtils.getOrderExistsState(orderItem.orderCode)) {
-                case OrderDBUtils.ORDER_STATE_EXIST:
-                    OrderItem.updateLogistics(orderItem.goodsItems);
-                    OrderDBUtils.setNeedRequest(orderItem.orderCode, OrderItem.REQUEST_NO_NEED);
-                    break;
-                case OrderDBUtils.ORDER_STATE_EXIST_BUT_NOT_DATA:
-                    OrderDBUtils.fillOrderData(orderItem);
-                    break;
-            }
+            updateOrderData(orderItem);
         }
+
+
+    }
+
+    private static void updateOrderData(OrderItem orderItem) {
+        switch (OrderDBUtils.getOrderExistsState(orderItem.orderCode)) {
+            case OrderDBUtils.ORDER_STATE_EXIST:
+                OrderItem.updateLogistics(orderItem.goodsItems);
+                OrderDBUtils.setNeedRequest(orderItem.orderCode, OrderItem.REQUEST_NO_NEED);
+                break;
+            case OrderDBUtils.ORDER_STATE_EXIST_BUT_NOT_DATA:
+                OrderDBUtils.fillOrderData(orderItem);
+                break;
+        }
+
     }
 
 
+    private class FillAllScannedOrderTask implements Runnable {
 
+        private JSONObject mResponse;
+
+        FillAllScannedOrderTask(JSONObject response) {
+            mResponse = response;
+        }
+
+        @Override
+        public void run() {
+            try {
+                JSONArray orders = mResponse.getJSONArray("scaned_orders");
+                for (int i = 0, len = orders.length(); i < len; ++i) {
+                    JSONObject order = orders.getJSONObject(i);
+                    OrderItem orderItem = OrderItem.newOrderItem(order);
+                    updateOrderData(orderItem);
+                }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        reloadData(true);
+                    }
+                });
+            } catch (JSONException e) {
+                Logger.e(TAG, "fill (all) scanned order fill", e);
+            }
+        }
+    }
 
 
 
