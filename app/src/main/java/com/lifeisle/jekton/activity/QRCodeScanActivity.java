@@ -58,13 +58,11 @@ import java.util.Map;
 
 /**
  * @author Jekton
- * @version 0.2 8/10/2015
  */
 public class QRCodeScanActivity extends AppCompatActivity
         implements View.OnClickListener, OrderView, RadioGroup.OnCheckedChangeListener,
         View.OnTouchListener, SwipeRefreshLayout.OnRefreshListener, SurfaceHolder.Callback {
 
-    public static final String ORDER_DELIVERED = "OrderOperateReceiver.ORDER_DELIVERED";
     public static final String ORDER_LOGISTICS_UPDATE = "OrderOperateReceiver.ORDER_LOGISTICS_UPDATE";
 
 
@@ -98,7 +96,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     private View background;
     private EditText barcodeInputText;
 
-    private IntentFilter orderOperateFilter;
+    private IntentFilter logisticsIntentFilter;
     private OrderOperateReceiver orderOperateReceiver = new OrderOperateReceiver();
 
 
@@ -143,9 +141,8 @@ public class QRCodeScanActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_code_scan);
 
-        orderOperateFilter = new IntentFilter();
-        orderOperateFilter.addAction(ORDER_DELIVERED);
-        orderOperateFilter.addAction(ORDER_LOGISTICS_UPDATE);
+        logisticsIntentFilter = new IntentFilter();
+        logisticsIntentFilter.addAction(ORDER_LOGISTICS_UPDATE);
 
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
@@ -220,15 +217,9 @@ public class QRCodeScanActivity extends AppCompatActivity
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-        registerReceiver(orderOperateReceiver, orderOperateFilter);
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
+        registerReceiver(orderOperateReceiver, logisticsIntentFilter);
 
         if (!cameraInit) {
             Logger.d(TAG, "onResume() init camera");
@@ -539,6 +530,10 @@ public class QRCodeScanActivity extends AppCompatActivity
     }
 
 
+    public void postDeliveredOrder(int orderID, int eventID, int position) {
+        closeOptionMenu();
+        orderController.postDeliveredOrder(orderID, eventID, position);
+    }
 
 
     @Override
@@ -640,23 +635,12 @@ public class QRCodeScanActivity extends AppCompatActivity
 
         @Override
         public void onReceive(Context context, Intent intent) {
-
             String action = intent.getAction();
-            switch (action) {
-                case ORDER_DELIVERED:
-                    closeOptionMenu();
-                    int orderID = intent.getIntExtra(OrderListAdapter.OrderListItem.EXTRA_ORDER_CODE, -1);
-                    int eventID = intent.getIntExtra(OrderListAdapter.OrderListItem.EXTRA_EVENT_ID, -1);
-                    orderController.postDeliveredOrder(orderID, eventID);
-                    break;
-                case ORDER_LOGISTICS_UPDATE:
-                    orderController.notifyDataSetChanged(false);
-                    break;
+            if (action.equals(ORDER_LOGISTICS_UPDATE)) {
+                orderController.notifyDataSetChanged(false);
             }
-
         }
     }
-
 
 
 }

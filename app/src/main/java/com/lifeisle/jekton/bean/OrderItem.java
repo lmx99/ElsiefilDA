@@ -138,15 +138,15 @@ public class OrderItem {
             int length = goodsItem.logistics.length;
             if (length == 0) return false;
             Logistics lastLogistics = goodsItem.logistics[length - 1];
-            if (lastLogistics.eventID != EventIDMapper.EVENT_OTHER
-                    && lastLogistics.eventID != EventIDMapper.EVENT_SUPPLEMENT
-                    && lastLogistics.eventID != EventIDMapper.EVENT_RETURN_GOODS
-                    && lastLogistics.eventID != EventIDMapper.EVENT_EXCHANGE) {
-                return false;
+            if (lastLogistics.eventID == EventIDMapper.EVENT_OTHER
+                    || lastLogistics.eventID == EventIDMapper.EVENT_SUPPLEMENT
+                    || lastLogistics.eventID == EventIDMapper.EVENT_RETURN_GOODS
+                    || lastLogistics.eventID == EventIDMapper.EVENT_EXCHANGE) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
 

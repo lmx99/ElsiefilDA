@@ -13,19 +13,15 @@ import com.lifeisle.jekton.util.Logger;
  */
 public class OrdersDBHelper extends SQLiteOpenHelper {
 
-    private static final String TAG = "OrdersDBHelper";
-
-    public static final int DB_VERSION = 4;
-    public static final String DB_NAME = "orderItems";
-
     public static final String TABLE_ORDERS = "orders";
+
     public static final String TABLE_GOODS = "goods";
     public static final String TABLE_LOGISTICS = "logistics";
-
     public static final String INDEX_ORDERS = "orders_index";
-    public static final String INDEX_GOODS = "goods_index";
 
+    public static final String INDEX_GOODS = "goods_index";
     public static final String COLUMN_ORDERS_ID = "_id";
+
     public static final String COLUMN_ORDERS_ORDER_ID = "order_id";
     public static final String COLUMN_ORDERS_ORDER_NUMBER = "order_number";
     public static final String COLUMN_ORDERS_CREATE_TIME = "create_time";
@@ -39,9 +35,9 @@ public class OrdersDBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ORDERS_ORDER_CODE = "order_code";
     public static final String COLUMN_ORDERS_RESTAURANT_ID = "restaurant_id";
     public static final String COLUMN_ORDERS_REQUEST_TYPE = "request_type";
-
-
     public static final String COLUMN_GOODS_ID = "_id";
+
+
     public static final String COLUMN_GOODS_ORDER_ID = "order_id";
     public static final String COLUMN_GOODS_ITEM_ID = "item_id";
     public static final String COLUMN_GOODS_ORDER_CODE = "order_code";
@@ -50,9 +46,9 @@ public class OrdersDBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_GOODS_PRICE = "price";
     public static final String COLUMN_GOODS_QUANTITY = "quantity";
     public static final String COLUMN_GOODS_TOTAL_PRICE = "total_price";
-
-
     public static final String COLUMN_LOGISTICS_ID = "_id";
+
+
     public static final String COLUMN_LOGISTICS_ITEM_ID = "item_id";
     public static final String COLUMN_LOGISTICS_STAGE_ID = "stage_id";
     public static final String COLUMN_LOGISTICS_DLV_NAME = "dlv_name";
@@ -61,6 +57,13 @@ public class OrdersDBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_LOGISTICS_EVENT_DESC = "event_desc";
     public static final String COLUMN_LOGISTICS_MOBILE_PHONE = "mobile_phone";
     public static final String COLUMN_LOGISTICS_REAL_NAME = "real_name";
+
+
+    private static final String TAG = "OrdersDBHelper";
+
+    private static final int DB_VERSION = 4;
+
+    private static final String DB_NAME = "orderItems";
 
 
     private static final String CREATE_TABLE_ORDERS = "create table " + TABLE_ORDERS + " (" +
@@ -83,7 +86,7 @@ public class OrdersDBHelper extends SQLiteOpenHelper {
             COLUMN_GOODS_ID + " integer primary key autoincrement," +
             COLUMN_GOODS_ORDER_ID + " int default -1," +
             COLUMN_GOODS_ITEM_ID + " integer default -1," +
-            COLUMN_GOODS_ORDER_CODE + " varchar(18) not null unique default ''," +
+            COLUMN_GOODS_ORDER_CODE + " varchar(18) default ''," +
             COLUMN_GOODS_RESTAURANT + " varchar(60) default ''," +
             COLUMN_GOODS_COURSE_NAME + " varchar(60) default ''," +
             COLUMN_GOODS_PRICE + " decimal(6, 2) default 0.00," +
@@ -111,9 +114,8 @@ public class OrdersDBHelper extends SQLiteOpenHelper {
             + " (" + COLUMN_GOODS_ORDER_CODE + ");";
 
 
-    public OrdersDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
-                          int version) {
-        super(context, name, factory, version);
+    public OrdersDBHelper(Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
 //    public OrdersDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,

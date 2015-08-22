@@ -1,6 +1,5 @@
 package com.lifeisle.jekton.ui.adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -35,7 +34,7 @@ public class OrderListAdapter extends BaseAdapter {
      */
     private final int normalColor;
 
-    private Context context;
+    private QRCodeScanActivity activity;
     private OrderModel orderModel;
 
     /**
@@ -44,11 +43,11 @@ public class OrderListAdapter extends BaseAdapter {
      */
     private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
-    public OrderListAdapter(Context context, OrderModel orderModel) {
-        this.context = context;
+    public OrderListAdapter(QRCodeScanActivity activity, OrderModel orderModel) {
+        this.activity = activity;
         this.orderModel = orderModel;
 
-        normalColor = context.getResources().getColor(R.color.bg_order_list_item);
+        normalColor = activity.getResources().getColor(R.color.bg_order_list_item);
     }
 
 
@@ -76,6 +75,7 @@ public class OrderListAdapter extends BaseAdapter {
             listItem = (OrderListItem) convertView;
         }
 
+        listItem.position = position;
         OrderItem orderItem = getItem(position);
 
         if (!listItem.isDetailHidden()) {
@@ -106,7 +106,6 @@ public class OrderListAdapter extends BaseAdapter {
     public class OrderListItem extends RelativeLayout implements View.OnClickListener {
 
         public static final String EXTRA_ORDER_CODE = "OrderListItem.EXTRA_ORDER_UPDATE";
-        public static final String EXTRA_EVENT_ID = "OrderListItem.EXTRA_EVENT_ID";
 
         private static final long MILLI_30_MIN = 30 * 60 * 1000;
         private static final long MILLI_45_MIN = 45 * 60 * 1000;
@@ -122,13 +121,14 @@ public class OrderListAdapter extends BaseAdapter {
         private TextView tvDetailsInfo;
         private TextView tvOrderInfo;
 
+        private int position;
         private OrderItem orderItem;
 
 
         public OrderListItem() {
-            super(context);
+            super(activity);
 
-            LayoutInflater inflater = LayoutInflater.from(context);
+            LayoutInflater inflater = LayoutInflater.from(activity);
             inflater.inflate(R.layout.widget_order_list_item, this, true);
 
             btnDeliver = (TextView) findViewById(R.id.deliver);
@@ -159,9 +159,9 @@ public class OrderListAdapter extends BaseAdapter {
                     postDeliveredOrder(orderItem.orderID, EventIDMapper.EVENT_RECEIVED_BY_AGENT);
                     break;
                 case R.id.more:
-                    Intent intent = new Intent(context, OrderOperateActivity.class);
+                    Intent intent = new Intent(activity, OrderOperateActivity.class);
                     intent.putExtra(EXTRA_ORDER_CODE, orderItem.orderCode);
-                    context.startActivity(intent);
+                    activity.startActivity(intent);
                     break;
                 case R.id.detail:
                     if (!isDetailHidden()) {
@@ -174,11 +174,7 @@ public class OrderListAdapter extends BaseAdapter {
         }
 
         private void postDeliveredOrder(int orderID, int eventID) {
-            Intent intent = new Intent(QRCodeScanActivity.ORDER_DELIVERED);
-            intent.putExtra(EXTRA_ORDER_CODE, orderID);
-            intent.putExtra(EXTRA_EVENT_ID, eventID);
-            context.sendBroadcast(intent);
-
+            activity.postDeliveredOrder(orderID, eventID, position);
         }
 
 
