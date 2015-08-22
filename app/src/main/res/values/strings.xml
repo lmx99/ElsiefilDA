@@ -414,6 +414,8 @@
 
 
     <!-- strings that used in SignUpActivity-->
+    <string name="title_activity_sign_up">Sign Up</string>
+
     <string name="hint_user_name">User Name</string>
     <string name="hint_password">Password</string>
     <string name="hint_password_reenter">Re-enter Password</string>
