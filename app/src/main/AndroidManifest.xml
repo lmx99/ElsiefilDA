@@ -489,7 +489,12 @@
             android:name="com.lifeisle.jekton.activity.SignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyTheme"
+            android:label="@string/title_activity_sign_up"
+            android:parentActivityName="com.easemob.chatuidemo.activity.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.easemob.chatuidemo.activity.LoginActivity" />
         </activity>
 
         <receiver
