@@ -114,18 +114,7 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
                         try {
                             int status = response.getInt("status");
                             if (status == 0) {
-                                new Thread() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            JSONObject order = OrderItem.getOrderItemAt(response, 0);
-                                            OrderItem item = OrderItem.newOrderItem(order);
-                                            OrderItem.updateLogistics(item.goodsItems);
-                                        } catch (JSONException e) {
-                                            Logger.e(TAG, e.toString(), e);
-                                        }
-                                    }
-                                }.start();
+                                new Thread(new LogisticsUpdateRunnable(response)).start();
 
                                 Toaster.showShort(OrderOperateActivity.this, R.string.success_post);
                                 finish();
@@ -184,6 +173,28 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
                 return EventIDMapper.EVENT_OTHER;
             default:
                 return -1;
+        }
+    }
+
+
+
+    public static final class LogisticsUpdateRunnable implements Runnable {
+
+        private JSONObject mResponse;
+
+        LogisticsUpdateRunnable(JSONObject response) {
+            mResponse = response;
+        }
+
+        @Override
+        public void run() {
+            try {
+                JSONObject order = OrderItem.getOrderItemAt(mResponse, 0);
+                OrderItem item = OrderItem.newOrderItem(order);
+                OrderItem.updateLogistics(item.goodsItems);
+            } catch (JSONException e) {
+                Logger.e(TAG, e.toString(), e);
+            }
         }
     }
 }
