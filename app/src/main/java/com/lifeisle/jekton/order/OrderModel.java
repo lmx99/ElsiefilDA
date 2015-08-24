@@ -87,6 +87,7 @@ public class OrderModel {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
+                        orderView.stopRefreshView();
                         try {
                             if (jsonObject.getInt("status") == 0) {
                                 if (!executorService.isShutdown()) {
@@ -104,6 +105,7 @@ public class OrderModel {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        orderView.stopRefreshView();
                         Logger.e(TAG,
                                  "error occurred when retrieve all scanned orders" + volleyError);
                     }

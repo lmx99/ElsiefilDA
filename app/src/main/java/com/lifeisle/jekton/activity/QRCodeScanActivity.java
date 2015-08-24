@@ -493,9 +493,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     public void notifyDataSetChanged() {
         Logger.d(TAG, "notifyDataSetChanged()");
         orderListAdapter.notifyDataSetChanged();
-        if (swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.setRefreshing(false);
-        }
+        stopRefreshView();
     }
 
     @Override
@@ -521,6 +519,14 @@ public class QRCodeScanActivity extends AppCompatActivity
     @Override
     public void showErrMsg(int msgId) {
         Toaster.showShort(this, msgId);
+    }
+
+
+    @Override
+    public void stopRefreshView() {
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
