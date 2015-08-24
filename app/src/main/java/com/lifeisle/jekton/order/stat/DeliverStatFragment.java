@@ -19,6 +19,7 @@ import com.lifeisle.jekton.order.stat.controller.GangerLogisticsStatController;
 import com.lifeisle.jekton.order.stat.controller.MotorLogisticsStatController;
 import com.lifeisle.jekton.order.stat.controller.StatController;
 import com.lifeisle.jekton.util.Logger;
+import com.lifeisle.jekton.util.Preferences;
 
 import java.util.Arrays;
 
@@ -39,6 +40,7 @@ public class DeliverStatFragment extends Fragment {
 
     private DeliverStatModel mModel;
     private BaseAdapter mAdapter;
+    private int mStatType;
 
 
     @Override
@@ -51,10 +53,13 @@ public class DeliverStatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Intent intent = getActivity().getIntent();
-        int type = intent.getIntExtra(EXTRA_STAT_TYPE, -1);
+        mStatType = intent.getIntExtra(EXTRA_STAT_TYPE, -1);
+        if (mStatType == -1) {
+            mStatType = Preferences.getStatType();
+        }
 
         StatController controller;
-        switch (type) {
+        switch (mStatType) {
             case STAT_TYPE_DELIVER:
                 controller = new DeliverLogisticsStatController(this);
                 break;
@@ -65,7 +70,7 @@ public class DeliverStatFragment extends Fragment {
                 controller = new GangerLogisticsStatController(this);
                 break;
             default:
-                throw new IllegalArgumentException("unknown type " + type);
+                throw new IllegalArgumentException("unknown type " + mStatType);
         }
 
         mModel = controller.getDeliverStatModel();
@@ -92,6 +97,7 @@ public class DeliverStatFragment extends Fragment {
             intent.putExtra(EXTRA_STAT_INTERVAL, mModel.getInterval());
             startActivityForResult(intent, REQUEST_CODE_SET_INTERVAL);
 
+            Preferences.setStatType(mStatType);
             return true;
         }
 

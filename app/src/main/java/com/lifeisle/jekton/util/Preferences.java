@@ -103,4 +103,16 @@ public class Preferences {
         editor.putInt("jcat_id", id);
         editor.apply();
     }
+
+
+    public static int getStatType() {
+        SharedPreferences preferences = getInstance(PREF_WORK_INFO);
+        return preferences.getInt("stat_type", -1);
+    }
+
+    public static void setStatType(int id) {
+        SharedPreferences.Editor editor = getInstance(PREF_WORK_INFO).edit();
+        editor.putInt("stat_type", id);
+        editor.apply();
+    }
 }
