@@ -5,9 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.view.animation.AlphaAnimation;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
@@ -21,7 +19,7 @@ import com.lifeisle.jekton.util.Preferences;
  */
 public class SplashActivity extends BaseActivity {
 	private RelativeLayout rootLayout;
-	private TextView versionText;
+
 	
 	private static final int sleepTime = 2000;
 
@@ -31,12 +29,12 @@ public class SplashActivity extends BaseActivity {
 		super.onCreate(arg0);
 
 		rootLayout = (RelativeLayout) findViewById(R.id.splash_root1);
-		versionText = (TextView) findViewById(R.id.tv_version);
 
-		versionText.setText(getVersion());
+
+	/*	versionText.setText(getVersion());
 		AlphaAnimation animation = new AlphaAnimation(0.3f, 1.0f);
 		animation.setDuration(1500);
-		rootLayout.startAnimation(animation);
+		rootLayout.startAnimation(animation);*/
 	}
 
 	@Override

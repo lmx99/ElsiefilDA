@@ -43,7 +43,7 @@ public class WheelView extends View {
 	private static final int VALUE_TEXT_COLOR = 0xF0FF6347;
 
 	/** item文字的颜色 */
-	private static final int ITEMS_TEXT_COLOR = 0xFF000000;
+	private static final int ITEMS_TEXT_COLOR = 0x70595757;
 
 	/** 顶部和底部阴影的颜色 */
 /*	private static final int[] SHADOWS_COLORS = new int[] { 0xFF111111,
@@ -53,7 +53,7 @@ public class WheelView extends View {
 	private static final int ADDITIONAL_ITEM_HEIGHT = 15;
 
 	/** 字体大小 */
-	private static final int TEXT_SIZE = 25;
+	private static final int TEXT_SIZE = 28;
 
 	/** 顶部和底部item的偏移值 */
 	private static final int ITEM_OFFSET = TEXT_SIZE / 5;

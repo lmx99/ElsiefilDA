@@ -27,16 +27,17 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:textColor="@color/boshu_textcolorallqh"
                 android:id="@+id/tv_boshu_editname"
                 android:layout_width="220dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
-                android:text="未填写"
                 android:textSize="16sp" >
             </TextView>
 
             <EditText
+                android:textColor="@color/boshu_textcolorallqh"
                 android:textSize="16sp"
                 android:id="@+id/et_boshu_editnickName"
                 android:layout_width="fill_parent"
@@ -56,6 +57,7 @@
         android:background="@color/boshu_item_color" >
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
@@ -71,15 +73,16 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:textColor="@color/boshu_textcolorallqh"
                 android:id="@+id/tv_boshu_editschool"
                 android:layout_width="215dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
-                android:text="未填写"
                 android:textSize="16sp" />
 
             <EditText
+                android:textColor="@color/boshu_textcolorallqh"
                 android:textSize="16sp"
                 android:id="@+id/et_boshu_school"
                 android:layout_width="match_parent"
@@ -107,21 +110,23 @@
             android:textSize="16sp" />
 
         <LinearLayout
+
             android:id="@+id/ll_boshu_job"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal" >
 
             <TextView
+                android:textColor="@color/boshu_textcolorallqh"
                 android:id="@+id/tv_boshu_editjob"
                 android:layout_width="215dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
-                android:text="未填写"
                 android:textSize="16sp" />
 
             <EditText
+                android:textColor="@color/boshu_textcolorallqh"
                 android:textSize="16sp"
                 android:id="@+id/et_boshu_job"
                 android:layout_width="match_parent"
@@ -155,12 +160,13 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:textColor="@color/boshu_textcolorallqh"
+
                 android:id="@+id/tv_boshu_editsex"
                 android:layout_width="220dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
-                android:text="未填写"
                 android:textSize="16sp" />
 
             
@@ -190,12 +196,12 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:textColor="@color/boshu_textcolorallqh"
                 android:id="@+id/tv_boshu_editage"
                 android:layout_width="220dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
-                android:text="未填写"
                 android:textSize="16sp" />
 
            
@@ -223,12 +229,13 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:textColor="@color/boshu_textcolorallqh"
+
                 android:id="@+id/tv_boshu_edithight"
                 android:layout_width="220dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
-                android:text="未填写"
                 android:textSize="16sp" />
 
            
@@ -260,12 +267,12 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:textColor="@color/boshu_textcolorallqh"
                 android:id="@+id/tv_boshu_editbody"
                 android:layout_width="215dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
-                android:text="未填写"
                 android:textSize="16sp" />
 
            
@@ -295,12 +302,13 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:textColor="@color/boshu_textcolorallqh"
+
                 android:id="@+id/tv_boshu_enrollment"
                 android:layout_width="215dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
-                android:text="未填写"
                 android:textSize="16sp" />
 
             
@@ -330,7 +338,7 @@
             android:background="#00000000"
             android:gravity="center"
             android:text="认证"
-            android:textColor="#0348FF"
+            android:textColor="@color/top_bar_normal_bg"
             android:textSize="15sp" >
         </Button>
     </RelativeLayout>

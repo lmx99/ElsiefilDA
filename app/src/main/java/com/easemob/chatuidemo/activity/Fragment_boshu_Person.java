@@ -1,11 +1,6 @@
 package com.easemob.chatuidemo.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,23 +15,23 @@ import android.widget.TextView;
 import com.boshu.activity.Activity_boshu_Message;
 import com.boshu.activity.Activity_boshu_Setting;
 import com.boshu.activity.Activity_boshu_Wallet;
-import com.boshu.customview.CircleImageView;
 import com.boshu.db.UserDao;
 import com.boshu.domain.User;
 import com.boshu.image.ImageDowloader;
-import com.boshu.image.ImageDowloader.OnImageDownloadListener;
 import com.boshu.utils.Model;
+import com.easemob.chatuidemo.Constant;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.util.Preferences;
 
 public class Fragment_boshu_Person extends Fragment implements OnClickListener{
     private RelativeLayout rl_Boshu_Message;
     private RelativeLayout rl_Boshu_Wallet;
+    private RelativeLayout rl_boshu_set;
     private TextView tv_boshu_experience;
-    private CircleImageView circl_boshu_head;
+   // private CircleImageView circl_boshu_head;
     private ImageDowloader mImageDowloader;
     private ImageView iv_boshu_setting;
-    private headImageBroadCast broadCast=new headImageBroadCast();
+    //private headImageBroadCast broadCast=new headImageBroadCast();
     @Override
     public View onCreateView(LayoutInflater inflater,
             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,11 +59,13 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
         rl_Boshu_Message.setOnClickListener(this);
         tv_boshu_experience=(TextView) getView().findViewById(R.id.tv_boshu_experience);
         tv_boshu_experience.setOnClickListener(this);
-        circl_boshu_head=(CircleImageView) getView().findViewById(R.id.circl_boshu_head);
+       // circl_boshu_head=(CircleImageView) getView().findViewById(R.id.circl_boshu_head);
         iv_boshu_setting= (ImageView) getView().findViewById(R.id.iv_boshu_setting);
+        rl_boshu_set= (RelativeLayout) getView().findViewById(R.id.rl_boshu_set);
         iv_boshu_setting.setOnClickListener(this);
+        rl_boshu_set.setOnClickListener(this);
         mImageDowloader=new ImageDowloader(getActivity());
-        this.RegisterBroadCast(broadCast);
+       // this.RegisterBroadCast(broadCast);
         
     }
     
@@ -78,14 +75,14 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
         User user=ud.find(Preferences.getUserName());
         if(user!=null) {
             String headUrl = Model.PitureLoad + user.getHeadImage();
-            Bitmap headBitmap = mImageDowloader.showCacheBitmap(headUrl.replaceAll(
-                    "[^\\w]", ""));
-            setNetBitmap(circl_boshu_head, headBitmap, headUrl);
+          /*  Bitmap headBitmap = mImageDowloader.showCacheBitmap(headUrl.replaceAll(
+                    "[^\\w]", ""));*/
+          //  setNetBitmap(circl_boshu_head, headBitmap, headUrl);
         }
           
         
     }
-    public void setNetBitmap(final ImageView img,Bitmap bitmap,String url){
+   /* public void setNetBitmap(final ImageView img,Bitmap bitmap,String url){
         
         if(bitmap!=null){
             img.setImageBitmap(bitmap);
@@ -101,7 +98,7 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
                 }
             });
         }
-    }
+    }*/
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
@@ -120,7 +117,7 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
             it.setClass(getActivity(), Activity_boshu_Wallet.class);
             getActivity().startActivity(it);
             break;
-            case R.id.iv_boshu_setting:
+            case R.id.rl_boshu_set:
                 it.setClass(getActivity(), Activity_boshu_Setting.class);
                 getActivity().startActivity(it);
                 break;
@@ -128,12 +125,12 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
         
     }
     
-   public void RegisterBroadCast(headImageBroadCast broadCast){
+   /*public void RegisterBroadCast(headImageBroadCast broadCast){
         IntentFilter filter=new IntentFilter();
         filter.addAction("lifeisland.boshu.headimage");
        getActivity().registerReceiver(broadCast, filter);
-    }
-    public class headImageBroadCast extends BroadcastReceiver{
+    }*/
+   /* public class headImageBroadCast extends BroadcastReceiver{
         
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -141,9 +138,15 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
             byte[] b=intent.getByteArrayExtra("bitmap");
             Bitmap bitmap=BitmapFactory.decodeByteArray(b, 0, b.length);
             circl_boshu_head.setImageBitmap(bitmap);
-        }
-       
-        
-    }
+        }*/
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(((MainActivity)getActivity()).isConflict){
+            outState.putBoolean("isConflict", true);
+        }else if(((MainActivity)getActivity()).getCurrentAccountRemoved()){
+            outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
+        }
+    }
 }
