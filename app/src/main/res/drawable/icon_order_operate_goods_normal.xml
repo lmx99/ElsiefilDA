@@ -7,7 +7,7 @@
         android:width="@dimen/width_activity_order_goods_icon" />
 
     <stroke android:color="@color/main_color" android:width="4dp" />
-    <solid android:color="@color/white" />
+    <solid android:color="@android:color/white" />
     <corners android:radius="2dp" />
 
 </shape>

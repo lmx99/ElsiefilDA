@@ -318,7 +318,7 @@
     <string name="btn_sign_in">登录</string>
     <string name="btn_sign_up">注册</string>
     <string name="btn_sign_up_verify">获取验证码</string>
-    <string name="btn_sign_up_verify_wait">%d后重新获取</string>
+    <string name="btn_sign_up_verify_wait">获取验证码(%d)</string>
     <string name="error_auto_login_fail">自动登录失败</string>
     <string name="error_fail_post">数据发送失败</string>
     <string name="error_fail_to_login">登录失败</string>

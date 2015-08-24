@@ -61,13 +61,14 @@
 
 
 
-    <dimen name="height_sign_up_item">60dp</dimen>
-    <dimen name="padding_sign_up_text">10dp</dimen>
-    <dimen name="margin_sign_up_text">10dp</dimen>
-
-    <dimen name="height_sign_in_item">60dp</dimen>
-    <dimen name="width_sign_in_btn">160dp</dimen>
-
+    <!-- SignUpActivity -->
+    <dimen name="height_sign_up_item">50dp</dimen>
+    <dimen name="padding_sign_up_text">4dp</dimen>
+    <dimen name="size_sign_up_text">18sp</dimen>
+    <dimen name="margin_vertical_sign_up_text">20dp</dimen>
+    <dimen name="drawablePadding_sign_up_icons">12dp</dimen>
+    <dimen name="width_verify_button">120dp</dimen>
+    <dimen name="radius_sign_up_button">10dp</dimen>
 
 
     <!--  OrderOperateActivity -->

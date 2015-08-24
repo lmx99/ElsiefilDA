@@ -423,7 +423,7 @@
     <string name="hint_verification_code">Verification Code</string>
 
     <string name="btn_sign_up_verify">Verify</string>
-    <string name="btn_sign_up_verify_wait">Re-send after %ds</string>
+    <string name="btn_sign_up_verify_wait">Re-send(%ds)</string>
     <string name="btn_sign_up">Sign Up</string>
 
     <string name="error_pwd_unmatched">The password that you provided are unmatched</string>
