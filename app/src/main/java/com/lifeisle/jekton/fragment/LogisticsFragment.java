@@ -20,42 +20,42 @@ import com.lifeisle.jekton.activity.QRCodeScanActivity;
 import com.lifeisle.jekton.activity.ScheduleCategoryActivity;
 import com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity;
 
-public class LogisticsFragment extends Fragment implements View.OnClickListener{
+public class LogisticsFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater,
-            @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        return inflater.inflate(R.layout.fragment_logistics,container,false);
+                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_logistics, container, false);
     }
 
-   @Override
-public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    // TODO Auto-generated method stub
-    super.onActivityCreated(savedInstanceState);
-    if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
-        return;
-       init();
-}
-    private void init() {
-        getView().findViewById(R.id.schedule).setOnClickListener(this);
-        getView().findViewById(R.id.myPosition).setOnClickListener(this);
-        getView().findViewById(R.id.occupationAuth).setOnClickListener(this);
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
+            return;
+        init();
+    }
 
-        View schedule = getView().findViewById(R.id.schedule);
+    private void init() {
+        View view = getView();
+        view.findViewById(R.id.schedule).setOnClickListener(this);
+        view.findViewById(R.id.myPosition).setOnClickListener(this);
+        view.findViewById(R.id.job_opportunity).setOnClickListener(this);
+
+        View schedule = view.findViewById(R.id.schedule);
         schedule.setOnClickListener(this);
         schedule.setVisibility(View.GONE);
-        View myPosition = getView().findViewById(R.id.myPosition);
+        View myPosition = view.findViewById(R.id.myPosition);
         myPosition.setOnClickListener(this);
         myPosition.setVisibility(View.GONE);
-        getView().findViewById(R.id.occupationAuth).setOnClickListener(this);
+        view.findViewById(R.id.job_opportunity).setOnClickListener(this);
 
-        getView().findViewById(R.id.deliver_stat).setOnClickListener(this);
-        View orderSearch = getView().findViewById(R.id.order_search);
+        view.findViewById(R.id.deliver_stat).setOnClickListener(this);
+        View orderSearch = view.findViewById(R.id.order_search);
         orderSearch.setOnClickListener(this);
         orderSearch.setVisibility(View.GONE);
-        getView().findViewById(R.id.scanQRCode).setOnClickListener(this);
+        view.findViewById(R.id.scanQRCode).setOnClickListener(this);
 
-        getView().findViewById(R.id.scanQRCode).setOnClickListener(this);
+        view.findViewById(R.id.scanQRCode).setOnClickListener(this);
     }
 
     @Override
@@ -69,7 +69,7 @@ public void onActivityCreated(@Nullable Bundle savedInstanceState) {
                 startActivity(MyPositionActivity.class);
                 break;
             }
-            case R.id.occupationAuth: {
+            case R.id.job_opportunity: {
                 startActivity(JobsActivity.class);
                 break;
             }
@@ -97,9 +97,9 @@ public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(((MainActivity)getActivity()).isConflict){
+        if (((MainActivity) getActivity()).isConflict) {
             outState.putBoolean("isConflict", true);
-        }else if(((MainActivity)getActivity()).getCurrentAccountRemoved()){
+        } else if (((MainActivity) getActivity()).getCurrentAccountRemoved()) {
             outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
         }
     }
