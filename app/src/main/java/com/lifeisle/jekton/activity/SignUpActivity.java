@@ -61,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity implements TextWatcher, Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_test);
+        setContentView(R.layout.activity_sign_up);
 
         etUserName = (EditText) findViewById(R.id.userName);
         etPassword = (EditText) findViewById(R.id.password);
