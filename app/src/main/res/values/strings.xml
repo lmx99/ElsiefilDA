@@ -398,6 +398,8 @@
     <!-- OrderOperateActivity -->
     <string name="title_order_operate">Order Operation</string>
 
+    <string name="action_call_user">Call user</string>
+
     <string name="btn_deliver">Deliver</string>
     <string name="btn_received_by_agent">ReceivedByAgent</string>
     <string name="btn_more">More</string>
@@ -410,6 +412,7 @@
     <string name="hint_reason">Reason:</string>
     <string name="error_order_code_null">Error: order code is null!</string>
     <string name="error_no_goods_item_selected">No goods selected!</string>
+    <string name="error_fail_call_user">Fail to open the dialer</string>
 
 
 

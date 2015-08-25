@@ -1,8 +1,13 @@
 package com.lifeisle.jekton.order;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -46,6 +51,9 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
     private RadioGroup eventRatioGroup;
     private EditText etReason;
 
+    private Object requestTag = new Object();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,12 +91,35 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_order_operate, menu);
+
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_call) {
+            try {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:" + orderItem.mobilePhone));
+                startActivity(callIntent);
+            } catch (ActivityNotFoundException e) {
+                Toaster.showShort(this, R.string.error_fail_call_user);
+                Logger.e("Calling a Phone Number", "Call failed", e);
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MyApplication.cancelRequest(requestTag);
     }
-
 
 
     @Override
@@ -104,45 +135,52 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
         final int eventID = getEventID();
         Logger.d(TAG, "eventID = " + eventID);
 
-        MyApplication.addToRequestQueue(new AutoLoginRequest(this, Request.Method.POST, StringUtils.getServerPath(),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(final JSONObject response) {
-                        Logger.d(TAG, "response: " + response);
-                        try {
-                            int status = response.getInt("status");
-                            if (status == 0) {
-                                new Thread(new LogisticsUpdateRunnable(response)).start();
+        AutoLoginRequest request =
+                new AutoLoginRequest(
+                        this,
+                        Request.Method.POST,
+                        StringUtils.getServerPath(),
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(final JSONObject response) {
+                                Logger.d(TAG, "response: " + response);
+                                try {
+                                    int status = response.getInt("status");
+                                    if (status == 0) {
+                                        new Thread(new LogisticsUpdateRunnable(response)).start();
 
-                                Toaster.showShort(OrderOperateActivity.this, R.string.success_post);
-                                finish();
+                                        Toaster.showShort(OrderOperateActivity.this, R.string.success_post);
+                                        finish();
+                                    }
+                                } catch (JSONException e) {
+                                    Logger.e(TAG, e.toString());
+                                    Toaster.showShort(OrderOperateActivity.this, R.string.error_fail_post);
+                                }
+
                             }
-                        } catch (JSONException e) {
-                            Logger.e(TAG, e.toString());
-                            Toaster.showShort(OrderOperateActivity.this, R.string.error_fail_post);
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toaster.showShort(OrderOperateActivity.this, R.string.error_fail_post);
+                            }
                         }
+                ) {
 
-                    }
-                },
-                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toaster.showShort(OrderOperateActivity.this, R.string.error_fail_post);
+                    protected void setParams(Map<String, String> params) {
+                        for (int i : checkedSet) {
+                            params.put("item_ids[]", "" + i);
+                        }
+                        params.put("event_id", "" + eventID);
+                        params.put("remarks", etReason.getText().toString());
+                        params.put("sys", "lgst");
+                        params.put("ctrl", "lgst_nor");
+                        params.put("action", "items_lgst");
                     }
-                }) {
-
-            @Override
-            protected void setParams(Map<String, String> params) {
-                for (int i : checkedSet) {
-                    params.put("item_ids[]", "" + i);
-                }
-                params.put("event_id", "" + eventID);
-                params.put("remarks", etReason.getText().toString());
-                params.put("sys", "lgst");
-                params.put("ctrl", "lgst_nor");
-                params.put("action", "items_lgst");
-            }
-        });
+                };
+        request.setTag(requestTag);
+        MyApplication.addToRequestQueue(request);
     }
 
     private Set<Integer> getGoodsCheckedSet() {
@@ -152,22 +190,16 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
     private int getEventID() {
         switch (eventRatioGroup.getCheckedRadioButtonId()) {
             case R.id.deliver:
-                Logger.d(TAG, "R.id.deliver selected");
                 return EventIDMapper.EVENT_DELIVERED;
             case R.id.receivedByAgent:
-                Logger.d(TAG, "R.id.receivedByAgent selected");
                 return EventIDMapper.EVENT_RECEIVED_BY_AGENT;
             case R.id.supplement:
-                Logger.d(TAG, "R.id.supplement selected");
                 return EventIDMapper.EVENT_SUPPLEMENT;
             case R.id.returnGoods:
-                Logger.d(TAG, "R.id.returnGoods selected");
                 return EventIDMapper.EVENT_RETURN_GOODS;
             case R.id.exchange:
-                Logger.d(TAG, "R.id.exchange selected");
                 return EventIDMapper.EVENT_EXCHANGE;
             case R.id.other:
-                Logger.d(TAG, "R.id.other selected");
                 return EventIDMapper.EVENT_OTHER;
             default:
                 return -1;
