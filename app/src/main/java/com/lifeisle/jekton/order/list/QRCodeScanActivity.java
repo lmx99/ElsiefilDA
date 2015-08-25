@@ -74,6 +74,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     private ProgressDialog progressDialog;
     private BaseAdapter orderListAdapter;
 
+    private MenuItem optionMenuItem;
     private LinearLayout options;
     private RadioGroup orderOption;
     private RadioGroup sortOption;
@@ -366,6 +367,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_qr_code_scan, menu);
+        optionMenuItem = menu.findItem(R.id.optionMenu);
         return true;
     }
 
@@ -396,19 +398,36 @@ public class QRCodeScanActivity extends AppCompatActivity
     }
 
     private int getOrderOption() {
+        int titleResId;
+        int result;
         switch (orderOption.getCheckedRadioButtonId()) {
             default:
-            case R.id.all:
-                return OrderController.OPTION_ORDER_ALL;
             case R.id.undelivered:
-                return OrderController.OPTION_ORDER_UNDELIVERED;
+                titleResId = R.string.ratio_btn_undelivered;
+                result = OrderController.OPTION_ORDER_UNDELIVERED;
+                break;
+            case R.id.all:
+                titleResId = R.string.ratio_btn_all;
+                result = OrderController.OPTION_ORDER_ALL;
+                break;
             case R.id.delivered:
-                return OrderController.OPTION_ORDER_DELIVERED;
+                titleResId = R.string.ratio_btn_delivered;
+                result = OrderController.OPTION_ORDER_DELIVERED;
+                break;
             case R.id.abnormal:
-                return OrderController.OPTION_ORDER_ABNORMAL;
+                titleResId = R.string.ratio_btn_abnormal;
+                result = OrderController.OPTION_ORDER_ABNORMAL;
+                break;
             case R.id.postFail:
-                return OrderController.OPTION_ORDER_POST_FAIL;
+                titleResId = R.string.ratio_btn_post_fail;
+                result = OrderController.OPTION_ORDER_POST_FAIL;
+                break;
         }
+        if (optionMenuItem != null) {
+            optionMenuItem.setTitle(titleResId);
+        }
+
+        return result;
     }
 
     private int getSortOption() {
@@ -472,6 +491,7 @@ public class QRCodeScanActivity extends AppCompatActivity
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+        // TODO: 8/25/2015
         setOptions();
     }
 

@@ -127,6 +127,7 @@ public class OrderListAdapter extends BaseAdapter {
 
             LayoutInflater inflater = LayoutInflater.from(activity);
             inflater.inflate(R.layout.widget_order_list_item, this, true);
+            setOnClickListener(this);
 
             btnDeliver = (TextView) findViewById(R.id.deliver);
             btnReceivedByAgent = (TextView) findViewById(R.id.receivedByAgent);
@@ -161,11 +162,8 @@ public class OrderListAdapter extends BaseAdapter {
                     activity.startActivity(intent);
                     break;
                 case R.id.detail:
-                    if (!isDetailHidden()) {
-                        tvDetailsInfo.setVisibility(View.GONE);
-                    } else {
-                        tvDetailsInfo.setVisibility(View.VISIBLE);
-                    }
+                default:
+                    toggleDetailView();
                     break;
             }
         }
@@ -174,6 +172,13 @@ public class OrderListAdapter extends BaseAdapter {
             activity.postDeliveredOrder(orderID, eventID, position);
         }
 
+        private void toggleDetailView() {
+            if (!isDetailHidden()) {
+                tvDetailsInfo.setVisibility(View.GONE);
+            } else {
+                tvDetailsInfo.setVisibility(View.VISIBLE);
+            }
+        }
 
 
         public void fillData(OrderItem order) {
