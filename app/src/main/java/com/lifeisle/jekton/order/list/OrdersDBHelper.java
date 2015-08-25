@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.data.db;
+package com.lifeisle.jekton.order.list;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

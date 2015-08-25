@@ -3,7 +3,7 @@ package com.boshu.receiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.lifeisle.jekton.receiver.LogisticsUpdateReceiver;
+import com.lifeisle.jekton.order.LogisticsUpdateReceiver;
 import com.tencent.android.tpush.XGPushBaseReceiver;
 import com.tencent.android.tpush.XGPushClickedResult;
 import com.tencent.android.tpush.XGPushRegisterResult;

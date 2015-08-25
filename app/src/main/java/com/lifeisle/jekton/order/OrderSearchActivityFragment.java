@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.fragment;
+package com.lifeisle.jekton.order;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.order.sorter;
+package com.lifeisle.jekton.order.list.sorter;
 
 import com.lifeisle.jekton.bean.OrderItem;
 

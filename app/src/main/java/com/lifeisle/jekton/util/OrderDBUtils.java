@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteException;
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.bean.OrderItem;
-import com.lifeisle.jekton.data.db.OrdersDBHelper;
+import com.lifeisle.jekton.order.list.OrdersDBHelper;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,12 +1,12 @@
-package com.lifeisle.jekton.receiver;
+package com.lifeisle.jekton.order;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 
-import com.lifeisle.jekton.activity.QRCodeScanActivity;
 import com.lifeisle.jekton.bean.OrderItem;
+import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.OrderDBUtils;
 
@@ -22,7 +22,7 @@ public class LogisticsUpdateReceiver extends BroadcastReceiver {
     private static final String TAG = "LogisticsUpdateReceiver";
 
     public static final String ACTION_LOGISTICS_UPDATE
-            = "com.lifeisle.jekton.receiver.LogisticsUpdateReceiver.ACTION_LOGISTICS_UPDATE";
+            = "com.lifeisle.jekton.order.LogisticsUpdateReceiver.ACTION_LOGISTICS_UPDATE";
     public static final String EXTRA_ORDER_UPDATE = "EXTRA_ORDER_UPDATE";
 
     @Override

@@ -23,7 +23,7 @@ import android.util.Log;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
-import com.lifeisle.jekton.activity.QRCodeScanActivity;
+import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 
 import java.util.Collection;
 import java.util.EnumMap;

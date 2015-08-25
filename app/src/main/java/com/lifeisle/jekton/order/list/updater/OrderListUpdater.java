@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.order.updater;
+package com.lifeisle.jekton.order.list.updater;
 
 import com.lifeisle.jekton.bean.OrderItem;
 import com.lifeisle.jekton.util.OrderDBUtils;

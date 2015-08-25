@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.ui.adapter;
+package com.lifeisle.jekton.order;
 
 import android.content.Context;
 import android.view.LayoutInflater;

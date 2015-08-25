@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.order;
+package com.lifeisle.jekton.order.list;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,11 +9,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.activity.OrderOperateActivity;
 import com.lifeisle.jekton.bean.OrderItem;
-import com.lifeisle.jekton.order.sorter.OrderSorter;
-import com.lifeisle.jekton.order.updater.OrderListUpdater;
-import com.lifeisle.jekton.ui.adapter.OrderListAdapter;
+import com.lifeisle.jekton.order.OrderOperateActivity;
+import com.lifeisle.jekton.order.list.sorter.OrderSorter;
+import com.lifeisle.jekton.order.list.updater.OrderListUpdater;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.OrderDBUtils;
 import com.lifeisle.jekton.util.Preferences;

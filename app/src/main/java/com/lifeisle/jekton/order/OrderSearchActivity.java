@@ -1,9 +1,8 @@
-package com.lifeisle.jekton.activity;
+package com.lifeisle.jekton.order;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import com.lifeisle.android.R;
 

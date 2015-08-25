@@ -73,8 +73,9 @@
         android:paddingRight="68dp"
         android:layout_marginTop="8dp"
         android:layout_below="@id/background"
-        android:inputType="number"
+        android:inputType="text"
         android:singleLine="true"
+        android:textColor="@android:color/white"
         android:layout_centerHorizontal="true" />
 
     <TextView

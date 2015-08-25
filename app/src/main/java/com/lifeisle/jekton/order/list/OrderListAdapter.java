@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.ui.adapter;
+package com.lifeisle.jekton.order.list;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,11 +10,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.activity.OrderOperateActivity;
-import com.lifeisle.jekton.activity.QRCodeScanActivity;
 import com.lifeisle.jekton.bean.OrderItem;
 import com.lifeisle.jekton.order.EventIDMapper;
-import com.lifeisle.jekton.order.OrderModel;
+import com.lifeisle.jekton.order.OrderOperateActivity;
 import com.lifeisle.jekton.util.Logger;
 
 import java.text.SimpleDateFormat;

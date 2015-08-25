@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.activity;
+package com.lifeisle.jekton.order.list;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -42,10 +42,6 @@ import com.google.zxing.client.android.InScanningTimer;
 import com.google.zxing.client.android.ViewfinderView;
 import com.google.zxing.client.android.camera.CameraManager;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.order.OrderController;
-import com.lifeisle.jekton.order.OrderModel;
-import com.lifeisle.jekton.order.OrderView;
-import com.lifeisle.jekton.ui.adapter.OrderListAdapter;
 import com.lifeisle.jekton.util.DimensionUtils;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.Toaster;

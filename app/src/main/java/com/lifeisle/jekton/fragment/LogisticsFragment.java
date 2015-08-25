@@ -15,9 +15,9 @@ import com.easemob.chatuidemo.activity.MainActivity;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.activity.JobsActivity;
 import com.lifeisle.jekton.activity.MyPositionActivity;
-import com.lifeisle.jekton.activity.OrderSearchActivity;
-import com.lifeisle.jekton.activity.QRCodeScanActivity;
 import com.lifeisle.jekton.activity.ScheduleCategoryActivity;
+import com.lifeisle.jekton.order.OrderSearchActivity;
+import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 import com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity;
 
 public class LogisticsFragment extends Fragment implements View.OnClickListener {
