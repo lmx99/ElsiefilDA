@@ -3,7 +3,7 @@
     package="com.lifeisle.android"
     android:versionCode="2"
     android:versionName="V1.0.1"
-    >
+    android:installLocation="auto">
 
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -533,7 +533,7 @@
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.lifeisle.jekton.activity.ScheduleCategoryActivity"
+            android:name="com.lifeisle.jekton.schedule.ScheduleCategoryActivity"
             android:label="@string/title_activity_schedule_category"
             android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
             android:theme="@style/MyTheme" >
@@ -569,13 +569,13 @@
                 android:value="com.lifeisle.jekton.order.stat.DeliverStatActivity" />
         </activity>
         <activity
-            android:name="com.lifeisle.jekton.activity.ScheduleDetailActivity"
+            android:name="com.lifeisle.jekton.schedule.ScheduleDetailActivity"
             android:label="@string/title_activity_add_schedule"
-            android:parentActivityName="com.lifeisle.jekton.activity.ScheduleCategoryActivity"
+            android:parentActivityName="com.lifeisle.jekton.schedule.ScheduleCategoryActivity"
             android:theme="@style/MyTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.lifeisle.jekton.activity.ScheduleCategoryActivity" />
+                android:value="com.lifeisle.jekton.schedule.ScheduleDetailActivity" />
         </activity>
         <activity
             android:name="com.lifeisle.jekton.order.OrderSearchActivity"
@@ -585,6 +585,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.easemob.chatuidemo.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.lifeisle.jekton.schedule.ScheduleTableActivity"
+            android:label="@string/title_activity_schedule_table"
+            android:theme="@style/MyTheme"
+            android:parentActivityName="com.lifeisle.jekton.schedule.ScheduleCategoryActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lifeisle.jekton.schedule.ScheduleCategoryActivity" />
         </activity>
     </application>
 

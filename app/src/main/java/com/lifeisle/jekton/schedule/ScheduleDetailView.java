@@ -29,4 +29,8 @@ public interface ScheduleDetailView {
     void showErrMsg(int msgId);
 
     void close();
+
+    void setEnabled(boolean enabled);
+
+    void setActionBarTitle(int titleId);
 }

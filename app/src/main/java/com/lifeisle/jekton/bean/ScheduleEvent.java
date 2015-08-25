@@ -2,17 +2,21 @@ package com.lifeisle.jekton.bean;
 
 import android.database.Cursor;
 
-import com.lifeisle.jekton.data.ScheduleContract;
+import com.alamkanak.weekview.WeekViewEvent;
+import com.lifeisle.jekton.schedule.data.ScheduleContract;
 import com.lifeisle.jekton.util.ScheduleDBUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * @author Jekton
  * @version 0.1 8/6/2015
  */
-public class ScheduleEvent {
+public class ScheduleEvent implements Cloneable {
 
     public static final int MASK_MONDAY    = 0b0000_0001;
     public static final int MASK_TUESDAY   = 0b0000_0010;
@@ -22,11 +26,13 @@ public class ScheduleEvent {
     public static final int MASK_SATURDAY  = 0b0010_0000;
     public static final int MASK_SUNDAY    = 0b0100_0000;
 
-    public static final int MASK_EVERYDAY  = 0b0111_1111;
-    public static final int MASK_WEEKDAY   = 0b0001_1111;
-    public static final int MASK_NEVER     = 0b0000_0000;
+    public static final int REPEAT_EVERYDAY = 0b0111_1111;
+    public static final int REPEAT_WEEKDAY  = 0b0001_1111;
+    public static final int REPEAT_NEVER    = 0b0000_0000;
 
-    public int id;
+    private static final String TAG = ScheduleEvent.class.getSimpleName();
+
+    public long id;
     public String title;
     public long startMillis;
     public long endMillis;
@@ -36,23 +42,49 @@ public class ScheduleEvent {
     public boolean needPost;
 
 
+    public WeekViewEvent toWeekViewEvent() {
+        Calendar startTime = new GregorianCalendar();
+        startTime.setTimeInMillis(startMillis);
+        Calendar endTime = new GregorianCalendar();
+        endTime.setTimeInMillis(endMillis);
+        return new WeekViewEvent(id, title, startTime, endTime);
+    }
+
+
+
     @Override
     public String toString() {
         return "ScheduleEvent{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", startMillis=" + startMillis +
-                ", endMillis=" + endMillis +
-                ", repeat=" + repeat +
-                ", notify=" + notify +
-                ", type=" + type +
-                ", needPost=" + needPost +
+                "id=" + id + "\n" +
+                ", title='" + title + '\'' + "\n" +
+                ", startMillis=" + startMillis + "\n" +
+                ", endMillis=" + endMillis + "\n" +
+                ", repeat=" + repeat + "\n" +
+                ", notify=" + notify + "\n" +
+                ", type=" + type + "\n" +
+                ", needPost=" + needPost + "\n" +
                 '}';
     }
 
+
+    public static ScheduleEvent newInstance(ScheduleEvent event) {
+        ScheduleEvent newEvent = new ScheduleEvent();
+        newEvent.id = event.id;
+        newEvent.title = event.title;
+        newEvent.startMillis = event.startMillis;
+        newEvent.endMillis = event.endMillis;
+        newEvent.repeat = event.repeat;
+        newEvent.notify = event.notify;
+        newEvent.type = event.type;
+        newEvent.needPost = event.needPost;
+
+        return newEvent;
+    }
+
+
     public static ScheduleEvent newInstance(JSONObject jsonObject) throws JSONException {
         ScheduleEvent event = new ScheduleEvent();
-        event.id = jsonObject.getInt(ScheduleContract.OWN_EVENT_LOCAL_ID);
+        event.id = jsonObject.getLong(ScheduleContract.OWN_EVENT_LOCAL_ID);
         event.title = jsonObject.getString(ScheduleContract.OWN_EVENT_TITLE);
         event.startMillis = jsonObject.getLong(ScheduleContract.OWN_EVENT_START_TIME);
         event.endMillis = jsonObject.getLong(ScheduleContract.OWN_EVENT_END_TIME);
@@ -66,7 +98,7 @@ public class ScheduleEvent {
 
     public static ScheduleEvent newInstance(Cursor cursor) {
         ScheduleEvent event = new ScheduleEvent();
-        event.id = cursor.getInt(ScheduleDBUtils.COL_EVENT_ID);
+        event.id = cursor.getLong(ScheduleDBUtils.COL_EVENT_ID);
         event.title = cursor.getString(ScheduleDBUtils.COL_EVENT_TITLE);
         event.startMillis = cursor.getLong(ScheduleDBUtils.COL_EVENT_START_TIME);
         event.endMillis = cursor.getLong(ScheduleDBUtils.COL_EVENT_END_TIME);
@@ -77,4 +109,5 @@ public class ScheduleEvent {
 
         return event;
     }
+
 }

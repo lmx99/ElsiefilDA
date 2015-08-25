@@ -382,7 +382,7 @@
     <string name="fragment_logistics_deliver_stat">配送统计</string>
     <string name="fragment_logistics_job_opportunity">职资认证</string>
     <string name="fragment_logistics_my_position">我的职位</string>
-    <string name="fragment_logistics_order_search">订单扫描</string>
+    <string name="fragment_logistics_order_search">订单搜索</string>
     <string name="friday">周五</string>
     <string name="hint_address">地址</string>
     <string name="hint_class">分类</string>
@@ -425,4 +425,8 @@
     <string name="title_activity_deliver_stat_category">配送统计</string>
     <string name="title_activity_sign_up">注册</string>
     <string name="title_fragment_logistics">物流</string>
+    <string name="action_1_day">1 天</string>
+    <string name="action_3_days">3 天</string>
+    <string name="action_7_days">7 天</string>
+    <string name="action_today">今天</string>
 </resources>

@@ -1,7 +1,8 @@
-package com.lifeisle.jekton.activity;
+package com.lifeisle.jekton.schedule;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,18 +13,17 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.data.ScheduleContract;
+import com.lifeisle.jekton.bean.ScheduleEvent;
 import com.lifeisle.jekton.fragment.SettingRepeatDialogFragment;
-import com.lifeisle.jekton.schedule.ScheduleController;
-import com.lifeisle.jekton.schedule.ScheduleDetailView;
-import com.lifeisle.jekton.schedule.ScheduleInsertController;
-import com.lifeisle.jekton.schedule.ScheduleModel;
+import com.lifeisle.jekton.schedule.data.ScheduleContract;
 import com.lifeisle.jekton.util.DateUtils;
 import com.lifeisle.jekton.util.Toaster;
 
 public class ScheduleDetailActivity extends AppCompatActivity implements View.OnClickListener,
         TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener,
         SettingRepeatDialogFragment.OnRepeatChangeListener, ScheduleDetailView {
+
+    public static final String EXTRA_EVENT_ID = "ScheduleDetailActivity.EXTRA_EVENT_ID";
 
     /**
      * Stored as a field to prevent being reclaimed
@@ -51,13 +51,22 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_schedule);
 
-        init();
+        initView();
 
-        ScheduleModel scheduleModel = new ScheduleModel(this);
-        controller = new ScheduleInsertController(this, scheduleModel);
+        long eventId = -1;
+        Intent intent = getIntent();
+        if (intent != null
+                && (eventId = intent.getLongExtra(EXTRA_EVENT_ID, eventId)) >= 0) {
+            ScheduleOperateModel scheduleOperateModel = new ScheduleOperateModel(this, eventId);
+            controller = new ScheduleUpdateController(this, scheduleOperateModel);
+        } else {
+            ScheduleOperateModel scheduleOperateModel = new ScheduleOperateModel(this);
+            controller = new ScheduleInsertController(this, scheduleOperateModel);
+        }
+
     }
 
-    private void init() {
+    private void initView() {
         mTitle = (EditText) findViewById(R.id.event_title);
 
         initTime();
@@ -188,6 +197,22 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
         this.repeat.setText(DateUtils.formatRepeatOfWeekString(repeat));
         // store the int repeat to the tag of repeatTextView
         this.repeat.setTag(repeat);
+
+        if (repeat != ScheduleEvent.REPEAT_NEVER) {
+            if (startTimeDay.getVisibility() != View.GONE) {
+                startTimeDay.setVisibility(View.GONE);
+            }
+            if (endTimeDay.getVisibility() != View.GONE) {
+                endTimeDay.setVisibility(View.GONE);
+            }
+        } else {
+            if (startTimeDay.getVisibility() != View.VISIBLE) {
+                startTimeDay.setVisibility(View.VISIBLE);
+            }
+            if (endTimeDay.getVisibility() != View.VISIBLE) {
+                endTimeDay.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override
@@ -237,5 +262,15 @@ public class ScheduleDetailActivity extends AppCompatActivity implements View.On
     @Override
     public void close() {
         finish();
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        // TODO: 8/19/2015
+    }
+
+    @Override
+    public void setActionBarTitle(int titleId) {
+        setTitle(titleId);
     }
 }
