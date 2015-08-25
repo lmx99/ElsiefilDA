@@ -512,6 +512,13 @@ public class QRCodeScanActivity extends AppCompatActivity
         stopRefreshView();
     }
 
+    private void stopRefreshView() {
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
+
+
     @Override
     public void setFailCount(int count) {
         if (count > 0) {
@@ -535,14 +542,6 @@ public class QRCodeScanActivity extends AppCompatActivity
     @Override
     public void showErrMsg(int msgId) {
         Toaster.showShort(this, msgId);
-    }
-
-
-    @Override
-    public void stopRefreshView() {
-        if (swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.setRefreshing(false);
-        }
     }
 
     @Override

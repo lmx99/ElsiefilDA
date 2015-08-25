@@ -15,6 +15,4 @@ public interface OrderView {
     void setFailCount(int count);
 
     void showErrMsg(int msgId);
-
-    void stopRefreshView();
 }

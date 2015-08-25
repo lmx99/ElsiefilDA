@@ -89,25 +89,27 @@ public class OrderModel {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
-                        orderView.stopRefreshView();
                         try {
                             if (jsonObject.getInt("status") == 0) {
                                 if (!executorService.isShutdown()) {
                                     executorService.execute(new FillAllScannedOrderTask(jsonObject));
                                 }
                             } else {
+                                reloadData(false);
                                 Logger.e(TAG, "error occurred when retrieve all scanned orders");
 
                             }
                         } catch (JSONException e) {
+                            reloadData(false);
                             Logger.e(TAG, "error occurred when retrieve all scanned orders", e);
                         }
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        orderView.stopRefreshView();
+                        reloadData(false);
                         Logger.e(TAG,
                                  "error occurred when retrieve all scanned orders" + volleyError);
                     }
@@ -267,8 +269,9 @@ public class OrderModel {
         intent.setAction(JobTimeOutReceiver.ACTION_TIMEOUT);
 
         final int requestCode = 0;
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent,
-                                                                 PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent =
+                PendingIntent.getBroadcast(context, requestCode, intent,
+                                           PendingIntent.FLAG_UPDATE_CURRENT);
         Calendar now = new GregorianCalendar();
         now.add(Calendar.HOUR_OF_DAY, 3);
 
