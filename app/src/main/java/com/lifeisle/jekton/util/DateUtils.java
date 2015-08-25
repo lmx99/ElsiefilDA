@@ -1,7 +1,7 @@
 package com.lifeisle.jekton.util;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.ScheduleEvent;
+import com.lifeisle.jekton.schedule.data.ScheduleEvent;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

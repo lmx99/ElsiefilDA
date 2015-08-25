@@ -10,7 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.OrderItem;
 import com.lifeisle.jekton.order.EventIDMapper;
 import com.lifeisle.jekton.order.OrderOperateActivity;
 import com.lifeisle.jekton.util.Logger;

@@ -1,9 +1,8 @@
-package com.lifeisle.jekton.bean;
+package com.lifeisle.jekton.schedule.data;
 
 import android.database.Cursor;
 
 import com.alamkanak.weekview.WeekViewEvent;
-import com.lifeisle.jekton.schedule.data.ScheduleContract;
 import com.lifeisle.jekton.util.ScheduleDBUtils;
 
 import org.json.JSONException;

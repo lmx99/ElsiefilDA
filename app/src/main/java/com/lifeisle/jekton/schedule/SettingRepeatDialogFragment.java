@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.fragment;
+package com.lifeisle.jekton.schedule;
 
 
 import android.app.Dialog;
@@ -13,7 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.ScheduleEvent;
+import com.lifeisle.jekton.schedule.data.ScheduleEvent;
 import com.lifeisle.jekton.util.Logger;
 
 /**

@@ -14,7 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.OrderItem;
+import com.lifeisle.jekton.order.list.OrderItem;
 import com.lifeisle.jekton.order.list.OrderListAdapter;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.OrderDBUtils;

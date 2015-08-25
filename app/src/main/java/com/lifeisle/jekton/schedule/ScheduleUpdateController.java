@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.view.View;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.ScheduleEvent;
+import com.lifeisle.jekton.schedule.data.ScheduleEvent;
 
 /**
  * @author Jekton

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 
-import com.lifeisle.jekton.bean.OrderItem;
+import com.lifeisle.jekton.order.list.OrderItem;
 import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.OrderDBUtils;

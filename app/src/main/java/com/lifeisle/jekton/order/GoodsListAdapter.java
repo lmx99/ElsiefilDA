@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.OrderItem;
+import com.lifeisle.jekton.order.list.OrderItem;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,8 +1,8 @@
 package com.lifeisle.jekton.schedule;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.ScheduleEvent;
 import com.lifeisle.jekton.schedule.data.ScheduleContract;
+import com.lifeisle.jekton.schedule.data.ScheduleEvent;
 import com.lifeisle.jekton.util.DateUtils;
 import com.lifeisle.jekton.util.Logger;
 

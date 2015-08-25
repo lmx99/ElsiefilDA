@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.lifeisle.jekton.bean.OrderItem;
 import com.lifeisle.jekton.util.Logger;
 
 /**

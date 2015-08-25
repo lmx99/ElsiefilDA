@@ -1,6 +1,6 @@
 package com.lifeisle.jekton.order.list.sorter;
 
-import com.lifeisle.jekton.bean.OrderItem;
+import com.lifeisle.jekton.order.list.OrderItem;
 
 import java.util.ArrayList;
 import java.util.Collections;

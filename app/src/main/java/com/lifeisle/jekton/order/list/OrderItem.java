@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.bean;
+package com.lifeisle.jekton.order.list;
 
 import com.lifeisle.jekton.order.EventIDMapper;
 import com.lifeisle.jekton.util.OrderDBUtils;

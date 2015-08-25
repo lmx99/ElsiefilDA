@@ -7,9 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.easemob.chatuidemo.MyApplication;
-import com.lifeisle.jekton.bean.ScheduleEvent;
 import com.lifeisle.jekton.schedule.data.ScheduleContract.EventEntry;
 import com.lifeisle.jekton.schedule.data.ScheduleDBHelper;
+import com.lifeisle.jekton.schedule.data.ScheduleEvent;
 
 import java.util.ArrayList;
 import java.util.Calendar;

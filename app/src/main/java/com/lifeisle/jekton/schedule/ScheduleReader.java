@@ -1,7 +1,7 @@
 package com.lifeisle.jekton.schedule;
 
 import com.alamkanak.weekview.WeekViewEvent;
-import com.lifeisle.jekton.bean.ScheduleEvent;
+import com.lifeisle.jekton.schedule.data.ScheduleEvent;
 import com.lifeisle.jekton.util.ScheduleDBUtils;
 
 import java.util.ArrayList;

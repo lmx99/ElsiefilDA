@@ -13,9 +13,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.ScheduleEvent;
-import com.lifeisle.jekton.fragment.SettingRepeatDialogFragment;
 import com.lifeisle.jekton.schedule.data.ScheduleContract;
+import com.lifeisle.jekton.schedule.data.ScheduleEvent;
 import com.lifeisle.jekton.util.DateUtils;
 import com.lifeisle.jekton.util.Toaster;
 
