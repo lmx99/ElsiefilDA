@@ -62,7 +62,5 @@ public class LogisticsUpdateReceiver extends BroadcastReceiver {
             e.printStackTrace();
         }
 
-
-
     }
 }

@@ -486,6 +486,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.lifeisle.jekton.order.list.QRCodeScanActivity" />
         </activity>
+        <receiver
+            android:name="com.lifeisle.jekton.order.list.JobTimeOutReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.lifeisle.jekton.order.list.JobTimeOutReceiver.ACTION_TIMEOUT" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name="com.lifeisle.jekton.activity.SignUpActivity"
             android:screenOrientation="portrait"

@@ -1,5 +1,7 @@
 package com.lifeisle.jekton.order.list;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -25,6 +27,8 @@ import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -228,6 +232,7 @@ public class OrderModel {
                                             jcat_id = response.getInt("jcat_id");
                                             Preferences.setJCatID(jcat_id);
                                             Toaster.showShort(context, R.string.success_sign_in_jobs);
+                                            setupJobTimeOutAlarm();
                                             break;
                                         case 1:
                                             Toaster.showShort(context, R.string.error_fail_sign_in_jobs_1);
@@ -254,6 +259,21 @@ public class OrderModel {
                         }
                 );
         MyApplication.addToRequestQueue(request);
+    }
+
+
+    private void setupJobTimeOutAlarm() {
+        Intent intent = new Intent();
+        intent.setAction(JobTimeOutReceiver.ACTION_TIMEOUT);
+
+        final int requestCode = 0;
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent,
+                                                                 PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar now = new GregorianCalendar();
+        now.add(Calendar.HOUR_OF_DAY, 3);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, now.getTimeInMillis(), pendingIntent);
     }
 
 
