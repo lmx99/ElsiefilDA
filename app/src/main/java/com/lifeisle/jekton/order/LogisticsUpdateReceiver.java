@@ -36,11 +36,8 @@ public class LogisticsUpdateReceiver extends BroadcastReceiver {
                     if (orderCode.equals("")) return;
 
                     Logger.d(TAG, "orderCode = " + orderCode);
-                    if (OrderDBUtils.isOrderCodeExists(orderCode)) {
-                        OrderDBUtils.setNeedRequest(orderCode, OrderItem.REQUEST_LOGISTICS_UPDATE);
-                    } else {
-                        OrderDBUtils.insertOrderCode(orderCode, OrderItem.REQUEST_LOGISTICS_UPDATE);
-                    }
+                    OrderDBUtils.setNeedRequest(orderCode, OrderItem.REQUEST_LOGISTICS_UPDATE);
+
 
                     Intent notifyDataSetChanged = new Intent(QRCodeScanActivity.ORDER_LOGISTICS_UPDATE);
                     context.sendBroadcast(notifyDataSetChanged);
