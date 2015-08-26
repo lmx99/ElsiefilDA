@@ -1,5 +1,7 @@
 package com.lifeisle.jekton.order;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -50,6 +52,8 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
     private RadioButton rbDeliver;
     private RadioGroup eventRatioGroup;
     private EditText etReason;
+
+    private Dialog mDialog;
 
     private Object requestTag = new Object();
 
@@ -147,12 +151,19 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
                                 try {
                                     int status = response.getInt("status");
                                     if (status == 0) {
-                                        new Thread(new LogisticsUpdateRunnable(response)).start();
+                                        JSONObject order = OrderItem.getOrderItemAt(response, 0);
+                                        OrderItem item = OrderItem.newOrderItem(order);
+                                        OrderItem.updateLogistics(item.goodsItems);
 
+                                        closeDialog();
                                         Toaster.showShort(OrderOperateActivity.this, R.string.success_post);
                                         finish();
+                                    } else {
+                                        closeDialog();
+                                        Toaster.showShort(OrderOperateActivity.this, R.string.error_fail_post);
                                     }
                                 } catch (JSONException e) {
+                                    closeDialog();
                                     Logger.e(TAG, e.toString());
                                     Toaster.showShort(OrderOperateActivity.this, R.string.error_fail_post);
                                 }
@@ -169,8 +180,11 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
 
                     @Override
                     protected void setParams(Map<String, String> params) {
+                        int index = 0;
                         for (int i : checkedSet) {
-                            params.put("item_ids[]", "" + i);
+                            // work for PHP server
+                            params.put("item_ids[" + index++ + "]", "" + i);
+                            Logger.d(TAG, "item_id = " + i);
                         }
                         params.put("event_id", "" + eventID);
                         params.put("remarks", etReason.getText().toString());
@@ -181,6 +195,7 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
                 };
         request.setTag(requestTag);
         MyApplication.addToRequestQueue(request);
+        openDialog();
     }
 
     private Set<Integer> getGoodsCheckedSet() {
@@ -206,25 +221,17 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-
-
-    public static final class LogisticsUpdateRunnable implements Runnable {
-
-        private JSONObject mResponse;
-
-        LogisticsUpdateRunnable(JSONObject response) {
-            mResponse = response;
+    private void openDialog() {
+        if (mDialog == null) {
+            mDialog = new ProgressDialog(this);
         }
+        mDialog.show();
+    }
 
-        @Override
-        public void run() {
-            try {
-                JSONObject order = OrderItem.getOrderItemAt(mResponse, 0);
-                OrderItem item = OrderItem.newOrderItem(order);
-                OrderItem.updateLogistics(item.goodsItems);
-            } catch (JSONException e) {
-                Logger.e(TAG, e.toString(), e);
-            }
+    private void closeDialog() {
+        if (mDialog != null) {
+            mDialog.dismiss();
         }
     }
+
 }

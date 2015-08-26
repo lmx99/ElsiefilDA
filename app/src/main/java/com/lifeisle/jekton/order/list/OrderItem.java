@@ -108,7 +108,7 @@ public class OrderItem {
                 }
 
             }
-            details = builder.toString();
+            details = builder.substring(0, builder.length() - 1);
         }
         return details;
     }

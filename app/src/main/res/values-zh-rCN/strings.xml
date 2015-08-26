@@ -420,7 +420,7 @@
     <string name="cat_ganger_logistics_stat">领班统计</string>
     <string name="cat_motor_logistics_stat">电车员配送统计</string>
     <string name="error_fail_enter_jobs">入职失败</string>
-    <string name="error_fail_sign_in_jobs_2">不能重复签到或没有安排工作</string>
+    <string name="error_fail_sign_in_jobs_2_2">没有安排工作</string>
     <string name="success_enter_jobs">入职成功</string>
     <string name="title_activity_deliver_stat_category">配送统计</string>
     <string name="title_activity_sign_up">注册</string>
