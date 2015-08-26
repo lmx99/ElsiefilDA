@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.EventIDMapper;
 import com.lifeisle.jekton.order.OrderOperateActivity;
@@ -26,10 +27,18 @@ public class OrderListAdapter extends BaseAdapter {
 
     private static final String TAG = "OrderListAdapter";
 
-    /**
-     * used by {@link OrderListItem}
-     */
-    private final int normalColor;
+
+    private static final long MILLI_30_MIN = 30 * 60 * 1000;
+    private static final long MILLI_45_MIN = 45 * 60 * 1000;
+    private static final long MILLI_60_MIN = 60 * 60 * 1000;
+
+    private static final int URGENCY_LEVEL_NORMAL =
+            MyApplication.getInstance().getResources().getColor(R.color.bg_order_list_item);
+    private static final int URGENCY_LEVEL_LIGHT = Color.YELLOW;
+    private static final int URGENCY_LEVEL_MIDDLE = Color.rgb(255, 165, 0);
+    private static final int URGENCY_LEVEL_SEVER = Color.RED;
+
+
 
     private QRCodeScanActivity activity;
     private OrderModel orderModel;
@@ -43,8 +52,6 @@ public class OrderListAdapter extends BaseAdapter {
     public OrderListAdapter(QRCodeScanActivity activity, OrderModel orderModel) {
         this.activity = activity;
         this.orderModel = orderModel;
-
-        normalColor = activity.getResources().getColor(R.color.bg_order_list_item);
     }
 
 
@@ -104,19 +111,16 @@ public class OrderListAdapter extends BaseAdapter {
 
         public static final String EXTRA_ORDER_CODE = "OrderListItem.EXTRA_ORDER_UPDATE";
 
-        private static final long MILLI_30_MIN = 30 * 60 * 1000;
-        private static final long MILLI_45_MIN = 45 * 60 * 1000;
-        private static final long MILLI_60_MIN = 60 * 60 * 1000;
-
 
         private TextView btnDeliver;
         private TextView btnReceivedByAgent;
         private TextView btnMore;
         private TextView tvOrderNum;
         private TextView tvTime;
-        private TextView btnDetail;
+//        private TextView btnDetail;
         private TextView tvDetailsInfo;
         private TextView tvOrderInfo;
+        private View mUrgencyIndicator;
 
         private int position;
         private OrderItem orderItem;
@@ -134,15 +138,16 @@ public class OrderListAdapter extends BaseAdapter {
             btnMore = (TextView) findViewById(R.id.more);
             tvOrderNum = (TextView) findViewById(R.id.orderNum);
             tvTime = (TextView) findViewById(R.id.time);
-            btnDetail = (TextView) findViewById(R.id.detail);
+//            btnDetail = (TextView) findViewById(R.id.detail);
             tvDetailsInfo = (TextView) findViewById(R.id.detailsInfo);
             tvOrderInfo = (TextView) findViewById(R.id.orderInfo);
+            mUrgencyIndicator = findViewById(R.id.urgency_indicator);
 
 
             btnDeliver.setOnClickListener(this);
             btnReceivedByAgent.setOnClickListener(this);
             btnMore.setOnClickListener(this);
-            btnDetail.setOnClickListener(this);
+//            btnDetail.setOnClickListener(this);
         }
 
 
@@ -161,7 +166,7 @@ public class OrderListAdapter extends BaseAdapter {
                     intent.putExtra(EXTRA_ORDER_CODE, orderItem.orderCode);
                     activity.startActivity(intent);
                     break;
-                case R.id.detail:
+//                case R.id.detail:
                 default:
                     toggleDetailView();
                     break;
@@ -194,20 +199,7 @@ public class OrderListAdapter extends BaseAdapter {
             tvOrderNum.setText(order.goodsItems == null ? "" : "" + order.goodsItems.length);
 
             tvTime.setText(dateFormat.format(order.addTime));
-            Date date = new Date();
-            long delta = date.getTime() - order.createTime.getTime();
-            Logger.d(TAG, "create time delta = " + delta);
-            if (delta > MILLI_60_MIN) {
-                setBackgroundColor(Color.RED);
-            } else if (delta > MILLI_45_MIN) {
-                setBackgroundColor(Color.rgb(255, 165, 0));
-            } else if (delta > MILLI_30_MIN) {
-                setBackgroundColor(Color.YELLOW);
-            } else {
-                setBackgroundColor(normalColor);
-            }
-
-
+            setUrgencyLevel();
 
             setButtonsEnable(order.orderID > 0);
 
@@ -221,6 +213,22 @@ public class OrderListAdapter extends BaseAdapter {
                 }
             }
 
+
+        }
+
+        private void setUrgencyLevel() {
+            Date date = new Date();
+            long delta = date.getTime() - orderItem.createTime.getTime();
+            Logger.d(TAG, "create time delta = " + delta);
+            if (delta > MILLI_60_MIN) {
+                mUrgencyIndicator.setBackgroundColor(URGENCY_LEVEL_SEVER);
+            } else if (delta > MILLI_45_MIN) {
+                mUrgencyIndicator.setBackgroundColor(URGENCY_LEVEL_MIDDLE);
+            } else if (delta > MILLI_30_MIN) {
+                mUrgencyIndicator.setBackgroundColor(URGENCY_LEVEL_LIGHT);
+            } else {
+                mUrgencyIndicator.setBackgroundColor(URGENCY_LEVEL_NORMAL);
+            }
 
         }
 
@@ -246,7 +254,7 @@ public class OrderListAdapter extends BaseAdapter {
 
         public void setButtonsEnable(boolean enabled) {
             btnMore.setEnabled(enabled);
-            btnDetail.setEnabled(enabled);
+//            btnDetail.setEnabled(enabled);
             setDeliverButtonEnable(enabled);
         }
 
