@@ -1,6 +1,7 @@
 package com.lifeisle.jekton.order.list;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -129,6 +130,7 @@ public class OrderListAdapter extends BaseAdapter {
         private int position;
         private OrderItem orderItem;
 
+        private int mUrgencyIndicatorHeight;
 
         public OrderListItem() {
             super(activity);
@@ -137,6 +139,7 @@ public class OrderListAdapter extends BaseAdapter {
             inflater.inflate(R.layout.widget_order_list_item, this, true);
             setPadding(0, PADDING_LIST_ITEM, PADDING_LIST_ITEM, PADDING_LIST_ITEM);
             setOnClickListener(this);
+            setWillNotDraw(false);
 
             btnDeliver = (TextView) findViewById(R.id.deliver);
             btnReceivedByAgent = (TextView) findViewById(R.id.receivedByAgent);
@@ -153,8 +156,24 @@ public class OrderListAdapter extends BaseAdapter {
             btnReceivedByAgent.setOnClickListener(this);
             btnMore.setOnClickListener(this);
 //            btnDetail.setOnClickListener(this);
+
         }
 
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+
+            if (mUrgencyIndicatorHeight == 0) {
+                mUrgencyIndicatorHeight = computeHeight();
+                mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorHeight;
+                Logger.d(TAG, "mUrgencyIndicatorHeight = " + mUrgencyIndicatorHeight);
+            }
+        }
+
+        private int computeHeight() {
+            return getHeight() * 4 / 5;
+        }
 
         @Override
         public void onClick(View v) {
