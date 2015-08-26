@@ -13,6 +13,7 @@ import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.EventIDMapper;
 import com.lifeisle.jekton.order.OrderOperateActivity;
+import com.lifeisle.jekton.util.DimensionUtils;
 import com.lifeisle.jekton.util.Logger;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +29,9 @@ public class OrderListAdapter extends BaseAdapter {
     private static final String TAG = "OrderListAdapter";
 
 
+    /**
+     * For {@link com.lifeisle.jekton.order.list.OrderListAdapter.OrderListItem}
+     */
     private static final long MILLI_30_MIN = 30 * 60 * 1000;
     private static final long MILLI_45_MIN = 45 * 60 * 1000;
     private static final long MILLI_60_MIN = 60 * 60 * 1000;
@@ -38,6 +42,7 @@ public class OrderListAdapter extends BaseAdapter {
     private static final int URGENCY_LEVEL_MIDDLE = Color.rgb(255, 165, 0);
     private static final int URGENCY_LEVEL_SEVER = Color.RED;
 
+    private final int PADDING_LIST_ITEM = DimensionUtils.dp2px(MyApplication.getInstance(), 16);
 
 
     private QRCodeScanActivity activity;
@@ -111,7 +116,6 @@ public class OrderListAdapter extends BaseAdapter {
 
         public static final String EXTRA_ORDER_CODE = "OrderListItem.EXTRA_ORDER_UPDATE";
 
-
         private TextView btnDeliver;
         private TextView btnReceivedByAgent;
         private TextView btnMore;
@@ -131,6 +135,7 @@ public class OrderListAdapter extends BaseAdapter {
 
             LayoutInflater inflater = LayoutInflater.from(activity);
             inflater.inflate(R.layout.widget_order_list_item, this, true);
+            setPadding(PADDING_LIST_ITEM, PADDING_LIST_ITEM, PADDING_LIST_ITEM, PADDING_LIST_ITEM);
             setOnClickListener(this);
 
             btnDeliver = (TextView) findViewById(R.id.deliver);

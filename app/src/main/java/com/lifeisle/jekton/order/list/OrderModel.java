@@ -379,9 +379,9 @@ public class OrderModel {
                                 orderRequestCount--;
                                 updateLogistics(response, index, currentInitCount);
                             } else {
-                                Logger.d(TAG, "postOrderCode response: \n" + response);
                                 OrderDBUtils.deleteOrderCode(orderCode);
                                 Toaster.showShort(context, R.string.error_order_code_invalid);
+                                reloadData(false);
                             }
                         } catch (JSONException e) {
                             Logger.e(TAG, e.toString(), e);
@@ -704,15 +704,15 @@ public class OrderModel {
                     OrderItem orderItem = OrderItem.newOrderItem(order);
                     updateOrderData(orderItem);
                 }
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        reloadData(true);
-                    }
-                });
             } catch (JSONException e) {
-                Logger.e(TAG, "fill (all) scanned order fill", e);
+                Logger.e(TAG, "Fail to fill (all) scanned orders", e);
             }
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    reloadData(false);
+                }
+            });
         }
     }
 
