@@ -227,29 +227,7 @@ public class OrderModel {
                             @Override
                             public void onResponse(JSONObject response) {
                                 Logger.d(TAG, "signInAJob() response: " + response);
-                                try {
-                                    int status = response.getInt("status");
-                                    switch (status) {
-                                        case 0:
-                                            jcat_id = response.getInt("jcat_id");
-                                            Preferences.setJCatID(jcat_id);
-                                            Toaster.showShort(context, R.string.success_sign_in_jobs);
-                                            setupJobTimeOutAlarm();
-                                            break;
-                                        case 1:
-                                            Toaster.showShort(context, R.string.error_fail_sign_in_jobs_1);
-                                            break;
-                                        case 2:
-                                            Toaster.showShort(context, R.string.error_fail_sign_in_jobs_2);
-                                            break;
-                                        default:
-                                            Toaster.showShort(context, R.string.error_fail_sign_in_jobs_1);
-                                            break;
-                                    }
-                                } catch (JSONException e) {
-                                    Toaster.showShort(context, R.string.error_fail_sign_in_jobs_1);
-                                    Logger.e(TAG, "Sign In Jobs response: " + response, e);
-                                }
+                                parseSignInResponse(response);
                             }
                         },
                         new Response.ErrorListener() {
@@ -261,6 +239,42 @@ public class OrderModel {
                         }
                 );
         MyApplication.addToRequestQueue(request);
+    }
+
+    private void parseSignInResponse(JSONObject response) {
+        try {
+            int status = response.getInt("status");
+            switch (status) {
+                case 0:
+                    readJCatId(response);
+                    break;
+                case 2:
+                    if (jcat_id > 0) {
+                        Toaster.showShort(context, R.string.error_fail_sign_in_jobs_2_1);
+                    } else {
+                        try {
+                            readJCatId(response);
+                        } catch (JSONException ex) {
+                            Toaster.showShort(context, R.string.error_fail_sign_in_jobs_2_2);
+                        }
+                    }
+                    break;
+                case 1:
+                default:
+                    Toaster.showShort(context, R.string.error_fail_sign_in_jobs_1);
+                    break;
+            }
+        } catch (JSONException e) {
+            Toaster.showShort(context, R.string.error_fail_sign_in_jobs_1);
+            Logger.e(TAG, "Sign In Jobs response: " + response, e);
+        }
+    }
+
+    private void readJCatId(JSONObject response) throws JSONException{
+        jcat_id = response.getInt("jcat_id");
+        Preferences.setJCatID(jcat_id);
+        Toaster.showShort(context, R.string.success_sign_in_jobs);
+        setupJobTimeOutAlarm();
     }
 
 

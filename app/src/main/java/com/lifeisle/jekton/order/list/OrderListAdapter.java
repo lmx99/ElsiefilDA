@@ -135,7 +135,7 @@ public class OrderListAdapter extends BaseAdapter {
 
             LayoutInflater inflater = LayoutInflater.from(activity);
             inflater.inflate(R.layout.widget_order_list_item, this, true);
-            setPadding(PADDING_LIST_ITEM, PADDING_LIST_ITEM, PADDING_LIST_ITEM, PADDING_LIST_ITEM);
+            setPadding(0, PADDING_LIST_ITEM, PADDING_LIST_ITEM, PADDING_LIST_ITEM);
             setOnClickListener(this);
 
             btnDeliver = (TextView) findViewById(R.id.deliver);
@@ -234,7 +234,7 @@ public class OrderListAdapter extends BaseAdapter {
             } else {
                 mUrgencyIndicator.setBackgroundColor(URGENCY_LEVEL_NORMAL);
             }
-
+            mUrgencyIndicator.invalidate();
         }
 
 
