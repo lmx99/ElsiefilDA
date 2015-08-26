@@ -130,7 +130,8 @@ public class OrderListAdapter extends BaseAdapter {
         private int position;
         private OrderItem orderItem;
 
-        private int mUrgencyIndicatorHeight;
+        private int mUrgencyIndicatorOriginHeight;
+        private int mUrgencyIndicatorExpandedHeight;
 
         public OrderListItem() {
             super(activity);
@@ -164,16 +165,35 @@ public class OrderListAdapter extends BaseAdapter {
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
 
-            if (mUrgencyIndicatorHeight == 0) {
-                mUrgencyIndicatorHeight = computeHeight();
-                mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorHeight;
-                Logger.d(TAG, "mUrgencyIndicatorHeight = " + mUrgencyIndicatorHeight);
+            if (mUrgencyIndicatorOriginHeight == 0) {
+                mUrgencyIndicatorOriginHeight = computeHeight();
+                mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorOriginHeight;
+                Logger.d(TAG, "mUrgencyIndicatorOriginHeight = " + mUrgencyIndicatorOriginHeight);
             }
+
+            if (mUrgencyIndicatorExpandedHeight == 0 && !isDetailHidden()) {
+                // calculate once time
+                post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mUrgencyIndicatorExpandedHeight == 0) {
+                            mUrgencyIndicatorExpandedHeight = computeHeight();
+                        }
+                        mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorExpandedHeight;
+                        Logger.d(TAG, "dispatchDraw() mUrgencyIndicatorExpandedHeight = "
+                                + mUrgencyIndicatorExpandedHeight);
+                        mUrgencyIndicator.requestLayout();
+                    }
+                });
+            }
+
         }
 
         private int computeHeight() {
             return getHeight() * 4 / 5;
         }
+
+
 
         @Override
         public void onClick(View v) {
@@ -204,8 +224,13 @@ public class OrderListAdapter extends BaseAdapter {
         private void toggleDetailView() {
             if (!isDetailHidden()) {
                 tvDetailsInfo.setVisibility(View.GONE);
+                mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorOriginHeight;
+
             } else {
                 tvDetailsInfo.setVisibility(View.VISIBLE);
+                if (mUrgencyIndicatorExpandedHeight > 0) {
+                    mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorExpandedHeight;
+                }
             }
         }
 
