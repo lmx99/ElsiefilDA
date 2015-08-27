@@ -125,7 +125,6 @@ public class OrderListAdapter extends BaseAdapter {
         private TextView btnMore;
         private TextView tvOrderNum;
         private TextView tvTime;
-//        private TextView btnDetail;
         private TextView tvDetailsInfo;
         private TextView tvOrderInfo;
         private View mUrgencyIndicator;
@@ -149,17 +148,13 @@ public class OrderListAdapter extends BaseAdapter {
             btnMore = (TextView) findViewById(R.id.more);
             tvOrderNum = (TextView) findViewById(R.id.orderNum);
             tvTime = (TextView) findViewById(R.id.time);
-//            btnDetail = (TextView) findViewById(R.id.detail);
             tvDetailsInfo = (TextView) findViewById(R.id.detailsInfo);
             tvOrderInfo = (TextView) findViewById(R.id.orderInfo);
             mUrgencyIndicator = findViewById(R.id.urgency_indicator);
 
-
             btnDeliver.setOnClickListener(this);
             btnReceivedByAgent.setOnClickListener(this);
             btnMore.setOnClickListener(this);
-//            btnDetail.setOnClickListener(this);
-
         }
 
 
@@ -216,9 +211,10 @@ public class OrderListAdapter extends BaseAdapter {
                     intent.putExtra(EXTRA_ORDER_CODE, orderItem.orderCode);
                     activity.startActivity(intent);
                     break;
-//                case R.id.detail:
                 default:
-                    toggleDetailView();
+                    if (orderItem != null && orderItem.orderID != -1) {
+                        toggleDetailView();
+                    }
                     break;
             }
         }

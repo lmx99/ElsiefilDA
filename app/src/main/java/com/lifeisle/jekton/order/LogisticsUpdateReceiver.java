@@ -8,7 +8,6 @@ import android.os.Handler;
 import com.lifeisle.jekton.order.list.OrderItem;
 import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 import com.lifeisle.jekton.util.Logger;
-import com.lifeisle.jekton.util.OrderDBUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;

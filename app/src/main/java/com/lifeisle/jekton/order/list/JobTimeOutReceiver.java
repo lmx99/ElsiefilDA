@@ -4,8 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.lifeisle.jekton.order.OrderDBUtils;
 import com.lifeisle.jekton.util.Logger;
-import com.lifeisle.jekton.util.OrderDBUtils;
 import com.lifeisle.jekton.util.Preferences;
 
 /**

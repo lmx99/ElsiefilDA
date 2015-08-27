@@ -11,11 +11,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
+import com.lifeisle.jekton.order.OrderDBUtils;
 import com.lifeisle.jekton.order.OrderOperateActivity;
 import com.lifeisle.jekton.order.list.sorter.OrderSorter;
 import com.lifeisle.jekton.order.list.updater.OrderListUpdater;
 import com.lifeisle.jekton.util.Logger;
-import com.lifeisle.jekton.util.OrderDBUtils;
 import com.lifeisle.jekton.util.Preferences;
 import com.lifeisle.jekton.util.StringUtils;
 import com.lifeisle.jekton.util.Toaster;
@@ -76,6 +76,7 @@ public class OrderModel {
         executorService = Executors.newSingleThreadExecutor();
 
         handler = new OrderUpdateHandler(this);
+        setupJobTimeOutAlarm();
     }
 
 
@@ -279,18 +280,23 @@ public class OrderModel {
 
 
     private void setupJobTimeOutAlarm() {
-        Intent intent = new Intent();
-        intent.setAction(JobTimeOutReceiver.ACTION_TIMEOUT);
+        Intent intent = new Intent(context, JobTimeOutReceiver.class);
+//        intent.setAction(JobTimeOutReceiver.ACTION_TIMEOUT);
 
         final int requestCode = 0;
+//        PendingIntent pendingIntent =
+//                PendingIntent.getBroadcast(context, requestCode, intent,
+//                                           PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(context, requestCode, intent,
-                                           PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.getService(context, requestCode, intent,
+                                         PendingIntent.FLAG_UPDATE_CURRENT);
         Calendar now = new GregorianCalendar();
-        now.add(Calendar.HOUR_OF_DAY, 3);
+//        now.add(Calendar.HOUR_OF_DAY, 3);
+        now.add(Calendar.MINUTE, 1);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, now.getTimeInMillis(), pendingIntent);
+        Logger.d(TAG, "set alarm " + now);
     }
 
 

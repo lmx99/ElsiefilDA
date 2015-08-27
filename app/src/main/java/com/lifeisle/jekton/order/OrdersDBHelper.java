@@ -1,9 +1,10 @@
-package com.lifeisle.jekton.order.list;
+package com.lifeisle.jekton.order;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.lifeisle.jekton.order.list.OrderItem;
 import com.lifeisle.jekton.util.Logger;
 
 /**

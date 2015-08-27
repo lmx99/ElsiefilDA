@@ -24,7 +24,6 @@ import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.list.OrderItem;
 import com.lifeisle.jekton.order.list.OrderListAdapter;
 import com.lifeisle.jekton.util.Logger;
-import com.lifeisle.jekton.util.OrderDBUtils;
 import com.lifeisle.jekton.util.StringUtils;
 import com.lifeisle.jekton.util.Toaster;
 import com.lifeisle.jekton.util.network.AutoLoginRequest;

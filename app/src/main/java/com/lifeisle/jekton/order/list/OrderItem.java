@@ -1,7 +1,7 @@
 package com.lifeisle.jekton.order.list;
 
 import com.lifeisle.jekton.order.EventIDMapper;
-import com.lifeisle.jekton.util.OrderDBUtils;
+import com.lifeisle.jekton.order.OrderDBUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,7 +87,7 @@ public class OrderItem {
 
     public String getDetails() {
         if (details == null) {
-            if (goodsItems == null) return "";
+            if (goodsItems == null || goodsItems.length == 0) return "";
 
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < goodsItems.length; i++) {
