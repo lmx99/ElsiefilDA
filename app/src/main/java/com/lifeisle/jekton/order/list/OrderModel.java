@@ -64,7 +64,8 @@ public class OrderModel {
     private OrderSorter orderSorter;
     private OrderListUpdater orderListUpdater;
 
-    private int jcat_id = Preferences.getJCatID();
+//    private int jcat_id = Preferences.getJCatID();
+    private int jcat_id = 3;
 
 
     public OrderModel(Context context) {
@@ -76,6 +77,7 @@ public class OrderModel {
         executorService = Executors.newSingleThreadExecutor();
 
         handler = new OrderUpdateHandler(this);
+        Preferences.setSignInMillis(System.currentTimeMillis());
     }
 
 

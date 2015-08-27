@@ -76,7 +76,7 @@
     <!-- Jekton -->
 	<color name="bg_activity_main">#eeeeed</color>
 
-    <color name="main_color">#41aee3</color>
+    <color name="main_color">#39a6d9</color>
 
     <color name="tab_normal">#6e8bbb</color>
     <color name="tab_selected">#6e8bbb</color>
@@ -99,7 +99,7 @@
     <color name="order_list_btn_textColor">#2b2b2b</color>
 
     <color name="bg_order_list_item">#e0dede</color>
-
+    <color name="radio_button_icon">#2f9dd0</color>
 
 
 

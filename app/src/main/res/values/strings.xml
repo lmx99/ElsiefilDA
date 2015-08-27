@@ -382,7 +382,7 @@
     <string name="ratio_btn_undelivered">Undelivered</string>
     <string name="ratio_btn_delivered">Delivered</string>
     <string name="ratio_btn_abnormal">Abnormal</string>
-    <string name="ratio_btn_post_fail">PostFailed</string>
+    <string name="ratio_btn_post_fail">Post Failed</string>
 
     <string name="ratio_btn_sort_by_create_time">Sort By Time</string>
 
