@@ -3,7 +3,6 @@ package com.lifeisle.jekton.order;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 
 import com.lifeisle.jekton.order.list.OrderItem;
 import com.lifeisle.jekton.order.list.QRCodeScanActivity;
@@ -27,7 +26,6 @@ public class LogisticsUpdateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         String extra = intent.getStringExtra(EXTRA_ORDER_UPDATE);
-        final Handler handler = new Handler();
         Logger.d(TAG, extra);
         try {
             JSONObject jsonObject = new JSONObject(extra);
@@ -36,30 +34,18 @@ public class LogisticsUpdateReceiver extends BroadcastReceiver {
                     final String orderCode = jsonObject.getString("order_code");
                     if (orderCode.equals("")) return;
 
-                    new Thread() {
-                        @Override
-                        public void run() {
-                            Logger.d(TAG, "orderCode = " + orderCode);
-                            if (OrderDBUtils.isOrderCodeExists(orderCode)) {
-                                OrderDBUtils.setNeedRequest(orderCode, OrderItem.REQUEST_LOGISTICS_UPDATE);
-                            } else {
-                                OrderDBUtils.insertOrderCode(orderCode, OrderItem.REQUEST_LOGISTICS_UPDATE);
-                            }
+                    Logger.d(TAG, "orderCode = " + orderCode);
+                    OrderDBUtils.setNeedRequest(orderCode, OrderItem.REQUEST_LOGISTICS_UPDATE);
 
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Intent notifyDataSetChanged = new Intent(QRCodeScanActivity.ORDER_LOGISTICS_UPDATE);
-                                    context.sendBroadcast(notifyDataSetChanged);
-                                }
-                            });
-                        }
-                    }.start();
 
+                    Intent notifyDataSetChanged = new Intent(QRCodeScanActivity.ORDER_LOGISTICS_UPDATE);
+                    context.sendBroadcast(notifyDataSetChanged);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
+
+
 }
+
