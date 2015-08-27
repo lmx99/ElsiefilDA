@@ -227,7 +227,6 @@ public class OrderListAdapter extends BaseAdapter {
             if (!isDetailHidden()) {
                 tvDetailsInfo.setVisibility(View.GONE);
                 mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorOriginHeight;
-
             } else {
                 tvDetailsInfo.setVisibility(View.VISIBLE);
                 if (mUrgencyIndicatorExpandedHeight > 0) {
