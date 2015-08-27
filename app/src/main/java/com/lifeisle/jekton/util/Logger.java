@@ -12,6 +12,7 @@ import com.android.volley.VolleyError;
 public class Logger {
 
     private static boolean error = true;
+    private static boolean info = true;
     private static boolean debug = true;
 
     public static void e(String tag, String msg) {
@@ -41,6 +42,12 @@ public class Logger {
             Log.w(tag, msg);
     }
 
+
+    public static void i(String tag, String msg) {
+        if (info) {
+            Log.i(tag, msg);
+        }
+    }
 
     public static void d(String tag, String msg) {
         if (debug)

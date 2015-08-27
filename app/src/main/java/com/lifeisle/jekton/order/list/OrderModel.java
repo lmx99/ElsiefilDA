@@ -12,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.OrderDBUtils;
+import com.lifeisle.jekton.order.OrderDataCleanService;
 import com.lifeisle.jekton.order.OrderOperateActivity;
 import com.lifeisle.jekton.order.list.sorter.OrderSorter;
 import com.lifeisle.jekton.order.list.updater.OrderListUpdater;
@@ -28,7 +29,6 @@ import org.json.JSONObject;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +43,7 @@ public class OrderModel {
 
     private static final String TAG = "OrderModel";
     private static final String SERVER_PATH = StringUtils.getServerPath();
+    private static final long MILLIS_3_HOUR = 3 * 60 * 60 * 1000;
 
     private static final int WHAT_UPDATE_ORDER_ITEM = 0;
 
@@ -66,7 +67,6 @@ public class OrderModel {
     private int jcat_id = Preferences.getJCatID();
 
 
-
     public OrderModel(Context context) {
         this.context = context;
         orderView = (OrderView) context;
@@ -76,7 +76,6 @@ public class OrderModel {
         executorService = Executors.newSingleThreadExecutor();
 
         handler = new OrderUpdateHandler(this);
-        setupJobTimeOutAlarm();
     }
 
 
@@ -152,19 +151,28 @@ public class OrderModel {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+                List<OrderItem> orders;
                 Logger.d(TAG, "init()");
-                List<OrderItem> orders = orderListUpdater.init();
-                if (orderSorter != null) {
-                    orders = orderSorter.sort(orders);
+                long nowMillis = System.currentTimeMillis();
+                long signInMillis = Preferences.getSignInMillis();
+                if (nowMillis - signInMillis > MILLIS_3_HOUR) {
+                    cleanUpData();
+                    orders = new ArrayList<>(0);
+                } else {
+                    orders = orderListUpdater.init();
+                    if (orderSorter != null) {
+                        orders = orderSorter.sort(orders);
+                    }
+
+                    for (int i = 0, size = orders.size(); i < size; ++i) {
+                        OrderItem item = orders.get(i);
+                        if (item.requestType != OrderItem.REQUEST_NO_NEED) {
+                            postOrderCode(item.orderCode, i, item.requestType, currentInitCount);
+                        }
+                    }
+                    Logger.d(TAG, "init() finish");
                 }
 
-                for (int i = 0, size = orders.size(); i < size; ++i) {
-                    OrderItem item = orders.get(i);
-                    if (item.requestType != OrderItem.REQUEST_NO_NEED) {
-                        postOrderCode(item.orderCode, i, item.requestType, currentInitCount);
-                    }
-                }
-                Logger.d(TAG, "init() finish");
                 final List<OrderItem> orderList = orders;
                 handler.post(new Runnable() {
                     @Override
@@ -274,25 +282,20 @@ public class OrderModel {
     private void readJCatId(JSONObject response) throws JSONException{
         jcat_id = response.getInt("jcat_id");
         Preferences.setJCatID(jcat_id);
+        Preferences.setSignInMillis(System.currentTimeMillis());
         Toaster.showShort(context, R.string.success_sign_in_jobs);
         setupJobTimeOutAlarm();
     }
 
-
     private void setupJobTimeOutAlarm() {
-        Intent intent = new Intent(context, JobTimeOutReceiver.class);
-//        intent.setAction(JobTimeOutReceiver.ACTION_TIMEOUT);
+        Intent intent = new Intent(context, OrderDataCleanService.class);
 
         final int requestCode = 0;
-//        PendingIntent pendingIntent =
-//                PendingIntent.getBroadcast(context, requestCode, intent,
-//                                           PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent pendingIntent =
-                PendingIntent.getService(context, requestCode, intent,
-                                         PendingIntent.FLAG_UPDATE_CURRENT);
-        Calendar now = new GregorianCalendar();
-//        now.add(Calendar.HOUR_OF_DAY, 3);
-        now.add(Calendar.MINUTE, 1);
+                PendingIntent.getBroadcast(context, requestCode, intent,
+                                           PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar now = Calendar.getInstance();
+        now.add(Calendar.HOUR_OF_DAY, 3);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, now.getTimeInMillis(), pendingIntent);
@@ -308,8 +311,7 @@ public class OrderModel {
                         Logger.d(TAG, "signOutAJob() response: " + response);
                         try {
                             if (response.getInt("status") == 0) {
-                                Preferences.setJCatID(-1);
-                                OrderDBUtils.clearOrders();
+                                cleanUpData();
                                 Toaster.showShort(context, R.string.success_sign_out_jobs);
                             } else {
                                 Toaster.showShort(context, R.string.error_fail_sign_out_jobs);
@@ -328,6 +330,11 @@ public class OrderModel {
                         Toaster.showShort(context, R.string.error_fail_sign_out_jobs);
                     }
                 }));
+    }
+
+    public static void cleanUpData() {
+        Preferences.setJCatID(-1);
+        OrderDBUtils.clearOrders();
     }
 
     public void enterJob(JSONObject jsonObject) {

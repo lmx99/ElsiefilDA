@@ -104,6 +104,17 @@ public class Preferences {
         editor.apply();
     }
 
+    public static long getSignInMillis() {
+        SharedPreferences preferences = getInstance(PREF_WORK_INFO);
+        return preferences.getLong("sign_in_millis" + getUserName(), -1);
+    }
+
+    public static void setSignInMillis(long millis) {
+        SharedPreferences.Editor editor = getInstance(PREF_WORK_INFO).edit();
+        editor.putLong("sign_in_millis" + getUserName(), millis);
+        editor.apply();
+    }
+
 
     public static int getStatType() {
         SharedPreferences preferences = getInstance(PREF_WORK_INFO);

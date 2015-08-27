@@ -588,18 +588,8 @@
             android:value="com.lifeisle.jekton.schedule.ScheduleCategoryActivity" />
         </activity>
 
+        <service android:name="com.lifeisle.jekton.order.OrderDataCleanService" />
 
-        <service android:name="com.lifeisle.jekton.order.list.OrderCleanService" />
-
-
-        <receiver
-            android:name="com.lifeisle.jekton.order.list.JobTimeOutReceiver"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.lifeisle.jekton.order.list.JobTimeOutReceiver.ACTION_TIMEOUT" />
-            </intent-filter>
-        </receiver>
         <receiver
             android:name="com.lifeisle.jekton.order.LogisticsUpdateReceiver"
             android:enabled="true"

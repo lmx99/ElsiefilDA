@@ -1,22 +1,21 @@
-package com.lifeisle.jekton.order.list;
+package com.lifeisle.jekton.order;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.lifeisle.jekton.order.OrderDBUtils;
-import com.lifeisle.jekton.util.Preferences;
+import com.lifeisle.jekton.order.list.OrderModel;
+import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 
 /**
  * @author Jekton
  */
-public class OrderCleanService extends Service {
+public class OrderDataCleanService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Preferences.setJCatID(-1);
-        OrderDBUtils.clearOrders();
+        OrderModel.cleanUpData();
 
         Intent notifyDataSetChanged = new Intent(QRCodeScanActivity.ORDER_LOGISTICS_UPDATE);
         sendBroadcast(notifyDataSetChanged);
