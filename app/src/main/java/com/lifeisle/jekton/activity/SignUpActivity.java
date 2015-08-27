@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -52,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity implements TextWatcher, Vi
     private EditText etReenterPassword;
     private EditText etPhone;
     private EditText etVerificationCode;
-    private Button btnGetVerifyCode;
+    private TextView btnGetVerifyCode;
     private Button btnSignUp;
 
     private ProgressDialog progressDialog;
@@ -67,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity implements TextWatcher, Vi
         etReenterPassword = (EditText) findViewById(R.id.reenterPassword);
         etPhone = (EditText) findViewById(R.id.phone);
         etVerificationCode = (EditText) findViewById(R.id.verificationCode);
-        btnGetVerifyCode = (Button) findViewById(R.id.verify);
+        btnGetVerifyCode = (TextView) findViewById(R.id.verify);
         btnSignUp = (Button) findViewById(R.id.sign_up);
 
 
@@ -180,7 +181,6 @@ public class SignUpActivity extends AppCompatActivity implements TextWatcher, Vi
                                 progressDialog.dismiss();
                                 try {
                                     int status = response.getInt("status");
-                                    System.out.println(response+"******************************");
                                     switch (status) {
                                         case 0:     // sign up successfully
                                             Intent intent = new Intent(SignUpActivity.this,

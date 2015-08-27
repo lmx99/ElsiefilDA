@@ -95,12 +95,23 @@ public class Preferences {
 
     public static int getJCatID() {
         SharedPreferences preferences = getInstance(PREF_WORK_INFO);
-        return preferences.getInt("jcat_id", -1);
+        return preferences.getInt("jcat_id" + getUserName(), -1);
     }
 
     public static void setJCatID(int id) {
         SharedPreferences.Editor editor = getInstance(PREF_WORK_INFO).edit();
-        editor.putInt("jcat_id", id);
+        editor.putInt("jcat_id" + getUserName(), id);
+        editor.apply();
+    }
+
+    public static long getSignInMillis() {
+        SharedPreferences preferences = getInstance(PREF_WORK_INFO);
+        return preferences.getLong("sign_in_millis" + getUserName(), -1);
+    }
+
+    public static void setSignInMillis(long millis) {
+        SharedPreferences.Editor editor = getInstance(PREF_WORK_INFO).edit();
+        editor.putLong("sign_in_millis" + getUserName(), millis);
         editor.apply();
     }
 

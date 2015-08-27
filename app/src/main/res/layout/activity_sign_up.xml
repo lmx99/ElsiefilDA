@@ -1,91 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:orientation="vertical"
+    android:background="@color/bg_activity_sign_up"
+    android:padding="32dp">
 
     <EditText
-
         android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_sign_up_item"
+        android:layout_marginBottom="@dimen/margin_vertical_sign_up_text"
+        android:background="@drawable/bg_sign_up_edit_text"
+        android:drawableLeft="@drawable/icon_sign_up_user_name"
+        android:drawablePadding="@dimen/drawablePadding_sign_up_icons"
+        android:drawableStart="@drawable/icon_sign_up_user_name"
+        android:hint="@string/hint_user_name"
+        android:maxLength="16"
         android:paddingLeft="@dimen/padding_sign_up_text"
         android:paddingRight="@dimen/padding_sign_up_text"
-        android:layout_marginBottom="@dimen/margin_sign_up_text"
-        android:hint="@string/error_user_name_empty"
-        android:maxLength="16"
-        android:background="@color/bg_sign_up_text"/>
+        android:textCursorDrawable="@drawable/cursor_sign_up_edit_text"
+        android:textSize="@dimen/size_sign_up_text"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_sign_up_item"
-        android:paddingLeft="@dimen/padding_sign_up_text"
-        android:paddingRight="@dimen/padding_sign_up_text"
-        android:layout_marginBottom="@dimen/margin_sign_up_text"
+        android:layout_marginBottom="@dimen/margin_vertical_sign_up_text"
+        android:background="@drawable/bg_sign_up_edit_text"
+        android:drawableLeft="@drawable/icon_password"
+        android:drawablePadding="@dimen/drawablePadding_sign_up_icons"
+        android:drawableStart="@drawable/icon_password"
+        android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:maxLength="16"
-        android:hint="@string/hint_password"
-        android:background="@color/bg_sign_up_text"/>
+        android:paddingLeft="@dimen/padding_sign_up_text"
+        android:paddingRight="@dimen/padding_sign_up_text"
+        android:textCursorDrawable="@drawable/cursor_sign_up_edit_text"
+        android:textSize="@dimen/size_sign_up_text"/>
+
 
     <EditText
         android:id="@+id/reenterPassword"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_sign_up_item"
+        android:layout_marginBottom="@dimen/margin_vertical_sign_up_text"
+        android:background="@drawable/bg_sign_up_edit_text"
+        android:drawableLeft="@drawable/icon_password"
+        android:drawablePadding="@dimen/drawablePadding_sign_up_icons"
+        android:drawableStart="@drawable/icon_password"
+        android:hint="@string/hint_password_reenter"
+        android:inputType="textPassword"
+        android:maxLength="16"
         android:paddingLeft="@dimen/padding_sign_up_text"
         android:paddingRight="@dimen/padding_sign_up_text"
-        android:layout_marginBottom="@dimen/margin_sign_up_text"
-        android:inputType="textPassword"
-        android:hint="@string/hint_password_reenter"
-        android:background="@color/bg_sign_up_text"/>
+        android:textCursorDrawable="@drawable/cursor_sign_up_edit_text"
+        android:textSize="@dimen/size_sign_up_text"/>
+
 
     <EditText
         android:id="@+id/phone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_sign_up_item"
+        android:layout_marginBottom="@dimen/margin_vertical_sign_up_text"
+        android:background="@drawable/bg_sign_up_edit_text"
+        android:drawableLeft="@drawable/icon_sign_up_phone"
+        android:drawablePadding="@dimen/drawablePadding_sign_up_icons"
+        android:drawableStart="@drawable/icon_sign_up_phone"
+        android:hint="@string/hint_phone"
+        android:inputType="phone"
         android:paddingLeft="@dimen/padding_sign_up_text"
         android:paddingRight="@dimen/padding_sign_up_text"
-        android:layout_marginBottom="@dimen/margin_sign_up_text"
-        android:inputType="phone"
-        android:hint="@string/hint_phone"
-        android:background="@color/bg_sign_up_text"/>
+        android:textCursorDrawable="@drawable/cursor_sign_up_edit_text"
+        android:textSize="@dimen/size_sign_up_text"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/bg_sign_up_edit_text">
+
+        <TextView
+            android:id="@+id/verify"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_sign_up_item"
+            android:gravity="center_vertical"
+            android:padding="@dimen/padding_sign_up_text"
+            android:text="@string/btn_sign_up_verify"
+            android:textAllCaps="false"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/size_sign_up_text"/>
 
         <EditText
             android:id="@+id/verificationCode"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_sign_up_item"
-            android:layout_weight="3"
-            android:paddingLeft="@dimen/padding_sign_up_text"
-            android:paddingRight="@dimen/padding_sign_up_text"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:hint="@string/hint_verification_code"
-            android:background="@color/bg_sign_up_text"/>
-
-        <Button
-            android:id="@+id/verify"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_sign_up_item"
-            android:layout_weight="2"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="6dp"
-            android:text="@string/btn_sign_up_verify"
-            android:background="@drawable/bg_sign_up_verify"/>
+            android:padding="@dimen/padding_sign_up_text"
+            android:textCursorDrawable="@drawable/cursor_sign_up_edit_text"
+            android:textSize="@dimen/size_sign_up_text"/>
 
     </LinearLayout>
+
+
 
     <Button
         android:id="@+id/sign_up"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_sign_up_item"
-        android:layout_marginTop="24dp"
-        android:text="@string/btn_sign_up"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bg_btn_sign_up"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:text="@string/btn_sign_up"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/size_sign_up_text"/>
 
 </LinearLayout>

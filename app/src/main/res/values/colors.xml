@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <color name="white">#ffffff</color>
     <color name="common_top_bar_blue">#4ebcd3</color>
     <color name="btn_login_normal">#00acff</color>
     <color name="btn_login_pressed">#46678d</color>
@@ -76,7 +76,7 @@
     <!-- Jekton -->
 	<color name="bg_activity_main">#eeeeed</color>
 
-    <color name="main_color">#00a5e8</color>
+    <color name="main_color">#41aee3</color>
 
     <color name="tab_normal">#6e8bbb</color>
     <color name="tab_selected">#6e8bbb</color>
@@ -84,6 +84,14 @@
     <color name="goto_btn_textColor">#0f0f0f</color>
 
 
+
+    <!-- QRCodeScanActivity-->
+    <color name="possible_result_points">#c0ffbd21</color>
+    <!-- Android standard ICS color -->
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_laser">#ffcc0000</color>
+    <!-- Android standard ICS color -->
+    <color name="viewfinder_mask">#60000000</color>
 
     <color name="order_list_circle_red">#d85238</color>
     <color name="order_list_btn_border">#aca7a5</color>
@@ -94,17 +102,19 @@
 
 
 
-    <color name="bg_sign_up_text">#e1e1e1</color>
-
 
     <color name="bg_order_operate_ok_normal">#d85238</color>
     <color name="bg_order_operate_ok_pressed">#bd3731</color>
 
 
 
+    <!-- SignUpActivity -->
+    <color name="bg_activity_sign_up">#f9f9fa</color>
+    <color name="bg_sign_up_text">#e1e1e1</color>
+
+
     <color name="transparent">#00000000</color>
     <color name="gray">#808080</color>
-    <color name="white">#ffffff</color>
 
 
 
@@ -112,15 +122,6 @@
     <!-- dialog_set_repeat.xml -->
     <color name="divider_dialog_set_repeat">#c4c4c4</color>
     <color name="bg_dialog_set_repeat_text">#ddd</color>
-
-
-    <!-- QRCodeScanActivity-->
-    <color name="possible_result_points">#c0ffbd21</color>
-    <!-- Android standard ICS color -->
-    <color name="result_view">#b0000000</color>
-    <color name="viewfinder_laser">#ffcc0000</color>
-    <!-- Android standard ICS color -->
-    <color name="viewfinder_mask">#60000000</color>
 
 
 

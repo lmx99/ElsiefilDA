@@ -1,7 +1,7 @@
 package com.lifeisle.jekton.util;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.ScheduleEvent;
+import com.lifeisle.jekton.schedule.data.ScheduleEvent;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -118,17 +118,17 @@ public class DateUtils {
      * @return time in "hh:mm" format
      */
     public static String formatTime(int hourOfDay, int minute) {
-        return String.format("%2d:%02d", hourOfDay, minute);
+        return String.format("%02d:%02d", hourOfDay, minute);
     }
 
 
     public static String formatRepeatOfWeekString(int daysOfWeek) {
         switch (daysOfWeek) {
-            case ScheduleEvent.MASK_EVERYDAY:
+            case ScheduleEvent.REPEAT_EVERYDAY:
                 return StringUtils.getStringFromResource(R.string.repeat_opt_everyday);
-            case ScheduleEvent.MASK_WEEKDAY:
+            case ScheduleEvent.REPEAT_WEEKDAY:
                 return StringUtils.getStringFromResource(R.string.repeat_opt_weekdays);
-            case ScheduleEvent.MASK_NEVER:
+            case ScheduleEvent.REPEAT_NEVER:
                 return StringUtils.getStringFromResource(R.string.repeat_opt_never);
         }
 
@@ -155,5 +155,16 @@ public class DateUtils {
         int min = extractMin(time);
 
         return new GregorianCalendar(year, month, day, hour, min).getTimeInMillis();
+    }
+
+    public static String[] timeMillis2String(long millis) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTimeInMillis(millis);
+
+        String[] result = new String[2];
+        result[0] = formatDate(calendar);
+        result[1] = formatTime(calendar);
+
+        return result;
     }
 }

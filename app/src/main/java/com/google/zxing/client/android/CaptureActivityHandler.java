@@ -27,7 +27,7 @@ import com.google.zxing.DecodeHintType;
 import com.google.zxing.Result;
 import com.google.zxing.client.android.camera.CameraManager;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.activity.QRCodeScanActivity;
+import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 
 import java.util.Collection;
 import java.util.Map;

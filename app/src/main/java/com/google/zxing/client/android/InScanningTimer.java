@@ -24,7 +24,7 @@ import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.util.Log;
 
-import com.lifeisle.jekton.activity.QRCodeScanActivity;
+import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 
 /**
  * Finishes an activity after a period of inactivity if the device is on battery power.

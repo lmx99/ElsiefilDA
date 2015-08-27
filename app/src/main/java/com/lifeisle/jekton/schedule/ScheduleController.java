@@ -1,9 +1,12 @@
 package com.lifeisle.jekton.schedule;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.ScheduleEvent;
-import com.lifeisle.jekton.data.ScheduleContract;
+import com.lifeisle.jekton.schedule.data.ScheduleContract;
+import com.lifeisle.jekton.schedule.data.ScheduleEvent;
 import com.lifeisle.jekton.util.DateUtils;
+import com.lifeisle.jekton.util.Logger;
+
+import java.util.Arrays;
 
 /**
  * @author Jekton
@@ -12,6 +15,7 @@ import com.lifeisle.jekton.util.DateUtils;
 public abstract class ScheduleController {
 
     private ScheduleDetailView mScheduleDetailView;
+    private static final String TAG = ScheduleController.class.getSimpleName();
 
     public ScheduleController(ScheduleDetailView scheduleDetailView) {
         mScheduleDetailView = scheduleDetailView;
@@ -35,6 +39,8 @@ public abstract class ScheduleController {
         long startMillis = DateUtils.translateTimeMillis(startTime[0], startTime[1]);
         String[] endTime = mScheduleDetailView.getEndTime();
         long endMillis = DateUtils.translateTimeMillis(endTime[0], endTime[1]);
+        Logger.d(TAG, "startTime = " + Arrays.toString(startTime) +
+                ", endTime = " + Arrays.toString(endTime));
         if (endMillis < startMillis) {
             mScheduleDetailView.showErrMsg(R.string.error_start_greater_end);
             return null;
