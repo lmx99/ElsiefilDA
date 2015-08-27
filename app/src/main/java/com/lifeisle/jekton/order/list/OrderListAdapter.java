@@ -43,7 +43,10 @@ public class OrderListAdapter extends BaseAdapter {
     private static final int URGENCY_LEVEL_MIDDLE = Color.rgb(255, 165, 0);
     private static final int URGENCY_LEVEL_SEVER = Color.RED;
 
-    private final int PADDING_LIST_ITEM = DimensionUtils.dp2px(MyApplication.getInstance(), 16);
+    private static final int WIDTH_URGENCY_NORMAL = 0;
+    private static final int WIDTH_URGENCY_LIGHT = DimensionUtils.dp2px(MyApplication.getInstance(), 8);
+    private static final int WIDTH_URGENCY_MIDDLE = DimensionUtils.dp2px(MyApplication.getInstance(), 16);
+    private static final int WIDTH_URGENCY_SEVER = DimensionUtils.dp2px(MyApplication.getInstance(), 24);
 
 
     private QRCodeScanActivity activity;
@@ -138,7 +141,6 @@ public class OrderListAdapter extends BaseAdapter {
 
             LayoutInflater inflater = LayoutInflater.from(activity);
             inflater.inflate(R.layout.widget_order_list_item, this, true);
-//            setPadding(0, 0, PADDING_LIST_ITEM, PADDING_LIST_ITEM);
             setOnClickListener(this);
             setWillNotDraw(false);
 
@@ -273,15 +275,25 @@ public class OrderListAdapter extends BaseAdapter {
             Date date = new Date();
             long delta = date.getTime() - orderItem.createTime.getTime();
             Logger.d(TAG, "create time delta = " + delta);
+
+            int color;
+            int width;
             if (delta > MILLI_60_MIN) {
-                mUrgencyIndicator.setBackgroundColor(URGENCY_LEVEL_SEVER);
+                color = URGENCY_LEVEL_SEVER;
+                width = WIDTH_URGENCY_SEVER;
             } else if (delta > MILLI_45_MIN) {
-                mUrgencyIndicator.setBackgroundColor(URGENCY_LEVEL_MIDDLE);
+                color = URGENCY_LEVEL_MIDDLE;
+                width = WIDTH_URGENCY_MIDDLE;
             } else if (delta > MILLI_30_MIN) {
-                mUrgencyIndicator.setBackgroundColor(URGENCY_LEVEL_LIGHT);
+                color = URGENCY_LEVEL_LIGHT;
+                width = WIDTH_URGENCY_LIGHT;
             } else {
-                mUrgencyIndicator.setBackgroundColor(URGENCY_LEVEL_NORMAL);
+                color = URGENCY_LEVEL_NORMAL;
+                width = WIDTH_URGENCY_NORMAL;
             }
+            mUrgencyIndicator.setBackgroundColor(color);
+            mUrgencyIndicator.getLayoutParams().width = width;
+            mUrgencyIndicator.requestLayout();
             mUrgencyIndicator.invalidate();
         }
 

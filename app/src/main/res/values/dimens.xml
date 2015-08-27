@@ -56,8 +56,9 @@
     <!-- QRCodeScanActivity -->
     <dimen name="order_list_item_num_size">20dp</dimen>
     <dimen name="order_list_btn_textSize">14sp</dimen>
-    <dimen name="order_list_btn_paddingX">10dp</dimen>
+    <dimen name="order_list_btn_paddingX">8dp</dimen>
     <dimen name="order_list_btn_paddingY">6dp</dimen>
+    <dimen name="order_list_item_paddingLeft">28dp</dimen>
 
 
 
