@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/optionMenu"
-        android:title="@string/menu_option"
+        android:title="@string/ratio_btn_undelivered"
         app:showAsAction="always"/>
 
 </menu>

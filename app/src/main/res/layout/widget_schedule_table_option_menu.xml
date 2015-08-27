@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <RadioButton
+        android:id="@+id/days_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_1_day" />
+
+    <RadioButton
+        android:id="@+id/days_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_3_days"
+        android:checked="true"/>
+
+    <RadioButton
+        android:id="@+id/days_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_7_days" />
+</RadioGroup>

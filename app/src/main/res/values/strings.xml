@@ -339,7 +339,7 @@
     <string name="title_fragment_logistics">Logistics</string>
     <string name="fragment_logistics_routine">Schedules</string>
     <string name="fragment_logistics_my_position">MyPosition</string>
-    <string name="fragment_logistics_job_auth">Job Opportunities</string>
+    <string name="fragment_logistics_job_opportunity">Job Opportunities</string>
     <string name="fragment_logistics_scan_QR_code">Scan QR Code</string>
     <string name="fragment_logistics_deliver_stat">Deliver Stat</string>
     <string name="fragment_logistics_order_search">Search Orders</string>
@@ -362,7 +362,8 @@
     <string name="error_fail_to_insert_goods">Fail to insert goods item to the database. Please check your storage.</string>
     <string name="error_fail_to_update_order">Fail to update order item of the database. Please check your storage or  permissions.</string>
     <string name="error_fail_sign_in_jobs_1">Fail to sign in</string>
-    <string name="error_fail_sign_in_jobs_2">Could not repeatedly sign in or without a job now</string>
+    <string name="error_fail_sign_in_jobs_2_1">Already signed in</string>
+    <string name="error_fail_sign_in_jobs_2_2">Without a job now</string>
     <string name="error_fail_sign_out_jobs">Fail to sign out</string>
     <string name="error_fail_enter_jobs">Fail to enter job</string>
     <string name="error_fail_enter_jobs_1" translatable="false">没有资格</string>
@@ -398,6 +399,8 @@
     <!-- OrderOperateActivity -->
     <string name="title_order_operate">Order Operation</string>
 
+    <string name="action_call_user">Call user</string>
+
     <string name="btn_deliver">Deliver</string>
     <string name="btn_received_by_agent">ReceivedByAgent</string>
     <string name="btn_more">More</string>
@@ -410,6 +413,7 @@
     <string name="hint_reason">Reason:</string>
     <string name="error_order_code_null">Error: order code is null!</string>
     <string name="error_no_goods_item_selected">No goods selected!</string>
+    <string name="error_fail_call_user">Fail to open the dialer</string>
 
 
 
@@ -423,7 +427,7 @@
     <string name="hint_verification_code">Verification Code</string>
 
     <string name="btn_sign_up_verify">Verify</string>
-    <string name="btn_sign_up_verify_wait">Re-send after %ds</string>
+    <string name="btn_sign_up_verify_wait">Re-send(%ds)</string>
     <string name="btn_sign_up">Sign Up</string>
 
     <string name="error_pwd_unmatched">The password that you provided are unmatched</string>
@@ -509,6 +513,7 @@
 
     <!-- ScheduleDetailActivity -->
     <string name="title_activity_add_schedule">Add Schedule</string>
+    <string name="title_activity_schedule_detail">Schedule Detail</string>
     <string name="title_activity_alter_schedule">Alter Schedule</string>
 
     <string name="title_event_title">Title</string>
@@ -520,9 +525,14 @@
     <string name="repeat_opt_weekdays">Weekday</string>
 
     <string name="error_event_title_empty">The title couldn\'t be empty</string>
-    <string name="error_fail_to_add_event">Some error occurred and adding failed</string>
+    <string name="error_fail_to_add_event">Fail to add event</string>
+    <string name="error_fail_to_update_event">Fail to update event</string>
+    <string name="error_fail_to_delete_event">Fail to delete event</string>
+    <string name="error_event_not_found">Event not Found</string>
 
     <string name="success_add_event">Schedule added</string>
+    <string name="success_update_event">Schedule updated</string>
+    <string name="success_delete_event">Schedule deleted</string>
 
 
 
@@ -535,5 +545,12 @@
     <string name="hint_source">Source</string>
     <string name="hint_class">Classification</string>
 
-    
+
+    <!-- ScheduleTableActivity -->
+    <string name="title_activity_schedule_table">ScheduleTable</string>
+    <string name="action_today">Today</string>
+    <string name="action_1_day">1 Day</string>
+    <string name="action_3_days">3 Days</string>
+    <string name="action_7_days">7 Days</string>
+
 </resources>

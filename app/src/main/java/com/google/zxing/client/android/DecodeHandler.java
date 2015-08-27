@@ -31,7 +31,7 @@ import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.activity.QRCodeScanActivity;
+import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Map;

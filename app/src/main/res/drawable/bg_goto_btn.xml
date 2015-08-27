@@ -6,7 +6,7 @@
             android:dither="true"
             android:shape="rectangle">
 
-            <solid android:color="#d3cdca" />
+            <solid android:color="#e2e2e3" />
         </shape>
     </item>
 
@@ -17,7 +17,7 @@
             android:dither="true"
             android:shape="rectangle">
 
-            <solid android:color="#dfd9d5" />
+            <solid android:color="#ededee" />
         </shape>
     </item>
 
@@ -28,7 +28,7 @@
             android:dither="true"
             android:shape="rectangle">
 
-            <solid android:color="#ffffffff" />
+            <solid android:color="#f9f9fa" />
         </shape>
     </item>
 

@@ -7,9 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.easemob.chatuidemo.MyApplication;
-import com.lifeisle.jekton.bean.ScheduleEvent;
-import com.lifeisle.jekton.data.ScheduleContract.EventEntry;
-import com.lifeisle.jekton.data.db.ScheduleDBHelper;
+import com.lifeisle.jekton.schedule.data.ScheduleContract.EventEntry;
+import com.lifeisle.jekton.schedule.data.ScheduleDBHelper;
+import com.lifeisle.jekton.schedule.data.ScheduleEvent;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,11 +72,13 @@ public class ScheduleDBUtils {
 
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         builder.setTables(EventEntry.TABLE_NAME);
-        builder.appendWhere(EventEntry.COL_EVENT_START_TIME + " between " +
-                startTime + " and " + endTime);
+        builder.appendWhere(
+                EventEntry.COL_EVENT_REPEAT + " != " + ScheduleEvent.REPEAT_NEVER + " or (" +
+                EventEntry.COL_EVENT_START_TIME + " < " + endTime + " and " +
+                startTime + " < " + EventEntry.COL_EVENT_END_TIME + ")"
+                );
         Cursor cursor = builder.query(db, EVENT_COLUMNS, null, null, null, null,
                 EventEntry.COL_EVENT_START_TIME + " asc ");
-
         List<ScheduleEvent> events = createEventsFromCursor(cursor);
         cursor.close();
         return events;
@@ -92,7 +94,33 @@ public class ScheduleDBUtils {
     }
 
 
+    public static ScheduleEvent getScheduleEvent(long id) {
+        SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = db.query(EventEntry.TABLE_NAME,
+                EVENT_COLUMNS,
+                EventEntry._ID + "=" + id,
+                null,
+                null,
+                null,
+                null);
+        if (cursor.moveToFirst()) {
+            return ScheduleEvent.newInstance(cursor);
+        }
+        return null;
+    }
+
     public static long insertScheduleEvent(ScheduleEvent event) {
+        ContentValues values = convertToValues(event);
+
+        SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
+        long id = db.insert(EventEntry.TABLE_NAME, null, values);
+        if (id < 0)
+            Logger.e(LOG_TAG, "Fail to insert event to database, event = " + event);
+
+        return id;
+    }
+
+    private static ContentValues convertToValues(ScheduleEvent event) {
         ContentValues values = new ContentValues();
         values.put(EventEntry.COL_EVENT_TITLE, event.title);
         values.put(EventEntry.COL_EVENT_START_TIME, event.startMillis);
@@ -102,11 +130,36 @@ public class ScheduleDBUtils {
         values.put(EventEntry.COL_EVENT_TYPE, event.type);
         values.put(EventEntry.COL_EVENT_NEED_POST, event.needPost ? 1 : 0);
 
-        SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
-        long id = db.insert(EventEntry.TABLE_NAME, null, values);
-        if (id < 0)
-            Logger.e(LOG_TAG, "Fail to insert event to database, event = " + event);
+        return values;
+    }
 
-        return id;
+
+    public static int updateScheduleEvent(ScheduleEvent event) {
+        deleteAlarm(event.id);
+
+        ContentValues values = convertToValues(event);
+        SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
+        int count = db.update(EventEntry.TABLE_NAME, values, EventEntry._ID + "=" + event.id, null);
+        if (count <= 0)
+            Logger.e(LOG_TAG, "Fail to update event to database, event = " + event);
+
+        return count;
+    }
+
+
+    public static int deleteScheduleEvent(long id) {
+        deleteAlarm(id);
+
+        SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
+        int count = db.delete(EventEntry.TABLE_NAME, EventEntry._ID + "=" + id, null);
+        if (count <= 0) {
+            Logger.e(LOG_TAG, "Fail to delete event to database, eventId = " + id);
+        }
+
+        return count;
+    }
+
+    private static void deleteAlarm(long id) {
+        // TODO: 8/19/2015  delete old alarm
     }
 }
