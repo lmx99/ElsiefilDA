@@ -60,6 +60,8 @@
     <dimen name="order_list_btn_paddingY">6dp</dimen>
     <dimen name="order_list_item_paddingLeft">28dp</dimen>
 
+    <dimen name="size_radio_button_icon">20dp</dimen>
+
 
 
     <!-- SignUpActivity -->

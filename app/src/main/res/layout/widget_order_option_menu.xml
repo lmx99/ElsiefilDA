@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="#c64f4543">
 
     <RadioGroup
         android:id="@+id/orderOption"
@@ -14,6 +16,7 @@
             android:id="@+id/all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/MyRadioButton"
             android:text="@string/ratio_btn_all"/>
 
         <RadioButton
@@ -21,25 +24,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ratio_btn_undelivered"
-            android:checked="true"/>
+            android:checked="true"
+            style="@style/MyRadioButton"/>
 
         <RadioButton
             android:id="@+id/delivered"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_delivered" />
+            android:text="@string/ratio_btn_delivered"
+            style="@style/MyRadioButton"/>
 
         <RadioButton
             android:id="@+id/abnormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_abnormal" />
+            android:text="@string/ratio_btn_abnormal"
+            style="@style/MyRadioButton"/>
 
         <RadioButton
             android:id="@+id/postFail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_post_fail" />
+            android:text="@string/ratio_btn_post_fail"
+            style="@style/MyRadioButton" />
 
     </RadioGroup>
 
@@ -48,14 +55,15 @@
         android:id="@+id/sortOption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="16dp">
 
         <RadioButton
             android:id="@+id/sortByCreateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ratio_btn_sort_by_create_time"
-            android:checked="true"/>
+            android:checked="true"
+            style="@style/MyRadioButton"/>
 
     </RadioGroup>
 
@@ -64,20 +72,22 @@
         android:id="@+id/sortOptionExtra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="16dp">
 
         <RadioButton
             android:id="@+id/ascending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ratio_btn_ascending"
+            style="@style/MyRadioButton"
             android:checked="true"/>
 
         <RadioButton
             android:id="@+id/descending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ratio_btn_descending" />
+            android:text="@string/ratio_btn_descending"
+            style="@style/MyRadioButton" />
 
     </RadioGroup>
 

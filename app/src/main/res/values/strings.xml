@@ -382,7 +382,7 @@
     <string name="ratio_btn_undelivered">Undelivered</string>
     <string name="ratio_btn_delivered">Delivered</string>
     <string name="ratio_btn_abnormal">Abnormal</string>
-    <string name="ratio_btn_post_fail">PostFailed</string>
+    <string name="ratio_btn_post_fail">Post Failed</string>
 
     <string name="ratio_btn_sort_by_create_time">Sort By Time</string>
 
@@ -481,6 +481,7 @@
     <string name="cat_deliver_logistics_stat">Deliver Stat</string>
     <string name="cat_motor_logistics_stat">Motor Stat</string>
     <string name="cat_ganger_logistics_stat">Ganger Stat</string>
+
 
     <!-- DeliverStatActivity-->
     <string name="title_activity_deliver_stat">DeliverStat</string>
