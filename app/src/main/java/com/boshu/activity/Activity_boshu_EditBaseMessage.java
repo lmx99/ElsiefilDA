@@ -54,6 +54,7 @@ import com.boshu.image.ImageDowloader;
 import com.boshu.image.ImageDowloader.OnImageDownloadListener;
 import com.boshu.utils.CompressPicture;
 import com.boshu.utils.Model;
+import com.boshu.utils.UserIndent;
 import com.easemob.chatuidemo.activity.MainActivity;
 import com.easemob.chatuidemo.utils.CommonUtils;
 import com.lifeisle.android.R;
@@ -62,9 +63,11 @@ import com.lifeisle.jekton.util.network.AutoLoginRequest;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
@@ -415,7 +418,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                 setView("真实姓名",3);
                 break;
             case R.id.tv_boshu_editphone:
-                setView("电话号码",4);
+                setView("手机号码",4);
                 break;
             case R.id.tv_boshu_editphone1:
                 setView("应急号码",5);
@@ -501,7 +504,13 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                 this.setSelect(R.layout.item_boshu_select, bodyStrings, 1.2, 1.7);
                 break;
             case R.id.bt_boshu_ident:
-                postIndent();
+               if( !UserIndent.getuserIndent(user)) {
+                   Toast.makeText(this, "请完善应聘信息，么么哒!", 0).show();
+                   return;
+               }else {
+                   postIndent();
+               }
+
                 break;
         }
 
@@ -1448,5 +1457,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
             }
         });
 
+    }
+    public void setApplication(){
     }
 }

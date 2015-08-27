@@ -40,16 +40,19 @@
 
 
     </RelativeLayout>
-
     <ScrollView
+        android:background="@color/boshu_item_color"
         android:id="@+id/sl_boshu_editMessageNew"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <LinearLayout
+            android:background="@color/boshu_item_color"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
+
+
             <RelativeLayout
                 android:id="@+id/rl_boshu_head"
                 android:layout_width="match_parent"

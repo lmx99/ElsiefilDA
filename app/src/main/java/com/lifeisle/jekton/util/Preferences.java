@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
+import com.boshu.utils.Model;
 import com.easemob.chatuidemo.MyApplication;
 
 
@@ -81,17 +82,16 @@ public class Preferences {
     }
 
 
+
     public static String getPassword() {
         return getInstance(PREF_USER_INFO).getString("password", "");
     }
-
     public static void setPassword(String password) {
         SharedPreferences preferences = getInstance(PREF_USER_INFO);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("password", password);
         editor.apply();
     }
-
 
     public static int getJCatID() {
         SharedPreferences preferences = getInstance(PREF_WORK_INFO);
@@ -126,4 +126,15 @@ public class Preferences {
         editor.putInt("stat_type", id);
         editor.apply();
     }
+    /*boshu*/
+    public static void setIndent(String flag){
+        SharedPreferences preferences = getInstance(PREF_USER_INFO);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Model.APPLACATION, flag);
+        editor.apply();
+    }
+    public static String getIndent(){
+        SharedPreferences preferences = getInstance(PREF_USER_INFO);
+        return preferences.getString(Model.APPLACATION, null);
+    };
 }

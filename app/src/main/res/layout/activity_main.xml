@@ -174,12 +174,17 @@
                 android:textSize="12sp" />
         </RelativeLayout>
     </LinearLayout>
-
+    <View
+        android:id="@+id/view_ty"
+        android:layout_above="@id/main_bottom"
+        android:background="#2E030000"
+        android:layout_height="0.3dp"
+        android:layout_width="fill_parent"/>
     <RelativeLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/main_bottom" >
+        android:layout_above="@id/view_ty" >
 
     </RelativeLayout>
 

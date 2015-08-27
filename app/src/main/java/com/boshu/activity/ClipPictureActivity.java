@@ -100,7 +100,6 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
                 if (imageWidth > imageHeight) {
                     scale = (clipHeight * 1.0f) / imageHeight;
                 }
-
                 // 起始中心点
                 float imageMidX = imageWidth * scale / 2;
                 float imageMidY = clipview.getCustomTopBarHeight()
