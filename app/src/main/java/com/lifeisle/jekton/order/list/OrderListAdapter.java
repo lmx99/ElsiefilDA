@@ -138,7 +138,7 @@ public class OrderListAdapter extends BaseAdapter {
 
             LayoutInflater inflater = LayoutInflater.from(activity);
             inflater.inflate(R.layout.widget_order_list_item, this, true);
-            setPadding(0, PADDING_LIST_ITEM, PADDING_LIST_ITEM, PADDING_LIST_ITEM);
+//            setPadding(0, 0, PADDING_LIST_ITEM, PADDING_LIST_ITEM);
             setOnClickListener(this);
             setWillNotDraw(false);
 
@@ -165,20 +165,24 @@ public class OrderListAdapter extends BaseAdapter {
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
 
+            // calculate once time
             if (mUrgencyIndicatorOriginHeight == 0) {
                 mUrgencyIndicatorOriginHeight = computeHeight();
-                mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorOriginHeight;
-                Logger.d(TAG, "mUrgencyIndicatorOriginHeight = " + mUrgencyIndicatorOriginHeight);
-            }
-
-            if (mUrgencyIndicatorExpandedHeight == 0 && !isDetailHidden()) {
-                // calculate once time
                 post(new Runnable() {
                     @Override
                     public void run() {
-                        if (mUrgencyIndicatorExpandedHeight == 0) {
-                            mUrgencyIndicatorExpandedHeight = computeHeight();
-                        }
+                        mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorOriginHeight;
+                        Logger.d(TAG, "mUrgencyIndicatorOriginHeight = " + mUrgencyIndicatorOriginHeight);
+                        mUrgencyIndicator.requestLayout();
+                    }
+                });
+            }
+
+            if (mUrgencyIndicatorExpandedHeight == 0 && !isDetailHidden()) {
+                mUrgencyIndicatorExpandedHeight = computeHeight();
+                post(new Runnable() {
+                    @Override
+                    public void run() {
                         mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorExpandedHeight;
                         Logger.d(TAG, "dispatchDraw() mUrgencyIndicatorExpandedHeight = "
                                 + mUrgencyIndicatorExpandedHeight);
@@ -190,7 +194,7 @@ public class OrderListAdapter extends BaseAdapter {
         }
 
         private int computeHeight() {
-            return getHeight() * 4 / 5;
+            return getHeight();
         }
 
 
