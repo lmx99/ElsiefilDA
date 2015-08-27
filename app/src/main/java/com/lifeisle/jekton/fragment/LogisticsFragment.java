@@ -3,6 +3,7 @@ package com.lifeisle.jekton.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,11 +15,13 @@ import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.activity.MainActivity;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.activity.JobsActivity;
+import com.lifeisle.jekton.activity.MyBrowserActivity;
 import com.lifeisle.jekton.activity.MyPositionActivity;
 import com.lifeisle.jekton.order.OrderSearchActivity;
 import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 import com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity;
 import com.lifeisle.jekton.schedule.ScheduleCategoryActivity;
+import com.lifeisle.jekton.util.StringUtils;
 
 public class LogisticsFragment extends Fragment implements View.OnClickListener {
     @Override
@@ -56,6 +59,7 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
         view.findViewById(R.id.scanQRCode).setOnClickListener(this);
 
         view.findViewById(R.id.scanQRCode).setOnClickListener(this);
+        view.findViewById(R.id.qr_code).setOnClickListener(this);
     }
 
     @Override
@@ -83,6 +87,14 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
             }
             case R.id.scanQRCode: {
                 startActivity(QRCodeScanActivity.class);
+                break;
+            }
+            case R.id.qr_code: {
+                Intent intent = new Intent(getActivity(), MyBrowserActivity.class);
+                intent.setData(Uri.parse(
+                        StringUtils.getServerBase()
+                                + "font.php?sys=mobile&ctrl=epl&action=job_qr"));
+                startActivity(intent);
                 break;
             }
         }
