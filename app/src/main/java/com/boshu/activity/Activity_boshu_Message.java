@@ -36,6 +36,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.boshu.adapter.Adapter_Boshu_alterDialog;
+import com.boshu.crop.Crop;
 import com.boshu.customview.CircleImageView;
 import com.boshu.db.UserDao;
 import com.boshu.domain.User;
@@ -45,7 +46,9 @@ import com.boshu.image.FileCacheUtils;
 import com.boshu.image.ImageDowloader;
 import com.boshu.image.ImageDowloader.OnImageDownloadListener;
 import com.boshu.utils.Model;
+import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.utils.CommonUtils;
+import com.easemob.util.PathUtil;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.util.Preferences;
 import com.lifeisle.jekton.util.network.AutoLoginRequest;
@@ -62,6 +65,8 @@ import java.util.Map;
 
 public class Activity_boshu_Message extends Activity implements
         OnClickListener, OnItemClickListener {
+    private Bitmap newbitmap;
+    private String  strImgPath;
     private TextView tv_boshu_BaseMessage;
     private RelativeLayout rl_boshu_head;
     private AlertDialog alertDialog;
@@ -81,7 +86,13 @@ public class Activity_boshu_Message extends Activity implements
 
     private String[] ss = new String[] { "相册", "拍照" };
    private headImageBroadCast broadCast=new headImageBroadCast();
-   
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.unregisterReceiver(broadCast);
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
@@ -185,7 +196,21 @@ public class Activity_boshu_Message extends Activity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 0) {
+        System.out.println(Crop.REQUEST_PICK+"_----"+resultCode);
+        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
+            beginCrop(data.getData());
+        }
+        if(resultCode==RESULT_OK&&requestCode==11209){
+            File file=new File(strImgPath);
+            Uri uri=Uri.fromFile(file);
+            beginCrop(uri);
+
+        }
+
+        if (requestCode == Crop.REQUEST_CROP) {
+            handleCrop(resultCode, data);
+        }
+       /* if (resultCode == RESULT_OK && requestCode == 0) {
             File file = new File(FILE_PATH);
             if (!file.exists()) {
                 file.mkdir();
@@ -275,17 +300,17 @@ public class Activity_boshu_Message extends Activity implements
                                     byte[] arg2) {
                                 // TODO Auto-generated method stub
                                 //通知头像更新
-                               /* Intent it=new Intent("lifeisland.boshu.headimage");
+                               *//* Intent it=new Intent("lifeisland.boshu.headimage");
                                 byte[] bit=com.boshu.utils.BitmapUtils.getBitmapByte(bitmap);
                                 it.putExtra("bitmap",bit);
-                                Activity_boshu_Message.this.sendBroadcast(it);*/
-                                imageview.setImageBitmap(bitmap);
+                                Activity_boshu_Message.this.sendBroadcast(it);*//*
+                                imageview.setImageBitmap(newbitmap);
                                 Toast.makeText(Activity_boshu_Message.this,
                                         "头像上传成功~", Toast.LENGTH_SHORT).show();
                                 String result = new String(arg2);
                                 
-                                Activity_boshu_Message.this.setJsonDb(result,bitmap);
-                               /* CompressPicture.setSoftBitmap(bitmap);*///释放内存
+                                Activity_boshu_Message.this.setJsonDb(result,newbitmap);
+                               *//* CompressPicture.setSoftBitmap(bitmap);*//*//释放内存
                                 mProngressDialog.dismiss();
                             }
 
@@ -307,7 +332,7 @@ public class Activity_boshu_Message extends Activity implements
             } finally {
                
             }
-        }
+        }*/
 
     }
 
@@ -376,10 +401,16 @@ public class Activity_boshu_Message extends Activity implements
         switch (parent.getId()) {
         case R.id.lv:
             if (id == 0) {
-                selectPicFromLocal();
+                Crop.pickImage(this);
+                alertDialog.dismiss();
             }
             if (id == 1) {
-                selectPicFromCamera();
+                alertDialog.dismiss();
+                File cameraFile = new File(PathUtil.getInstance().getImagePath(), MyApplication.getInstance().getUserName()
+                        + System.currentTimeMillis() + ".jpg");
+                //String cameraFile.getParentFile().mkdirs();
+                strImgPath =cameraFile.getAbsolutePath();
+                Crop.cameraImage(this, 11209, cameraFile);
             }
             break;
         }
@@ -576,5 +607,124 @@ public class Activity_boshu_Message extends Activity implements
         });
         
     }
+    private void beginCrop(Uri source) {
 
+
+        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
+        Crop.of(source, destination).asSquare().start(this);
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == RESULT_OK) {
+            Uri uri=Crop.getOutput(result);
+            System.out.println("回来路径：");
+            try {
+                // img_boshu_studentCard.setImageURI(uri);
+                System.out.println(uri.toString());
+                Bitmap bitmap=MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                newbitmap=BitmapUtils.decodeSampleBitmapFromBitmap(bitmap);
+                if(!bitmap.isRecycled()){
+                    bitmap.recycle();
+                    System.gc();
+                }
+                String bitmapPath = Environment.getExternalStorageDirectory().toString() + "/DCIM/Camera/"+System.currentTimeMillis()+".JPG";
+                byte[] bytes=com.boshu.utils.BitmapUtils.getBitmapByte(newbitmap);
+                com.boshu.utils.BitmapUtils.write(bytes,bitmapPath);
+
+                upPicture(bitmapPath);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this,"图片出错",0).show();
+            }
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+   public void upPicture(String bitmapPath){
+       try {
+
+           final int[] progressFlag = {0};
+           File file1 = new File(bitmapPath);
+         //  byte[] bis = data.getByteArrayExtra("bitmap");
+         /*  final Bitmap bitmap = BitmapUtils.decodeSampleBitmapFromByteArray(bis, 80,
+                   80);*/
+
+           AsyncHttpClient client = new AsyncHttpClient();
+           client.addHeader("cookie", Preferences.getCookie());
+           RequestParams params = new RequestParams();
+           params.put("head_image", file1);
+           params.put("sys", "user");
+           params.put("ctrl", "user");
+           params.put("action", "mod_all");
+           client.post(Model.PathLoad, params,
+                   new AsyncHttpResponseHandler() {
+                       @Override
+                       public void onProgress(int bytesWritten, int totalSize) {
+                           super.onProgress(bytesWritten, totalSize);
+                           int progress=0;
+                           if(progressFlag[0]!=100) {
+                               if (bytesWritten != totalSize && bytesWritten != 0) {
+                                   progress = (int) (bytesWritten / (float) totalSize * 100);
+                                   mProngressDialog.setProgress(progress);
+                               } else {
+                                   progress = 100;
+                                   progressFlag[0] = 100;
+                                   mProngressDialog.setProgress(progress);
+
+                               }
+                           }
+                       }
+
+                       @Override
+                       public void onStart() {
+                           super.onStart();
+                           mProngressDialog=new ProgressDialog(Activity_boshu_Message.this);
+                           mProngressDialog.setMessage("正在上传图片...");
+                           mProngressDialog.setIndeterminate(false);
+                           mProngressDialog.setMax(100);
+                           mProngressDialog.setProgress(0);
+                           mProngressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                           mProngressDialog.setCancelable(false);
+                           mProngressDialog.show();
+                       }
+
+                       @Override
+                       public void onSuccess(int arg0, Header[] arg1,
+                                             byte[] arg2) {
+                           // TODO Auto-generated method stub
+                           //通知头像更新
+                               /* Intent it=new Intent("lifeisland.boshu.headimage");
+                                byte[] bit=com.boshu.utils.BitmapUtils.getBitmapByte(bitmap);
+                                it.putExtra("bitmap",bit);
+                                Activity_boshu_Message.this.sendBroadcast(it);*/
+                         //  imageview.setImageBitmap(bitmap);
+                           imageview.setImageBitmap(newbitmap);
+                           Toast.makeText(Activity_boshu_Message.this,
+                                   "头像上传成功~", Toast.LENGTH_SHORT).show();
+                           String result = new String(arg2);
+
+                           Activity_boshu_Message.this.setJsonDb(result,newbitmap);
+                               /* CompressPicture.setSoftBitmap(bitmap);*///释放内存
+                           mProngressDialog.dismiss();
+                       }
+
+                       @Override
+                       public void onFailure(int arg0, Header[] arg1,
+                                             byte[] arg2, Throwable arg3) {
+                           // TODO Auto-generated method stub
+                           // String str = new String(arg2);
+                           mProngressDialog.dismiss();
+                           Toast.makeText(Activity_boshu_Message.this,"头像上传失败,呵呵~", Toast.LENGTH_SHORT).show();
+                       }
+                   });
+
+       } catch (Exception e) {
+           // TODO: handle exception
+           e.printStackTrace();
+           mProngressDialog.dismiss();
+           Toast.makeText(Activity_boshu_Message.this,"未知错误，呵呵~",0).show();
+       } finally {
+
+       }
+   }
 }

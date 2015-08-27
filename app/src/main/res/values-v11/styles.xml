@@ -7,6 +7,7 @@
 
     <style name="horizontal_slide" parent="android:style/Theme.Holo.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@style/AnimFade2</item>
+         <item name="android:windowBackground">@color/top_bar_normal_bg</item>
     </style>
 
     <style name="nornal_style" parent="android:style/Theme.Holo.Light.NoActionBar"></style>

@@ -22,7 +22,6 @@ import com.boshu.customview.ClipView.OnDrawListenerComplete;
 import com.boshu.image.BitmapUtils;
 import com.lifeisle.android.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -82,13 +81,7 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
      */
     private void initClipView(int top) {
         pathImage = this.getIntent().getStringExtra("pathImage");
-        /*
-         * bitmap = BitmapFactory.decodeResource(this.getResources(),
-         * R.drawable.pic);
-         */
-        bitmap=BitmapUtils.decodeSampledBitmapFromSDCard(pathImage);
-       // bitmap=  BitmapFactory.decodeFile(pathImage);
-       
+        bitmap= BitmapUtils.decodeSampledBitmapFromSDCard(pathImage);
         clipview = new ClipView(ClipPictureActivity.this);
         clipview.setCustomTopBarHeight(top);
         clipview.addOnDrawCompleteListener(new OnDrawListenerComplete() {
@@ -120,6 +113,7 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
                 matrix.postTranslate(midX - imageMidX, midY - imageMidY);
 
                 srcPic.setImageMatrix(matrix);
+
                 srcPic.setImageBitmap(bitmap);
             }
         });
@@ -194,25 +188,33 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
     }
 
     public void onClick(View v) {
-        Bitmap clipBitmap = getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        clipBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] bitmapByte = baos.toByteArray();
-        File file=new File(pathImage);
         try {
+        Bitmap clipBitmap = getBitmap();
+      /*  ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        clipBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] bitmapByte  = com.boshu.utils.BitmapUtils.getBitmapByte(clipBitmap);
+        /*File file=new File(pathImage);
+
         FileOutputStream fos=new FileOutputStream(file);
         fos.write(bitmapByte);
-        fos.close();
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
-        Intent intent = new Intent();
+        fos.close();*/
+            byte[] bitmapByte  = com.boshu.utils.BitmapUtils.getBitmapByte(clipBitmap);
+            Intent intent = new Intent();
+            File file=new File(pathImage);
+            FileOutputStream fos=new FileOutputStream(file);
+            fos.write(bitmapByte);
+            fos.close();
 
-        intent.putExtra("bitmap", bitmapByte);
+
+     //   intent.putExtra("bitmap", bitmapByte);
 
         this.setResult(200, intent);
         this.finish();
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            System.out.println("错误"+e.toString());
+        }
     }
 
     /**
@@ -225,19 +227,19 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
         View view = this.getWindow().getDecorView();
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
-
         // 获取状态栏高度
         Rect frame = new Rect();
         this.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
         int statusBarHeight = frame.top;
-
         Bitmap finalBitmap = Bitmap.createBitmap(view.getDrawingCache(),
                 clipview.getClipLeftMargin(), clipview.getClipTopMargin()
                         + statusBarHeight, clipview.getClipWidth(),
                 clipview.getClipHeight());
-
         // 释放资源
         view.destroyDrawingCache();
+        if(!bitmap.isRecycled()){
+            bitmap.recycle();
+        }
         return finalBitmap;
     }
     public void back(View view){

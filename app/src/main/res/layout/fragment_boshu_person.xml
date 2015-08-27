@@ -101,6 +101,7 @@
     </RelativeLayout>
     <include layout="@layout/view"></include>
     <RelativeLayout
+        android:id="@+id/rl_boshu_Amounts"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -121,6 +122,7 @@
     <include layout="@layout/view"></include>
 
     <RelativeLayout
+        android:id="@+id/rl_boshu_Settlement"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

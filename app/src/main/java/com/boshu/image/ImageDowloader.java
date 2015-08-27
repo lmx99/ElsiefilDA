@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 
+import com.boshu.utils.Model;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -71,6 +73,62 @@ public class ImageDowloader {
 					Message msg=Message.obtain(handler,DOWNLOAD,bitmap);
 					msg.sendToTarget();
 					 fileCacheUtils.addBitmapToFile(subUrl, bitmap);
+					BitMapLruCacheHelper.getInstance().addBitmapToMemCache(subUrl, bitmap);
+				}
+			});
+		}
+		return null;
+	}
+	public Bitmap downloadImageNew(int width,int height,final String url,final OnImageDownloadListener listener){
+		final String subUrl=url.replaceAll("[^\\w]", "");//
+		Bitmap bitmap=showCacheBitmap(subUrl);//
+		this.REQ_HEIGHT=height;
+		this.REQ_WIDTH=width;
+
+		final String urlNew=url.substring(0, url.length()- Model.APPNAME.length());
+		System.out.println("新的路径"+urlNew);
+		if(bitmap!=null){
+			listener.onImageDownload(url,bitmap);
+			return bitmap;
+		}else{
+
+			new AsyncTask<String, Void,Bitmap>(){//
+
+				@Override
+				protected Bitmap doInBackground(String... params) {
+					// TODO Auto-generated method stub
+
+					Bitmap bitmap=getImageFromUrl(urlNew);
+					fileCacheUtils.addBitmapToFile(subUrl, bitmap);
+					BitMapLruCacheHelper.getInstance().addBitmapToMemCache(subUrl, bitmap);//
+					return bitmap;
+				}
+				protected void onPostExecute(Bitmap result){
+					listener.onImageDownload(url,result);
+				}
+
+			}.execute(urlNew);
+			final Handler handler=new Handler(){
+
+				@Override
+				public void handleMessage(Message msg) {
+					// TODO Auto-generated method stub
+					if(msg.what==DOWNLOAD){
+						listener.onImageDownload(url,(Bitmap)msg.obj);
+					}
+
+				}
+
+			};
+			this.getThreadPooll().execute(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					Bitmap bitmap=getImageFromUrl(urlNew);
+					Message msg=Message.obtain(handler,DOWNLOAD,bitmap);
+					msg.sendToTarget();
+					fileCacheUtils.addBitmapToFile(subUrl, bitmap);
 					BitMapLruCacheHelper.getInstance().addBitmapToMemCache(subUrl, bitmap);
 				}
 			});
