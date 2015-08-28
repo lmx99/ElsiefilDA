@@ -40,10 +40,10 @@ public class WheelView extends View {
 	private static final int MIN_DELTA_FOR_SCROLLING = 1;
 
 	/** 当前值和标签的颜色 */
-	private static final int VALUE_TEXT_COLOR = 0xF0FF6347;
+	private static final int VALUE_TEXT_COLOR = 0xFF2CA6E0;
 
 	/** item文字的颜色 */
-	private static final int ITEMS_TEXT_COLOR = 0x70595757;
+	private static final int ITEMS_TEXT_COLOR = 0xF9595757;
 
 	/** 顶部和底部阴影的颜色 */
 /*	private static final int[] SHADOWS_COLORS = new int[] { 0xFF111111,
@@ -53,7 +53,7 @@ public class WheelView extends View {
 	private static final int ADDITIONAL_ITEM_HEIGHT = 15;
 
 	/** 字体大小 */
-	private static final int TEXT_SIZE = 28;
+	private static int TEXT_SIZE = 26;
 
 	/** 顶部和底部item的偏移值 */
 	private static final int ITEM_OFFSET = TEXT_SIZE / 5;
@@ -150,7 +150,9 @@ public class WheelView extends View {
 		super(context);
 		initData(context);
 	}
-
+   public void setTextSize(int size){
+	   TEXT_SIZE=size;
+   }
 	private void initData(Context context) {
 		gestureDetector = new GestureDetector(context, gestureListener);
 		gestureDetector.setIsLongpressEnabled(false);// 设置手势长按不起作用
@@ -388,14 +390,18 @@ public class WheelView extends View {
 	 */
 	private void initResourceIfNecessary() {
 		if (itemsPaint == null) {
+			Paint mp = new Paint();
+			mp.setFakeBoldText(true);
 			itemsPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG
-					| Paint.FAKE_BOLD_TEXT_FLAG);
+					);
+			itemsPaint.setFakeBoldText(false);
 			itemsPaint.setTextSize(TEXT_SIZE);
 		}
 
 		if (valuePaint == null) {
 			valuePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG
-					| Paint.FAKE_BOLD_TEXT_FLAG | Paint.DITHER_FLAG);
+					 | Paint.DITHER_FLAG);
+			valuePaint.setFakeBoldText(false);
 			valuePaint.setTextSize(TEXT_SIZE);
 			valuePaint.setShadowLayer(0.1f, 0, 0.1f, 0xFFC0C0C0);
 		}

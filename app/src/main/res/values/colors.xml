@@ -43,16 +43,17 @@
     <color name="boshu_item_color">#F9F9FA</color>
     <color name="boshu_backgroud_color">#EFEFEE</color>
     <color name="boshu_backgroud_color2">#F2F2F2</color>
-    <color name="boshu_view">#C8C9CA</color>
+    <color name="boshu_view">#DBDCDC</color>
     <color name="boshu_textcolorkey">#9e9e9f</color>
     <color name="boshu_textcolorvalues">#343434</color>
 
 
-    <color name="boshu_textcolorallqh">#FF595757</color>
+    <color name="boshu_textcolorallqh">#0f0f0f</color>
     <color name="boshu_textcolorhint">#FFC8C9CA</color>
     <color name="boshu_backgroud">#FFEEEEEF</color>
     <color name="boshu_tag">#FFE8E8E8</color>
     <color name="qh_bacgroud">#eeeeef</color>
+    <color name="boshu_longin_color">#41aee3</color>
 
     
     

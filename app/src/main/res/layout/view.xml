@@ -5,8 +5,9 @@
     android:orientation="vertical" >
     <View 
         android:background="@color/boshu_view"
-        android:layout_height="0.5dp"
+        android:layout_height="0.3dp"
         android:layout_width="fill_parent"/>
-    
 
 </LinearLayout>
+
+

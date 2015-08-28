@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:orientation="vertical"
-
     >
+
 
     <TextView
         android:text="11:33"
@@ -29,7 +29,7 @@
             android:padding="10dp" >
 
             <ImageView
-                android:id="@+id/News_Pic"
+                android:id="@+id/push_img1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#B5B9BE"
@@ -37,7 +37,7 @@
 
             <TextView
                 android:textColor="#ffffff"
-                android:id="@+id/News_Title"
+                android:id="@+id/push_tv1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -53,6 +53,7 @@
             android:background="#B5B9BE" />
 
         <LinearLayout
+            android:id="@+id/push_linear2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -60,7 +61,7 @@
             android:padding="10dp" >
 
             <TextView
-                android:id="@+id/News_Title1"
+                android:id="@+id/push_tv2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -70,7 +71,7 @@
                 android:text="as大苏打撒打算打算" />
 
             <ImageView
-                android:id="@+id/News_Pic1"
+                android:id="@+id/push_img2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/delete" />
@@ -82,6 +83,7 @@
             android:background="#B5B9BE" />
 
         <LinearLayout
+            android:id="@+id/push_linear3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -89,7 +91,7 @@
             android:padding="10dp" >
 
             <TextView
-                android:id="@+id/News_Title2"
+                android:id="@+id/push_tv3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -99,7 +101,7 @@
                 android:text="as大苏打撒打算打算" />
 
             <ImageView
-                android:id="@+id/News_Pic2"
+                android:id="@+id/push_img3"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/delete" />
@@ -108,9 +110,10 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/delete" />
+            android:background="#B5B9BE" />
 
         <LinearLayout
+            android:id="@+id/push_linear4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -118,7 +121,7 @@
             android:padding="10dp" >
 
             <TextView
-                android:id="@+id/News_Title3"
+                android:id="@+id/push_tv4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -128,7 +131,7 @@
                 android:text="as大苏打撒打算打算" />
 
             <ImageView
-                android:id="@+id/News_Pic3"
+                android:id="@+id/push_img4"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/delete" />

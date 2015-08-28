@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:text="11:33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <com.boshu.customview.CircleImageView
+        android:id="@+id/pushUserHead"
+        android:layout_width="@dimen/size_avatar"
+        android:layout_height="@dimen/size_avatar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/margin_chat_activity"
+        android:src="@drawable/mini_avatar_shadow"
+        app:border_color="@color/white"
+        app:border_width="0dp"
+        />
+
+    <TextView
+        android:text="你好，我们的系统已经恢复了，欢迎使用生活岛"
+        android:layout_toRightOf="@+id/iv_userhead"
+        android:id="@+id/tv_push_message"
+        android:textSize="16sp"
+        android:background="@drawable/chatfrom_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</LinearLayout>
