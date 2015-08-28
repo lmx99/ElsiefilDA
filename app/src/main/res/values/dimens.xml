@@ -48,7 +48,7 @@
     <dimen name="text_size_action_bar">20sp</dimen>
 
     <dimen name="fragment_logistics_btn_height">54dp</dimen>
-    <dimen name="fragment_logistics_btn_textSize">18sp</dimen>
+    <dimen name="fragment_logistics_btn_textSize">16sp</dimen>
     <dimen name="fragment_logistics_btn_drawablePadding">16dp</dimen>
 
 
@@ -59,6 +59,8 @@
     <dimen name="order_list_btn_paddingX">8dp</dimen>
     <dimen name="order_list_btn_paddingY">6dp</dimen>
     <dimen name="order_list_item_paddingLeft">28dp</dimen>
+
+    <dimen name="size_radio_button_icon">20dp</dimen>
 
 
 
@@ -73,11 +75,12 @@
 
 
     <!--  OrderOperateActivity -->
-    <dimen name="width_activity_order_goods_icon">50dp</dimen>
-    <dimen name="height_activity_order_goods_icon">32dp</dimen>
-    <dimen name="padding_activity_order_operate_action_btn">10dp</dimen>
+    <dimen name="padding_y_activity_order_operate_action_btn">9dp</dimen>
+    <dimen name="padding_x_activity_order_operate">32dp</dimen>
     <dimen name="interval_activity_order_operate_action_btn">1dp</dimen>
-    <dimen name="text_activity_order_operate_action_btn">20sp</dimen>
+    <dimen name="text_activity_order_operate_action_btn">16sp</dimen>
+
+    <dimen name="radius_order_operate">6dp</dimen>
 
 
 

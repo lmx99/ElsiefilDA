@@ -5,6 +5,6 @@
         android:drawable="@color/main_color" />
 
     <item
-        android:bottom="1.4dp"
+        android:bottom="1dp"
         android:drawable="@color/bg_activity_sign_up" />
 </layer-list>
