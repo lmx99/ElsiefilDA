@@ -19,4 +19,6 @@
     <item type="id" name="decode_succeeded" />
     <item type="id" name="quit" />
     <item type="id" name="restart_preview" />
+    <item type="id" name="pushd_dialog"/>
+    <item type="id" name="push_new"/>
 </resources>

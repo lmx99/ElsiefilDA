@@ -1,7 +1,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <style name="AppTheme" parent="android:Theme.Light" />
+    <style name="AppTheme" parent="android:Theme.Light"
+        />
 
 
     <style name="chat_content_date_style">
@@ -68,13 +69,13 @@
     <style name="Anim_style" parent="android:Theme.NoTitleBar.Fullscreen">
         <item name="android:windowAnimationStyle">@style/AnimFade</item>
     </style>
-
     <style name="Anim_style2" parent="android:Theme.NoTitleBar">
         <item name="android:windowAnimationStyle">@style/AnimFade</item>
     </style>
 
     <style name="horizontal_slide" parent="android:Theme.NoTitleBar">
         <item name="android:windowAnimationStyle">@style/AnimFade2</item>
+         <item name="android:windowBackground">@color/top_bar_normal_bg</item>
     </style>
 
     <style name="nornal_style" parent="android:Theme.NoTitleBar"></style>

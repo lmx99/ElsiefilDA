@@ -88,6 +88,11 @@ public class upteVersionDialog {
         return alertDialog;
     }
     public void postVersion(final Context context, final WindowManager window, final LayoutInflater inflater, final boolean toast) {
+       final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("正在检测中~");
+        pd.setCanceledOnTouchOutside(false);
+        pd.setCancelable(false);
+        pd.show();
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.start();
         requestQueue.add(new AutoLoginRequest(context, Request.Method.POST,
@@ -111,14 +116,16 @@ public class upteVersionDialog {
                                 Toast.makeText(context, "已经为最新版本.么么哒！", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        Log.e(TAG, verCode + "=========" + verName + "========" + urlApk);
                     } else {
-                        Toast.makeText(context, "未知错误", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "更新：未知错误", Toast.LENGTH_SHORT).show();
+
                     }
 
                 } catch (Exception e) {
-                    Log.e(TAG, "更新软件模块报错，请检查!" + e.getMessage());
+                    Toast.makeText(context, "更新：服务器出错！", Toast.LENGTH_SHORT).show();
+
                 }
+                pd.dismiss();
 
 
             }
