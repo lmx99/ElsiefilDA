@@ -117,12 +117,12 @@
         android:id="@+id/sign_up"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_sign_up_item"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="45dp"
         android:background="@drawable/bg_btn_sign_up"
         android:enabled="false"
         android:text="@string/btn_sign_up"
         android:textAllCaps="false"
-        android:textColor="@android:color/white"
+        android:textColor="@drawable/text_color_sign_up_btn"
         android:textSize="@dimen/size_sign_up_text"/>
 
 </LinearLayout>

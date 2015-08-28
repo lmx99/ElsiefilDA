@@ -48,7 +48,7 @@
     <dimen name="text_size_action_bar">20sp</dimen>
 
     <dimen name="fragment_logistics_btn_height">54dp</dimen>
-    <dimen name="fragment_logistics_btn_textSize">18sp</dimen>
+    <dimen name="fragment_logistics_btn_textSize">16sp</dimen>
     <dimen name="fragment_logistics_btn_drawablePadding">16dp</dimen>
 
 
