@@ -125,4 +125,22 @@
         android:textColor="@color/goto_btn_textColor"
         android:textSize="@dimen/fragment_logistics_btn_textSize" />
 
+    <TextView
+        android:id="@+id/qr_code"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragment_logistics_btn_height"
+        android:background="@drawable/bg_goto_btn"
+        android:clickable="true"
+        android:drawableEnd="@drawable/icon_greater"
+        android:drawableLeft="@drawable/icon_scan"
+        android:drawablePadding="@dimen/fragment_logistics_btn_drawablePadding"
+        android:drawableRight="@drawable/icon_greater"
+        android:drawableStart="@drawable/icon_scan"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/fragment_logistics_btn_drawablePadding"
+        android:paddingRight="@dimen/fragment_logistics_btn_drawablePadding"
+        android:text="@string/fragment_logistics_auth_qr_code"
+        android:textColor="@color/goto_btn_textColor"
+        android:textSize="@dimen/fragment_logistics_btn_textSize" />
+
 </LinearLayout>

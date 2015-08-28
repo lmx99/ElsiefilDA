@@ -3,7 +3,7 @@
 
     <item
         android:state_checked="true"
-        android:drawable="@drawable/icon_order_operate_goods_checked" />
+        android:drawable="@drawable/radio_checked_mark" />
 
-    <item android:drawable="@drawable/icon_order_operate_goods_normal" />
+    <item android:drawable="@drawable/radio_ring" />
 </selector>

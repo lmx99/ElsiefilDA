@@ -5,7 +5,7 @@ import android.widget.BaseAdapter;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.stat.DeliverStatFragment;
 import com.lifeisle.jekton.order.stat.DeliverStatModel;
-import com.lifeisle.jekton.order.stat.adapter.MotorLogisticsStatListAdapter;
+import com.lifeisle.jekton.order.stat.adapter.GangerLogisticsStatListAdapter;
 import com.lifeisle.jekton.order.stat.factory.GangerLogisticsStatFactory;
 
 /**
@@ -20,7 +20,7 @@ public class GangerLogisticsStatController implements StatController {
         mModel = new DeliverStatModel(fragment,
                                       new GangerLogisticsStatFactory(),
                                       StatController.ACTION_STAT_TYPE_GANGER);
-        mAdapter = new MotorLogisticsStatListAdapter(fragment.getActivity(), mModel);
+        mAdapter = new GangerLogisticsStatListAdapter(fragment.getActivity(), mModel);
     }
 
 

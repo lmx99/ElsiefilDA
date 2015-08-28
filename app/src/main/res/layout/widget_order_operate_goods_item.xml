@@ -3,7 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:paddingLeft="@dimen/padding_x_activity_order_operate"
+    android:paddingRight="@dimen/padding_x_activity_order_operate"
+    android:paddingTop="@dimen/padding_y_activity_order_operate_action_btn"
+    android:paddingBottom="@dimen/padding_y_activity_order_operate_action_btn"
     android:textSize="14sp"
-    android:button="@color/white"
-    android:drawableRight="@drawable/icon_order_operate_goods" />
+    android:button="@android:color/white"
+    android:drawableRight="@drawable/radio_order_operate_goods"
+    android:drawableEnd="@drawable/radio_order_operate_goods" />
