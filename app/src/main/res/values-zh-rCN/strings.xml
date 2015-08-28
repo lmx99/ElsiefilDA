@@ -106,8 +106,8 @@
     <string name="Introduction">简介</string>
     <string name="To_join_the_chat">加入群聊</string>
     <string name="login">登录</string>
-    <string name="user_name">用户名</string>
-    <string name="password">密码</string>
+    <string name="user_name">请输入用户名</string>
+    <string name="password">请输入密码</string>
     <string name="register">注册</string>
     <string name="confirmpassword">确认密码</string>
     <string name="downwaiting">正在下载文件请稍后</string>
@@ -286,6 +286,16 @@
     <string name="hanging_up">正在挂断..</string>
     <string name="illegal_user_name">用户名不合法</string>
     <string name="robot_chat">环信小助手</string>
+
+
+
+
+    <string name="crop__saving">正在加载照片…</string>
+    <string name="crop__wait">请等待…</string>
+    <string name="crop__pick_error">无效的图片</string>
+
+    <string name="crop__done">完成</string>
+    <string name="crop__cancel">取消</string>
     
     
     

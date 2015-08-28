@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:background="@color/boshu_backgroud_color2"
     android:orientation="vertical" >
-
+    <include layout="@layout/view1" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/boshu_item_color" >
-
         <TextView
+            android:id="@+id/f_nickname"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
@@ -19,35 +19,22 @@
             android:text="昵称"
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
-
-        <LinearLayout
-            android:id="@+id/ll_boshu_nickname"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal" >
-
             <TextView
+                android:layout_marginRight="10dp"
+                android:drawableRight="@drawable/entry_page1"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/f_nickname"
                 android:textColor="@color/boshu_textcolorallqh"
                 android:id="@+id/tv_boshu_editname"
-                android:layout_width="220dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
                 android:textSize="16sp" >
             </TextView>
 
-            <EditText
-                android:textColor="@color/boshu_textcolorallqh"
-                android:textSize="16sp"
-                android:id="@+id/et_boshu_editnickName"
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
-                android:background="#00000000"
-                android:visibility="gone" />
-
-        </LinearLayout>
     </RelativeLayout>
+
+
 
     <include layout="@layout/view1" />
 
@@ -57,7 +44,7 @@
         android:background="@color/boshu_item_color" >
 
         <TextView
-
+           android:id="@+id/f_school"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
@@ -66,41 +53,29 @@
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
 
-        <LinearLayout
-            android:id="@+id/ll_boshu_school"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal" >
-
             <TextView
+                android:layout_marginRight="10dp"
+                android:drawableRight="@drawable/entry_page1"
+                android:layout_toRightOf="@id/f_school"
                 android:textColor="@color/boshu_textcolorallqh"
                 android:id="@+id/tv_boshu_editschool"
-                android:layout_width="215dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="20dp"
                 android:gravity="center_vertical"
                 android:textSize="16sp" />
 
-            <EditText
-                android:textColor="@color/boshu_textcolorallqh"
-                android:textSize="16sp"
-                android:id="@+id/et_boshu_school"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
-                android:background="#00000000"
-                android:visibility="invisible" />
-        </LinearLayout>
+
     </RelativeLayout>
-
     <include layout="@layout/view1" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/boshu_item_color" >
 
         <TextView
+
+            android:id="@+id/f_job"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
@@ -109,35 +84,25 @@
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
 
-        <LinearLayout
 
-            android:id="@+id/ll_boshu_job"
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:drawableRight="@drawable/entry_page1"
+            android:layout_toRightOf="@id/f_job"
+            android:textColor="@color/boshu_textcolorallqh"
+            android:id="@+id/tv_boshu_editjob"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal" >
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="16sp" />
 
-            <TextView
-                android:textColor="@color/boshu_textcolorallqh"
-                android:id="@+id/tv_boshu_editjob"
-                android:layout_width="215dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
-                android:gravity="center_vertical"
-                android:textSize="16sp" />
 
-            <EditText
-                android:textColor="@color/boshu_textcolorallqh"
-                android:textSize="16sp"
-                android:id="@+id/et_boshu_job"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
-                android:background="#00000000"
-                android:visibility="invisible" />
-        </LinearLayout>
     </RelativeLayout>
 
     <include layout="@layout/view1" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -160,10 +125,11 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:layout_marginRight="10dp"
+                android:drawableRight="@drawable/entry_page1"
                 android:textColor="@color/boshu_textcolorallqh"
-
                 android:id="@+id/tv_boshu_editsex"
-                android:layout_width="220dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
@@ -176,11 +142,13 @@
     <include layout="@layout/view1" />
 
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/boshu_item_color" >
 
         <TextView
+            android:id="@+id/f_age"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
@@ -190,17 +158,20 @@
             android:textSize="16sp" />
 
         <LinearLayout
+            android:layout_toRightOf="@id/f_age"
             android:id="@+id/ll_boshu_age"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal" >
 
             <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:drawableRight="@drawable/entry_page1"
                 android:textColor="@color/boshu_textcolorallqh"
                 android:id="@+id/tv_boshu_editage"
-                android:layout_width="220dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
                 android:textSize="16sp" />
 
@@ -214,6 +185,7 @@
         android:background="@color/boshu_item_color" >
 
         <TextView
+            android:id="@+id/f_hight"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
@@ -223,18 +195,20 @@
             android:textSize="16sp" />
 
         <LinearLayout
+            android:layout_toRightOf="@+id/f_hight"
             android:id="@+id/ll_boshu_hight"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal" >
 
             <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:drawableRight="@drawable/entry_page1"
                 android:textColor="@color/boshu_textcolorallqh"
-
                 android:id="@+id/tv_boshu_edithight"
-                android:layout_width="220dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
                 android:gravity="center_vertical"
                 android:textSize="16sp" />
 
@@ -252,6 +226,7 @@
         android:background="@color/boshu_item_color" >
 
         <TextView
+            android:id="@+id/f_fitgure"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
@@ -261,17 +236,20 @@
             android:textSize="16sp" />
 
         <LinearLayout
+            android:layout_toRightOf="@id/f_fitgure"
             android:id="@+id/ll_boshu_body"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal" >
 
             <TextView
+                android:layout_marginRight="10dp"
+                android:drawableRight="@drawable/entry_page1"
                 android:textColor="@color/boshu_textcolorallqh"
                 android:id="@+id/tv_boshu_editbody"
-                android:layout_width="215dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="20dp"
                 android:gravity="center_vertical"
                 android:textSize="16sp" />
 
@@ -287,6 +265,7 @@
         android:background="@color/boshu_item_color" >
 
         <TextView
+            android:id="@+id/f_entry"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
@@ -296,6 +275,7 @@
             android:textSize="16sp" />
 
         <LinearLayout
+            android:layout_toRightOf="@id/f_entry"
             android:id="@+id/ll_boshu_enrollmentNew"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -303,11 +283,12 @@
 
             <TextView
                 android:textColor="@color/boshu_textcolorallqh"
-
+                android:layout_marginRight="10dp"
+                android:drawableRight="@drawable/entry_page1"
                 android:id="@+id/tv_boshu_enrollment"
-                android:layout_width="215dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="20dp"
                 android:gravity="center_vertical"
                 android:textSize="16sp" />
 

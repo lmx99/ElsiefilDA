@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="54dp" />
     </RelativeLayout>
-     <include layout="@layout/view"></include>
+     <include layout="@layout/view_white"></include>
 
     <RelativeLayout
         android:id="@+id/rl_boshu_wallet"
@@ -85,7 +85,7 @@
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <include layout="@layout/view"></include>
+        <include layout="@layout/view_white"></include>
         <TextView
             android:textSize="15sp"
             android:textColor="@color/boshu_textcolorallqh"
@@ -101,6 +101,7 @@
     </RelativeLayout>
     <include layout="@layout/view"></include>
     <RelativeLayout
+        android:id="@+id/rl_boshu_Amounts"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -121,6 +122,7 @@
     <include layout="@layout/view"></include>
 
     <RelativeLayout
+        android:id="@+id/rl_boshu_Settlement"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -137,13 +139,13 @@
             android:layout_width="match_parent"
             android:layout_height="54dp" />
     </RelativeLayout>
-    <include layout="@layout/view"></include>
+    <include layout="@layout/view_white"></include>
     <RelativeLayout
         android:layout_marginTop="13dp"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <include layout="@layout/view"></include>
+        <include layout="@layout/view_white"></include>
         <TextView
             android:textSize="15sp"
             android:textColor="@color/boshu_textcolorallqh"
@@ -151,21 +153,21 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="30dp"
             android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/message_experience"
+            android:drawableLeft="@drawable/message_experience1"
             android:drawableRight="@drawable/entry_page"
             android:gravity="center_vertical"
             android:text="我的经验"
             android:layout_width="match_parent"
             android:layout_height="54dp" />
     </RelativeLayout>
-    <include layout="@layout/view"></include>
+    <include layout="@layout/view_white"></include>
     <RelativeLayout
         android:id="@+id/rl_boshu_set"
         android:layout_marginTop="13dp"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <include layout="@layout/view"></include>
+        <include layout="@layout/view_white"></include>
         <TextView
             android:textSize="15sp"
             android:textColor="@color/boshu_textcolorallqh"
@@ -180,7 +182,7 @@
             android:layout_width="match_parent"
             android:layout_height="54dp" />
     </RelativeLayout>
-    <include layout="@layout/view"/>
+    <include layout="@layout/view_white"/>
 
     
     
