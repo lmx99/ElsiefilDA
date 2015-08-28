@@ -10,12 +10,12 @@
         android:id="@+id/goodsList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4" />
+        android:layout_weight="2" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="12">
+        android:layout_weight="7">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -125,17 +125,22 @@
             <EditText
                 android:id="@+id/reason"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:padding="@dimen/padding_y_activity_order_operate_action_btn"
-                android:background="#eeeeee"
+                android:background="@drawable/bg_order_operate_reason"
                 android:hint="@string/hint_reason"/>
 
             <TextView
                 android:id="@+id/ok"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:padding="6dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"

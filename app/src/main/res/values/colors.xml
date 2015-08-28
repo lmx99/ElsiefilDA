@@ -107,8 +107,10 @@
     <!-- OrderOperateActivity -->
     <color name="radio_order_operate_option_checked">#ddd</color>
     <color name="text_order_operate_option">#515151</color>
-    <color name="bg_order_operate_ok_normal">#d85238</color>
-    <color name="bg_order_operate_ok_pressed">#bd3731</color>
+    <color name="bg_order_operate_ok_normal">#e53131</color>
+    <color name="bg_order_operate_ok_pressed">#cae53131</color>
+    <color name="border_order_operate_reason">#d7d7da</color>
+    <color name="bg_order_operate_reason">#eeeeef</color>
 
 
 

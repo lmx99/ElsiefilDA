@@ -75,10 +75,12 @@
 
 
     <!--  OrderOperateActivity -->
-    <dimen name="padding_y_activity_order_operate_action_btn">10dp</dimen>
-    <dimen name="padding_x_activity_order_operate">24dp</dimen>
+    <dimen name="padding_y_activity_order_operate_action_btn">9dp</dimen>
+    <dimen name="padding_x_activity_order_operate">32dp</dimen>
     <dimen name="interval_activity_order_operate_action_btn">1dp</dimen>
     <dimen name="text_activity_order_operate_action_btn">16sp</dimen>
+
+    <dimen name="radius_order_operate">6dp</dimen>
 
 
 
