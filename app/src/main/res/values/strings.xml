@@ -341,6 +341,7 @@
     <string name="fragment_logistics_my_position">MyPosition</string>
     <string name="fragment_logistics_job_opportunity">Job Opportunities</string>
     <string name="fragment_logistics_scan_QR_code">Scan QR Code</string>
+    <string name="fragment_logistics_auth_qr_code">Authority QR Codes</string>
     <string name="fragment_logistics_deliver_stat">Deliver Stat</string>
     <string name="fragment_logistics_order_search">Search Orders</string>
 
