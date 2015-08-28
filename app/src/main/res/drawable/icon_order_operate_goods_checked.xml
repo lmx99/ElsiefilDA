@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <size
-        android:height="@dimen/height_activity_order_goods_icon"
-        android:width="@dimen/width_activity_order_goods_icon" />
-    <solid android:color="@color/main_color" />
-    <corners android:radius="2dp" />
+    <item
+        android:drawable="@drawable/radio_order_list_option_unchecked" />
+    <item
+        android:drawable="@drawable/icon_checked" />
 
-</shape>
+    <!--<shape-->
+        <!--android:shape="oval">-->
+
+        <!--<size-->
+            <!--android:height="@dimen/size_radio_button_icon"-->
+            <!--android:width="@dimen/size_radio_button_icon" />-->
+        <!--<stroke-->
+            <!--android:color="@color/main_color"-->
+            <!--android:width="2dp"/>-->
+
+
+    <!--</shape>-->
+</layer-list>
