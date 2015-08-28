@@ -24,9 +24,8 @@
                 android:id="@+id/btn_logistics"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@color/boshu_item_color"
                 android:drawableTop="@drawable/tag_logistic_bg"
-
                 android:onClick="onTabClicked"
                 android:paddingBottom="2dip"
                 android:paddingTop="7dip"
@@ -61,7 +60,7 @@
                 android:id="@+id/btn_find"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@color/boshu_item_color"
                 android:drawableTop="@drawable/tab_chat_bg"
                 android:onClick="onTabClicked"
                 android:paddingBottom="2dip"
@@ -96,7 +95,7 @@
                 android:id="@+id/btn_conversation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@color/boshu_item_color"
                 android:drawableTop="@drawable/tab_chat_bg"
                 android:onClick="onTabClicked"
                 android:paddingBottom="2dip"
@@ -132,7 +131,7 @@
                 android:id="@+id/btn_address_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@color/boshu_item_color"
                 android:drawableTop="@drawable/tab_contact_list_bg"
                 android:onClick="onTabClicked"
                 android:paddingBottom="2dip"
@@ -163,7 +162,7 @@
                 android:id="@+id/btn_setting"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@color/boshu_item_color"
                 android:drawableTop="@drawable/tab_setting_bg"
                 android:onClick="onTabClicked"
                 android:paddingBottom="2dip"
@@ -174,17 +173,12 @@
                 android:textSize="12sp" />
         </RelativeLayout>
     </LinearLayout>
-    <View
-        android:id="@+id/view_ty"
-        android:layout_above="@id/main_bottom"
-        android:background="#2E030000"
-        android:layout_height="0.3dp"
-        android:layout_width="fill_parent"/>
+
     <RelativeLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/view_ty" >
+        android:layout_above="@id/main_bottom" >
 
     </RelativeLayout>
 

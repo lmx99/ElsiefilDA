@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/boshu_backgroud_color"
+    android:background="@color/boshu_backgroud_color2"
     android:orientation="vertical">
 
 
@@ -40,8 +40,9 @@
 
 
     </RelativeLayout>
+    <include layout="@layout/view_ty" />
     <ScrollView
-        android:background="@color/boshu_item_color"
+        android:background="@color/boshu_backgroud_color2"
         android:id="@+id/sl_boshu_editMessageNew"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -84,6 +85,7 @@
 
             <include layout="@layout/view" />
             <RelativeLayout
+                android:background="@color/boshu_backgroud_color2"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" >
 

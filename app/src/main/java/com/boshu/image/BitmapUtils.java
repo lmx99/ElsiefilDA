@@ -19,7 +19,6 @@ public class BitmapUtils {
 		opts.inSampleSize=inSampleSize;//节约内存，得到缩略图所需的bitmap（我的理解）
 		opts.inJustDecodeBounds=false;
 		Bitmap bitmap=BitmapFactory.decodeResource(res, resId,opts);
-
 		return bitmap;
 
 
@@ -83,8 +82,8 @@ public class BitmapUtils {
 		//byte[] data=com.boshu.utils.BitmapUtils.getBitmapByte(bitmap);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-		int percent=500*1024*100/baos.toByteArray().length;
-		if( baos.toByteArray().length / 1024>500) {//判断如果图片大于1M,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
+		int percent=700*1024*100/baos.toByteArray().length;
+		if( baos.toByteArray().length / 1024>700) {//判断如果图片大于1M,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
 			baos.reset();//重置baos即清空baos
 			bitmap.compress(Bitmap.CompressFormat.JPEG,percent, baos);//这里压缩50%，把压缩后的数据存放到baos中
 		}

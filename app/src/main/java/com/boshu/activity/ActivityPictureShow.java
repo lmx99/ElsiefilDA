@@ -31,11 +31,13 @@ public class ActivityPictureShow extends Activity{
     private int position;
     private  List<String> list;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boshu_pcitureshow);
         initView();
+
 
     }
     private void initView() {

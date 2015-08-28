@@ -1,11 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:background="#ffffff"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
     <RelativeLayout
 
       android:id="@+id/ll"
@@ -34,9 +32,11 @@
        >
 
     <ImageView
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:id="@+id/img_show"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
     </RelativeLayout>
@@ -48,6 +48,4 @@
         android:layout_centerInParent="true"
         android:layout_width="30dp"
         android:layout_height="30dp"/>
-
-
 </RelativeLayout>

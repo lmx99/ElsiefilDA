@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="0.5dp"
     android:orientation="vertical" >
-    <View 
-        android:background="@color/boshu_view"
-        android:layout_height="0.3dp"
+    <View
+        android:background="@color/white"
+        android:layout_height="0.1dp"
         android:layout_width="fill_parent"/>
 
 </LinearLayout>
 
 
+    

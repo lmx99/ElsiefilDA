@@ -334,6 +334,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
         bt_boshu_finish = (Button) this.findViewById(R.id.bt_boshu_finish);
         if(EDITFLAG!=2) {
             bt_boshu_finish.setVisibility(View.VISIBLE);
+            bt_boshu_indent.setVisibility(View.GONE);
         }
         bt_boshu_finish.setOnClickListener(this);
 
@@ -505,7 +506,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                 break;
             case R.id.bt_boshu_ident:
                if( !UserIndent.getuserIndent(user)) {
-                   Toast.makeText(this, "请完善应聘信息，么么哒!", 0).show();
+                   Toast.makeText(this, "请完善全部信息，么么哒!", 0).show();
                    return;
                }else {
                    postIndent();
@@ -910,7 +911,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
             img.setImageBitmap(bitmap);
         } else {
             img.setImageResource(R.drawable.default_add);
-            mImageDowloader.downloadImage(100, 100, url,
+            mImageDowloader.downloadImage(200, 200, url,
                     new OnImageDownloadListener() {
                         @Override
                         public void onImageDownload(String url, Bitmap bitmap) {
@@ -1058,7 +1059,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
         sl.fullScroll(ScrollView.FOCUS_DOWN);
         try {
             File file1 = new File(pathImage);
-            final Bitmap bt = BitmapUtils.decodeSampledBitmapFromSDCard(pathImage, 100, 100);
+            final Bitmap bt = BitmapUtils.decodeSampledBitmapFromSDCard(pathImage, 200, 200);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("cookie", Preferences.getCookie());
             RequestParams params = new RequestParams();
@@ -1204,7 +1205,6 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                                     System.out.println("身份证照前照：" + bImage);
                                     user.setBeforeIdCard(bImage);
                                     if (user != null) {
-                                        user.setBeforeIdCard(bImage);
                                         ud.update(user);
                                     } else {
                                         user = new User();

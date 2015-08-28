@@ -1,12 +1,14 @@
 package com.boshu.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,32 +33,64 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
     private ImageView srcPic;
     private View sure;
     private ClipView clipview;
-   private String pathImage ;
+    private String pathImage;
 
     private Matrix matrix = new Matrix();
     private Matrix savedMatrix = new Matrix();
 
-    /** 动作标志：无 */
+    /**
+     * 动作标志：无
+     */
     private static final int NONE = 0;
-    /** 动作标志：拖动 */
+    /**
+     * 动作标志：拖动
+     */
     private static final int DRAG = 1;
-    /** 动作标志：缩放 */
+    /**
+     * 动作标志：缩放
+     */
     private static final int ZOOM = 2;
-    /** 初始化动作标志 */
+    /**
+     * 初始化动作标志
+     */
     private int mode = NONE;
 
-    /** 记录起始坐标 */
+    /**
+     * 记录起始坐标
+     */
     private PointF start = new PointF();
-    /** 记录缩放时两指中间点坐标 */
+    /**
+     * 记录缩放时两指中间点坐标
+     */
     private PointF mid = new PointF();
     private float oldDist = 1f;
+private Bitmap bitmap;
+    private ProgressDialog pd;
+    private android.os.Handler handler = new android.os.Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    pd.dismiss();
+                    Intent intent = new Intent();
+                    ClipPictureActivity.this.setResult(200, intent);
+                    ClipPictureActivity.this.finish();
+                    break;
+            }
+        }
+    };
 
-    private Bitmap bitmap;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cut_picture);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
+            }
+        }).start();
         srcPic = (ImageView) this.findViewById(R.id.src_pic);
         srcPic.setOnTouchListener(this);
 
@@ -76,12 +110,13 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
 
     /**
      * 初始化截图区域，并将源图按裁剪框比例缩放
-     * 
+     *
      * @param top
      */
     private void initClipView(int top) {
+
         pathImage = this.getIntent().getStringExtra("pathImage");
-        bitmap= BitmapUtils.decodeSampledBitmapFromSDCard(pathImage);
+        bitmap = BitmapUtils.decodeSampledBitmapFromSDCard(pathImage);
         clipview = new ClipView(ClipPictureActivity.this);
         clipview.setCustomTopBarHeight(top);
         clipview.addOnDrawCompleteListener(new OnDrawListenerComplete() {
@@ -119,44 +154,44 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
 
         this.addContentView(clipview, new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-       
+
     }
 
     public boolean onTouch(View v, MotionEvent event) {
         ImageView view = (ImageView) v;
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
-        case MotionEvent.ACTION_DOWN:
-            savedMatrix.set(matrix);
-            // 设置开始点位置
-            start.set(event.getX(), event.getY());
-            mode = DRAG;
-            break;
-        case MotionEvent.ACTION_POINTER_DOWN:
-            oldDist = spacing(event);
-            if (oldDist > 10f) {
+            case MotionEvent.ACTION_DOWN:
                 savedMatrix.set(matrix);
-                midPoint(mid, event);
-                mode = ZOOM;
-            }
-            break;
-        case MotionEvent.ACTION_UP:
-        case MotionEvent.ACTION_POINTER_UP:
-            mode = NONE;
-            break;
-        case MotionEvent.ACTION_MOVE:
-            if (mode == DRAG) {
-                matrix.set(savedMatrix);
-                matrix.postTranslate(event.getX() - start.x, event.getY()
-                        - start.y);
-            } else if (mode == ZOOM) {
-                float newDist = spacing(event);
-                if (newDist > 10f) {
-                    matrix.set(savedMatrix);
-                    float scale = newDist / oldDist;
-                    matrix.postScale(scale, scale, mid.x, mid.y);
+                // 设置开始点位置
+                start.set(event.getX(), event.getY());
+                mode = DRAG;
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                oldDist = spacing(event);
+                if (oldDist > 10f) {
+                    savedMatrix.set(matrix);
+                    midPoint(mid, event);
+                    mode = ZOOM;
                 }
-            }
-            break;
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_POINTER_UP:
+                mode = NONE;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (mode == DRAG) {
+                    matrix.set(savedMatrix);
+                    matrix.postTranslate(event.getX() - start.x, event.getY()
+                            - start.y);
+                } else if (mode == ZOOM) {
+                    float newDist = spacing(event);
+                    if (newDist > 10f) {
+                        matrix.set(savedMatrix);
+                        float scale = newDist / oldDist;
+                        matrix.postScale(scale, scale, mid.x, mid.y);
+                    }
+                }
+                break;
         }
         view.setImageMatrix(matrix);
         return true;
@@ -164,7 +199,7 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
 
     /**
      * 多点触控时，计算最先放下的两指距离
-     * 
+     *
      * @param event
      * @return
      */
@@ -176,7 +211,7 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
 
     /**
      * 多点触控时，计算最先放下的两指中心坐标
-     * 
+     *
      * @param point
      * @param event
      */
@@ -187,38 +222,40 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
     }
 
     public void onClick(View v) {
-        try {
-        Bitmap clipBitmap = getBitmap();
-      /*  ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        clipBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] bitmapByte  = com.boshu.utils.BitmapUtils.getBitmapByte(clipBitmap);
-        /*File file=new File(pathImage);
+        pd = new ProgressDialog(ClipPictureActivity.this);
+        pd.setMessage("正在保存图片~");
+        pd.setCanceledOnTouchOutside(false);
+        pd.setCancelable(false);
+        pd.show();
+        final Bitmap clipBitmap = getBitmap();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                byte[] bitmapByte = com.boshu.utils.BitmapUtils.getBitmapByte(clipBitmap);
+                File file = new File(pathImage);
+                try {
+                    FileOutputStream fos = new FileOutputStream(file);
+                    fos.write(bitmapByte);
+                    fos.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Message message = handler.obtainMessage();
+                message.what = 1;
+                handler.sendMessage(message);
 
-        FileOutputStream fos=new FileOutputStream(file);
-        fos.write(bitmapByte);
-        fos.close();*/
-            byte[] bitmapByte  = com.boshu.utils.BitmapUtils.getBitmapByte(clipBitmap);
-            Intent intent = new Intent();
-            File file=new File(pathImage);
-            FileOutputStream fos=new FileOutputStream(file);
-            fos.write(bitmapByte);
-            fos.close();
+            }
+        }).start();
 
 
-     //   intent.putExtra("bitmap", bitmapByte);
+        //   intent.putExtra("bitmap", bitmapByte);
 
-        this.setResult(200, intent);
-        this.finish();
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-            System.out.println("错误"+e.toString());
-        }
+
     }
 
     /**
      * 获取裁剪框内截图
-     * 
+     *
      * @return
      */
     private Bitmap getBitmap() {
@@ -236,12 +273,13 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
                 clipview.getClipHeight());
         // 释放资源
         view.destroyDrawingCache();
-        if(!bitmap.isRecycled()){
+        if (!bitmap.isRecycled()) {
             bitmap.recycle();
         }
         return finalBitmap;
     }
-    public void back(View view){
+
+    public void back(View view) {
         this.finish();
     }
 
