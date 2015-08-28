@@ -39,14 +39,14 @@
         android:background="@drawable/bg_goto_btn"
         android:clickable="true"
         android:drawableEnd="@drawable/icon_greater"
-        android:drawableLeft="@drawable/icon_my_position"
+        android:drawableLeft="@drawable/icon_my_job"
         android:drawablePadding="@dimen/fragment_logistics_btn_drawablePadding"
         android:drawableRight="@drawable/icon_greater"
-        android:drawableStart="@drawable/icon_my_position"
+        android:drawableStart="@drawable/icon_my_job"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/fragment_logistics_btn_drawablePadding"
         android:paddingRight="@dimen/fragment_logistics_btn_drawablePadding"
-        android:text="@string/fragment_logistics_my_position"
+        android:text="@string/fragment_logistics_my_job"
         android:textColor="@color/goto_btn_textColor"
         android:textSize="@dimen/fragment_logistics_btn_textSize" />
 

@@ -515,7 +515,7 @@
         android:name="com.lifeisle.jekton.activity.MyBrowserActivity"
         android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
         <activity
-        android:name="com.lifeisle.jekton.activity.JobsActivity"
+        android:name="com.lifeisle.jekton.job.JobsActivity"
         android:label="@string/title_activity_jobs"
         android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
         android:theme="@style/MyTheme" >
@@ -526,7 +526,7 @@
             android:value="com.easemob.chatuidemo.activity.MainActivity" />
         </activity>
         <activity
-        android:name="com.lifeisle.jekton.activity.MyPositionActivity"
+        android:name="com.lifeisle.jekton.job.MyPositionActivity"
         android:label="@string/title_activity_my_position"
         android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
         android:theme="@style/MyTheme" >

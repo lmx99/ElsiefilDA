@@ -338,7 +338,7 @@
 
     <string name="title_fragment_logistics">Logistics</string>
     <string name="fragment_logistics_routine">Schedules</string>
-    <string name="fragment_logistics_my_position">MyPosition</string>
+    <string name="fragment_logistics_my_job">My Job</string>
     <string name="fragment_logistics_job_opportunity">Job Opportunities</string>
     <string name="fragment_logistics_scan_QR_code">Scan QR Code</string>
     <string name="fragment_logistics_auth_qr_code">Authority QR Codes</string>

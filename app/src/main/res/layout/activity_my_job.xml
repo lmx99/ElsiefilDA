@@ -36,7 +36,7 @@
         android:textColor="@color/main_color"
         android:textSize="18sp" />
 
-    <com.lifeisle.jekton.ui.widget.FlowLayout
+    <com.lifeisle.jekton.job.widget.FlowLayout
         android:id="@+id/peers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

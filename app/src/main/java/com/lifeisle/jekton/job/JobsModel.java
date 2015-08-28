@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.model;
+package com.lifeisle.jekton.job;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,9 +7,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.activity.JobsActivity;
 import com.lifeisle.jekton.activity.MyBrowserActivity;
-import com.lifeisle.jekton.bean.JobInfo;
+import com.lifeisle.jekton.job.data.bean.JobInfo;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.StringUtils;
 import com.lifeisle.jekton.util.Toaster;

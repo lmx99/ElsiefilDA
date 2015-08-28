@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.ui.adapter;
+package com.lifeisle.jekton.job.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -49,7 +49,7 @@ public class SubordinateListAdapter extends BaseAdapter {
             textView.setBackgroundColor(Color.WHITE);
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-                    context.getResources().getDrawable(R.drawable.tab_logistics_selected), null);
+                    context.getResources().getDrawable(R.drawable.icon_greater), null);
         } else {
             textView = (TextView) convertView;
         }
