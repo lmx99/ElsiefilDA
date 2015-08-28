@@ -439,4 +439,5 @@
     <string name="action_3_days">3 天</string>
     <string name="action_7_days">7 天</string>
     <string name="action_today">今天</string>
+    <string name="error_fail_sign_in_jobs_2_1"></string>
 </resources>

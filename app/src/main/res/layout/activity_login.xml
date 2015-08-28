@@ -18,7 +18,7 @@
             android:layout_centerInParent="true"
             android:text="登录注册"
             android:textColor="#ffffff"
-            android:textSize="18sp"
+            android:textSize="20sp"
             />
     </RelativeLayout>
 
