@@ -2,8 +2,12 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/radio_order_list_option_unchecked" />
+        android:drawable="@drawable/radio_ring" />
     <item
+        android:left="2dp"
+        android:top="2dp"
+        android:right="2dp"
+        android:bottom="2dp"
         android:drawable="@drawable/icon_checked" />
 
     <!--<shape-->

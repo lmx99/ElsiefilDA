@@ -77,7 +77,7 @@
     <!-- Jekton -->
 	<color name="bg_activity_main">#eeeeed</color>
 
-    <color name="main_color">#39a6d9</color>
+    <color name="main_color">#41aee3</color>
     <color name="red">#f00</color>
 
     <color name="tab_normal">#6e8bbb</color>
@@ -101,10 +101,12 @@
     <color name="order_list_btn_textColor">#2b2b2b</color>
 
     <color name="bg_order_list_item">#e0dede</color>
-    <color name="radio_button_icon">#2f9dd0</color>
+    <color name="radio_button_icon">#41aee3</color>
 
 
-
+    <!-- OrderOperateActivity -->
+    <color name="radio_order_operate_option_checked">#ddd</color>
+    <color name="text_order_operate_option">#515151</color>
     <color name="bg_order_operate_ok_normal">#d85238</color>
     <color name="bg_order_operate_ok_pressed">#bd3731</color>
 
@@ -113,7 +115,7 @@
     <!-- SignUpActivity -->
     <color name="bg_activity_sign_up">#f9f9fa</color>
     <color name="bg_sign_up_text">#e1e1e1</color>
-
+    <color name="hint_sign_up">#c8c9ca</color>
 
     <color name="transparent">#00000000</color>
     <color name="gray">#808080</color>
@@ -121,6 +123,7 @@
 
     <!-- DeliverStatFragment -->
     <color name="bg_deliver_stat_date">#EDEDEE</color>
+    <color name="divider_deliver_stat">#e2e2e3</color>
 
 
 
