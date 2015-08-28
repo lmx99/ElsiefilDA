@@ -1443,9 +1443,8 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println("Volley error: " + error);
+                pd.dismiss();
                 Toast.makeText(Activity_boshu_EditBaseMessage.this, "网络出错啦，么么哒！", Toast.LENGTH_SHORT).show();
-
-
             }
         }) {
 

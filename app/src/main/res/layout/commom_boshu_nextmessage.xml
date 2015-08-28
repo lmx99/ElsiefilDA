@@ -7,13 +7,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/boshu_item_color">
 
         <TextView
             android:id="@+id/f_rl"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="真实姓名"
@@ -27,7 +27,7 @@
             android:layout_toRightOf="@+id/f_rl"
             android:id="@+id/tv_boshu_real_name"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:textColor="@color/boshu_textcolorallqh"
@@ -42,13 +42,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/boshu_item_color">
 
         <TextView
             android:id="@+id/f_phone"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="手机号码"
@@ -61,7 +61,7 @@
             android:layout_toRightOf="@+id/f_phone"
             android:id="@+id/tv_boshu_editphone"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:textColor="@color/boshu_textcolorallqh"
@@ -76,13 +76,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/boshu_item_color">
 
         <TextView
             android:id="@+id/tv_boshu"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="应急号码"
@@ -95,7 +95,7 @@
             android:drawableRight="@drawable/entry_page1"
             android:id="@+id/tv_boshu_editphone1"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:textColor="@color/boshu_textcolorallqh"
@@ -108,13 +108,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/boshu_item_color">
 
         <TextView
             android:id="@+id/f_email"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="邮箱号码"
@@ -129,7 +129,7 @@
             android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_editmail"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:textSize="16sp" />
@@ -143,13 +143,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/boshu_item_color">
 
         <TextView
             android:id="@+id/f_qq"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="  QQ号码"
@@ -164,7 +164,7 @@
             android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_qq"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:textSize="16sp" />
@@ -178,13 +178,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/boshu_item_color">
 
         <TextView
             android:id="@+id/f_intent"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="就职意向"
@@ -199,7 +199,7 @@
             android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_editintention"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:textSize="16sp" />
@@ -213,14 +213,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/boshu_item_color">
 
         <TextView
             android:id="@+id/f_in"
             android:gravity="center_vertical"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:text="个人简历"
             android:textColor="@color/boshu_textcolorkey"
@@ -234,7 +234,7 @@
             android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_editresum"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:textSize="16sp" />
@@ -248,13 +248,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/boshu_item_color">
 
         <TextView
             android:id="@+id/f_sd"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="身份证号"
@@ -269,7 +269,7 @@
             android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_editidnumber"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:textSize="16sp" />
