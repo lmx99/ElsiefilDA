@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.job.data.bean.MyJobItem;
 import com.lifeisle.jekton.job.widget.FlowLayout;
+import com.lifeisle.jekton.util.DimensionUtils;
 
 /**
  * @author Jekton
@@ -21,6 +22,7 @@ public class MyJobPeriodsAdapter extends BaseAdapter {
 
     private String mFromText;
     private String mToText;
+    private int mPeerTextViewPadding;
 
 
     public MyJobPeriodsAdapter(Context context, MyJobItem item) {
@@ -29,6 +31,7 @@ public class MyJobPeriodsAdapter extends BaseAdapter {
 
         mFromText = context.getString(R.string.from);
         mToText = context.getString(R.string.to);
+        mPeerTextViewPadding = DimensionUtils.dp2px(context, 6);
     }
 
     @Override
@@ -62,12 +65,17 @@ public class MyJobPeriodsAdapter extends BaseAdapter {
         MyJobItem.Period periodItem = getItem(position);
 
         ViewHolder holder = (ViewHolder) view.getTag();
-        String periodText = String.format("%s%s ~ %s%s",
+        String periodText = String.format("%s%s\n%s%s",
                                           mFromText, periodItem.startTime,
                                           mToText, periodItem.endTime);
         holder.period.setText(periodText);
+        holder.peerGroup.removeAllViews();
         for (MyJobItem.Period.Peer peer : periodItem.peers) {
             TextView textView = new TextView(mContext);
+            textView.setPadding(mPeerTextViewPadding,
+                                mPeerTextViewPadding,
+                                mPeerTextViewPadding,
+                                mPeerTextViewPadding);
             textView.setText(peer.userName);
             holder.peerGroup.addView(textView);
         }

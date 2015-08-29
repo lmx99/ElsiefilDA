@@ -329,8 +329,8 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
 
-    <string name="from">From: </string>
-    <string name="to">To: </string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
 
 
 
@@ -466,9 +466,9 @@
 
     <!-- MyJobActivity -->
     <string name="title_activity_my_job">My Job</string>
-    <string name="activity_my_job_title">Title: </string>
-    <string name="activity_my_job_address">Address: </string>
-    <string name="activity_my_job_intro">Brief info: </string>
+    <string name="activity_my_job_title">Title:</string>
+    <string name="activity_my_job_address">Address:</string>
+    <string name="activity_my_job_intro">Brief info:</string>
 
 
 
