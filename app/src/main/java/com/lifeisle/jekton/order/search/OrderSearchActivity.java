@@ -53,23 +53,24 @@ public class OrderSearchActivity extends AppCompatActivity
     @Override
     public void onSearchOrder(String orderNumber, String orderCode, String phone,
                               String address, String source, int classify) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+        }
+        mProgressDialog.show();
         MyApplication.addToRequestQueue(
                 new AutoLoginRequest(
                         this, Request.Method.POST, StringUtils.getServerPath(),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject jsonObject) {
-                                gotoResultFragment();
                                 try {
                                     if (jsonObject.getInt("status") == 0) {
                                         processResponse(jsonObject);
                                     } else {
-                                        Toaster.showShort(OrderSearchActivity.this,
-                                                          R.string.error_search_fail);
+                                        onSearchFail();
                                     }
                                 } catch (JSONException e) {
-                                    Toaster.showShort(OrderSearchActivity.this,
-                                                      R.string.error_search_fail);
+                                    onSearchFail();
                                     Logger.e(LOG_TAG, "search order fail", e);
                                 }
                             }
@@ -77,9 +78,7 @@ public class OrderSearchActivity extends AppCompatActivity
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError volleyError) {
-                                gotoResultFragment();
-                                Toaster.showShort(OrderSearchActivity.this,
-                                                  R.string.error_search_fail);
+                                onSearchFail();
                                 Logger.e(LOG_TAG, "search order fail", volleyError);
                             }
                         }) {
@@ -102,15 +101,12 @@ public class OrderSearchActivity extends AppCompatActivity
         transaction.addToBackStack("OrderSearchResultFragment");
         transaction.replace(R.id.place_holder, fragment, "OrderSearchResultFragment");
         transaction.commit();
+
+        mProgressDialog.dismiss();
     }
 
-    private void gotoResultFragment() {
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        OrderSearchResultFragment fragment = new OrderSearchResultFragment();
-        transaction.addToBackStack("OrderSearchResultFragment");
-        transaction.replace(R.id.place_holder, fragment, "OrderSearchResultFragment");
-        transaction.commit();
+    private void onSearchFail() {
+        mProgressDialog.dismiss();
+        Toaster.showShort(OrderSearchActivity.this, R.string.error_search_fail);
     }
 }

@@ -439,4 +439,11 @@
     <string name="action_3_days">3 天</string>
     <string name="action_7_days">7 天</string>
     <string name="action_today">今天</string>
+    <string name="activity_my_job_address">地址</string>
+    <string name="activity_my_job_intro">简介</string>
+    <string name="activity_my_job_title">标题</string>
+    <string name="error_event_not_found">找不到该事件</string>
+    <string name="error_fail_call_user"></string>
+    <string name="error_fail_sign_in_jobs_2_1"></string>
+    <string name="error_search_fail">查找失败</string>
 </resources>
