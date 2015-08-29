@@ -548,7 +548,7 @@
         </activity>
         <activity
             android:name="com.lifeisle.jekton.job.SubordinateActivity"
-            android:label="@string/title_activity_my_job"
+            android:label="@string/title_activity_subordinate"
             android:parentActivityName="com.lifeisle.jekton.job.MyJobActivity"
             android:theme="@style/MyTheme">
 
@@ -604,7 +604,7 @@
                 android:value="com.lifeisle.jekton.schedule.ScheduleDetailActivity"/>
         </activity>
         <activity
-            android:name="com.lifeisle.jekton.order.OrderSearchActivity"
+            android:name="com.lifeisle.jekton.order.search.OrderSearchActivity"
             android:label="@string/title_activity_order_search"
             android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
             android:theme="@style/MyTheme">

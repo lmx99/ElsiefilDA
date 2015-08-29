@@ -471,6 +471,10 @@
     <string name="activity_my_job_intro">Brief info:</string>
 
 
+    <!-- SubordinateActivity -->
+    <string name="title_activity_subordinate">Subordinates</string>
+
+
 
     <!-- ScheduleCategoryActivity -->
     <string name="title_activity_schedule_category">Schedules</string>
@@ -545,6 +549,8 @@
     <string name="hint_address">Address</string>
     <string name="hint_source">Source</string>
     <string name="hint_class">Classification</string>
+
+    <string name="error_search_fail">Fail to search orders</string>
 
 
     <!-- ScheduleTableActivity -->

@@ -17,8 +17,8 @@ import com.lifeisle.android.R;
 import com.lifeisle.jekton.activity.MyBrowserActivity;
 import com.lifeisle.jekton.job.JobsActivity;
 import com.lifeisle.jekton.job.MyJobActivity;
-import com.lifeisle.jekton.order.OrderSearchActivity;
 import com.lifeisle.jekton.order.list.QRCodeScanActivity;
+import com.lifeisle.jekton.order.search.OrderSearchActivity;
 import com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity;
 import com.lifeisle.jekton.schedule.ScheduleCategoryActivity;
 import com.lifeisle.jekton.util.StringUtils;
@@ -47,14 +47,11 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
         View schedule = view.findViewById(R.id.schedule);
         schedule.setOnClickListener(this);
         schedule.setVisibility(View.GONE);
-        View myPosition = view.findViewById(R.id.myPosition);
-        myPosition.setOnClickListener(this);
+        view.findViewById(R.id.myPosition).setOnClickListener(this);
         view.findViewById(R.id.job_opportunity).setOnClickListener(this);
 
         view.findViewById(R.id.deliver_stat).setOnClickListener(this);
-        View orderSearch = view.findViewById(R.id.order_search);
-        orderSearch.setOnClickListener(this);
-        orderSearch.setVisibility(View.GONE);
+        view.findViewById(R.id.order_search).setOnClickListener(this);
         view.findViewById(R.id.scanQRCode).setOnClickListener(this);
 
         view.findViewById(R.id.scanQRCode).setOnClickListener(this);

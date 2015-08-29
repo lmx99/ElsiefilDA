@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/orderNum"
+        android:layout_width="@dimen/order_list_item_num_size"
+        android:layout_height="@dimen/order_list_item_num_size"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:background="@drawable/bg_order_list_circle_red"
+        android:gravity="center"
+        android:textColor="@color/order_list_btn_textColor"/>
+
+    <TextView
+        android:id="@+id/orderInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/order_list_item_paddingLeft"
+        android:layout_marginStart="@dimen/order_list_item_paddingLeft"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_toLeftOf="@id/orderNum"
+        android:layout_toStartOf="@id/orderNum"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/orderNum"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:textColor="#9e9e9e"
+        android:textSize="12sp"/>
+
+
+    <TextView
+        android:id="@+id/detailsInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/orderInfo"
+        android:layout_toLeftOf="@id/orderNum"
+        android:layout_toStartOf="@id/orderNum"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/order_list_item_paddingLeft"
+        android:layout_marginStart="@dimen/order_list_item_paddingLeft"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+
+
+</merge>
