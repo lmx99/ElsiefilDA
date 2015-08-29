@@ -19,11 +19,12 @@ public class SubordinateContract {
     public static final String OWM_DISTRICT = "district";
     public static final String OWM_ADDRESS = "address";
     public static final String OWM_MAP = "map";
-    public static final String OWM_CONTRACTS = "contacts";
+    public static final String OWM_CONTACTS = "contacts";
     public static final String OWM_TEL_PHONE = "tel_phone";
     public static final String OWM_MOBILE_PHONE = "mobile_phone";
     public static final String OWM_J_CAT_ID = "jcat_id";
     public static final String OWM_PERIODS = "infos";
+    public static final String OWM_RIGHTS = "rights";
 
 
     public static final class PeriodContract {
