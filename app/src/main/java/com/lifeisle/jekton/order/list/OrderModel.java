@@ -64,8 +64,7 @@ public class OrderModel {
     private OrderSorter orderSorter;
     private OrderListUpdater orderListUpdater;
 
-//    private int jcat_id = Preferences.getJCatID();
-    private int jcat_id = 3;
+    private int jcat_id = Preferences.getJCatID();
 
 
     public OrderModel(Context context) {
@@ -454,10 +453,12 @@ public class OrderModel {
 
     public void postDeliveredOrder(int orderID, int eventID, final int position) {
         final int currentInitCount = initCount;
+        orderView.showDialog();
         MyApplication.addToRequestQueue(new PostDeliveredOrderRequest(orderID, eventID,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(final JSONObject response) {
+                        orderView.closeDialog();
                         Logger.d(TAG, "postDeliveredOrder() response: " + response);
                         try {
                             int status = response.getInt("status");
@@ -479,6 +480,7 @@ public class OrderModel {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        orderView.closeDialog();
                         Logger.e(TAG, error);
                         Toaster.showShort(context, R.string.error_fail_post_delivered);
                     }
