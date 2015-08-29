@@ -16,7 +16,7 @@ import com.easemob.chatuidemo.activity.MainActivity;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.activity.MyBrowserActivity;
 import com.lifeisle.jekton.job.JobsActivity;
-import com.lifeisle.jekton.job.MyPositionActivity;
+import com.lifeisle.jekton.job.MyJobActivity;
 import com.lifeisle.jekton.order.OrderSearchActivity;
 import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 import com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity;
@@ -69,7 +69,7 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
                 break;
             }
             case R.id.myPosition: {
-                startActivity(MyPositionActivity.class);
+                startActivity(MyJobActivity.class);
                 break;
             }
             case R.id.job_opportunity: {

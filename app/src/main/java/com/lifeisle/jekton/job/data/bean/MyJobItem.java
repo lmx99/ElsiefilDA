@@ -7,6 +7,7 @@ import com.lifeisle.jekton.job.data.MyJobContract.PeriodContract.PeerContract;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 /**
  * @author Jekton
  */
@@ -16,16 +17,23 @@ public class MyJobItem {
     public String intro;
     public String address;
     public Period[] periods;
+    public SubordinateItem[] subordinates;
 
 
-    public static MyJobItem makeInstance(JSONObject jsonObject) throws JSONException {
+    public static MyJobItem makeInstance(JSONObject response) throws JSONException {
+        JSONObject myJob = response.getJSONObject(MyJobContract.OWM_MY_JOB);
+
         MyJobItem item = new MyJobItem();
-        item.title = jsonObject.getString(MyJobContract.OWM_TITLE);
-        item.intro = jsonObject.getString(MyJobContract.OWM_INTRO);
-        item.address = jsonObject.getString(MyJobContract.OWM_ADDRESS);
+        item.title = myJob.getString(MyJobContract.OWM_TITLE);
+        item.intro = myJob.getString(MyJobContract.OWM_INTRO);
+        item.address = myJob.getString(MyJobContract.OWM_ADDRESS);
 
-        JSONArray periodArray = jsonObject.getJSONArray(MyJobContract.OWM_PERIODS);
+        JSONArray periodArray = myJob.getJSONArray(MyJobContract.OWM_PERIODS);
         item.periods = Period.makeInstances(periodArray);
+
+
+        JSONArray subordinateArray = response.getJSONArray(MyJobContract.OWM_SUBORDINATES);
+        item.subordinates = SubordinateItem.makeInstances(subordinateArray);
 
         return item;
     }

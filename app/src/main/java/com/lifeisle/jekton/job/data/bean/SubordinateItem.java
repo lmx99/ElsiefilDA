@@ -61,6 +61,14 @@ public class SubordinateItem {
         return item;
     }
 
+    public static SubordinateItem[] makeInstances(JSONArray subordinateArray) throws JSONException {
+        SubordinateItem[] items = new SubordinateItem[subordinateArray.length()];
+        for (int i = 0; i < items.length; ++i) {
+            items[i] = SubordinateItem.makeInstance(subordinateArray.getJSONObject(i));
+        }
+
+        return items;
+    }
 
     public static class Period {
         public long infoId;

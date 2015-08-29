@@ -1,46 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?><!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:orientation="vertical">-->
+<?xml version="1.0" encoding="utf-8"?>
 
-<!-- --><!-- --><!--</ScrollView>-->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#eeeeed"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/time"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:padding="8dp"
-        android:text="Duration: 11:00 - 13:00"
-        android:textSize="22sp" />
+        android:text="@string/activity_my_job_title"
+        android:textSize="@dimen/text_size_job_title"/>
 
     <TextView
-        android:id="@+id/position"
+        android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:background="@android:color/white"
         android:padding="8dp"
-        android:text="Position: Supervisor"
-        android:textSize="22sp" />
-
+        android:text="@string/activity_my_job_address"
+        android:textSize="@dimen/text_size_job_title"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Peer"
-        android:textColor="@color/main_color"
-        android:textSize="18sp" />
-
-    <com.lifeisle.jekton.job.widget.FlowLayout
-        android:id="@+id/peers"
+        android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white" />
+        android:layout_marginTop="2dp"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:text="@string/activity_my_job_intro"
+        android:textSize="@dimen/text_size_job_title"/>
+
+
+    <ListView
+        android:id="@+id/periods"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 
     <TextView
@@ -49,14 +50,17 @@
         android:layout_marginTop="20dp"
         android:text="Subordinate"
         android:textColor="@color/main_color"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
 
 
     <ListView
         android:id="@+id/subordinateList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:divider="@android:color/transparent"
-        android:dividerHeight="10dp" />
+        android:dividerHeight="10dp"/>
 
 </LinearLayout>
+
+

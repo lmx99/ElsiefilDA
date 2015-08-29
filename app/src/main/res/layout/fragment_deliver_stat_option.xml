@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/title_start_time"
+            android:text="@string/from"
             android:textAppearance="?android:textAppearanceLarge" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/title_end_time"
+            android:text="@string/to"
             android:textAppearance="?android:textAppearanceLarge" />
 
         <TextView

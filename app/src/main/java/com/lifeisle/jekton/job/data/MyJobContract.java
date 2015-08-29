@@ -7,6 +7,8 @@ public class MyJobContract {
 
     public static final String OWM_MY_JOB = "my_job";
 
+    public static final String OWM_SUBORDINATES = "under_job";
+
     public static final String OWM_TITLE = "title";
     public static final String OWM_INTRO = "intro";
     public static final String OWM_ADDRESS = "address";

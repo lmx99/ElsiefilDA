@@ -329,7 +329,8 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
 
-
+    <string name="from">From: </string>
+    <string name="to">To: </string>
 
 
 
@@ -463,8 +464,11 @@
 
 
 
-    <!-- MyPositionActivity -->
-    <string name="title_activity_my_position">My Position</string>
+    <!-- MyJobActivity -->
+    <string name="title_activity_my_job">My Job</string>
+    <string name="activity_my_job_title">Title: </string>
+    <string name="activity_my_job_address">Address: </string>
+    <string name="activity_my_job_intro">Brief info: </string>
 
 
 
@@ -502,13 +506,8 @@
 
 
 
-    <!-- DeliverStatOptionFragment -->
-    <string name="action_ok">OK</string>
-
 
     <!-- share with ScheduleDetailActivity-->
-    <string name="title_start_time">From: </string>
-    <string name="title_end_time">To: </string>
     <string name="error_start_greater_end">The end time must greater than or equal to the start</string>
 
 
