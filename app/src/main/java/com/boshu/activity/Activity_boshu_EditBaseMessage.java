@@ -14,9 +14,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -55,11 +55,16 @@ import com.boshu.image.ImageDowloader.OnImageDownloadListener;
 import com.boshu.utils.CompressPicture;
 import com.boshu.utils.Model;
 import com.boshu.utils.UserIndent;
+import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.activity.MainActivity;
 import com.easemob.chatuidemo.utils.CommonUtils;
 import com.lifeisle.android.R;
+import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.Preferences;
+import com.lifeisle.jekton.util.StringUtils;
+import com.lifeisle.jekton.util.Toaster;
 import com.lifeisle.jekton.util.network.AutoLoginRequest;
+import com.lifeisle.jekton.util.network.SessionRequest;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -355,28 +360,29 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
-
+        //调用相机
         if (resultCode == RESULT_OK && requestCode == 0) {
             File file = new File(FILE_PATH);
             if (!file.exists()) {
                 file.mkdir();
             }
-            Uri uri = Uri.fromFile(file);
-
+          /*  Uri uri = Uri.fromFile(file);
             String path1 = uri.toString();
             String pa = path1.split("sdcard")[1];
             String path = Environment.getExternalStorageDirectory().toString();
-            pathImage = path + pa;
+            pathImage = path + pa;*/
+            pathImage=FILE_PATH;
             Intent it = new Intent(this, ClipPictureActivity.class);
-            it.putExtra("pathImage", pathImage);
+            it.putExtra("pathImage",pathImage);
             startActivityForResult(it, 199);
         }
+        //调用相册
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_LOCAL) {
             if (data != null) {
                 Uri uri = data.getData();
                 if (uri != null) {
                     // sendPicByUri(selectedImage);
-                    if (!TextUtils.isEmpty(uri.getAuthority())) {
+                 /*   if (!TextUtils.isEmpty(uri.getAuthority())) {
                         Cursor cursor = getContentResolver().query(uri,
                                 new String[]{MediaStore.Images.Media.DATA},
                                 null, null, null);
@@ -385,16 +391,19 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                         }
                         cursor.moveToFirst();
                         pathImage = cursor.getString(cursor
-                                .getColumnIndex(MediaStore.Images.Media.DATA));
+                                .getColumnIndex(MediaStore.Images.Media.DATA));*/
+                       pathImage= getPicturePath(uri);
                         Intent it = new Intent(this, ClipPictureActivity.class);
                         it.putExtra("pathImage", pathImage);
                         startActivityForResult(it, 199);
-                    }
+
                 }
             }
         }
         if (resultCode == 200 && requestCode == 199) {
-            upPicture(pathImage);
+            System.out.println("pahtImage" + pathImage);
+            setWeLoginPost();
+
         }
     }
 
@@ -513,6 +522,37 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                }
 
                 break;
+        }
+
+    }
+    private String getPicturePath(Uri selectedImage) {
+        // String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(selectedImage, null, null, null, null);
+        String st8 = getResources().getString(R.string.cant_find_pictures);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex("_data");
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            cursor = null;
+
+            if (picturePath == null || picturePath.equals("null")) {
+                Toast toast = Toast.makeText(this, st8, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return null;
+            }
+            return picturePath;
+        } else {
+            File file = new File(selectedImage.getPath());
+            if (!file.exists()) {
+                Toast toast = Toast.makeText(this, st8, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return null;
+
+            }
+            return  file.getAbsolutePath();
         }
 
     }
@@ -1105,14 +1145,7 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
                         @Override
                         public void onStart() {
                             super.onStart();
-                            mProngressDialog = new ProgressDialog(Activity_boshu_EditBaseMessage.this);
-                            mProngressDialog.setMessage("正在上传图片...");
-                            mProngressDialog.setIndeterminate(false);
-                            mProngressDialog.setMax(100);
-                            mProngressDialog.setProgress(0);
-                            mProngressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                            mProngressDialog.setCancelable(false);
-                            mProngressDialog.show();
+
                         }
 
                         @Override
@@ -1457,6 +1490,76 @@ public class Activity_boshu_EditBaseMessage extends Activity implements
         });
 
     }
-    public void setApplication(){
+    public void setWeLoginPost(){
+        mProngressDialog = new ProgressDialog(Activity_boshu_EditBaseMessage.this);
+        mProngressDialog.setMessage("正在上传图片...");
+        mProngressDialog.setIndeterminate(false);
+        mProngressDialog.setMax(100);
+        mProngressDialog.setProgress(0);
+        mProngressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProngressDialog.setCancelable(false);
+        mProngressDialog.show();
+        MyApplication.addToRequestQueue(new SignInRequest(Request.Method.POST,
+                StringUtils.getServerPath(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+
+                        try {
+                            int status = response.getInt("status");
+                            switch (status) {
+                                case 1:
+                                    upPicture(pathImage);
+                                    break;
+                                case 0:
+                                    upPicture(pathImage);
+                                    break;
+                                case 2:
+                                    Toaster.showShort(Activity_boshu_EditBaseMessage.this,
+                                            R.string.error_password_invalid);
+                                    pd.dismiss();
+                                    break;
+                                case 3:
+                                    Toaster.showShort(Activity_boshu_EditBaseMessage.this,
+                                            R.string.error_user_name_invalid);
+                                    pd.dismiss();
+                                    break;
+                                default:
+                                    Toaster.showShort(Activity_boshu_EditBaseMessage.this,
+                                            R.string.error_unknown);
+                                    pd.dismiss();
+                                    break;
+                            }
+                        } catch (JSONException e) {
+                            Logger.e(TAG, e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        mProngressDialog.dismiss();
+                        Logger.e(TAG, error);
+                        Toaster.showShort(Activity_boshu_EditBaseMessage.this, R.string.error_fail_to_login);
+                    }
+                }));
+
+    }
+    private class SignInRequest extends SessionRequest {
+
+        public SignInRequest(int method, String url, Response.Listener<JSONObject> listener,
+                             Response.ErrorListener errorListener) {
+            super(method, url, listener, errorListener);
+        }
+
+        @Override
+        protected void setParams(Map<String, String> params) {
+            params.put("user_name", Preferences.getUserName());
+            params.put("password", Preferences.getPassword());
+            params.put("sys", "user");
+            params.put("ctrl", "user");
+            params.put("action", "login");
+        }
     }
 }

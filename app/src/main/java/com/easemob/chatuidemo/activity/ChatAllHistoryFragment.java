@@ -225,7 +225,6 @@ public class ChatAllHistoryFragment extends Fragment implements View.OnClickList
          * 保证Conversation在Sort过程中最后一条消息的时间不变
          * 避免并发问题
          */
-
         List<Pair<Long, EMConversation>> sortList = new ArrayList<Pair<Long, EMConversation>>();
         /*EMConversation ec = new EMConversation("boshu");
         ec.setExtField("推送标记，升级记得认真读代码哦");

@@ -29,7 +29,6 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_logistics, container, false);
     }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -43,7 +42,6 @@ public class LogisticsFragment extends Fragment implements View.OnClickListener 
         view.findViewById(R.id.schedule).setOnClickListener(this);
         view.findViewById(R.id.myPosition).setOnClickListener(this);
         view.findViewById(R.id.job_opportunity).setOnClickListener(this);
-
         View schedule = view.findViewById(R.id.schedule);
         schedule.setOnClickListener(this);
         schedule.setVisibility(View.GONE);

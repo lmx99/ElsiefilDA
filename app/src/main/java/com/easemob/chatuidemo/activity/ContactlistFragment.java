@@ -41,6 +41,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.boshu.activity.Activity_boshu_FriMsg;
 import com.easemob.applib.controller.HXSDKHelper;
 import com.easemob.applib.controller.HXSDKHelper.HXSyncListener;
 import com.easemob.chat.EMContactManager;
@@ -203,7 +204,7 @@ public class ContactlistFragment extends Fragment {
 					startActivity(new Intent(getActivity(), RobotsActivity.class));
 				}else {
 					// demo中直接进入聊天页面，实际一般是进入用户详情页
-					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getUsername()));
+					startActivity(new Intent(getActivity(),Activity_boshu_FriMsg.class).putExtra("userId", adapter.getItem(position).getUsername()));
 				}
 			}
 		});

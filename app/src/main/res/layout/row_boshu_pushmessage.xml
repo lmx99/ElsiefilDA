@@ -4,10 +4,12 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:orientation="vertical"
+    android:background="#EBEBEB"
     >
 
 
     <TextView
+        android:layout_marginLeft="11dp"
         android:text="11:33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,6 +17,8 @@
         />
 
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="11dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
@@ -48,9 +52,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:layout_marginTop="5dp"
-            android:background="#B5B9BE" />
+            android:background="@color/boshu_view" />
 
         <LinearLayout
             android:id="@+id/push_linear2"
@@ -79,8 +83,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#B5B9BE" />
+            android:layout_height="0.5dp"
+            android:background="@color/boshu_view" />
 
         <LinearLayout
             android:id="@+id/push_linear3"
@@ -109,8 +113,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#B5B9BE" />
+            android:layout_height="0.5dp"
+            android:background="@color/boshu_view" />
 
         <LinearLayout
             android:id="@+id/push_linear4"

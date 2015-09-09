@@ -92,8 +92,8 @@ public class upteVersionDialog {
             final ProgressDialog pd = new ProgressDialog(context);
             if (toast == true) {
                 pd.setMessage("正在检测中~");
-                pd.setCanceledOnTouchOutside(false);
-                pd.setCancelable(false);
+                pd.setCanceledOnTouchOutside(true);
+                pd.setCancelable(true);
                 pd.show();
             }
 

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.boshu.utils.Model;
 
@@ -36,11 +37,11 @@ public class ImageDowloader {
 			listener.onImageDownload(url,bitmap);
 			return bitmap;
 		}else{
-			
 			new AsyncTask<String, Void,Bitmap>(){//
 
 				@Override
 				protected Bitmap doInBackground(String... params) {
+					Log.i("ff",url);
 					// TODO Auto-generated method stub
 					Bitmap bitmap=getImageFromUrl(url);
 					fileCacheUtils.addBitmapToFile(subUrl, bitmap);
@@ -58,6 +59,9 @@ public class ImageDowloader {
 				public void handleMessage(Message msg) {
 					// TODO Auto-generated method stub
 					if(msg.what==DOWNLOAD){
+						if(listener==null){
+							Log.i("loger","天打雷霹");
+						}
 						listener.onImageDownload(url,(Bitmap)msg.obj);
 					}
 					
@@ -86,7 +90,6 @@ public class ImageDowloader {
 		this.REQ_WIDTH=width;
 
 		final String urlNew=url.substring(0, url.length()- Model.APPNAME.length());
-		System.out.println("新的路径"+urlNew);
 		if(bitmap!=null){
 			listener.onImageDownload(url,bitmap);
 			return bitmap;

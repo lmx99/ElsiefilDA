@@ -222,7 +222,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
-            android:text="个人简历"
+            android:text="工作经历"
             android:textColor="@color/boshu_textcolorkey"
             android:textSize="16sp" />
 

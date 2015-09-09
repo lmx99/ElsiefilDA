@@ -86,7 +86,6 @@ import com.easemob.chatuidemo.adapter.ExpressionAdapter;
 import com.easemob.chatuidemo.adapter.ExpressionPagerAdapter;
 import com.easemob.chatuidemo.adapter.MessageAdapter;
 import com.easemob.chatuidemo.adapter.VoicePlayClickListener;
-import com.easemob.chatuidemo.domain.RobotUser;
 import com.easemob.chatuidemo.utils.CommonUtils;
 import com.easemob.chatuidemo.utils.ImageUtils;
 import com.easemob.chatuidemo.utils.SmileUtils;
@@ -104,7 +103,6 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 聊天页面
@@ -528,13 +526,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
         groupListener = new GroupListener();
         EMGroupManager.getInstance().addGroupChangeListener(groupListener);
 	}
-	
 	protected void onChatRoomViewCreation(){
         findViewById(R.id.container_to_group).setVisibility(View.GONE);
         
         final ProgressDialog pd = ProgressDialog.show(this, "", "Joining......");
         EMChatManager.getInstance().joinChatRoom(toChatUsername, new EMValueCallBack<EMChatRoom>() {
-        
         @Override
         public void onSuccess(EMChatRoom value) {
             // TODO Auto-generated method stub
@@ -600,9 +596,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				Intent intent = new Intent(this, ForwardMessageActivity.class);
 				intent.putExtra("forward_msg_id", forwardMsg.getMsgId());
 				startActivity(intent);
-				
 				break;
-
 			default:
 				break;
 			}

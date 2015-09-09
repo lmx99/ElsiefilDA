@@ -102,7 +102,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     private Button[] mTabs;
     private ContactlistFragment contactListFragment;
     private ChatAllHistoryFragment chatHistoryFragment;
-    // private SettingsFragment settingFragment;
+    private SettingsFragment settingFragment;
     private Fragment_boshu_Person personFragment;
 
     // 物流的fragment
@@ -189,13 +189,13 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 
         chatHistoryFragment = new ChatAllHistoryFragment();
         contactListFragment = new ContactlistFragment();
-        // settingFragment = new SettingsFragment();
+         settingFragment = new SettingsFragment();
         personFragment = new Fragment_boshu_Person();
         logisticsFragment = new LogisticsFragment();
         findFragment = new Fragment_boshu_find();
 
         fragments = new Fragment[] { chatHistoryFragment, contactListFragment,
-                personFragment, logisticsFragment, findFragment };
+                personFragment, logisticsFragment, settingFragment };
         // 添加显示第一个fragment
 
         manager.beginTransaction()
@@ -203,8 +203,8 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 .add(R.id.fragment_container, chatHistoryFragment)
                 .add(R.id.fragment_container, contactListFragment)
                 .add(R.id.fragment_container, logisticsFragment)
-                .add(R.id.fragment_container, findFragment)
-                .hide(logisticsFragment).hide(findFragment).hide(personFragment)
+                .add(R.id.fragment_container, settingFragment)
+                .hide(logisticsFragment).hide(settingFragment).hide(personFragment)
                 .hide(contactListFragment).show(chatHistoryFragment).commit();
 
         init();

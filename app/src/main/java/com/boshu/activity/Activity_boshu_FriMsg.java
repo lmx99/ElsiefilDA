@@ -3,6 +3,7 @@ package com.boshu.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.boshu.adapter.Adapter_Boshu_alterDialog;
+import com.easemob.chatuidemo.activity.ChatActivity;
 import com.lifeisle.android.R;
 
 /**
@@ -29,6 +31,7 @@ public class Activity_boshu_FriMsg extends Activity implements View.OnClickListe
     private TextView tv_school;
     private Button bt_chat;
     private AlertDialog alertDialog;
+    private Intent it;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class Activity_boshu_FriMsg extends Activity implements View.OnClickListe
         init();
     }
     public void init(){
+        it=this.getIntent();
         tv_remarks= (TextView) this.findViewById(R.id.tv_remarks);
         tv_nickName= (TextView) this.findViewById(R.id.tv_nickName);
         img_sex= (ImageView) this.findViewById(R.id.img_sex);
@@ -63,6 +67,9 @@ public class Activity_boshu_FriMsg extends Activity implements View.OnClickListe
                 setAlertDialog(this, ss,width1, height1);
                 break;
             case R.id.bt_chat:
+                it.setClass(this, ChatActivity.class);
+                this.startActivity(it);
+                this.finish();
                 break;
         }
 

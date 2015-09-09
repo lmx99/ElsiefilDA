@@ -33,8 +33,8 @@ import com.easemob.applib.controller.HXSDKHelper;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatOptions;
 import com.easemob.chatuidemo.Constant;
-import com.easemob.chatuidemo.MyApplication;
 import com.easemob.chatuidemo.DemoHXSDKModel;
+import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 
 
@@ -102,7 +102,7 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 	private TextView textview1, textview2;
 
 	private LinearLayout blacklistContainer;
-	
+
 	/**
 	 * 退出按钮
 	 */
@@ -111,9 +111,9 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 	private RelativeLayout rl_switch_chatroom_leave;
 	private ImageView iv_switch_room_owner_leave_allow;
 	private ImageView iv_switch_room_owner_leave_disallow;
-	
+
 	private EMChatOptions chatOptions;
- 
+
 	/**
 	 * 诊断
 	 */
@@ -122,9 +122,9 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 	 * iOS离线推送昵称
 	 */
 	private LinearLayout pushNick;
-	
+
 	DemoHXSDKModel model;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_conversation_settings, container, false);

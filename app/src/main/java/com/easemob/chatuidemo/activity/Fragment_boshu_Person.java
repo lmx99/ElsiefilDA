@@ -15,9 +15,7 @@ import android.widget.Toast;
 
 import com.boshu.activity.Activity_boshu_EditBaseMessage;
 import com.boshu.activity.Activity_boshu_FriMsg;
-import com.boshu.activity.Activity_boshu_Message;
 import com.boshu.activity.Activity_boshu_Setting;
-import com.boshu.activity.Activity_boshu_Wallet;
 import com.boshu.activity.Activity_boshu_push;
 import com.boshu.db.UserDao;
 import com.boshu.domain.User;
@@ -123,21 +121,22 @@ public class Fragment_boshu_Person extends Fragment implements OnClickListener{
             
             break;
         case R.id.tv_boshu_experience:
-            Toast.makeText(getActivity(),"待开发",0).show();
-/*            it.setClass(getActivity(), Activity_boshu_FriMsg.class);
+            Toast.makeText(getActivity(),"开发中...",0).show();
+         it.setClass(getActivity(), Activity_boshu_FriMsg.class);
             getActivity().startActivity(it);
-            break*/;
+            break;
             case R.id.rl_boshu_Settlement:
-                Toast.makeText(getActivity(),"待开发",0).show();
-                /*it.setClass(getActivity(), Activity_boshu_push.class);
-                getActivity().startActivity(it);*/
+                Toast.makeText(getActivity(),"开发中...",0).show();
+                it.setClass(getActivity(), Activity_boshu_push.class);
+                getActivity().startActivity(it);
                 break;
             case R.id.rl_boshu_Amounts:
-                Toast.makeText(getActivity(),"待开发",0).show();
+                Toast.makeText(getActivity(),"开发中...",0).show();
                 break;
         case R.id.rl_boshu_wallet:
-            it.setClass(getActivity(), Activity_boshu_Wallet.class);
-            getActivity().startActivity(it);
+            Toast.makeText(getActivity(),"开发中...",0).show();
+           /* it.setClass(getActivity(), Activity_boshu_Wallet.class);
+            getActivity().startActivity(it);*/
             break;
             case R.id.rl_boshu_set:
                 it.setClass(getActivity(), Activity_boshu_Setting.class);
