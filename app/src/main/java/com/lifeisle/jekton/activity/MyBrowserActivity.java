@@ -66,7 +66,6 @@ public class MyBrowserActivity extends Activity implements View.OnClickListener 
             }
         });
 
-
         Intent intent = getIntent();
         String dataString = intent.getDataString();
         Logger.d(TAG, "url = " + dataString);
