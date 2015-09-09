@@ -39,8 +39,8 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
+import com.boshu.activity.Activity_boshu_FriMsg;
 import com.boshu.db.UserDao;
-import com.boshu.domain.User;
 import com.boshu.image.ImageDowloader;
 import com.boshu.utils.Model;
 import com.easemob.EMCallBack;
@@ -74,7 +74,6 @@ import com.easemob.chatuidemo.utils.DateUtils;
 import com.easemob.chatuidemo.utils.ImageCache;
 import com.easemob.chatuidemo.utils.ImageUtils;
 import com.easemob.chatuidemo.utils.SmileUtils;
-import com.easemob.chatuidemo.utils.UserUtils;
 import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.DensityUtil;
 import com.easemob.util.EMLog;
@@ -96,7 +95,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MessageAdapter extends BaseAdapter{
+public class MessageAdapter extends BaseAdapter implements  OnClickListener{
 
 	private final static String TAG = "msg";
 
@@ -139,7 +138,7 @@ public class MessageAdapter extends BaseAdapter{
 
 	private Map<String, Timer> timers = new Hashtable<String, Timer>();
 
-	public MessageAdapter(Context context, String username, int chatType) {
+	public MessageAdapter(Context context, String username, int chatType){
 		this.username = username;
 		this.context = context;
 		inflater = LayoutInflater.from(context);
@@ -464,8 +463,13 @@ public class MessageAdapter extends BaseAdapter{
 		
 		//设置用户头像
 		//setUserAvatar(message, holder.iv_avatar);
-		setAvater(context,message,holder.iv_avatar);
-
+		holder.iv_avatar.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				context.startActivity(new Intent(context, Activity_boshu_FriMsg.class).putExtra("userId",username));
+			}
+		});
+		setAvater(context, message, holder.iv_avatar);
 		switch (message.getType()) {
 		// 根据消息type显示item
 		case IMAGE: // 图片
@@ -1231,13 +1235,13 @@ public class MessageAdapter extends BaseAdapter{
 
 			@Override
 			public void onSuccess() {
-				
+
 				updateSendedView(message, holder);
 			}
 
 			@Override
 			public void onError(int code, String error) {
-				
+
 				updateSendedView(message, holder);
 			}
 
@@ -1520,6 +1524,18 @@ public class MessageAdapter extends BaseAdapter{
 
 	}
 
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()){
+			case R.id.iv_avatar:
+				Toast.makeText(context,"chuxianle",0).show();
+				Log.i("MessageAdaper","出现啦！");
+				context.startActivity(new Intent(context, Activity_boshu_FriMsg.class));
+			break;
+		}
+
+	}
+
 	public static class ViewHolder {
 		ImageView iv;
 		TextView tv;
@@ -1557,7 +1573,6 @@ public class MessageAdapter extends BaseAdapter{
 		public MapClickListener(LatLng loc, String address) {
 			location = loc;
 			this.address = address;
-
 		}
 
 		@Override

@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_gravity="center_vertical"
         android:background="@color/top_bar_normal_bg"
-        android:layout_height="46dp"
+        android:layout_height="50dp"
         android:layout_width="match_parent"
         android:gravity="center_vertical"
         >
@@ -19,9 +19,9 @@
             android:layout_centerInParent="true"
             android:gravity="center_vertical"
             android:textColor="@color/bottom_text_color_normal"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:text="修改个人信息"
-            android:layout_height="46dp"
+            android:layout_height="50dp"
             android:layout_width="wrap_content"
             />
         <Button
@@ -31,7 +31,7 @@
             android:background="#00000000"
             android:id="@+id/bt_boshu_finish"
             android:layout_width="wrap_content"
-            android:layout_height="46dp"
+            android:layout_height="50dp"
             android:gravity="center"
             android:text="进入"
             android:textColor="@android:color/white"

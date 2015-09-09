@@ -15,9 +15,9 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.Toast;
 
 import com.boshu.customview.ClipView;
 import com.boshu.customview.ClipView.OnDrawListenerComplete;
@@ -64,7 +64,7 @@ public class ClipPictureActivity extends Activity implements OnTouchListener,
      */
     private PointF mid = new PointF();
     private float oldDist = 1f;
-private Bitmap bitmap;
+    private Bitmap bitmap;
     private ProgressDialog pd;
     private android.os.Handler handler = new android.os.Handler() {
         @Override
@@ -85,17 +85,13 @@ private Bitmap bitmap;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cut_picture);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }).start();
         srcPic = (ImageView) this.findViewById(R.id.src_pic);
+        pathImage = this.getIntent().getStringExtra("pathImage");
+        bitmap = BitmapUtils.decodeSampledBitmapFromSDCard(pathImage);
+        srcPic.setImageBitmap(bitmap);
         srcPic.setOnTouchListener(this);
-
-        ViewTreeObserver observer = srcPic.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+       ViewTreeObserver observer = srcPic.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
             @SuppressWarnings("deprecation")
             public void onGlobalLayout() {
@@ -114,9 +110,10 @@ private Bitmap bitmap;
      * @param top
      */
     private void initClipView(int top) {
-
-        pathImage = this.getIntent().getStringExtra("pathImage");
-        bitmap = BitmapUtils.decodeSampledBitmapFromSDCard(pathImage);
+        if(bitmap==null){
+            Toast.makeText(this,"获取图片失败，请退出程序重试！",Toast.LENGTH_SHORT).show();
+            return;
+        }
         clipview = new ClipView(ClipPictureActivity.this);
         clipview.setCustomTopBarHeight(top);
         clipview.addOnDrawCompleteListener(new OnDrawListenerComplete() {
@@ -127,7 +124,6 @@ private Bitmap bitmap;
                 int clipWidth = clipview.getClipWidth();
                 int midX = clipview.getClipLeftMargin() + (clipWidth / 2);
                 int midY = clipview.getClipTopMargin() + (clipHeight / 2);
-
                 int imageWidth = bitmap.getWidth();
                 int imageHeight = bitmap.getHeight();
                 // 按裁剪框求缩放比例
@@ -147,7 +143,6 @@ private Bitmap bitmap;
                 matrix.postTranslate(midX - imageMidX, midY - imageMidY);
 
                 srcPic.setImageMatrix(matrix);
-
                 srcPic.setImageBitmap(bitmap);
             }
         });

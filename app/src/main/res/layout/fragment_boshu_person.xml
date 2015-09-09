@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_gravity="center_vertical"
         android:background="@color/top_bar_normal_bg"
-        android:layout_height="46dp"
+        android:layout_height="50dp"
         android:layout_width="match_parent"
         android:gravity="center_vertical"
       >
@@ -17,9 +17,9 @@
             android:layout_centerInParent="true"
             android:gravity="center_vertical"
             android:textColor="@color/bottom_text_color_normal"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:text="个人"
-            android:layout_height="46dp"
+            android:layout_height="50dp"
             android:layout_width="wrap_content"
             />
         <ImageView
@@ -29,7 +29,7 @@
             android:id="@+id/iv_boshu_setting"
             android:src="@drawable/settings_normal"
             android:layout_width="wrap_content"
-            android:layout_height="46dp" />
+            android:layout_height="50dp" />
         
     </RelativeLayout>
 
@@ -47,7 +47,6 @@
             android:id="@+id/circl_boshu_head"
             app:border_width="2dp"
             app:border_color="@color/boshu_all_color"
-            android:src="@drawable/delete"
             android:layout_height="80dp"
             android:layout_width="80dp"/>
       
@@ -65,10 +64,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:textSize="15sp"
+            android:textSize="16sp"
            android:textColor="@color/boshu_textcolorallqh"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/message_myself"
             android:drawableRight="@drawable/entry_page"
@@ -81,16 +80,16 @@
 
     <RelativeLayout
         android:id="@+id/rl_boshu_wallet"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="15dp"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <include layout="@layout/view_white"></include>
         <TextView
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textColor="@color/boshu_textcolorallqh"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/message_wallet"
             android:drawableRight="@drawable/entry_page"
@@ -106,10 +105,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textColor="@color/boshu_textcolorallqh"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/message_amounts"
             android:drawableRight="@drawable/entry_page"
@@ -127,10 +126,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textColor="@color/boshu_textcolorallqh"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/message_settlement"
             android:drawableRight="@drawable/entry_page"
@@ -141,17 +140,17 @@
     </RelativeLayout>
     <include layout="@layout/view_white"></include>
     <RelativeLayout
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="15dp"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <include layout="@layout/view_white"></include>
         <TextView
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_experience"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/message_experience1"
             android:drawableRight="@drawable/entry_page"
@@ -163,17 +162,17 @@
     <include layout="@layout/view_white"></include>
     <RelativeLayout
         android:id="@+id/rl_boshu_set"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="15dp"
         android:background="@color/boshu_item_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <include layout="@layout/view_white"></include>
         <TextView
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textColor="@color/boshu_textcolorallqh"
             android:id="@+id/tv_boshu_set"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/message_set"
             android:drawableRight="@drawable/entry_page"

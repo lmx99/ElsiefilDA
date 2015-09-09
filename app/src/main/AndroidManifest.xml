@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lifeisle.android"
-    android:versionCode="2"
-    android:versionName="V1.0.1"
+    android:versionCode="6"
+    android:versionName="V1.0.6"
     android:installLocation="auto">
-
-
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -294,6 +292,10 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
+        <activity android:name="com.boshu.activity.Activity_boshu_MessageSet"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            />
         <activity android:name="com.boshu.activity.ActivityPictureShow"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
@@ -307,6 +309,11 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             >
         </activity>
+        <activity android:name="com.boshu.activity.Activity_boshu_AddFriend"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode=""
+            ></activity>
         <activity android:name="com.boshu.activity.Activity_boshu_EditBaseMessage"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"

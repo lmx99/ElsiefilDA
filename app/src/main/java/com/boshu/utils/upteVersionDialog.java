@@ -88,11 +88,15 @@ public class upteVersionDialog {
         return alertDialog;
     }
     public void postVersion(final Context context, final WindowManager window, final LayoutInflater inflater, final boolean toast) {
-       final ProgressDialog pd = new ProgressDialog(context);
-        pd.setMessage("正在检测中~");
-        pd.setCanceledOnTouchOutside(false);
-        pd.setCancelable(false);
-        pd.show();
+
+            final ProgressDialog pd = new ProgressDialog(context);
+            if (toast == true) {
+                pd.setMessage("正在检测中~");
+                pd.setCanceledOnTouchOutside(true);
+                pd.setCancelable(true);
+                pd.show();
+            }
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.start();
         requestQueue.add(new AutoLoginRequest(context, Request.Method.POST,
@@ -111,21 +115,33 @@ public class upteVersionDialog {
                         verName = verNameApk.substring(0, verNameApk.length() - 4);
                         if (VersionUtils.getService(verCode, VersionUtils.getVerCode(context))) {
                            setAlertDialog(context,window,inflater);
+                            if(toast==true) {
+                                pd.dismiss();
+                            }
                         } else {
                             if(toast==true) {
+
                                 Toast.makeText(context, "已经为最新版本.么么哒！", Toast.LENGTH_SHORT).show();
+                                pd.dismiss();
                             }
                         }
                     } else {
                         Toast.makeText(context, "更新：未知错误", Toast.LENGTH_SHORT).show();
+                        if(toast==true) {
+                            pd.dismiss();
+                        }
 
                     }
 
+
                 } catch (Exception e) {
                     Toast.makeText(context, "更新：服务器出错！", Toast.LENGTH_SHORT).show();
+                    if(toast==true) {
+                        pd.dismiss();
+                    }
 
                 }
-                pd.dismiss();
+
 
 
             }

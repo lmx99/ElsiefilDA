@@ -11,7 +11,6 @@ public class NickHeadUser {
     public String getUserName() {
         return userName;
     }
-
     public String getHeadImage() {
         return headImage;
     }

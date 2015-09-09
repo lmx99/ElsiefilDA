@@ -439,12 +439,4 @@
     <string name="action_3_days">3 天</string>
     <string name="action_7_days">7 天</string>
     <string name="action_today">今天</string>
-    <string name="error_fail_sign_in_jobs_2_1">已签到</string>
-    <string name="error_fail_to_delete_event">删除日程失败</string>
-    <string name="error_fail_to_update_event">更新日程失败</string>
-    <string name="fragment_logistics_auth_qr_code">权限二维码</string>
-    <string name="success_delete_event">删除成功</string>
-    <string name="success_update_event">更新成功</string>
-    <string name="title_activity_schedule_detail">详情</string>
-    <string name="title_activity_schedule_table">日程表</string>
 </resources>
