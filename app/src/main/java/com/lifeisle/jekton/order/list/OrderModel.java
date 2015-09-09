@@ -13,6 +13,7 @@ import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.OrderDBUtils;
 import com.lifeisle.jekton.order.OrderDataCleanService;
+import com.lifeisle.jekton.order.OrderItem;
 import com.lifeisle.jekton.order.OrderOperateActivity;
 import com.lifeisle.jekton.order.list.sorter.OrderSorter;
 import com.lifeisle.jekton.order.list.updater.OrderListUpdater;
@@ -678,7 +679,7 @@ public class OrderModel {
         @Override
         public void run() {
             try {
-                final OrderItem orderItem = OrderItem.newOrderItem(orderJson);
+                final OrderItem orderItem = OrderItem.makeOrderItem(orderJson);
                 if (orderItem != null) {
                     updateOrderItem(index, orderItem);
                 }
@@ -732,7 +733,7 @@ public class OrderModel {
                 JSONArray orders = mResponse.getJSONArray("scaned_orders");
                 for (int i = 0, len = orders.length(); i < len; ++i) {
                     JSONObject order = orders.getJSONObject(i);
-                    OrderItem orderItem = OrderItem.newOrderItem(order);
+                    OrderItem orderItem = OrderItem.makeOrderItem(order);
                     updateOrderData(orderItem);
                 }
             } catch (JSONException e) {

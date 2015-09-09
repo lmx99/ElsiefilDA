@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.ui.widget;
+package com.lifeisle.jekton.job.widget;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.bean.JobInfo;
-import com.lifeisle.jekton.model.JobsModel;
+import com.lifeisle.jekton.job.JobsModel;
+import com.lifeisle.jekton.job.data.bean.JobInfo;
 import com.lifeisle.jekton.util.StringUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

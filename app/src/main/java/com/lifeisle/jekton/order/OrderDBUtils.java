@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteException;
 
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.order.list.OrderItem;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.StringUtils;
 

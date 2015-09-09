@@ -1,12 +1,11 @@
-package com.lifeisle.jekton.activity;
+package com.lifeisle.jekton.job;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.model.JobsModel;
-import com.lifeisle.jekton.ui.adapter.JobListAdapter;
+import com.lifeisle.jekton.job.adapter.JobListAdapter;
 
 
 /**

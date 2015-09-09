@@ -1,6 +1,6 @@
 package com.lifeisle.jekton.order.list.updater;
 
-import com.lifeisle.jekton.order.list.OrderItem;
+import com.lifeisle.jekton.order.OrderItem;
 
 import java.util.ArrayList;
 import java.util.List;

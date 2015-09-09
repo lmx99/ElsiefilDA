@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.EventIDMapper;
+import com.lifeisle.jekton.order.OrderItem;
 import com.lifeisle.jekton.order.OrderOperateActivity;
 import com.lifeisle.jekton.util.DimensionUtils;
 import com.lifeisle.jekton.util.Logger;
