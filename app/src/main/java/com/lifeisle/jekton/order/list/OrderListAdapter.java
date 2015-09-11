@@ -93,7 +93,7 @@ public class OrderListAdapter extends BaseAdapter {
         OrderItem orderItem = getItem(position);
 
         if (!listItem.isDetailHidden()) {
-            listItem.hideDetails();
+            listItem.toggleDetailView();
         }
 
         if (listItem.isDeliveredButtonEnable()) {
@@ -224,7 +224,7 @@ public class OrderListAdapter extends BaseAdapter {
             activity.postDeliveredOrder(orderID, eventID, position);
         }
 
-        private void toggleDetailView() {
+        public void toggleDetailView() {
             if (!isDetailHidden()) {
                 tvDetailsInfo.setVisibility(View.GONE);
                 mUrgencyIndicator.getLayoutParams().height = mUrgencyIndicatorOriginHeight;
@@ -296,10 +296,6 @@ public class OrderListAdapter extends BaseAdapter {
 
         public boolean isDetailHidden() {
             return tvDetailsInfo.getVisibility() == GONE;
-        }
-
-        public void hideDetails() {
-            tvDetailsInfo.setVisibility(View.GONE);
         }
 
 
