@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.order;
+package com.lifeisle.jekton.order.search;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,10 +14,8 @@ import android.widget.Spinner;
 
 import com.lifeisle.android.R;
 
-/**
- * A placeholder fragment containing a simple view.
- */
-public class OrderSearchActivityFragment extends Fragment {
+
+public class OrderSearchFragment extends Fragment {
 
     private EditText mOrderNumEditText;
     private EditText mOrderCodeEditText;
@@ -26,7 +24,7 @@ public class OrderSearchActivityFragment extends Fragment {
     private EditText mSourceEditText;
     private Spinner mClassifySpinner;
 
-    public OrderSearchActivityFragment() {
+    public OrderSearchFragment() {
         setHasOptionsMenu(true);
     }
 
@@ -48,12 +46,13 @@ public class OrderSearchActivityFragment extends Fragment {
         mSourceEditText = (EditText) parent.findViewById(R.id.source);
         mClassifySpinner = (Spinner) parent.findViewById(R.id.classify);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.order_search_classification, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter =
+                ArrayAdapter.createFromResource(getActivity(),
+                                                R.array.order_search_classification,
+                                                android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mClassifySpinner.setAdapter(adapter);
-
     }
 
 
@@ -64,16 +63,27 @@ public class OrderSearchActivityFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
+        if (item.getItemId() == R.id.action_search) {
+            ((OnSearchOrder) getActivity()).onSearchOrder(
+                    mOrderNumEditText.getText().toString(),
+                    mOrderCodeEditText.getText().toString(),
+                    mPhoneEditText.getText().toString(),
+                    mAddressEditText.getText().toString(),
+                    mSourceEditText.getText().toString(),
+                    mClassifySpinner.getSelectedItemPosition()
+            );
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+    interface OnSearchOrder {
+        void onSearchOrder(String orderNumber, String orderCode, String phone,
+                           String address, String source, int classify);
+    }
+
 }

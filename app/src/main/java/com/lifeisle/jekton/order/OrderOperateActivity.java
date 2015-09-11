@@ -21,7 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.order.list.OrderItem;
 import com.lifeisle.jekton.order.list.OrderListAdapter;
 import com.lifeisle.jekton.util.Logger;
 import com.lifeisle.jekton.util.StringUtils;
@@ -151,7 +150,7 @@ public class OrderOperateActivity extends AppCompatActivity implements View.OnCl
                                     int status = response.getInt("status");
                                     if (status == 0) {
                                         JSONObject order = OrderItem.getOrderItemAt(response, 0);
-                                        OrderItem item = OrderItem.newOrderItem(order);
+                                        OrderItem item = OrderItem.makeOrderItem(order);
                                         OrderItem.updateLogistics(item.goodsItems);
 
                                         closeDialog();

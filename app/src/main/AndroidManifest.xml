@@ -27,40 +27,41 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
     <!-- 【必须】 信鸽SDK所需权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
+    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <!-- 【可选】 信鸽SDK所需权限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BATTERY_STATS"/>
 
     <application
         android:name="com.easemob.chatuidemo.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo_lifeisle"
-        android:label="@string/app_name" >
+        android:label="@string/app_name">
         <!-- 开屏页 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/splash" >
+            android:theme="@style/splash"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -68,7 +69,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <!-- 登陆 -->
@@ -77,7 +78,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
-           >
+            >
         </activity>
 
         <!-- 注册 -->
@@ -85,7 +86,7 @@
             android:name="com.easemob.chatuidemo.activity.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:windowSoftInputMode="adjustResize|stateVisible">
         </activity>
         <!-- 聊天页面 -->
         <activity
@@ -93,39 +94,39 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustResize" >
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <!-- 添加好友 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.AddContactActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateVisible" >
+            android:windowSoftInputMode="stateVisible">
         </activity>
         <!-- 群组详情 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.GroupDetailsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
         <!-- 群组列表 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.GroupsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name="com.easemob.chatuidemo.activity.ChatRoomActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <!-- 聊天室详情 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.ChatRoomDetailsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
 
         <!-- 新建群组 -->
@@ -133,70 +134,70 @@
             android:name="com.easemob.chatuidemo.activity.NewGroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <!-- 退出群组提示框 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.ExitGroupDialog"
             android:screenOrientation="portrait"
-            android:theme="@style/MyDialogStyleBottom" >
+            android:theme="@style/MyDialogStyleBottom">
         </activity>
         <!-- 群组选人 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.GroupPickContactsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <!-- 地图 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.BaiduMapActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
 
         <!-- 新的朋友邀请消息页面 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.NewFriendsMsgActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
         <!-- 转发消息用户列表页面 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.ForwardMessageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <!-- 自定义的contextmenu -->
         <activity
             android:name="com.easemob.chatuidemo.activity.ContextMenu"
             android:screenOrientation="portrait"
-            android:theme="@style/MyDialogStyle" >
+            android:theme="@style/MyDialogStyle">
         </activity>
         <!-- 自定义的alertdialog -->
         <activity
             android:name="com.easemob.chatuidemo.activity.AlertDialog"
             android:screenOrientation="portrait"
-            android:theme="@style/MyDialogStyle" >
+            android:theme="@style/MyDialogStyle">
         </activity>
         <!-- 显示下载大图页面 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.ShowBigImage"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
         <!-- 下载文件 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.ShowNormalFileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
         <!-- 黑名单 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.BlacklistActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
 
         <!-- 公开的群聊列表 -->
@@ -204,13 +205,13 @@
             android:name="com.easemob.chatuidemo.activity.PublicGroupsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name="com.easemob.chatuidemo.activity.PublicChatRoomsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <!-- 语音通话 -->
@@ -218,7 +219,7 @@
             android:name="com.easemob.chatuidemo.activity.VoiceCallActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/nornal_style" >
+            android:theme="@style/nornal_style">
         </activity>
         <!-- 视频通话 -->
         <activity
@@ -226,56 +227,56 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
         <!-- 群聊简单信息 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.GroupSimpleDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
         <!-- 群组黑名单用户列表 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.GroupBlacklistActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
         <activity
             android:name="com.easemob.chatuidemo.activity.PublicGroupsSeachActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
         </activity>
         <activity
             android:name="com.easemob.chatuidemo.activity.EditActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateVisible" >
+            android:windowSoftInputMode="stateVisible">
         </activity>
         <activity
             android:name="com.easemob.chatuidemo.activity.ShowVideoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <!-- choose video -->
         <activity
             android:name="com.easemob.chatuidemo.activity.ImageGridActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name="com.easemob.chatuidemo.activity.RecorderVideoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <!-- upload error log -->
         <activity
             android:name="com.easemob.chatuidemo.activity.DiagnoseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
         <!-- iOS offline push nick -->
@@ -283,14 +284,14 @@
             android:name="com.easemob.chatuidemo.activity.OfflinePushNickActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <!-- robots list -->
         <activity
             android:name="com.easemob.chatuidemo.activity.RobotsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity android:name="com.boshu.activity.Activity_boshu_MessageSet"
             android:theme="@style/horizontal_slide"
@@ -300,15 +301,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name="com.boshu.crop.CropImageActivity"
+        <activity
+            android:name="com.boshu.crop.CropImageActivity"
             android:theme="@style/CustomTheme"
             />
-        <activity android:name="com.boshu.activity.Activity_boshu_Message"
+        <activity
+            android:name="com.boshu.activity.Activity_boshu_Message"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             >
         </activity>
+
         <activity android:name="com.boshu.activity.Activity_boshu_AddFriend"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
@@ -317,58 +321,63 @@
         <activity android:name="com.boshu.activity.Activity_boshu_EditBaseMessage"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-           android:windowSoftInputMode=""
+            android:windowSoftInputMode=""
             ></activity>
-        <activity android:name="com.boshu.activity.ClipPictureActivity"
+        <activity
+            android:name="com.boshu.activity.ClipPictureActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             ></activity>
-        <activity android:name="com.boshu.activity.Activity_boshu_push"
+        <activity
+            android:name="com.boshu.activity.Activity_boshu_push"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             ></activity>
-        <activity android:name="com.boshu.activity.Activity_boshu_Wallet"
+        <activity
+            android:name="com.boshu.activity.Activity_boshu_Wallet"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             ></activity>
-        <activity android:name="com.boshu.activity.Activity_boshu_Setting"
+        <activity
+            android:name="com.boshu.activity.Activity_boshu_Setting"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name="com.boshu.activity.Activity_boshu_ChangePass"
+        <activity
+            android:name="com.boshu.activity.Activity_boshu_ChangePass"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             />
-        <activity android:name="com.boshu.activity.Activity_boshu_FriMsg"
+        <activity
+            android:name="com.boshu.activity.Activity_boshu_FriMsg"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden"
             ></activity>
-
 
 
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="focus#lifeisle" />
+            android:value="focus#lifeisle"/>
         <!-- 声明sdk所需的service -->
         <service
             android:name="com.easemob.chat.EMChatService"
-            android:exported="true" />
+            android:exported="true"/>
         <!-- 声明sdk所需的receiver -->
-        <receiver android:name="com.easemob.chat.EMMonitorReceiver" >
+        <receiver android:name="com.easemob.chat.EMMonitorReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
 
-                <data android:scheme="package" />
+                <data android:scheme="package"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
             </intent-filter>
         </receiver>
 
@@ -376,42 +385,42 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" />
+            android:process=":remote"/>
         <!-- umeng appkey，可忽略 -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="53912a3156240b01a7075ed1" >
+            android:value="53912a3156240b01a7075ed1">
         </meta-data>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="3ecea51f560650b1ed8a4b99808f52e8" />
+            android:value="3ecea51f560650b1ed8a4b99808f52e8"/>
         <!-- 信所需要的 -->
         <!-- 【必须】 信鸽receiver广播接收 -->
         <receiver
             android:name="com.tencent.android.tpush.XGPushReceiver"
-            android:process=":xg_service_v2" >
-            <intent-filter android:priority="0x7fffffff" >
+            android:process=":xg_service_v2">
+            <intent-filter android:priority="0x7fffffff">
 
                 <!-- 【必须】 信鸽SDK的内部广播 -->
-                <action android:name="com.tencent.android.tpush.action.SDK" />
-                <action android:name="com.tencent.android.tpush.action.INTERNAL_PUSH_MESSAGE" />
+                <action android:name="com.tencent.android.tpush.action.SDK"/>
+                <action android:name="com.tencent.android.tpush.action.INTERNAL_PUSH_MESSAGE"/>
                 <!-- 【必须】 系统广播：开屏和网络切换 -->
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
 
                 <!-- 【可选】 一些常用的系统广播，增强信鸽service的复活机会，请根据需要选择。当然，你也可以添加APP自定义的一些广播让启动service -->
-                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
             </intent-filter>
             <!-- 【可选】 usb相关的系统广播，增强信鸽service的复活机会，请根据需要添加 -->
-            <intent-filter android:priority="0x7fffffff" >
-                <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
-                <action android:name="android.intent.action.MEDIA_REMOVED" />
-                <action android:name="android.intent.action.MEDIA_CHECKING" />
-                <action android:name="android.intent.action.MEDIA_EJECT" />
+            <intent-filter android:priority="0x7fffffff">
+                <action android:name="android.intent.action.MEDIA_UNMOUNTED"/>
+                <action android:name="android.intent.action.MEDIA_REMOVED"/>
+                <action android:name="android.intent.action.MEDIA_CHECKING"/>
+                <action android:name="android.intent.action.MEDIA_EJECT"/>
 
-                <data android:scheme="file" />
+                <data android:scheme="file"/>
             </intent-filter>
         </receiver>
         <!-- 【必须】 信鸽service -->
@@ -419,16 +428,16 @@
             android:name="com.tencent.android.tpush.service.XGPushService"
             android:exported="true"
             android:persistent="true"
-            android:process=":xg_service_v2" />
+            android:process=":xg_service_v2"/>
 
         <!-- 【必须】 通知service，其中android:name部分要改为当前包名 -->
         <service
             android:name="com.tencent.android.tpush.rpc.XGRemoteService"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
 
                 <!-- 【必须】 请修改为当前APP名包.PUSH_ACTION，如demo的包名为：com.qq.xgdemo -->
-                <action android:name="com.lifeisle.android.PUSH_ACTION" />
+                <action android:name="com.lifeisle.android.PUSH_ACTION"/>
             </intent-filter>
         </service>
 
@@ -447,29 +456,30 @@
         -->
         <!-- 【可选】APP实现的Receiver，用于接收消息透传和操作结果的回调，请根据需要添加 -->
         <!-- YOUR_PACKAGE_PATH.CustomPushReceiver需要改为自己的Receiver： -->
-        <receiver android:name="com.boshu.receiver.MessageReceiver" >
+        <receiver android:name="com.boshu.receiver.MessageReceiver">
             <intent-filter>
 
                 <!-- 接收消息透传 -->
-                <action android:name="com.tencent.android.tpush.action.PUSH_MESSAGE" />
+                <action android:name="com.tencent.android.tpush.action.PUSH_MESSAGE"/>
                 <!-- 监听注册、反注册、设置/删除标签、通知被点击等处理结果 -->
-                <action android:name="com.tencent.android.tpush.action.FEEDBACK" />
+                <action android:name="com.tencent.android.tpush.action.FEEDBACK"/>
             </intent-filter>
         </receiver>
 
         <!-- 【必须】 请修改为APP的AccessId，“21”开头的10位数字，中间没空格 -->
         <meta-data
             android:name="XG_V2_ACCESS_ID"
-            android:value="2100139965" />
+            android:value="2100139965"/>
         <!-- 【必须】 请修改为APP的AccessKey，“A”开头的12位字符串，中间没空格 -->
         <meta-data
             android:name="XG_V2_ACCESS_KEY"
-            android:value="A5AV374M4TTV" />
+            android:value="A5AV374M4TTV"/>
 
         <!-- 【！！不需要添加！！】 此处的secretkey主要是为了Demo一键诊断用，实际APP不用添加，切记！ -->
         <meta-data
             android:name="XG_V2_SECRET_KEY"
-            android:value="977cf34428994a033ed325c0e392a02d" />
+            android:value="977cf34428994a033ed325c0e392a02d"/>
+
 
 
 
@@ -491,130 +501,142 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.easemob.chatuidemo.activity.MainActivity" />
+                android:value="com.easemob.chatuidemo.activity.MainActivity"/>
         </activity>
         <activity
             android:name="com.lifeisle.jekton.order.OrderOperateActivity"
             android:label="@string/title_order_operate"
             android:parentActivityName="com.lifeisle.jekton.order.list.QRCodeScanActivity"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.lifeisle.jekton.order.list.QRCodeScanActivity" />
+                android:value="com.lifeisle.jekton.order.list.QRCodeScanActivity"/>
         </activity>
         <activity
             android:name="com.lifeisle.jekton.activity.SignUpActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyTheme"
             android:label="@string/title_activity_sign_up"
             android:parentActivityName="com.easemob.chatuidemo.activity.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.easemob.chatuidemo.activity.LoginActivity" />
+                android:value="com.easemob.chatuidemo.activity.LoginActivity"/>
         </activity>
 
 
         <activity
-        android:name="com.lifeisle.jekton.activity.MyBrowserActivity"
-        android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
+            android:name="com.lifeisle.jekton.activity.MyBrowserActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar"/>
         <activity
-        android:name="com.lifeisle.jekton.activity.JobsActivity"
-        android:label="@string/title_activity_jobs"
-        android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
-        android:theme="@style/MyTheme" >
-
-            <!-- Parent activity meta-data to support API level 7+ -->
-            <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.easemob.chatuidemo.activity.MainActivity" />
-        </activity>
-        <activity
-        android:name="com.lifeisle.jekton.activity.MyPositionActivity"
-        android:label="@string/title_activity_my_position"
-        android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
-        android:theme="@style/MyTheme" >
+            android:name="com.lifeisle.jekton.job.JobsActivity"
+            android:label="@string/title_activity_jobs"
+            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
+            android:theme="@style/MyTheme">
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.easemob.chatuidemo.activity.MainActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.easemob.chatuidemo.activity.MainActivity"/>
         </activity>
         <activity
-        android:name="com.lifeisle.jekton.schedule.ScheduleCategoryActivity"
-        android:label="@string/title_activity_schedule_category"
-        android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
-        android:theme="@style/MyTheme" >
+            android:name="com.lifeisle.jekton.job.MyJobActivity"
+            android:label="@string/title_activity_my_job"
+            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
+            android:theme="@style/MyTheme">
+
+            <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.easemob.chatuidemo.activity.MainActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.easemob.chatuidemo.activity.MainActivity"/>
         </activity>
         <activity
-        android:name="com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity"
-        android:label="@string/title_activity_deliver_stat_category"
-        android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
-        android:theme="@style/MyTheme" >
+            android:name="com.lifeisle.jekton.job.SubordinateActivity"
+            android:label="@string/title_activity_subordinate"
+            android:parentActivityName="com.lifeisle.jekton.job.MyJobActivity"
+            android:theme="@style/MyTheme">
+
+            <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.easemob.chatuidemo.activity.MainActivity" />
-        </activity>
-        <activity
-        android:name="com.lifeisle.jekton.order.stat.DeliverStatActivity"
-        android:label="@string/title_activity_deliver_stat"
-        android:parentActivityName="com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity"
-        android:theme="@style/MyTheme" >
-            <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity" />
-        </activity>
-        <activity
-        android:name="com.lifeisle.jekton.order.stat.DeliverStatOptionActivity"
-        android:label="@string/title_activity_deliver_stat_option"
-        android:parentActivityName="com.lifeisle.jekton.order.stat.DeliverStatActivity"
-        android:theme="@style/MyTheme" >
-            <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.lifeisle.jekton.order.stat.DeliverStatActivity" />
-        </activity>
-        <activity
-        android:name="com.lifeisle.jekton.schedule.ScheduleDetailActivity"
-        android:label="@string/title_activity_add_schedule"
-        android:parentActivityName="com.lifeisle.jekton.schedule.ScheduleCategoryActivity"
-        android:theme="@style/MyTheme" >
-            <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.lifeisle.jekton.schedule.ScheduleDetailActivity" />
-        </activity>
-        <activity
-        android:name="com.lifeisle.jekton.order.OrderSearchActivity"
-        android:label="@string/title_activity_order_search"
-        android:theme="@style/MyTheme"
-        android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity" >
-            <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.easemob.chatuidemo.activity.MainActivity" />
-        </activity>
-        <activity
-        android:name="com.lifeisle.jekton.schedule.ScheduleTableActivity"
-        android:label="@string/title_activity_schedule_table"
-        android:theme="@style/MyTheme"
-        android:parentActivityName="com.lifeisle.jekton.schedule.ScheduleCategoryActivity" >
-            <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.lifeisle.jekton.schedule.ScheduleCategoryActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lifeisle.jekton.job.MyJobActivity"/>
         </activity>
 
-        <service android:name="com.lifeisle.jekton.order.OrderDataCleanService" />
+        <activity
+            android:name="com.lifeisle.jekton.schedule.ScheduleCategoryActivity"
+            android:label="@string/title_activity_schedule_category"
+            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
+            android:theme="@style/MyTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.easemob.chatuidemo.activity.MainActivity"/>
+        </activity>
+        <activity
+            android:name="com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity"
+            android:label="@string/title_activity_deliver_stat_category"
+            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
+            android:theme="@style/MyTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.easemob.chatuidemo.activity.MainActivity"/>
+        </activity>
+        <activity
+            android:name="com.lifeisle.jekton.order.stat.DeliverStatActivity"
+            android:label="@string/title_activity_deliver_stat"
+            android:parentActivityName="com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity"
+            android:theme="@style/MyTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lifeisle.jekton.order.stat.DeliverStatCategoryActivity"/>
+        </activity>
+        <activity
+            android:name="com.lifeisle.jekton.order.stat.DeliverStatOptionActivity"
+            android:label="@string/title_activity_deliver_stat_option"
+            android:parentActivityName="com.lifeisle.jekton.order.stat.DeliverStatActivity"
+            android:theme="@style/MyTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lifeisle.jekton.order.stat.DeliverStatActivity"/>
+        </activity>
+        <activity
+            android:name="com.lifeisle.jekton.schedule.ScheduleDetailActivity"
+            android:label="@string/title_activity_add_schedule"
+            android:parentActivityName="com.lifeisle.jekton.schedule.ScheduleCategoryActivity"
+            android:theme="@style/MyTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lifeisle.jekton.schedule.ScheduleDetailActivity"/>
+        </activity>
+        <activity
+            android:name="com.lifeisle.jekton.order.search.OrderSearchActivity"
+            android:label="@string/title_activity_order_search"
+            android:parentActivityName="com.easemob.chatuidemo.activity.MainActivity"
+            android:theme="@style/MyTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.easemob.chatuidemo.activity.MainActivity"/>
+        </activity>
+        <activity
+            android:name="com.lifeisle.jekton.schedule.ScheduleTableActivity"
+            android:label="@string/title_activity_schedule_table"
+            android:parentActivityName="com.lifeisle.jekton.schedule.ScheduleCategoryActivity"
+            android:theme="@style/MyTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lifeisle.jekton.schedule.ScheduleCategoryActivity"/>
+        </activity>
+
+        <service android:name="com.lifeisle.jekton.order.OrderDataCleanService"/>
 
         <receiver
             android:name="com.lifeisle.jekton.order.LogisticsUpdateReceiver"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.lifeisle.jekton.receiver.LogisticsUpdateReceiver.ACTION_LOGISTICS_UPDATE" />
+                <action android:name="com.lifeisle.jekton.receiver.LogisticsUpdateReceiver.ACTION_LOGISTICS_UPDATE"/>
             </intent-filter>
         </receiver>
     </application>

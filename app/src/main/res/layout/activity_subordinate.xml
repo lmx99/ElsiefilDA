@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#eeeeed"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:text="@string/activity_my_job_title"
+        android:textSize="@dimen/text_size_job_title"/>
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:text="@string/activity_my_job_address"
+        android:textSize="@dimen/text_size_job_title"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/info"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="2dp"-->
+        <!--android:background="@android:color/white"-->
+        <!--android:padding="8dp"-->
+        <!--android:text="@string/activity_my_job_intro"-->
+        <!--android:textSize="@dimen/text_size_job_title"/>-->
+
+
+    <ListView
+        android:id="@+id/periods"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+
+
+</LinearLayout>
+
+

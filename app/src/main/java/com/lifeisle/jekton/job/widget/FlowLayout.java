@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.ui.widget;
+package com.lifeisle.jekton.job.widget;
 
 
 import android.content.Context;

@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.lifeisle.jekton.order.list.OrderItem;
 import com.lifeisle.jekton.order.list.QRCodeScanActivity;
 import com.lifeisle.jekton.util.Logger;
 

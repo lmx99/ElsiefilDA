@@ -391,7 +391,7 @@
     <string name="error_start_greater_end">起始时间晚于结束时间</string>
     <string name="fragment_logistics_deliver_stat">配送统计</string>
     <string name="fragment_logistics_job_opportunity">职资认证</string>
-    <string name="fragment_logistics_my_position">我的职位</string>
+    <string name="fragment_logistics_my_job">我的职位</string>
     <string name="fragment_logistics_order_search">订单搜索</string>
     <string name="friday">周五</string>
     <string name="hint_address">地址</string>
@@ -414,16 +414,16 @@
     <string name="title_activity_deliver_stat">物流统计</string>
     <string name="title_activity_deliver_stat_option">选项</string>
     <string name="title_activity_jobs">职位</string>
-    <string name="title_activity_my_position">我的职位</string>
+    <string name="title_activity_my_job">我的职位</string>
     <string name="title_activity_order_search">订单搜索</string>
     <string name="title_activity_schedule_category">日程</string>
-    <string name="title_end_time">到</string>
+    <string name="to">到</string>
     <string name="title_event_title">标题</string>
     <string name="title_notify">提醒</string>
     <string name="title_order_operate">订单操作</string>
     <string name="title_repeat">重复</string>
     <string name="title_scan_qr_code">订单扫描</string>
-    <string name="title_start_time">从：</string>
+    <string name="from">从：</string>
     <string name="tuesday">周二</string>
     <string name="wednesday">周三</string>
     <string name="cat_deliver_logistics_stat">送餐员配送统计</string>
@@ -439,4 +439,11 @@
     <string name="action_3_days">3 天</string>
     <string name="action_7_days">7 天</string>
     <string name="action_today">今天</string>
+    <string name="activity_my_job_address">地址</string>
+    <string name="activity_my_job_intro">简介</string>
+    <string name="activity_my_job_title">标题</string>
+    <string name="error_event_not_found">找不到该事件</string>
+    <string name="error_fail_call_user"></string>
+    <string name="error_fail_sign_in_jobs_2_1"></string>
+    <string name="error_search_fail">查找失败</string>
 </resources>

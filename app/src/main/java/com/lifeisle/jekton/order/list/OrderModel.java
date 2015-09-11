@@ -13,6 +13,7 @@ import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
 import com.lifeisle.jekton.order.OrderDBUtils;
 import com.lifeisle.jekton.order.OrderDataCleanService;
+import com.lifeisle.jekton.order.OrderItem;
 import com.lifeisle.jekton.order.OrderOperateActivity;
 import com.lifeisle.jekton.order.list.sorter.OrderSorter;
 import com.lifeisle.jekton.order.list.updater.OrderListUpdater;
@@ -147,6 +148,8 @@ public class OrderModel {
         orderRequestCount = 0;
         orderView.setFailCount(orderRequestCount);
         handler.removeMessages(WHAT_UPDATE_ORDER_ITEM);
+
+        if (executorService.isShutdown()) return;
 
         final int currentInitCount = initCount;
         executorService.execute(new Runnable() {
@@ -678,7 +681,7 @@ public class OrderModel {
         @Override
         public void run() {
             try {
-                final OrderItem orderItem = OrderItem.newOrderItem(orderJson);
+                final OrderItem orderItem = OrderItem.makeOrderItem(orderJson);
                 if (orderItem != null) {
                     updateOrderItem(index, orderItem);
                 }
@@ -698,21 +701,19 @@ public class OrderModel {
             Logger.d(TAG, "message.arg2 = " + message.arg2);
             message.sendToTarget();
 
-            updateOrderData(orderItem);
+            updateOrderData(orderItem, false);
         }
 
 
     }
 
-    private static void updateOrderData(OrderItem orderItem) {
-        switch (OrderDBUtils.getOrderExistsState(orderItem.orderCode)) {
-            case OrderDBUtils.ORDER_STATE_EXIST:
-                OrderItem.updateLogistics(orderItem.goodsItems);
-                OrderDBUtils.setNeedRequest(orderItem.orderCode, OrderItem.REQUEST_NO_NEED);
-                break;
-            case OrderDBUtils.ORDER_STATE_EXIST_BUT_NOT_DATA:
-                OrderDBUtils.fillOrderData(orderItem);
-                break;
+    private static void updateOrderData(OrderItem orderItem, boolean mayNeedInsert) {
+        if (OrderDBUtils.getOrderExistsState(orderItem.orderCode)
+                == OrderDBUtils.ORDER_STATE_EXIST) {
+            OrderItem.updateLogistics(orderItem.goodsItems);
+            OrderDBUtils.setNeedRequest(orderItem.orderCode, OrderItem.REQUEST_NO_NEED);
+        } else {
+            OrderDBUtils.fillOrderData(orderItem, mayNeedInsert);
         }
 
     }
@@ -732,8 +733,8 @@ public class OrderModel {
                 JSONArray orders = mResponse.getJSONArray("scaned_orders");
                 for (int i = 0, len = orders.length(); i < len; ++i) {
                     JSONObject order = orders.getJSONObject(i);
-                    OrderItem orderItem = OrderItem.newOrderItem(order);
-                    updateOrderData(orderItem);
+                    OrderItem orderItem = OrderItem.makeOrderItem(order);
+                    updateOrderData(orderItem, true);
                 }
             } catch (JSONException e) {
                 Logger.e(TAG, "Fail to fill (all) scanned orders", e);

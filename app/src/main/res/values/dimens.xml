@@ -94,6 +94,9 @@
     <dimen name="width_dialog_divider">1dp</dimen>
     <dimen name="width_dialog_divider_half">0.5dp</dimen>
 
-    
+
+
+    <!-- MyJobActivity -->
+    <dimen name="text_size_job_title">18sp</dimen>
 
 </resources>

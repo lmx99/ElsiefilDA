@@ -7,9 +7,7 @@ import android.database.sqlite.SQLiteException;
 
 import com.easemob.chatuidemo.MyApplication;
 import com.lifeisle.android.R;
-import com.lifeisle.jekton.order.list.OrderItem;
 import com.lifeisle.jekton.util.Logger;
-import com.lifeisle.jekton.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,11 +64,12 @@ public class OrderDBUtils {
      * fill a row of the database of a order
      * @param item A orderItem that holds data of a order to be filled
      */
-    public static void fillOrderData(OrderItem item) {
+    public static void fillOrderData(OrderItem item, boolean isInsert) {
         Logger.d(TAG, "fillOrderData");
         ContentValues order = new ContentValues();
 
         order.put(OrdersDBHelper.COLUMN_ORDERS_ORDER_ID, item.orderID);
+        order.put(OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE, item.orderCode);
         order.put(OrdersDBHelper.COLUMN_ORDERS_ORDER_NUMBER, item.orderNumber);
         long createTime = item.createTime.getTime();
         order.put(OrdersDBHelper.COLUMN_ORDERS_CREATE_TIME, createTime);
@@ -86,12 +85,24 @@ public class OrderDBUtils {
         order.put(OrdersDBHelper.COLUMN_ORDERS_RESTAURANT_ID, item.restaurantID);
         order.put(OrdersDBHelper.COLUMN_ORDERS_REQUEST_TYPE, item.requestType);
 
-        int update = ordersDB.update(OrdersDBHelper.TABLE_ORDERS, order,
-                OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE + "='" + item.orderCode + "'", null);
-        if (update <= 0) {
-            Logger.e(TAG, StringUtils.getStringFromResource(R.string.error_fail_to_update_order) + item.orderCode);
 
+        if (isInsert) {
+            long id = ordersDB.insert(OrdersDBHelper.TABLE_ORDERS, null, order);
+            if (id < 0) {
+                Logger.e(TAG, "Fail to insert order Item, orderCode = " + item.orderCode);
+
+            }
+        } else {
+            int update = ordersDB.update(OrdersDBHelper.TABLE_ORDERS, order,
+                                     OrdersDBHelper.COLUMN_ORDERS_ORDER_CODE
+                                             + "='" + item.orderCode + "'", null);
+            if (update <= 0) {
+                Logger.e(TAG, "Fail to update order item, orderCode = " + item.orderCode);
+
+            }
         }
+
+
         insertGoodsItemInfo(item);
     }
 

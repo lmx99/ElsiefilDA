@@ -1,13 +1,13 @@
-package com.lifeisle.jekton.ui.adapter;
+package com.lifeisle.jekton.job.adapter;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.lifeisle.jekton.bean.JobInfo;
-import com.lifeisle.jekton.model.JobsModel;
-import com.lifeisle.jekton.ui.widget.JobItem;
+import com.lifeisle.jekton.job.JobsModel;
+import com.lifeisle.jekton.job.data.bean.JobInfo;
+import com.lifeisle.jekton.job.widget.JobItem;
 
 
 /**

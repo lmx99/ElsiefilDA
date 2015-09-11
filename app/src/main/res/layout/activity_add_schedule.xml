@@ -45,7 +45,7 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:paddingTop="@dimen/padding_selectable_text"
                 android:paddingBottom="@dimen/padding_selectable_text"
-                android:text="@string/title_start_time"
+                android:text="@string/from"
                 android:textAppearance="?android:textAppearanceMedium" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:paddingTop="@dimen/padding_selectable_text"
                 android:paddingBottom="@dimen/padding_selectable_text"
-                android:text="@string/title_end_time"
+                android:text="@string/to"
                 android:textAppearance="?android:textAppearanceMedium" />
 
         </LinearLayout>

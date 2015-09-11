@@ -1,4 +1,4 @@
-package com.lifeisle.jekton.bean;
+package com.lifeisle.jekton.job.data.bean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
