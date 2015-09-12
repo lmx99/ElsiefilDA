@@ -116,7 +116,14 @@ public class OrderController {
                 Logger.e(LOG_TAG, "unexpected qr code, data = " + data, e);
             }
         } else {
-            orderModel.addOrder(data);
+            String orderCode;
+            int lastIndexOfEqualSign = data.lastIndexOf("=");
+            if (lastIndexOfEqualSign >= 0) {
+                orderCode = data.substring(lastIndexOfEqualSign + 1, data.length());
+            } else {
+                orderCode = data;
+            }
+            orderModel.addOrder(orderCode);
         }
     }
 
